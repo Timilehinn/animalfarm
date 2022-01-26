@@ -1,0 +1,28 @@
+.wrap{
+    height: 100%;
+}
+.sidenav__vaults{
+    display: flex;
+}
+
+.backgrounddesign {
+    position: fixed;
+    z-index: -10;
+    left: 0px;
+    bottom: -2px;
+  
+
+}
+@media screen and (max-width:480px) {
+    .wrap{
+        height: auto;
+    }
+    .sidenav__vaults{
+        /* display: none; */
+    }
+
+    .backgrounddesign{
+        display: none;
+    }
+}
+

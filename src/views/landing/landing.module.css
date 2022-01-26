@@ -1,0 +1,83 @@
+.landing {
+	height: 100vh;
+	padding-top: 30px;
+	 background:linear-gradient(0deg, #000000f6, #000000ef), url(../../assets/img/image.jpg);
+	
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.landing header {
+	/* height: 80px; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.landing header img {
+	height: 19px;
+}
+
+.landing__main {
+	height: calc(100% - 80px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.landing__main h3 {
+	color: white;
+	text-align: center;
+	font-size: 3rem;
+	margin-bottom: 30px;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 800;
+}
+
+.icons {
+	margin-bottom: 30px;
+}
+
+.icons img {
+	height: 80px;
+}
+
+.icons img:nth-child(1) {
+	margin-right: 10px;
+}
+
+.icons img:nth-child(2) {
+	margin-left: 10px;
+}
+
+.landing__main button {
+	height: 50px;
+	border-radius: 5px;
+	width: 170px;
+	color: #f2de63;
+	background: none;
+	border: 1px solid #f2de63;
+	font-size: 20px;
+	cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+	.landing__main h3 {
+		font-size: 26px;
+	}
+	.icons img {
+		height: 50px;
+	}
+
+	.landing__main button {
+		position: absolute;
+		bottom: 50px;
+	}
+}
+
+@media only screen and (min-width: 480px) and (max-width: 768px) {
+	.landing__main h3 {
+		font-size: 50px;
+	}
+}
