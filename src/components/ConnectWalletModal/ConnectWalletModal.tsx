@@ -1,11 +1,11 @@
 import React, { Fragment } from 'react'
-import WalletButton from 'components/buttons/walletButtons/walletButton'
+import WalletButton from 'components/ConnectWalletModal/WalletButton/WalletButton'
 import { useConnectWalletModal } from 'state/wallet/hooks'
 import config, { walletLocalStorageKey } from './config'
 import { Config, Login } from './types'
 
 import style from './connectWalletModal.module.css'
-import help from '../../../assets/img/help-circle.png'
+import help from './Icons/help-circle.png'
 
 interface ConnectWalletProps {
 	login: Login

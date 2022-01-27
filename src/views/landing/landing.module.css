@@ -1,8 +1,7 @@
 .landing {
 	height: 100vh;
 	padding-top: 30px;
-	 background:linear-gradient(0deg, #000000f6, #000000ef), url(../../assets/img/image.jpg);
-	
+	background: linear-gradient(0deg, #000000f6, #000000ef);
 	background-repeat: no-repeat;
 	background-size: cover;
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import style from './background.module.css'
 import { useConnectWalletModal } from '../../state/wallet/hooks'
 
-function Background() {
+function GenericBackground() {
 	const { isModalOpen, toggleConnectWalletModal } = useConnectWalletModal()
 
 	const closeWalletModal = () => {
@@ -18,4 +18,4 @@ function Background() {
 	)
 }
 
-export default Background
+export default GenericBackground
