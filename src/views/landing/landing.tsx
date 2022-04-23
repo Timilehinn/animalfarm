@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useConnectWallet, useAllBalance, useConnectWalletModal } from 'state/wallet/hooks'
 // import useActiveWeb3React from 'hooks/useActiveWeb3React'
 // import { getAllBalance } from 'api/getBalance'
@@ -30,17 +30,7 @@ function Landing() {
 	}
 	return (
 		<div className={style.landing}>
-			<div className={style.landing__main}>
-				<h3>
-					Manage and Keep Track <br /> of your Vault Tokens{' '}
-				</h3>
-
-				<button type='button' onClick={connect}>
-					Connect Wallet
-				</button>
-			</div>
-			<ConnectWalletModal login={login} />
-			<GenericBackground />
+			{}
 		</div>
 	)
 }
