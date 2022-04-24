@@ -8,7 +8,7 @@ function GenericBackground() {
 	const closeWalletModal = () => {
 		toggleConnectWalletModal(false)
 	}
-
+	
 	return (
 		<div>
 			<div role='button' tabIndex={0} onKeyDown={closeWalletModal} onClick={closeWalletModal} className={isModalOpen ? `${style.modalBackground__active} ${style.modalBackground}` : `${style.modalBackground}`}>

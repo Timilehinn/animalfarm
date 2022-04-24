@@ -1,0 +1,48 @@
+@mixin flex($dir, $align-item, $justift-content) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $justift-content;
+    align-items: $align-item;
+}
+
+.nav{
+    width: calc(100vw - 240px);
+    height: 70px;
+    padding: 0px 20px 0px 20px;
+    
+
+    .nav__in{
+        width: 100%;
+        height: 100%;
+        background-color: #000000;
+        border-radius: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0px 20px 0px 20px;
+   
+
+        h3{
+            color: white;
+        }
+
+        button{
+            width: 200px;
+            height: 40px;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+            @include flex(row, center, center);
+
+            img{
+                height: 20px;
+                margin-right: 10px;
+            }
+
+        }
+    }
+
+   
+}

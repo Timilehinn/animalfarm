@@ -1,37 +1,41 @@
-import React from 'react'
+import React,{Suspense} from 'react'
 import { useConnectWallet, useAllBalance, useConnectWalletModal } from 'state/wallet/hooks'
+import {useRoutes, Route, Routes} from 'react-router-dom'
 // import useActiveWeb3React from 'hooks/useActiveWeb3React'
 // import { getAllBalance } from 'api/getBalance'
 import useAuth from 'hooks/useAuth'
+import SideNavigation from 'components/SideNavigation/SideNavigation'
+import TopNav from 'components/TopNav/TopNav'
+import PigsCredit from 'views/pigsCredit/PigsCredit'
 import GenericBackground from 'components/GenericBackground/GenericBackground'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
-import style from './landing.module.css'
+import Home from '../home/Home'
+import style from './Landing.module.scss'
 
 function Landing() {
 	const { login } = useAuth()
-	// const { account, active } = useActiveWeb3React()
-	// const { setAllBalance } = useAllBalance()
-	// const { setIsWalletConnected } = useConnectWallet()
+	
 	const { toggleConnectWalletModal } = useConnectWalletModal()
-
-	// useEffect(() => {
-	// 	const fetchBalance = async () => {
-	// 		setAllBalance(await getAllBalance(account))
-	// 	}
-	// 	if (active && account) {
-	// 		fetchBalance()
-	// 		setIsWalletConnected(true)
-	// 	}
-	// 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [active, account])
 
 	const connect = () => {
 		toggleConnectWalletModal(true)
 	}
+
+	
+
+
 	return (
 		<div className={style.landing}>
-			{}
-		</div>
+			<SideNavigation />
+			<div className={style.landing__wrap}>
+				<TopNav />
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/pigs-credit' element={<PigsCredit />} />
+					<Route path='*' element={<div>Not found</div>} />
+				</Routes>
+			</div>
+		</div> 
 	)
 }
 

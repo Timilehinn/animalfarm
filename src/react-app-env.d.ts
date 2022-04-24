@@ -9,3 +9,7 @@ interface Window {
 		bnbSign?: (address: string, message: string) => Promise<{ publicKey: string; signature: string }>
 	}
 }
+
+module "react/jsx-runtime" {
+    export default any;
+}
