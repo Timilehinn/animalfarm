@@ -1,1 +1,1 @@
-# Refactored Boilerplate from VaultDeFi codebase
+# Animal Farm
