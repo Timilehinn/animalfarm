@@ -59,6 +59,7 @@
 		]
 	},
 	"devDependencies": {
+		"@iconify/react": "^3.2.1",
 		"@pancakeswap/eslint-config-pancake": "^1.2.0",
 		"eslint": "^7.26.0"
 	}

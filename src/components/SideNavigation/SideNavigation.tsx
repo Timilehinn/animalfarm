@@ -5,6 +5,8 @@ import logo from '../../assets/svgg.png'
 import home from '../../assets/home.png'
 import shop from '../../assets/shop.png'
 import book from '../../assets/book.png'
+import home__svg from '../../assets/home__svg.svg'
+import { Icon } from '@iconify/react';
 
 function SideNavigation() {
   return (
@@ -16,21 +18,21 @@ function SideNavigation() {
         </header>
         <ul>
             <Link className={styles.link} to="/">
-                <img src={home} alt="" />
+                <Icon icon="clarity:home-line" />
                 <p>Home</p>
             </Link>
             <Link className={styles.link} to="pigs-credit" >
-                <img src={shop} alt="" />
+                <Icon icon="iconoir:small-shop" />
                 <p>Pigs Credit</p>
             </Link>
-            <li className={styles.link}>
-                <img src={book} alt="" />
+            <Link to="" className={styles.link}>
+                <Icon icon="fluent:book-20-regular" />
                 <p>Pigs Pen</p>
-            </li>
-            <li className={styles.link}>
-                <img src={shop} alt="" />
+            </Link>
+            <Link to="" className={styles.link}>
+                <Icon icon="iconoir:piggy-bank" />
                 <p>Piggy Bank</p>
-            </li>
+            </Link>
         </ul>
         <div className={styles.side__coinprice}>
             <div className={styles.side__coinprice__in}>
