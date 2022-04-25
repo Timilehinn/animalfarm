@@ -19,9 +19,9 @@ function PigsCredit() {
 			<div>
 				<PigsCreditCard />
 			</div>
-			<div>
+			{/* <div>
 				<PigsCreditCard />
-			</div>
+			</div> */}
 		</div>
 		<div className={styles.tabs}>
 			<div onClick={()=>setActiveTab(1)} className={ activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}` }>
@@ -32,6 +32,7 @@ function PigsCredit() {
 			</div>
 		</div>
 		<ClaimPigsPen />
+		<img className={styles.pig} src={pig} alt="" />
     </div>
   )
 }
