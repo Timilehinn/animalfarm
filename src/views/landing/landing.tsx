@@ -8,8 +8,10 @@ import SideNavigation from 'components/SideNavigation/SideNavigation'
 import TopNav from 'components/TopNav/TopNav'
 import PigsCredit from 'views/pigsCredit/PigsCredit'
 import GenericBackground from 'components/GenericBackground/GenericBackground'
+import PigsPen from 'views/pigsPen/PigsPen'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import Home from '../home/Home'
+
 import style from './Landing.module.scss'
 
 function Landing() {
@@ -32,6 +34,7 @@ function Landing() {
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/pigs-credit' element={<PigsCredit />} />
+					<Route path='/pigs-pen' element={<PigsPen />} />
 					<Route path='*' element={<div>Not found</div>} />
 				</Routes>
 			</div>

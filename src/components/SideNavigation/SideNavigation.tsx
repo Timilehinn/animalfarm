@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { Icon } from '@iconify/react';
 import styles from './SideNavigation.module.scss'
 import logo from '../../assets/svgg.png'
 import home from '../../assets/home.png'
 import shop from '../../assets/shop.png'
 import book from '../../assets/book.png'
-import home__svg from '../../assets/home__svg.svg'
-import { Icon } from '@iconify/react';
+
 
 function SideNavigation() {
   return (
@@ -25,11 +25,11 @@ function SideNavigation() {
                 <Icon icon="iconoir:small-shop" />
                 <p>Pigs Credit</p>
             </Link>
-            <Link to="" className={styles.link}>
+            <Link to="/pigs-pen" className={styles.link}>
                 <Icon icon="fluent:book-20-regular" />
                 <p>Pigs Pen</p>
             </Link>
-            <Link to="" className={styles.link}>
+            <Link to="/" className={styles.link}>
                 <Icon icon="iconoir:piggy-bank" />
                 <p>Piggy Bank</p>
             </Link>
