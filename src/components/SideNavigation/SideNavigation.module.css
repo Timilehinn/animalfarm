@@ -3,7 +3,7 @@
   width: 200px;
   border-radius: 20px;
   background: #000000;
-  padding: 20px 20px 0px 20px;
+  padding: 20px 20px 0px 0px;
   position: relative;
 }
 
@@ -23,6 +23,7 @@
           align-items: center;
   padding-top: 20px;
   margin-bottom: 50px;
+  padding-left: 15px;
 }
 
 .side header h3 {
@@ -42,7 +43,7 @@
 }
 
 .side ul .link {
-  padding: 15px 0px 15px 0px;
+  padding: 0px 0px 0px 15px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -54,6 +55,7 @@
   transition: 0.3s ease;
   color: white;
   text-decoration: none;
+  margin-bottom: 30px;
 }
 
 .side ul .link p {
@@ -67,10 +69,22 @@
   width: 18px;
 }
 
-.side ul .link:hover {
-  opacity: 0.5;
-  background: #000000b3;
-  border-radius: 5px;
+.side ul .link svg {
+  color: white;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.side ul .link:focus {
+  border-left: 3px solid #F3BA2F;
+}
+
+.side ul .link:focus svg {
+  color: #F3BA2F;
+}
+
+.side ul .link:focus p {
+  color: #F3BA2F;
 }
 
 .side .side__coinprice {
