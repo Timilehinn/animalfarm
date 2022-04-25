@@ -1,4 +1,5 @@
 import React from 'react'
+import AnimalFarmCarousel from 'components/AnimalFarmCarousel/Carousel'
 import styles from './Home.module.scss'
 import chart from '../../assets/chart.png'
 
@@ -15,7 +16,7 @@ function Home() {
                 <img src={chart} alt="" />
             </div>
         </section>
-        <h1>hello</h1>
+        <AnimalFarmCarousel />
     </div>
   )
 }

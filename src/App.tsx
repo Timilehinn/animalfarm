@@ -3,7 +3,8 @@ import { useConnectWallet } from 'state/wallet/hooks'
 import BigNumber from 'bignumber.js'
 import Landing from './views/landing/landing'
 import './App.css'
-
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 BigNumber.config({
 	EXPONENTIAL_AT: 1000,
