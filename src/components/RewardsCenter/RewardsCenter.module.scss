@@ -1,0 +1,40 @@
+.reward{
+    width: 30%;
+    margin-top: 60px;
+    .header{
+        margin-bottom: 20px;
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 12px;
+    }
+
+    .reward__claim{
+        // height: 200px;
+        width: 100%;
+        padding: 20px;
+        background: #171716;
+        border-radius: 10px;
+
+        .reward__claim__box{
+            width: 100%;
+            justify-content: space-between;
+            display: flex;
+            
+
+            p{
+                color: rgba(255, 255, 255, 0.6);
+                font-size: 12px;
+            }
+        }
+    }
+
+    button{
+        background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+        height: 50px;
+        width: 100%;
+        border: none;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+}

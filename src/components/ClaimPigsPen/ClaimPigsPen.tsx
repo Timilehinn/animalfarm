@@ -6,7 +6,7 @@ function ClaimPigsPen() {
   return (
     <div className={styles.claimpigs}>
 		
-		<p className={styles.header} >Submit pigs to be credited with Pigs V2</p>
+		<p className={styles.header} >Enter amount of pigs to be deposited to the pigs pen.</p>
 		<form action="">
 			<div className={styles.inputWrap}>
 				<div className={styles.inputBox} >
