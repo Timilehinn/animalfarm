@@ -32,7 +32,6 @@ function PigsCredit() {
 			</div>
 		</div>
 		<ClaimPigsPen />
-
     </div>
   )
 }

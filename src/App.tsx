@@ -14,6 +14,7 @@ function App() {
 	const { isWalletConnected } = useConnectWallet()
 
 	return (
+		
 		<div className='App'>
 			<Landing />
 		</div>
