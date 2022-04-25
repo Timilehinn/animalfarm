@@ -15,6 +15,7 @@ function Home() {
                 <img src={chart} alt="" />
             </div>
         </section>
+        <h1>hello</h1>
     </div>
   )
 }

@@ -1,0 +1,110 @@
+.side {
+  height: calc(100vh - 40px);
+  width: 200px;
+  border-radius: 20px;
+  background: #000000;
+  padding: 20px 20px 0px 20px;
+  position: relative;
+}
+
+.side header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding-top: 20px;
+  margin-bottom: 50px;
+}
+
+.side header h3 {
+  color: orange;
+  font-size: 16px;
+}
+
+.side header img {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+
+.side ul {
+  color: white;
+  list-style: none;
+}
+
+.side ul .link {
+  padding: 15px 0px 15px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  color: white;
+  text-decoration: none;
+}
+
+.side ul .link p {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.side ul .link img {
+  height: 18px;
+  margin-right: 10px;
+  width: 18px;
+}
+
+.side ul .link:hover {
+  opacity: 0.5;
+  background: #000000b3;
+  border-radius: 5px;
+}
+
+.side .side__coinprice {
+  width: 100%;
+  padding: 10px;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.side .side__coinprice .side__coinprice__in {
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background: #333333;
+  border-radius: 5px;
+}
+
+.side .side__coinprice .side__coinprice__in ul li {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+.side .side__coinprice .side__coinprice__in ul li img {
+  height: 20px;
+  margin-right: 10px;
+}
+
+.side .side__coinprice .side__coinprice__in ul li p {
+  font-size: 12px;
+}
+/*# sourceMappingURL=SideNavigation.module.css.map */

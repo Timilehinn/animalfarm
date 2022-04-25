@@ -1,0 +1,12 @@
+.landing {
+  padding: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body {
+  background: linear-gradient(10deg, #000000dd, #000000ef), url(../../assets/farm.png);
+  background-size: cover;
+}
+/*# sourceMappingURL=Landing.module.css.map */

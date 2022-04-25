@@ -1,0 +1,42 @@
+.home {
+  width: calc(100vw - 240px);
+  padding-left: 60px;
+  padding-right: 60px;
+  padding-top: 50px;
+}
+
+.home .home__farm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home .home__farm .home__farm__one {
+  width: 50%;
+}
+
+.home .home__farm .home__farm__one h3 {
+  color: white;
+  margin-bottom: 20px;
+}
+
+.home .home__farm .home__farm__one p {
+  color: white;
+  line-height: 30px;
+  font-size: 14px;
+}
+
+.home .home__farm .home__farm__two {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 50%;
+}
+
+.home .home__farm .home__farm__two img {
+  height: 250px;
+}
+/*# sourceMappingURL=Home.module.css.map */
