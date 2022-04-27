@@ -1,67 +1,83 @@
+*{
+    // border: 1px solid red;
+}
+
 .pigscredit{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
+    width: 100%;
 
     .cards {
+
         width: 30%;
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
         margin-bottom: 50px;
     
-        div {
-             background: #171716;;
+        div{
+
+            background: #221E16;;
             height: 80px;
             border-radius: 10px;
         }
     }
 
-    .tabs{
+    .credit__wrap{
+        
+        border: 1px solid  #F3BA2F;
+        border-radius: 10px;
+        padding: 20px;
         width: 30%;
-       
-        display: flex;
 
-        .tab__one{
+            .tabs{
+            width: 100%;
+            display: flex;
 
-            color: white;
-            width: 60%;
-            height: 40px;
-            cursor: pointer;
-            border-bottom: 3px solid #333333;
-            transition: 0.5s;
-            
+            .tab__one{
 
-            p{
-                text-align: center;
-                font-size: 14px;
+                color: white;
+                width: 50%;
+                height: 40px;
+                cursor: pointer;
+                border-bottom: 3px solid #333333;
+                transition: 0.5s;
+                
+
+                p{
+                    text-align: center;
+                    font-size: 14px;
+                }
             }
-        }
 
-        .tab__one__active{
-            border-bottom: 3px solid orange;
-        }
-
-        .tab__two{
-            color: white;
-            width: 50%;
-            cursor: pointer;
-            border-bottom: 3px solid #333333;
-            transition: 0.5s;
-
-            p {
-                text-align: center;
-                font-size: 14px;
-                font-weight: 600;
+            .tab__one__active{
+                border-bottom: 3px solid orange;
             }
-        }
 
-        .tab__two__active {
-            border-bottom: 3px solid orange;
+            .tab__two{
+                color: white;
+                width: 50%;
+                cursor: pointer;
+                border-bottom: 3px solid #333333;
+                transition: 0.5s;
+
+                p{
+                    text-align: center;
+                    font-size: 14px;
+                    font-weight: 600;
+                }
+            }
+
+            .tab__two__active {
+                border-bottom: 3px solid orange;
+            }
         }
     }
+
+    
 
     .pig {
 
@@ -74,4 +90,27 @@
 
     
     
+}
+
+@media screen and (max-width : 481px) {
+
+    .pigscredit{
+        padding: 50px 20px 0px 20px;
+        width: 100%;
+
+        .cards{
+
+            width: 100%;
+        }
+
+        .credit__wrap{
+
+            width: 100%;
+        }
+
+        .pig{
+
+            display: none;
+        }
+    }
 }

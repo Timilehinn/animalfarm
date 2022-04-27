@@ -119,3 +119,9 @@ $dark : #000000;
        
     }
 }
+
+@media screen and (max-width : 481px ) {
+    .side{
+        display: none;
+    }
+}

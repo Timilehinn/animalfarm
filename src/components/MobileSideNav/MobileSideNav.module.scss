@@ -1,0 +1,91 @@
+$gold : #F3BA2F;
+
+.mobile{
+
+    height: 100vh;
+    width: 50%;
+    background: #121212;
+    display: none;
+    position: absolute;
+    padding: 20px;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    transform: translateX(-100%);
+    transition: 0.5s;
+
+    header{
+        color :$gold;
+        font-weight: bold;
+    }
+
+    ul {
+        color: white;
+        list-style: none;
+        margin-top: 50px;
+    
+        .link {
+            padding: 0px 0px 0px 0px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: 0.3s ease;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 30px;
+    
+    
+            p {
+                font-size: 12px;
+                cursor: pointer;
+            }
+    
+            img {
+                height: 18px;
+                margin-right: 10px;
+                width: 18px;
+            }
+    
+            svg {
+                color: white;
+                margin-right: 10px;
+                font-size: 20px;
+            }
+        }
+    
+        .link:focus {
+            // border-left: 3px solid #F3BA2F;
+        }
+    
+        .link:focus svg {
+            color: #F3BA2F;
+        }
+    
+        .link:focus p {
+            color: #F3BA2F;
+        }
+    }
+    button{
+        background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+        padding: 10px;
+        border: none;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+    }
+}
+
+.mobile__active{
+
+    visibility: visible;
+    transform: translateX(0%);
+}
+
+@media screen and (max-width:481px){
+
+    .mobile{
+
+        display: block;
+    }
+
+}

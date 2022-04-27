@@ -9,8 +9,11 @@ import TopNav from 'components/TopNav/TopNav'
 import PigsCredit from 'views/pigsCredit/PigsCredit'
 import GenericBackground from 'components/GenericBackground/GenericBackground'
 import PigsPen from 'views/pigsPen/PigsPen'
+import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
+import MobileNav from '../../components/MobileNav/MobileNav'
 import Home from '../home/Home'
+
 
 import style from './Landing.module.scss'
 
@@ -31,6 +34,8 @@ function Landing() {
 			<SideNavigation />
 			<div className={style.landing__wrap}>
 				<TopNav />
+				<MobileNav />
+				<MobileSideNav />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/pigs-credit' element={<PigsCredit />} />
