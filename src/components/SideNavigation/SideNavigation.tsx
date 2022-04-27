@@ -29,7 +29,7 @@ function SideNavigation() {
                 <Icon icon="fluent:book-20-regular" />
                 <p>Pigs Pen</p>
             </Link>
-            <Link to="/" className={styles.link}>
+            <Link to="/piggy-bank" className={styles.link}>
                 <Icon icon="iconoir:piggy-bank" />
                 <p>Piggy Bank</p>
             </Link>
