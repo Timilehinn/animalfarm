@@ -33,3 +33,15 @@
         }
     }
 }
+
+@media screen and (max-width : 481px) {
+
+    .home{
+        width: 100%;
+
+        .home__farm{
+            flex-direction: column;
+        }
+        
+    }
+}
