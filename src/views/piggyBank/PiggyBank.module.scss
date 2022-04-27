@@ -1,3 +1,9 @@
+@media (max-width: 890px) {
+    .piggybank {
+        margin-left: 24px;
+        margin-right: 24px;
+    }
+}
 .about {
     display: flex;
     justify-content: center;
@@ -9,6 +15,11 @@
         display: initial;
         justify-items: center;
         align-items: center;
+        justify-content: center;
+        margin-bottom: 40px;
+    }
+    .card1 > P{
+        margin-bottom: 24px;
     }
 }
 .card1 {
@@ -24,12 +35,14 @@
 
 .aboutimg {
     max-width: 472px;
-    height: 260px !important;
+    height: 260px !important;  
 }
 @media (max-width: 890px) {
     .aboutimg {
         max-width: 422px;
         height: 220px !important;
+        display: table;
+        margin: 0 auto;
     }
 }
 //
@@ -45,8 +58,14 @@
     .features {
         display: initial;
         flex-direction: column-reverse;
+        margin-top: 20px
     }
-}
+   .cardlist{
+        color: #FFFFFF;
+        margin-bottom: 20px;
+        }
+    }
+
 .card2 {
     max-width: 495px;
 }
@@ -68,11 +87,10 @@
 }
 @media (max-width: 890px) {
     .featuresimg {
-        display: initial;
         max-width: 422px;
         height: 220px !important;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        display: table;
+        margin: 0 auto;
     }
 }
 //
@@ -88,6 +106,7 @@
         display: initial;
         justify-items: center;
         align-items: center;
+        
     }
 }
 .card3 {
@@ -109,6 +128,14 @@
     .multiplierimg {
         max-width: 422px;
         height: 220px !important;
+        display: table;
+        margin: 0 auto;
+    }
+    .card3 {
+        margin-top: 24px
+    }   
+    .multiplierlist{
+        margin-bottom: 20px;
     }
 }
 .multiplierlist{
@@ -167,10 +194,13 @@
 }
 @media (max-width: 890px) {
     .referralimg {
-        display: initial;
+        // display: initial;
         max-width: 422px;
         height: 220px !important;
-        margin-top: 40px;
-        margin-bottom: 40px;
+        display: table;
+        margin: 0 auto;
+    }
+    .referrallist{
+        margin-bottom: 20px;  
     }
 }
