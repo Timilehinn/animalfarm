@@ -12,10 +12,12 @@ const sliderThumbStyles = (props:rangeProps) => (`
   background: ${props.color};
   cursor: pointer;
   border-radius : 50%;
-  outline: 5px solid #F3BA2FE5;
+  cursor:pointer;
+  outline: 3px solid #F3BA2FE5;
   opacity: ${props.opacity};
   -webkit-transition: .2s;
   transition: opacity .2s;
+  
 `);
 
 const Styles = styled.div`
@@ -26,17 +28,20 @@ const Styles = styled.div`
   margin-bottom: 2rem;
   .value {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 14px;
     border: 1px solid #FFFFFF4D;
     padding : 5px;
-    border-radius : 3px;
+    border-radius : 5px;
     margin-left : 10px;
   }
   .slider {
     flex: 6;
     -webkit-appearance: none;
     width: 100%;
-    height: 2px;
+    height: 3px;
     border-radius: 5px;
     background:  #424242;
     outline: none;

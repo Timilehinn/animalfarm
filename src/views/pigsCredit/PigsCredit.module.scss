@@ -32,6 +32,7 @@
         border-radius: 10px;
         padding: 20px;
         width: 30%;
+        z-index: 5;
 
             .tabs{
             width: 100%;
@@ -81,10 +82,11 @@
 
     .pig {
 
-        position: absolute;
+        position: fixed;
         right: 0px;
         bottom: 0px;
         height: 250px;
+        z-index: 3;
     
     }
 
@@ -92,7 +94,7 @@
     
 }
 
-@media screen and (max-width : 481px) {
+@media screen and (max-width : 768px) {
 
     .pigscredit{
         padding: 50px 20px 0px 20px;
@@ -110,7 +112,8 @@
 
         .pig{
 
-            display: none;
+            // display: none;
+            height: 150px;
         }
     }
 }

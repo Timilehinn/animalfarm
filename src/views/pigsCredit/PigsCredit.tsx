@@ -4,6 +4,7 @@ import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import styles from './PigsCredit.module.scss'
 import pig from '../../assets/pig.png'
+import { useSpring, animated } from 'react-spring'
 
 
 
@@ -13,9 +14,10 @@ function PigsCredit() {
 	
 
 	const [ activeTab, setActiveTab ] = React.useState(1)
+	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200, });
 
   	return (
-    <div className={styles.pigscredit} >
+    <animated.div style={props} className={styles.pigscredit} >
 		<div className={styles.cards} >
 			<div>
 				<PigsCreditCard />
@@ -40,12 +42,12 @@ function PigsCredit() {
 				activeTab === 1 ? 
 				<ClaimPigsPen title="Submit Pigs" />
 				:
-				<RewardsCenter sliderRequired={true} title="Submit PIGS/BUSD LP" />
+				<RewardsCenter xLock={true} sliderRequired={true} title="Submit PIGS/BUSD LP" />
 			}
 		</div>
 		
 		<img className={styles.pig} src={pig} alt="" />
-    </div>
+    </animated.div>
   )
 }
 
