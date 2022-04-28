@@ -3,6 +3,10 @@ import { Link,NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react';
 import styles from './SideNavigation.module.scss'
 import logo from '../../assets/svgg.png'
+import doglogo from '../../assets/doglogo.png'
+import twitter from '../../assets/twitter.png'
+import discord from '../../assets/discord.png'
+import telegram from '../../assets/telegram.png'
 import home from '../../assets/home.png'
 import shop from '../../assets/shop.png'
 import book from '../../assets/book.png'
@@ -14,7 +18,6 @@ function SideNavigation() {
         <header>
             <img src={logo} alt="" />
             <h3>Animal Farm</h3>
-            
         </header>
         <ul>
             <NavLink 
@@ -54,11 +57,16 @@ function SideNavigation() {
                         <p>$146</p>
                     </li>
                     <li>
-                        <img src={logo} alt="" />
+                        <img src={doglogo} alt="" />
                         <p>$146</p>
                     </li>
                 </ul>
             </div>
+        </div>
+        <div className={styles.side__socials}>
+            <a href="http://localhost:3000/" className={styles.side__socials__icon}><img src={twitter} alt="" /></a>
+            <a href="http://localhost:3000/" className={styles.side__socials__icon}><img src={discord} alt="" /></a>
+            <a href="http://localhost:3000/" className={styles.side__socials__icon}><img src={telegram} alt="" /></a>
         </div>
     </div>
   )

@@ -3,6 +3,7 @@
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 50px;
+  height: 100vh;
 }
 
 .home .home__farm {
@@ -18,6 +19,7 @@
 .home .home__farm .home__farm__one h3 {
   color: white;
   margin-bottom: 20px;
+  font-size: 32px;
 }
 
 .home .home__farm .home__farm__one p {
@@ -37,6 +39,35 @@
 }
 
 .home .home__farm .home__farm__two img {
-  height: 250px;
+  height: 300px;
+}
+
+@media screen and (max-width: 1024px) {
+  .home {
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .home .home__farm {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .home .home__farm .home__farm__one {
+    width: 100%;
+  }
+  .home .home__farm .home__farm__two {
+    width: 100%;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    padding: 20px 0px 20px 0px;
+  }
+  .home .home__farm .home__farm__two img {
+    height: 200px;
+    width: 100%;
+    max-width: 500px;
+  }
 }
 /*# sourceMappingURL=Home.module.css.map */

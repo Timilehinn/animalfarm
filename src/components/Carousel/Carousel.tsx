@@ -46,13 +46,15 @@ function AnimalCarousel() {
   return (
     <div className='carousel' style={{color:"white"}} >
         <h3 className='carousel__h' >Animal Farm Features</h3>
-        <Carousel showArrows={false} transitionMs={600} breakPoints={breakPoints} itemsToShow={4}>
-            {
-                boxItem.map((item,index)=>(
-                    <Card title = {item.title} paragraph={item.paragraph} />
-                ))
-            }
-        </Carousel>
+        <div className='carousel__container'>
+            <Carousel showArrows={false} transitionMs={600} breakPoints={breakPoints} itemsToShow={4}>
+                {
+                    boxItem.map((item,index)=>(
+                        <Card title = {item.title} paragraph={item.paragraph} />
+                    ))
+                }
+            </Carousel>
+        </div>
     </div>
   )
 }

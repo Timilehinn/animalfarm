@@ -7,6 +7,7 @@
     width: calc(100vw - 340px);
     padding-left: 60px;padding-right: 60px;
     padding-top: 50px;
+    height: 100vh;
     
 
     .home__farm{
@@ -18,8 +19,7 @@
             h3{
                 color: white;
                 margin-bottom: 20px;
-                font-family: $boldFont;
-                font-family: 400;
+                font-size: 32px;
             }
             p{
                 color: white;
