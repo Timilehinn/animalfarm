@@ -25,6 +25,13 @@
 .carousel__h{
     color: white;
     margin-bottom: 30px;
+    font-size: 32px;
+}
+@media (min-width: 890px) {
+    .carousel__container {
+        margin-left: -22px;
+        margin-right: -22px;
+    }
 }
 
 button.rec-dot {

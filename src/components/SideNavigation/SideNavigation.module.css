@@ -1,10 +1,15 @@
 .side {
-  height: calc(100vh - 40px);
+  height: calc(100vh - 20px);
   width: 200px;
   border-radius: 20px;
   background: #000000;
   padding: 20px 20px 0px 0px;
-  position: relative;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  background: #1A1A1A;
 }
 
 .side header {
@@ -21,7 +26,7 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 20px;
+  padding-top: 6px;
   margin-bottom: 50px;
   padding-left: 15px;
 }
@@ -89,17 +94,19 @@
 
 .side .side__coinprice {
   width: 100%;
-  padding: 10px;
+  padding: 16px;
   position: absolute;
-  bottom: 0px;
+  bottom: 48px;
   right: 0px;
+  height: 100px;
 }
 
 .side .side__coinprice .side__coinprice__in {
   width: 100%;
   height: 100%;
-  padding: 20px;
-  background: #333333;
+  padding-left: 20px;
+  padding-top: 8px;
+  background: #000000;
   border-radius: 5px;
 }
 
@@ -120,5 +127,28 @@
 
 .side .side__coinprice .side__coinprice__in ul li p {
   font-size: 12px;
+}
+
+.side__socials {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+}
+
+.side__socials__icon {
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+@media screen and (max-width: 768px) {
+  .side {
+    display: none;
+  }
 }
 /*# sourceMappingURL=SideNavigation.module.css.map */
