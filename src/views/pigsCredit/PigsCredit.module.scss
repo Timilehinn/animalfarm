@@ -28,10 +28,14 @@
 
     .credit__wrap{
         
-        border: 1px solid  #F3BA2F;
+        border-top: 1px solid #f3bb2f6c;
+        border-right: 1px solid #f3bb2f6c;
+        border-left: 1px solid #f3bb2f6c;
+        border-bottom: 1px solid black;
         border-radius: 10px;
         padding: 20px;
         width: 30%;
+        z-index: 5;
 
             .tabs{
             width: 100%;
@@ -54,7 +58,7 @@
             }
 
             .tab__one__active{
-                border-bottom: 3px solid orange;
+                border-bottom: 3px solid #F3BA2FE5;
             }
 
             .tab__two{
@@ -72,7 +76,7 @@
             }
 
             .tab__two__active {
-                border-bottom: 3px solid orange;
+                border-bottom: 3px solid #F3BA2FE5;;
             }
         }
     }
@@ -81,10 +85,11 @@
 
     .pig {
 
-        position: absolute;
+        position: fixed;
         right: 0px;
         bottom: 0px;
         height: 250px;
+        z-index: 3;
     
     }
 
@@ -92,7 +97,7 @@
     
 }
 
-@media screen and (max-width : 481px) {
+@media screen and (max-width : 768px) {
 
     .pigscredit{
         padding: 50px 20px 0px 20px;
@@ -110,7 +115,8 @@
 
         .pig{
 
-            display: none;
+            // display: none;
+            height: 150px;
         }
     }
 }
