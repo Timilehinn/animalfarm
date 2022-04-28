@@ -14,10 +14,20 @@ function RewardsCenter({sliderRequired,title,xLock} : rewardProps) {
 
     const props = useSpring({ to: { opacity: 1, x : 0 }, from: { opacity: 0, x : 20 }, delay: 100, });
 
+    const [ value, setValue ] = React.useState('');
+
+	const handleChange = (e:any) =>{
+
+		setValue(e.target.value);
+	}
+	
+	const  buttonDisabled  = value === ''
+	
+
   return (
     <animated.div style={props} className={styles.reward} >
         <h3>{title}</h3>
-        <p className={styles.header} >Input the amount of BUSD to be paired with Pigs</p>
+        <p className={styles.header} >Input  amount of BUSD to be paired with Pigs</p>
         <div className={styles.reward__claim} >
             <div style={{marginBottom:"10px"}} className={styles.reward__claim__box}>
                 <p>Eran</p>
@@ -39,7 +49,7 @@ function RewardsCenter({sliderRequired,title,xLock} : rewardProps) {
 						<img src={logo} alt="" />
 						<p>PIGS</p>
 					</div>
-					<input type="number" placeholder='000' />
+					<input onChange={(e)=>handleChange(e)} value={value} type="number" placeholder='000' />
 				</div>
 				<div>
 					<p className={styles.claimable} >Amount Claimable: 376 PIGS</p>
@@ -49,7 +59,7 @@ function RewardsCenter({sliderRequired,title,xLock} : rewardProps) {
         { xLock && <p className={styles.xpigs} ><span>X PIGS</span> will be paired with <span>XBUSD</span></p>}
         { xLock && <p className={styles.lock} >Lock Duration (Optional)</p>}
         { sliderRequired && <RangeSlider color = "#121212" opacity = {3}  /> }
-        <button>Claim BUSD</button>
+        <button onClick={()=>alert("Hello")} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled } type='button' >Enter amount to claim</button>
     </animated.div>
   )
 }

@@ -35,6 +35,7 @@
             color: white;
             background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
             @include flex(row, center, center);
+            cursor: pointer;
 
             img{
                 height: 20px;

@@ -74,7 +74,7 @@ $grey : #FFFFFF4D;
             }
         }
 
-        button{
+        .button__disabled{
             width: 100%;
             height: 50px;
             margin-top: 20px;
@@ -82,6 +82,18 @@ $grey : #FFFFFF4D;
             border: none;
             background-color: #474E47;
             color: $grey;
+            cursor: not-allowed;
+            
+        }
+
+        .button__enabled{
+            width: 100%;
+            height: 50px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: none;cursor: pointer;
+            color:white;
+            background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);;
         }
         
 
