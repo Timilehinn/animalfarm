@@ -1,3 +1,4 @@
+@import '../../global.scss';
 $grey : #FFFFFF4D;
 
 .claimpigs{
@@ -16,6 +17,7 @@ $grey : #FFFFFF4D;
         color:white;
         margin-top: 20px;
         font-size: 16px;
+        font-family: $boldFont;
     }
 
     form{
@@ -41,11 +43,13 @@ $grey : #FFFFFF4D;
 
                     img{
                         margin-right: 10px;
+                        height: 20px;
                     }
 
                     p{
-                        color: white;
+                        color:  #F3BA2F;;
                         font-weight: bold;
+                        font-family: $boldFont;
                     }
                     
                 }
@@ -70,7 +74,7 @@ $grey : #FFFFFF4D;
             }
         }
 
-        button{
+        .button__disabled{
             width: 100%;
             height: 50px;
             margin-top: 20px;
@@ -78,6 +82,18 @@ $grey : #FFFFFF4D;
             border: none;
             background-color: #474E47;
             color: $grey;
+            cursor: not-allowed;
+            
+        }
+
+        .button__enabled{
+            width: 100%;
+            height: 50px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: none;cursor: pointer;
+            color:white;
+            background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);;
         }
         
 

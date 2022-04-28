@@ -52,6 +52,7 @@ $dark : #000000;
             color: white;
             text-decoration: none;
             margin-bottom: 30px;
+            transition: 0.3s;
             
 
             p{
@@ -72,16 +73,28 @@ $dark : #000000;
             }
         }
 
-        .link:focus{
+        .link__active{
             border-left: 3px solid #F3BA2F;
         }
 
-        .link:focus svg{
+        .link__active svg{
             color: #F3BA2F;
         }
-        .link:focus p {
+
+        .link__active p {
             color: #F3BA2F;
         }
+
+        // .link:focus{
+        //     border-left: 3px solid #F3BA2F;
+        // }
+
+        // .link:focus svg{
+        //     color: #F3BA2F;
+        // }
+        // .link:focus p {
+        //     color: #F3BA2F;
+        // }
 
         
     }

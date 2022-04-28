@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import WalletButton from 'components/ConnectWalletModal/WalletButton/WalletButton'
-import { useConnectWalletModal } from 'state/wallet/hooks'
+import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
 import config, { walletLocalStorageKey } from './config'
 import { Config, Login } from './types'
 
@@ -37,10 +37,15 @@ const getPreferredConfig = (walletConfig: Config[]) => {
 function ConnectWalletModal(props: ConnectWalletProps) {
 	const { login } = props
 	const { isModalOpen, toggleConnectWalletModal } = useConnectWalletModal()
+	const { setIsWalletConnected } = useConnectWallet()
 	const sortedConfig = getPreferredConfig(config)
 
 	const dismissModal = () => {
 		toggleConnectWalletModal(false)
+	}
+
+	const triggerConnect =() => {
+		setIsWalletConnected(true)
 	}
 
 	return (
@@ -53,7 +58,7 @@ function ConnectWalletModal(props: ConnectWalletProps) {
 
 				{sortedConfig.map((wallet) => (
 					<Fragment key={wallet.title}>
-						<WalletButton walletConfig={wallet} login={login} dismissModal={dismissModal} />
+						<WalletButton walletConfig={wallet} triggerConnect={triggerConnect}  login={login} dismissModal={dismissModal} />
 					</Fragment>
 				))}
 			</div>
