@@ -28,20 +28,42 @@
             width: 50%;
 
             img{
-                height: 250px;
+                height: 300px;
             }
         }
     }
 }
 
-@media screen and (max-width : 481px) {
+@media screen and (max-width :1024px) {
 
     .home{
         width: 100%;
+        padding-left: 20px;
+        padding-right: 20px;
 
         .home__farm{
             flex-direction: column;
+
+            .home__farm__one{
+                width: 100%;
+            }
+            .home__farm__two{
+                width: 100%;
+                justify-content: center;
+                // background : green;
+                padding: 20px 0px 20px 0px;
+
+                img{
+                    height: 200px;
+                    width: 100%;
+                    max-width: 500px;
+                    // object-fit: contain;
+
+                }
+            }
+
         }
+        
         
     }
 }

@@ -8,9 +8,12 @@
 
     .credit__wrap {
     
-        border: 1px solid #F3BA2F;
+        border-top: 1px solid #f3bb2f6c;
+        border-right: 1px solid #f3bb2f6c;
+        border-left: 1px solid #f3bb2f6c;
+        border-bottom: 1px solid black;
         border-radius: 10px; 
-        padding: 1px;
+        // padding: 1px;
         width: 30%;
         // border-image: linear-gradient(90deg,
         //     #F3BA2F,
@@ -45,7 +48,7 @@
                 }
             
                 .tab__one__active {
-                    border-bottom: 3px solid orange;
+                    border-bottom: 3px solid #F3BA2FE5;
                 }
             
                 .tab__two {
@@ -63,7 +66,7 @@
                 }
             
                 .tab__two__active {
-                    border-bottom: 3px solid orange;
+                    border-bottom: 3px solid  #F3BA2FE5;;
                 }
             }
         }
