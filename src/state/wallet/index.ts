@@ -92,7 +92,7 @@ const initialVaultSRewardBalance: Balance = {
 
 const initialState: WalletState = {
 	isConnected: false,
-	isModalOpen: false,
+	isModalOpen:false,
 	vaultBtcBalance: initialVaultBtcBalance,
 	vaultSBalance: initialVaultSBalance,
 	surgeBtcBalance: initialSurgeBtcBalance,

@@ -5,6 +5,7 @@ import Landing from './views/landing/landing'
 import './App.css'
 import "slick-carousel/slick/slick.css"; 
 import "slick-carousel/slick/slick-theme.css";
+import ModalBackdrop from './components/ModalBackdrop/ModalBackdrop'
 
 BigNumber.config({
 	EXPONENTIAL_AT: 1000,
@@ -18,6 +19,7 @@ function App() {
 
 		<div className='App'>
 			<Landing />
+			<ModalBackdrop />
 		</div>
 	)
 }

@@ -25,6 +25,7 @@ function Landing() {
 		toggleConnectWalletModal(true)
 	}
 
+
 	
 
 
@@ -35,6 +36,7 @@ function Landing() {
 				<TopNav />
 				<MobileNav />
 				<MobileSideNav />
+				<ConnectWalletModal login={login} />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/pigs-credit' element={<PigsCredit />} />

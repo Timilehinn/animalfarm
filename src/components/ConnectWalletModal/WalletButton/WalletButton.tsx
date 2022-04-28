@@ -6,6 +6,7 @@ import style from './walletButton.module.css'
 interface walletButtonProps {
 	walletConfig: Config
 	login: Login
+	triggerConnect: () => void
 	dismissModal: () => void
 }
 
@@ -18,7 +19,7 @@ interface walletButtonProps {
 // }
 
 function WalletButton(props: walletButtonProps) {
-	const { walletConfig, login, dismissModal } = props
+	const { walletConfig, login, dismissModal, triggerConnect } = props
 
 	const handleClick = () => {
 		const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent)
@@ -33,6 +34,8 @@ function WalletButton(props: walletButtonProps) {
 		localStorage.setItem(walletLocalStorageKey, walletConfig.title)
 		localStorage.setItem(connectorLocalStorageKey, walletConfig.connectorId)
 		dismissModal()
+		triggerConnect()
+
 	}
 	return (
 		<div>

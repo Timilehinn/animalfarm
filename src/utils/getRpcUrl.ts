@@ -2,7 +2,7 @@ import sample from 'lodash/sample'
 
 export const CHAIN_ID = 56
 export const NODES = {
-	56: ['https://speedy-nodes-nyc.moralis.io/fbb4b2b82993bf507eaaab13/bsc/mainnet', 'https://speedy-nodes-nyc.moralis.io/2c4732e32c4a0b62de5cd332/bsc/mainnet'],
+	56: ["http://149.56.174.1:8545", "http://lotw-vm-host5.qortal.org:8545"],
 	97: [
 		'https://speedy-nodes-nyc.moralis.io/480f9fd047ed15e4229e4547/bsc/testnet/archive',
 		'https://speedy-nodes-nyc.moralis.io/480f9fd047ed15e4229e4547/bsc/testnet/archive',
