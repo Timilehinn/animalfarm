@@ -35,7 +35,7 @@ function PigsCredit() {
 					<p>Claim to pig pens</p>
 				</div>
 				<div onClick={()=>setActiveTab(2)} className={  activeTab === 2 ? `${styles.tab__two} ${styles.tab__two__active}` : `${styles.tab__two}` }>
-					<p>Claim to Piggybank</p>
+					<p>Claim to Piggy bank</p>
 				</div>
 			</div>
 			{

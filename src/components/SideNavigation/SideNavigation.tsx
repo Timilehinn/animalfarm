@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react';
 import styles from './SideNavigation.module.scss'
 import logo from '../../assets/svgg.png'
@@ -17,25 +17,37 @@ function SideNavigation() {
             
         </header>
         <ul>
-            <Link className={styles.link} to="/">
+            <NavLink 
+                to="/"
+                className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link )}
+            >
                 <Icon icon="clarity:home-line" />
                 <p>Home</p>
-            </Link>
-            <Link className={styles.link} to="pigs-credit" >
+            </NavLink>
+            <NavLink 
+                to="/pigs-credit"
+                className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link )}
+            >
                 <Icon icon="iconoir:small-shop" />
-                <p>Pigs Credit</p>
-            </Link>
-            <Link to="/pigs-pen" className={styles.link}>
+                <p>Pig Credit</p>
+            </NavLink>
+            <NavLink 
+                to="/pigs-pen"
+                className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link )}
+            >
                 <Icon icon="fluent:book-20-regular" />
                 <p>Pigs Pen</p>
-            </Link>
-            <Link to="/piggy-bank" className={styles.link}>
+            </NavLink>
+            <NavLink 
+                to="/piggy-bank"
+                className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link )}
+            >
                 <Icon icon="iconoir:piggy-bank" />
                 <p>Piggy Bank</p>
-            </Link>
+            </NavLink>
         </ul>
         <div className={styles.side__coinprice}>
-            <div className={styles.side__coinprice__in}>
+            <div className={styles.side__coinprice__in}> 
                 <ul>
                     <li>
                         <img src={logo} alt="" />

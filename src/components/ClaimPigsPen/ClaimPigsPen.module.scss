@@ -1,3 +1,4 @@
+@import '../../global.scss';
 $grey : #FFFFFF4D;
 
 .claimpigs{
@@ -16,6 +17,7 @@ $grey : #FFFFFF4D;
         color:white;
         margin-top: 20px;
         font-size: 16px;
+        font-family: $boldFont;
     }
 
     form{
@@ -41,11 +43,13 @@ $grey : #FFFFFF4D;
 
                     img{
                         margin-right: 10px;
+                        height: 20px;
                     }
 
                     p{
-                        color: white;
+                        color:  #F3BA2F;;
                         font-weight: bold;
+                        font-family: $boldFont;
                     }
                     
                 }

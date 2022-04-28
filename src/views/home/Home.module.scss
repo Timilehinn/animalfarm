@@ -1,6 +1,10 @@
+@import '../../global.scss';
+
+
+
 .home{
 
-    width: calc(100vw - 240px);
+    width: calc(100vw - 340px);
     padding-left: 60px;padding-right: 60px;
     padding-top: 50px;
     
@@ -14,11 +18,14 @@
             h3{
                 color: white;
                 margin-bottom: 20px;
+                font-family: $boldFont;
+                font-family: 400;
             }
             p{
                 color: white;
                 line-height: 30px;
                 font-size: 14px;
+                font-family: $lightFont;
             }
         }
         .home__farm__two{
