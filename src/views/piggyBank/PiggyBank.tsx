@@ -9,6 +9,13 @@ import dogart from '../../assets/dogart.png'
 function PiggyBank() {
 	return (
 		<div className={style.piggybank}>
+
+			{/* first form here */}
+
+			{/* second form here */}
+			
+			{/* {table here} */}
+
 			<div className={style.about}>
 				<div className={style.card1}>
 					<h2>About Piggy Bank</h2>
