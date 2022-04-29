@@ -18,6 +18,8 @@ function TopNav() {
 		toggleConnectWalletModal(true)
 	}
 
+	
+
 	return (
 		<div className={styles.nav__wrap} >
 			<div className={styles.nav}>
@@ -25,7 +27,10 @@ function TopNav() {
 					<h3>{routeName.length === 0 ? 'Home' : routeName}</h3>
 					<button onClick={() => connect()} type='button'>
 						<img src={wallet} alt='' />
-						<p>{isWalletConnected ? 'Disconnect' : 'Connect Wallet'}</p>
+						{	isWalletConnected ?
+							<p>{account ? account.substring(0, 6) : ''}...{account ? account.substring(account.length - 4) : ''}</p> :
+							<p>Connect Wallet</p>
+						}
 					</button>
 				</div>
 			</div>	

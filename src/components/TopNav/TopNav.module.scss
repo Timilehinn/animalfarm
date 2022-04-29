@@ -11,10 +11,11 @@
     flex-direction: column;
 
     .nav{
-        width: calc(100vw - 240px);
+        // width: calc(100vw - 240px);
+        width: 100%;
         height: 70px;
-        // padding: 0px 20px 0px 20px;
-        max-width: 1200px;
+        padding: 0px 20px 0px 50px;
+        // max-width: 1200px;
         
 
         .nav__in{
@@ -30,6 +31,7 @@
 
             h3{
                 color: white;
+                // margin-left: 20px;
             }
 
             button{
@@ -39,6 +41,7 @@
                 border-radius: 5px;
                 font-weight: bold;
                 color: white;
+                cursor: pointer;
                 background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
                 @include flex(row, center, center);
                 margin-right: 20px;

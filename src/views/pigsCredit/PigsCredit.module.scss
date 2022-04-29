@@ -14,7 +14,7 @@
     .pigscredit{
         @include center();
         width: 100%;
-        max-width: 1200px;
+        max-width: 1500px;
         .cards {
 
             width: 30%;
@@ -32,11 +32,11 @@
         }
 
         .credit__wrap{
+            background: linear-gradient(#121212,#121212) padding-box, linear-gradient(#f3ba2a,#121212) border-box;
+            border-style: solid;
+            border-width: 1px;
+            border-color: transparent;
             
-            border-top: 1px solid #f3bb2f6c;
-            border-right: 1px solid #f3bb2f6c;
-            border-left: 1px solid #f3bb2f6c;
-            border-bottom: 1px solid black;
             border-radius: 10px;
             padding: 20px;
             width: 30%;
@@ -52,7 +52,7 @@
                     width: 50%;
                     height: 40px;
                     cursor: pointer;
-                    border-bottom: 3px solid #333333;
+                    border-bottom: 2px solid #333333;
                     transition: 0.5s;
                     
 
@@ -65,14 +65,14 @@
                 }
 
                 .tab__one__active{
-                    border-bottom: 3px solid #F3BA2FE5;
+                    border-bottom: 2px solid #F3BA2FE5;
                 }
 
                 .tab__two{
                     color: white;
                     width: 50%;
                     cursor: pointer;
-                    border-bottom: 3px solid #333333;
+                    border-bottom: 2px solid #333333;
                     transition: 0.5s;
 
                     p{
@@ -84,7 +84,7 @@
                 }
 
                 .tab__two__active {
-                    border-bottom: 3px solid #F3BA2FE5;;
+                    border-bottom: 2px solid #F3BA2FE5;;
                 }
             }
         }
@@ -108,7 +108,7 @@
 
 
 
-@media screen and (max-width : 768px) {
+@media screen and (max-width : 1200px) {
 
     .pigscredit__wrap{
         
@@ -124,11 +124,26 @@
             .credit__wrap{
 
                 width: 100%;
+
+                .tabs{
+                    .tab__one{
+
+                        p{
+                            font-size: 12px;
+                        }
+                    }
+                    .tab__two{
+
+                        p{
+                            font-size: 12px;
+                        }
+                    }
+                }
             }
 
             .pig{
 
-                // display: none;
+                display: none;
                 height: 150px;
             }
         } 
