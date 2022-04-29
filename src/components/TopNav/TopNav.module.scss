@@ -5,48 +5,57 @@
     align-items: $align-item;
 }
 
-.nav{
-    width: calc(100vw - 240px);
-    height: 70px;
-    padding: 0px 20px 0px 20px;
+.nav__wrap{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    .nav{
+        width: calc(100vw - 240px);
+        height: 70px;
+        // padding: 0px 20px 0px 20px;
+        max-width: 1200px;
+        
+
+        .nav__in{
+            width: 100%;
+            height: 100%;
+            border-bottom: 1px solid #FFFFFF33;
+            // border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            // padding: 0px 20px 0px 20px;
     
 
-    .nav__in{
-        width: 100%;
-        height: 100%;
-        border-bottom: 1px solid #FFFFFF33;
-        // border-radius: 16px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0px 20px 0px 20px;
-   
-
-        h3{
-            color: white;
-        }
-
-        button{
-            width: 200px;
-            height: 40px;
-            border: none;
-            border-radius: 5px;
-            font-weight: bold;
-            color: white;
-            background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
-            @include flex(row, center, center);
-            margin-right: 20px;
-
-            img{
-                height: 20px;
-                margin-right: 10px;
+            h3{
+                color: white;
             }
 
-        }
-    }
+            button{
+                width: 200px;
+                height: 40px;
+                border: none;
+                border-radius: 5px;
+                font-weight: bold;
+                color: white;
+                background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+                @include flex(row, center, center);
+                margin-right: 20px;
 
-   
+                img{
+                    height: 20px;
+                    margin-right: 10px;
+                }
+
+            }
+        }
+
+    
+    }   
 }
+
+
 
 @media screen and (max-width : 768px) {
     .nav {

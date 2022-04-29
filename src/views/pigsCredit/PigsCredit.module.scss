@@ -1,128 +1,138 @@
 @import '../../global.scss';
 
 
-*{
-    // border: 1px solid red;
-}
 
-.pigscredit{
+
+.pigscredit__wrap{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 50px;
-    width: 100%;
-
-    .cards {
-
-        width: 30%;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin-bottom: 50px;
-    
-        div{
-
-            background: #221E16;;
-            height: 80px;
-            border-radius: 10px;
-        }
-    }
-
-    .credit__wrap{
-        
-        border-top: 1px solid #f3bb2f6c;
-        border-right: 1px solid #f3bb2f6c;
-        border-left: 1px solid #f3bb2f6c;
-        border-bottom: 1px solid black;
-        border-radius: 10px;
-        padding: 20px;
-        width: 30%;
-        z-index: 5;
-
-            .tabs{
-            width: 100%;
-            display: flex;
-
-            .tab__one{
-
-                color: white;
-                width: 50%;
-                height: 40px;
-                cursor: pointer;
-                border-bottom: 3px solid #333333;
-                transition: 0.5s;
-                
-
-                p{
-                    text-align: center;
-                    font-size: 14px;
-                    font-family: $boldFont;
-                    letter-spacing: 2;
-                }
-            }
-
-            .tab__one__active{
-                border-bottom: 3px solid #F3BA2FE5;
-            }
-
-            .tab__two{
-                color: white;
-                width: 50%;
-                cursor: pointer;
-                border-bottom: 3px solid #333333;
-                transition: 0.5s;
-
-                p{
-                    text-align: center;
-                    font-size: 14px;
-                    // font-weight: 600;
-                    font-family: $boldFont;
-                }
-            }
-
-            .tab__two__active {
-                border-bottom: 3px solid #F3BA2FE5;;
-            }
-        }
-    }
-
-    
-
-    .pig {
-
-        position: fixed;
-        right: 0px;
-        bottom: 0px;
-        height: 250px;
-        z-index: 3;
-    
-    }
-
-    
-    
-}
-
-@media screen and (max-width : 768px) {
-
+   
+   
     .pigscredit{
-        padding: 50px 20px 0px 20px;
+        @include center();
         width: 100%;
+        max-width: 1200px;
+        .cards {
 
-        .cards{
+            width: 30%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 50px;
+        
+            div{
 
-            width: 100%;
+                background: #221E16;;
+                height: 80px;
+                border-radius: 10px;
+            }
         }
 
         .credit__wrap{
+            
+            border-top: 1px solid #f3bb2f6c;
+            border-right: 1px solid #f3bb2f6c;
+            border-left: 1px solid #f3bb2f6c;
+            border-bottom: 1px solid black;
+            border-radius: 10px;
+            padding: 20px;
+            width: 30%;
+            z-index: 5;
 
+                .tabs{
+                width: 100%;
+                display: flex;
+
+                .tab__one{
+
+                    color: white;
+                    width: 50%;
+                    height: 40px;
+                    cursor: pointer;
+                    border-bottom: 3px solid #333333;
+                    transition: 0.5s;
+                    
+
+                    p{
+                        text-align: center;
+                        font-size: 14px;
+                        font-family: $boldFont;
+                        letter-spacing: 2;
+                    }
+                }
+
+                .tab__one__active{
+                    border-bottom: 3px solid #F3BA2FE5;
+                }
+
+                .tab__two{
+                    color: white;
+                    width: 50%;
+                    cursor: pointer;
+                    border-bottom: 3px solid #333333;
+                    transition: 0.5s;
+
+                    p{
+                        text-align: center;
+                        font-size: 14px;
+                        // font-weight: 600;
+                        font-family: $boldFont;
+                    }
+                }
+
+                .tab__two__active {
+                    border-bottom: 3px solid #F3BA2FE5;;
+                }
+            }
+        }
+
+        
+
+        .pig {
+
+            position: fixed;
+            right: 0px;
+            bottom: 0px;
+            height: 250px;
+            z-index: 3;
+        
+        }
+
+        
+        
+    }    
+}
+
+
+
+@media screen and (max-width : 768px) {
+
+    .pigscredit__wrap{
+        
+        .pigscredit{
+            padding: 50px 20px 0px 20px;
             width: 100%;
-        }
 
-        .pig{
+            .cards{
 
-            // display: none;
-            height: 150px;
-        }
+                width: 100%;
+            }
+
+            .credit__wrap{
+
+                width: 100%;
+            }
+
+            .pig{
+
+                // display: none;
+                height: 150px;
+            }
+        } 
     }
+
+    
 }

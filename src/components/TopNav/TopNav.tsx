@@ -19,15 +19,18 @@ function TopNav() {
 	}
 
 	return (
-		<div className={styles.nav}>
-			<div className={styles.nav__in}>
-				<h3>{routeName.length === 0 ? 'Home' : routeName}</h3>
-				<button onClick={() => connect()} type='button'>
-					<img src={wallet} alt='' />
-					<p>{isWalletConnected ? 'Disconnect' : 'Connect Wallet'}</p>
-				</button>
-			</div>
+		<div className={styles.nav__wrap} >
+			<div className={styles.nav}>
+				<div className={styles.nav__in}>
+					<h3>{routeName.length === 0 ? 'Home' : routeName}</h3>
+					<button onClick={() => connect()} type='button'>
+						<img src={wallet} alt='' />
+						<p>{isWalletConnected ? 'Disconnect' : 'Connect Wallet'}</p>
+					</button>
+				</div>
+			</div>	
 		</div>
+		
 	)
 }
 

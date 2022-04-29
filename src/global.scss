@@ -5,3 +5,10 @@ $boldFont : 'Poppins',
 sans-serif;
 $lightFont : 'Open Sans',
 sans-serif;
+
+@mixin center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

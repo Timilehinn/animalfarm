@@ -13,8 +13,7 @@
 .box__h3{
     margin-bottom: 10px;
     color: #F3BA2F;
-    font-family: 'Poppins',
-    sans-serif;;
+    font-family: 'Poppins',sans-serif; 
     font-size: 1.2rem
 }
 
@@ -34,8 +33,12 @@
     color: white;
     margin-bottom: 30px;
     font-size: 32px;
+    font-size: 1.2rem;
+    font-family: 'Poppins',
+    sans-serif;
 }
 @media (min-width: 890px) {
+
     .carousel__container {
         margin-left: -22px;
         margin-right: -22px;
