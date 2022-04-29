@@ -30,7 +30,7 @@
 		"react-router-dom": "^6.2.1",
 		"react-scripts": "^4.0.3",
 		"react-slick": "^0.29.0",
-		"react-spring": "^9.0.0-rc.3",
+		"react-spring": "^9.4.4",
 		"react-toastify": "^8.1.0",
 		"react-transition-group": "^2.9.0",
 		"recharts": "^2.1.8",
