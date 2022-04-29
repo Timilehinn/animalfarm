@@ -3,6 +3,7 @@ import React from 'react'
 import style from './PiggyBank.module.scss'
 import piggybank from '../../assets/piggybank.png'
 import piggycoin from '../../assets/piggycoin.png'
+import multiplierimg from '../../assets/multiplierimg.png'
 import dogart from '../../assets/dogart.png'
 
 function PiggyBank() {
@@ -52,7 +53,7 @@ function PiggyBank() {
 					</ul>
 				</div>
 				<div>
-					<img src={piggycoin} className={style.multiplierimg} alt='' />
+					<img src={multiplierimg} className={style.multiplierimg} alt='' />
 				</div>
 			</div>
 

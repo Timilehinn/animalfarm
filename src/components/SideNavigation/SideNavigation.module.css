@@ -61,6 +61,8 @@
   color: white;
   text-decoration: none;
   margin-bottom: 30px;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
 }
 
 .side ul .link p {
@@ -80,15 +82,15 @@
   font-size: 20px;
 }
 
-.side ul .link:focus {
+.side ul .link__active {
   border-left: 3px solid #F3BA2F;
 }
 
-.side ul .link:focus svg {
+.side ul .link__active svg {
   color: #F3BA2F;
 }
 
-.side ul .link:focus p {
+.side ul .link__active p {
   color: #F3BA2F;
 }
 

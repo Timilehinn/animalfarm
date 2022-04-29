@@ -1,0 +1,142 @@
+.reward {
+  width: 100%;
+}
+
+.reward .header {
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.reward h3 {
+  color: white;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.reward .reward__claim {
+  width: 100%;
+  padding: 20px;
+  background: #221E16;
+  border-radius: 10px;
+}
+
+.reward .reward__claim .reward__claim__box {
+  width: 100%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.reward .reward__claim .reward__claim__box p {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.reward form {
+  width: 100%;
+}
+
+.reward form .inputWrap {
+  border-radius: 10px;
+  margin-top: 20px;
+  padding: 20px;
+  border: 1px solid #FFFFFF4D;
+}
+
+.reward form .inputWrap .inputBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.reward form .inputWrap .inputBox .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.reward form .inputWrap .inputBox .logo img {
+  margin-right: 10px;
+}
+
+.reward form .inputWrap .inputBox .logo p {
+  color: #F3BA2F;
+  font-weight: bold;
+}
+
+.reward form .inputWrap .inputBox input {
+  background: none;
+  border: none;
+  color: white;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  text-align: right;
+}
+
+.reward form .inputWrap .claimable {
+  color: #FFFFFF4D;
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.reward form button {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #2E2E2E;
+  color: #FFFFFF4D;
+}
+
+.reward .xpigs {
+  color: white;
+  font-size: 12px;
+  margin-top: 20px;
+}
+
+.reward .xpigs span {
+  color: #F3BA2F;
+}
+
+.reward .lock {
+  color: white;
+  font-weight: 500;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.reward .button__disabled {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #474E47;
+  color: #FFFFFF4D;
+  cursor: not-allowed;
+}
+
+.reward .button__enabled {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+}
+/*# sourceMappingURL=RewardsCenter.module.css.map */
