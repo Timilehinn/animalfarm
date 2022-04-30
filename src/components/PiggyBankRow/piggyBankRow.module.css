@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+tr {
+  line-height: 5;
+  font-size: 10.8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.button {
+  color: #FFFFFF;
+  background-color: #47A348;
+  height: 34px;
+  width: 140px;
+  border-width: 0px;
+  border-color: transparent;
+  border-radius: 8px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin: auto;
+}
+
+.action {
+  position: relative;
+}
+
+.modal {
+  margin-top: 1.6px;
+  padding-left: 22px;
+  position: absolute;
+  z-index: 400;
+  max-width: 140px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  left: 44px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #262523;
+  padding-bottom: 4px;
+  padding-top: 4px;
+  -o-border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
+     border-image: -webkit-gradient(linear, left top, left bottom, from(#F3BA2F), to(#121212)) 1;
+     border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
+  border-radius: 6px;
+  border-width: 0.009px;
+  border-style: solid;
+  border-color: transparent;
+  height: auto;
+}
+
+.modal_off {
+  display: none;
+}
+
+.modal__button {
+  z-index: 600;
+  color: white;
+  width: 138px;
+  font-size: 12px;
+  border-color: #550101;
+  border: 0px;
+  background-color: #262523;
+  text-align: left;
+  padding-top: 2.4px;
+  padding-left: 20px;
+  margin-left: 0px;
+  margin-right: 22px;
+}
+
+hr {
+  width: 138px;
+  border-top: none;
+  margin-top: 2px;
+  margin-right: 21px;
+  z-index: -100;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+/*# sourceMappingURL=piggyBankRow.module.css.map */

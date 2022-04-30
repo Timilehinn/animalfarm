@@ -1,0 +1,90 @@
+.mobile {
+  height: 100vh;
+  width: 50%;
+  background: #121212;
+  display: none;
+  position: absolute;
+  padding: 20px;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  z-index: 20;
+}
+
+.mobile header {
+  color: #F3BA2F;
+  font-weight: bold;
+}
+
+.mobile ul {
+  color: white;
+  list-style: none;
+  margin-top: 50px;
+}
+
+.mobile ul .link {
+  padding: 0px 0px 0px 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 30px;
+}
+
+.mobile ul .link p {
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.mobile ul .link img {
+  height: 18px;
+  margin-right: 10px;
+  width: 18px;
+}
+
+.mobile ul .link svg {
+  color: white;
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+.mobile ul .link:focus svg {
+  color: #F3BA2F;
+}
+
+.mobile ul .link:focus p {
+  color: #F3BA2F;
+}
+
+.mobile button {
+  background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+  padding: 10px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+.mobile__active {
+  visibility: visible;
+  -webkit-transform: translateX(0%);
+          transform: translateX(0%);
+}
+
+@media screen and (max-width: 768px) {
+  .mobile {
+    display: block;
+  }
+}
+/*# sourceMappingURL=MobileSideNav.module.css.map */

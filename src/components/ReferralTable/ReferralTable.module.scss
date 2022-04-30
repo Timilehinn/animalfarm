@@ -1,0 +1,82 @@
+@import '../../global.scss';
+// $boldFont : 'Poppins',
+// sans-serif;
+
+.tableheader {
+    margin: auto;   
+    color: #FFFFFF; 
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: $boldFont;
+}
+.totalpiggybank {
+    font-size: 10px;
+    padding: 3px;
+    padding-right: 12px;
+    padding-left: 12px;
+    height: 10px;
+    border-radius: 8px;
+    background-color: #808183;
+    margin-left: 6px;
+}
+.tablebody {
+    font-family: $boldFont;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 300px;
+    margin: auto;   
+    max-width: 860px;
+    background: rgba(243, 186, 47, 0.1);
+    border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
+
+    // background: linear-gradient(#f3ba2f1a, #f3ba2f1a) padding-box, 
+    //     linear-gradient(180deg, #F3BA2F, #121212) border-box;
+
+    border-radius: 6px;
+    border-width: 0.6px;
+    border-style: solid;
+    border-color: transparent;
+    margin-bottom: 22px;
+}
+@media (min-width: 800px) and (max-width:1200px) { 
+    .tablebody {
+        max-width: 660px;
+    }
+}
+@media (min-width: 600px) and (max-width: 800px) { 
+    .tablebody {
+        max-width: 460px;
+    }
+}
+
+.tablebody::-webkit-scrollbar {
+    display: none;
+}
+.table {
+    width: 860px;
+    color: #FFFFFF; 
+    margin: auto;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-height: 500px;
+
+}
+@media (min-width: 600px) and (max-width: 800px) { 
+    .table {
+        max-width: 600px;
+    }
+}
+.table::-webkit-scrollbar {
+    display: none;
+}
+tbody {
+    text-align: center;
+    padding: 40px;
+}
+th {
+    font-size: 14px;
+    line-height: 4;
+}
+table{border-collapse:collapse}

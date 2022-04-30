@@ -1,9 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 .home {
-  width: calc(100vw - 240px);
+  max-width: calc(100vw - 240px);
   padding-left: 60px;
   padding-right: 60px;
   padding-top: 50px;
-  height: 100vh;
+  height: 90;
 }
 
 .home .home__farm {
@@ -26,6 +28,7 @@
   color: white;
   line-height: 30px;
   font-size: 14px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .home .home__farm .home__farm__two {

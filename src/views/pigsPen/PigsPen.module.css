@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
-.pigscredit {
+.pigspen {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,46 +15,31 @@
       -ms-flex-align: center;
           align-items: center;
   padding-top: 50px;
-  width: 100%;
 }
 
-.pigscredit .cards {
-  width: 30%;
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1fr 1fr;
-      grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 50px;
-}
-
-.pigscredit .cards div {
-  background: #221E16;
-  height: 80px;
-  border-radius: 10px;
-}
-
-.pigscredit .credit__wrap {
+.pigspen .credit__wrap {
   border-top: 1px solid #f3bb2f6c;
   border-right: 1px solid #f3bb2f6c;
   border-left: 1px solid #f3bb2f6c;
   border-bottom: 1px solid black;
   border-radius: 10px;
-  padding: 20px;
   width: 30%;
-  z-index: 5;
 }
 
-.pigscredit .credit__wrap .tabs {
+.pigspen .credit__wrap .credit__wrap__in {
+  padding: 20px;
+}
+
+.pigspen .credit__wrap .credit__wrap__in .tabs {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.pigscredit .credit__wrap .tabs .tab__one {
+.pigspen .credit__wrap .credit__wrap__in .tabs .tab__one {
   color: white;
-  width: 50%;
+  width: 60%;
   height: 40px;
   cursor: pointer;
   border-bottom: 3px solid #333333;
@@ -62,18 +47,19 @@
   transition: 0.5s;
 }
 
-.pigscredit .credit__wrap .tabs .tab__one p {
+.pigspen .credit__wrap .credit__wrap__in .tabs .tab__one p {
+  text-align: center;
+  font-size: 14px;
   text-align: center;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
-  letter-spacing: 2;
 }
 
-.pigscredit .credit__wrap .tabs .tab__one__active {
+.pigspen .credit__wrap .credit__wrap__in .tabs .tab__one__active {
   border-bottom: 3px solid #F3BA2FE5;
 }
 
-.pigscredit .credit__wrap .tabs .tab__two {
+.pigspen .credit__wrap .credit__wrap__in .tabs .tab__two {
   color: white;
   width: 50%;
   cursor: pointer;
@@ -82,37 +68,31 @@
   transition: 0.5s;
 }
 
-.pigscredit .credit__wrap .tabs .tab__two p {
+.pigspen .credit__wrap .credit__wrap__in .tabs .tab__two p {
+  text-align: center;
+  font-size: 14px;
   text-align: center;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
 
-.pigscredit .credit__wrap .tabs .tab__two__active {
-  border-bottom: 3px solid #F3BA2FE5;
+.pigspen .credit__wrap .credit__wrap__in .tabs .tab__two__active {
+  border-bottom: 3px solid  #F3BA2FE5;
 }
 
-.pigscredit .pig {
+.pigspen .pig {
   position: fixed;
   right: 0px;
   bottom: 0px;
   height: 250px;
-  z-index: 3;
 }
 
 @media screen and (max-width: 768px) {
-  .pigscredit {
-    padding: 50px 20px 0px 20px;
-    width: 100%;
+  .pigspen {
+    padding: 50px 20px 20px 20px;
   }
-  .pigscredit .cards {
+  .pigspen .credit__wrap {
     width: 100%;
-  }
-  .pigscredit .credit__wrap {
-    width: 100%;
-  }
-  .pigscredit .pig {
-    height: 150px;
   }
 }
-/*# sourceMappingURL=PigsCredit.module.css.map */
+/*# sourceMappingURL=PigsPen.module.css.map */

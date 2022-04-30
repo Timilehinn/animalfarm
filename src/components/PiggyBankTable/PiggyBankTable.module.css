@@ -1,0 +1,90 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+.tableheader {
+  margin: auto;
+  color: #FFFFFF;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-family: "Poppins", sans-serif;
+}
+
+.totalpiggybank {
+  font-size: 10px;
+  padding: 3px;
+  padding-right: 12px;
+  padding-left: 12px;
+  height: 10px;
+  border-radius: 8px;
+  background-color: #808183;
+  margin-left: 6px;
+}
+
+.tablebody {
+  font-family: "Poppins", sans-serif;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  max-height: 500px;
+  margin: auto;
+  max-width: 1000px;
+  background: rgba(243, 186, 47, 0.1);
+  -o-border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
+     border-image: -webkit-gradient(linear, left top, left bottom, from(#F3BA2F), to(#121212)) 1;
+     border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
+  border-radius: 6px;
+  border-width: 0.6px;
+  border-style: solid;
+  border-color: transparent;
+  margin-bottom: 22px;
+}
+
+@media (min-width: 800px) and (max-width: 1200px) {
+  .tablebody {
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .tablebody {
+    max-width: 600px;
+  }
+}
+
+.tablebody::-webkit-scrollbar {
+  display: none;
+}
+
+.table {
+  width: 1000px;
+  color: #FFFFFF;
+  margin: auto;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  max-height: 500px;
+}
+
+@media (min-width: 600px) and (max-width: 800px) {
+  .table {
+    max-width: 600px;
+  }
+}
+
+.table::-webkit-scrollbar {
+  display: none;
+}
+
+tbody {
+  text-align: center;
+  padding: 40px;
+}
+
+th {
+  font-size: 14px;
+  line-height: 4;
+}
+
+table {
+  border-collapse: collapse;
+}
+/*# sourceMappingURL=ReferralTable.module.css.map */
