@@ -39,16 +39,19 @@ tr {
     padding-top: 4px;
     border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
     border-radius: 6px;
-    border-width: 0.2px;
+    border-width: 0.009px;
     border-style: solid;
     border-color: transparent;
+    height: auto;
 }
-
+.modal_off {
+    display: none;
+}
 
 .modal__button {
     z-index: 600;
     color: white;
-    width: 136px;
+    width: 138px;
     font-size: 12px;
     border-color: rgb(85, 1, 1);
     border: 0px;
@@ -60,6 +63,10 @@ tr {
     margin-right: 22px;
 }
 hr {
-    width: 100%;
-    height: 0.2px;
+    width: 138px;
+    border-top: none;
+    margin-top: 2px;
+    margin-right: 21px;
+    z-index: -100;
+    border-color: rgba(255, 255, 255, 0.2);
 }
