@@ -2,11 +2,30 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
 interface initialStateProps {
     isMobileNavActive : boolean
+    isConfirmModalActive : boolean
+    isModalBackDropOpen : boolean
+    confirmModalProps: {
+        value : number
+        text : string
+        warning:string,
+        values:[]  
+    
+    }
 }
 
 const initialState:initialStateProps = {
 
-    isMobileNavActive : false
+    isMobileNavActive : false,
+    isConfirmModalActive : false,
+    isModalBackDropOpen : false,
+    confirmModalProps: {
+        value : 0,
+        text : '',
+        warning:'',
+        values:[
+
+        ]
+    }
 }
 
 const toggleSlice = createSlice({
@@ -15,9 +34,15 @@ const toggleSlice = createSlice({
     reducers : {
         toggleMobileNav:(state,action:PayloadAction<boolean>) => {
             state.isMobileNavActive = action.payload
+        },
+        toggleConfirmModal:(state,action:PayloadAction<boolean>)=>{
+            state.isConfirmModalActive = action.payload
+        },
+        toggleModalBackDrop:(state,action:PayloadAction<boolean>)=>{
+            state.isModalBackDropOpen = action.payload
         }
     }
 })
 
 export default toggleSlice.reducer
-export const { toggleMobileNav } = toggleSlice.actions
+export const { toggleMobileNav,  toggleModalBackDrop, toggleConfirmModal } = toggleSlice.actions

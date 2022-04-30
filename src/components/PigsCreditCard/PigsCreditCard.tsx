@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './PigsCredit.module.scss'
 
 interface cardProps {
-  amount : string
+  amount : number
 }
 
 function PigsCreditCard({amount}:cardProps) {

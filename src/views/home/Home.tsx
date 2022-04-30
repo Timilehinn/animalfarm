@@ -30,7 +30,7 @@ function Home() {
 		if (account) {
 			getPigsToClaim()
 			getBalance()
-		};
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 
