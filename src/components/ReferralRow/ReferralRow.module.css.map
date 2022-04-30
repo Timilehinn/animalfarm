@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "ACAA,OAAO,CAAC,mFAAI;AACZ,OAAO,CAAC,+EAAI;ADCZ,AAAA,EAAE,CAAC;EACC,WAAW,EAAE,CAAC;EACd,SAAS,EAAE,MAAM;EACjB,aAAa,EAAC,GAAG,CAAC,KAAK,CAAC,wBAAwB;CACnD",
+    "sources": [
+        "ReferralRow.module.scss",
+        "../../global.scss"
+    ],
+    "names": [],
+    "file": "ReferralRow.module.css"
+}
