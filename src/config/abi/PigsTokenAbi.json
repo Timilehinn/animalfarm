@@ -64,6 +64,25 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": true,
+        "internalType": "address",
+        "name": "sender",
+        "type": "address"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "Burn",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": false,
         "internalType": "bool",
         "name": "isEnabled",
@@ -697,7 +716,7 @@
         "type": "address"
       }
     ],
-    "name": "setAddLiquidityHelper",
+    "name": "setLiquidityHelper",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"

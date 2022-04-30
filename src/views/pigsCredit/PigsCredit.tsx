@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
+import { useAppSelector } from '../../state/hooks'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
@@ -9,13 +10,14 @@ import pig from '../../assets/pig.png'
 function PigsCredit() {
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
+	const pigsBalance = useAppSelector((state)=>state.balanceReducer.pigsBalance)
 
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
 			<div className={styles.pigscredit}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard />
+						<PigsCreditCard amount={pigsBalance} />
 					</div>
 					<div>
 						<PigsCreditCard />

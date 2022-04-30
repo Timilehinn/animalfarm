@@ -1,21 +1,36 @@
 import React, { useEffect } from 'react'
 import Carousel from 'components/Carousel/Carousel'
-import { getPigsBalance } from '../../api/getPigsBalance'
+import { getPigsBalance,availablePigsToClaim } from '../../api/getPigsBalance'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import styles from './Home.module.scss'
 import chart from '../../assets/chart.png'
+import { setPigsBalance  } from '../../state/balances'
+import { setPigsAvailableToClaim } from '../../state/pigsCredit'
+import { useAppDispatch } from '../../state/hooks'
 
 function Home() {
 	const { account } = useActiveWeb3React()
+	const dispatch = useAppDispatch()
 	console.log(account)
 
 	const getBalance = async () => {
 		const res = await getPigsBalance(account)
 		console.log(res)
+		dispatch(setPigsBalance(Number(res.amount/10**18)))
 	}
 
+	const getPigsToClaim = async () => {
+		const res = await availablePigsToClaim(account);
+		console.log( Number(res.amount)/10**18 )
+		dispatch(setPigsAvailableToClaim(Number(res.amount)/10**18))
+	}
+	
+
 	useEffect(() => {
-		if (account) getBalance()
+		if (account) {
+			getPigsToClaim()
+			getBalance()
+		};
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 

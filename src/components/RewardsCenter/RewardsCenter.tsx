@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
+import { useAppDispatch, useAppSelector } from 'state/hooks'
 import RangeSlider from 'components/RangeSlider/RangeSlider'
 import styles from './RewardsCenter.module.scss'
 import logo from '../../assets/svgg.png'
@@ -11,7 +12,9 @@ interface rewardProps {
 }
 
 function RewardsCenter({ sliderRequired, title, xLock }: rewardProps) {
+
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
+	const availablePigsToClaim = useAppSelector((state)=>state.pigsCreditReducer.pigsAvailableToClaim)
 
 	const [value, setValue] = React.useState('')
 
@@ -27,15 +30,11 @@ function RewardsCenter({ sliderRequired, title, xLock }: rewardProps) {
 			<p className={styles.header}>Input amount of BUSD to be paired with Pigs</p>
 			<div className={styles.reward__claim}>
 				<div style={{ marginBottom: '10px' }} className={styles.reward__claim__box}>
-					<p>Eran</p>
-					<p>BUSD</p>
-				</div>
-				<div style={{ marginBottom: '10px' }} className={styles.reward__claim__box}>
-					<p>Lockup durarion</p>
-					<p>50 days</p>
+					<p>Available Pigs to claim</p>
+					<p>{availablePigsToClaim}</p>
 				</div>
 				<div className={styles.reward__claim__box}>
-					<p>Total Liquididy</p>
+					<p>Estimated BUSD to pair</p>
 					<p>$1,3000,3445</p>
 				</div>
 			</div>
