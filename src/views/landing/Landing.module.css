@@ -5,8 +5,18 @@
   display: flex;
 }
 
+.landing .landing__wrap {
+  width: 100%;
+}
+
 body {
-  background: linear-gradient(10deg, #000000dd, #000000ef), url(../../assets/farm.png);
+  background: #121212;
   background-size: cover;
+}
+
+@media screen and (max-width: 481px) {
+  .landing {
+    padding: 0px;
+  }
 }
 /*# sourceMappingURL=Landing.module.css.map */

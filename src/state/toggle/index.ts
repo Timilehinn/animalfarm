@@ -19,7 +19,7 @@ const initialState:initialStateProps = {
     isConfirmModalActive : false,
     isModalBackDropOpen : false,
     confirmModalProps: {
-        value : 0,
+        value : 42,
         text : '',
         warning:'',
         values:[
@@ -40,9 +40,12 @@ const toggleSlice = createSlice({
         },
         toggleModalBackDrop:(state,action:PayloadAction<boolean>)=>{
             state.isModalBackDropOpen = action.payload
+        },
+        setModalProps:(state,action:PayloadAction<boolean>)=>{
+            state.confirmModalProps = action.payload
         }
     }
 })
 
 export default toggleSlice.reducer
-export const { toggleMobileNav,  toggleModalBackDrop, toggleConfirmModal } = toggleSlice.actions
+export const { toggleMobileNav,  toggleModalBackDrop, toggleConfirmModal, setc } = toggleSlice.actions

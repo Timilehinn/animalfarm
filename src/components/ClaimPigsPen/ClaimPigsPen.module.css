@@ -1,13 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 .claimpigs {
-  width: 30%;
-  height: 200px;
+  width: 100%;
   border-radius: 10px;
 }
 
 .claimpigs .header {
   color: #FFFFFF4D;
   font-size: 12px;
+  margin-top: 10px;
+}
+
+.claimpigs h3 {
+  color: white;
   margin-top: 20px;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
 }
 
 .claimpigs form {
@@ -16,7 +24,7 @@
 
 .claimpigs form .inputWrap {
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
   padding: 20px;
   border: 1px solid #FFFFFF4D;
 }
@@ -41,11 +49,13 @@
 
 .claimpigs form .inputWrap .inputBox .logo img {
   margin-right: 10px;
+  height: 20px;
 }
 
 .claimpigs form .inputWrap .inputBox .logo p {
-  color: white;
+  color: #F3BA2F;
   font-weight: bold;
+  font-family: "Poppins", sans-serif;
 }
 
 .claimpigs form .inputWrap .inputBox input {
@@ -64,14 +74,26 @@
   margin-top: 20px;
 }
 
-.claimpigs form button {
+.claimpigs form .button__disabled {
   width: 100%;
   height: 50px;
   margin-top: 20px;
   border-radius: 10px;
   border: none;
-  background-color: #2E2E2E;
+  background-color: #474E47;
   color: #FFFFFF4D;
+  cursor: not-allowed;
+}
+
+.claimpigs form .button__enabled {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
 }
 
 input::-webkit-outer-spin-button,
