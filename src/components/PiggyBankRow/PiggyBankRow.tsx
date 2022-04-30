@@ -23,9 +23,9 @@ function PiggyBankRow(props) {
                             {state === false ? <img src={down} alt=""/> :  <img src={up} alt="" />}
                         </button>
                         <div className={state ? style.modal : style.modal_off}>
-                            <button className={style.modal__button}>Sell</button><hr/>
-                            <button className={style.modal__button}>Dompound</button><hr/>
-                            <button className={style.modal__button}>Deposit</button>
+                            <button type='button' className={style.modal__button}>Sell</button><hr/>
+                            <button type='button' className={style.modal__button}>Dompound</button><hr/>
+                            <button type='button' className={style.modal__button}>Deposit</button>
                         </div>
                     </div>
                 </td>

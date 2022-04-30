@@ -59,7 +59,7 @@ function ReferralTable() {
 			<div className={style.referral}>
 				<div className={style.card4}>
 					<h2>Referrals</h2>
-					<p>The referral commission structure based on Drip'&apos;s highly successful BR34P dependency model with a FIBONACCI SEQUENTIAL PROGRESSION</p>
+					<p>The referral commission structure based on Drip&apos;s highly successful BR34P dependency model with a FIBONACCI SEQUENTIAL PROGRESSION</p>
 					<ul className={style.referrallist}>
 						<li>1% - 2 DOGS</li>
 						<li>2% - 3 DOGS</li>
