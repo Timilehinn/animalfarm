@@ -11,5 +11,5 @@ export const AnimalFarmTokens = {
 		name: 'PIGS',
 		symbol: 'PIGS',
 		decimals: 18,
-	}
+	},
 }

@@ -3,7 +3,7 @@ import styles from './Info.module.scss'
 
 interface infoProps {
     title : string,
-    info : number
+    info : any
 }
 
 function Info({title,info}:infoProps) {

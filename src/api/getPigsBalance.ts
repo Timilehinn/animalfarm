@@ -1,6 +1,6 @@
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
-import getPigsContract from '../utils/getPigsContracts'
+import getPigsContract from '../utils/getContracts'
 
 export const getPigsBalance = async(account:string) => {
 

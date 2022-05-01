@@ -1,15 +1,18 @@
 import React from 'react'
 import { toggleModalBackDrop,toggleConfirmModal } from 'state/toggle'
 import { useAppSelector,useAppDispatch } from 'state/hooks'
+import Info from 'components/Info/Info'
 import styles from './ConfirmModal.module.scss'
 import cancle from '../../assets/cancel.png'
 
 
 
 
+
 function ConfirmModal() {
 
-	const isModalActive = useAppSelector((state)=>state.toggleReducer.isConfirmModalActive)
+	const isModalActive = useAppSelector((state)=>state.toggleReducer.isConfirmModalActive);
+	const modalProps = useAppSelector((state)=>state.toggleReducer.confirmModalProps)
 	const dispatch = useAppDispatch()
 
 	const closeModal = () => {
@@ -18,17 +21,27 @@ function ConfirmModal() {
 
 	}
 
+	const confirm = () =>{
+		modalProps.confirmFunction()
+	}
+
   return (
     <div className={ isModalActive ? `${styles.confirmModal} ${styles.confirmModal__active}` : `${styles.confirmModal}`}>
 		<header>
 			<p>Confirm Claim</p>
-			<img  onClick={()=>closeModal()} src={cancle} alt="" />
+			<img role="presentation"  onClick={()=>closeModal()} src={cancle} alt="" />
 		</header>
-        <h3 className={styles.lp}>42</h3>
-		<p className={styles.pigs}>PIGS/BUSD LP Tokens</p>
-		<div className={styles.infoBox}>{}</div>
-		<p className={styles.msg} >Are you sure you want to claim the specified amount of LP tokens to Piggy Bank?</p>
-		<button type='button' >Claim</button>
+        <h3 className={styles.lp}>{modalProps.value}</h3>
+		<p className={styles.pigs}>{modalProps.text}</p>
+		<div className={styles.infoBox}>
+			{
+				modalProps.infoValues.map((item,index)=>(
+					<Info title={item.title} info={item.value}  />
+				))
+			}
+		</div>
+		<p className={styles.msg} >{modalProps.warning}</p>
+		<button onClick={()=>confirm()} type='button' >Claim</button>
     </div>
   )
 }

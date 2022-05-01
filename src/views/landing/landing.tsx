@@ -11,9 +11,11 @@ import PiggyBank from 'views/piggyBank/PiggyBank'
 import GenericBackground from 'components/GenericBackground/GenericBackground'
 import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
+import Toast from 'components/Toast/Toast'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
+
 import Home from '../home/Home'
 import style from './Landing.module.scss'
 
@@ -39,6 +41,7 @@ function Landing() {
 				<MobileSideNav />
 				<ConnectWalletModal login={login} />
 				<ConfirmModal />
+				<Toast />
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/pigs-credit' element={<PigsCredit />} />

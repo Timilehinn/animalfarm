@@ -8,7 +8,7 @@ interface claimProps {
 }
 
 function ClaimPigsPen({ title }: claimProps) {
-	const styleProps = useSpring({ to: { opacity: 'auto', x: 0 }, from: { opacity: 'auto', x: -20 }, delay: 100 }) // TODO: Look into the correct props. For some reasons, it is saying opacity is not compatible
+	const styleProps = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: -20 }, delay: 100 }) // TODO: Look into the correct props. For some reasons, it is saying opacity is not compatible
 
 	const [value, setValue] = useState('')
 

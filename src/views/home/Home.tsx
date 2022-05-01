@@ -28,8 +28,8 @@ function Home() {
 
 	useEffect(() => {
 		if (account) {
-			getPigsToClaim()
-			getBalance()
+			
+			Promise.all([getPigsToClaim(),getBalance()])
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])

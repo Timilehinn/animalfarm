@@ -234,7 +234,7 @@
     "name": "canClaim",
     "outputs": [
       {
-        "internalType": "bool",
+        "internalType": "boo3l",
         "name": "",
         "type": "bool"
       }
