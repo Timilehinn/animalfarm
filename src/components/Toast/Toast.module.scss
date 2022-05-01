@@ -1,0 +1,22 @@
+.toast{
+    width: 350px;
+    // height: 300px;
+    border: 1px solid #F3BA2F;
+    color: white;
+    border-radius: 10px;
+    position: fixed;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%) translateY(-20);
+    z-index: 10000;
+    padding: 20px;
+    visibility: hidden;
+    transition: 0.3s;
+    opacity: 0;
+}
+
+.toast__active{
+    visibility: visible;
+    opacity: 1;
+    transform: translate(-50%, -50%) translateY(0);
+}

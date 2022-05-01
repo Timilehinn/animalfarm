@@ -4,6 +4,7 @@ import styled from 'styled-components'
 interface rangeProps {
 	color: string
 	opacity: any
+	setLockDuration:any
 }
 
 const sliderThumbStyles = (props: rangeProps) => `
@@ -56,16 +57,17 @@ const Styles = styled.div`
 	}
 `
 
-function RangeSlider({ color, opacity }: rangeProps) {
+function RangeSlider({ color, opacity, setLockDuration }: rangeProps) {
 	const [value, setValue] = React.useState(50)
 
 	const handleChange = (e: any) => {
 		setValue(e.target.value)
+		setLockDuration(e.target.value)
 	}
 
 	return (
 		<Styles color={color} opacity={opacity}>
-			<input type='range' min={0} max={255} value={value} className='slider' onChange={(e) => handleChange(e)} />
+			<input type='range' min={0} max={156} value={value} className='slider' onChange={(e) => handleChange(e)} />
 			<div className='value'>{value}</div>
 		</Styles>
 	)
