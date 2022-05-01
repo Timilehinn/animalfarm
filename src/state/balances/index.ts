@@ -13,6 +13,9 @@ const balanceSlice = createSlice({
     reducers : {
         setPigsBalance: (state, action:PayloadAction<number>) => {
             state.pigsBalance = action.payload
+        },
+        setBusdBalance:(state,action:PayloadAction<number>)=>{
+            state.busdBalance = action.payload
         }
     }
 
@@ -20,5 +23,5 @@ const balanceSlice = createSlice({
 })
 
 
-export const { setPigsBalance  } = balanceSlice.actions
+export const { setPigsBalance, setBusdBalance  } = balanceSlice.actions
 export default balanceSlice.reducer

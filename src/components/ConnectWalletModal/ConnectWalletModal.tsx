@@ -3,6 +3,8 @@ import WalletButton from 'components/ConnectWalletModal/WalletButton/WalletButto
 import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
 import config, { walletLocalStorageKey } from './config'
 import { Config, Login } from './types'
+import { useAppDispatch } from 'state/hooks'
+import { toggleModalBackDrop } from 'state/toggle'
 
 import style from './connectWalletModal.module.css'
 import help from './Icons/help-circle.png'
@@ -39,6 +41,7 @@ function ConnectWalletModal(props: ConnectWalletProps) {
 	const { isModalOpen, toggleConnectWalletModal } = useConnectWalletModal()
 	const { setIsWalletConnected } = useConnectWallet()
 	const sortedConfig = getPreferredConfig(config)
+	const dispatch = useAppDispatch()
 
 	const dismissModal = () => {
 		toggleConnectWalletModal(false)
@@ -46,6 +49,7 @@ function ConnectWalletModal(props: ConnectWalletProps) {
 
 	const triggerConnect =() => {
 		setIsWalletConnected(true)
+		dispatch( toggleModalBackDrop(false) )
 	}
 
 	return (
