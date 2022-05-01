@@ -1,15 +1,23 @@
 import React from 'react'
-import { useAppSelector } from 'state/hooks'
+import { useAppSelector, useAppDispatch } from 'state/hooks'
+import { toggleModalBackDrop } from 'state/toggle'
+import { useConnectWalletModal } from 'state/wallet/hooks'
 import styles from './ModalBackdrop.module.scss'
 
 
-function ModalBackdrop() {
-  // const { isModalOpen,toggleConnectWalletModal } = useConnectWalletModal()
-  const isBackDropOpen = useAppSelector((state)=>state.toggleReducer.isModalBackDropOpen)
 
+function ModalBackdrop() {
+  const { isModalOpen,toggleConnectWalletModal } = useConnectWalletModal()
+  const isBackDropOpen = useAppSelector((state)=>state.toggleReducer.isModalBackDropOpen)
+  const dispatch = useAppDispatch()
+
+  const closeModal = () => {
+    toggleConnectWalletModal(false)
+    dispatch( toggleModalBackDrop(false) )
+  }
 
   return (
-    <div className={ isBackDropOpen ? `${styles.backdrop} ${styles.backdrop__active} ` : `${styles.backdrop}` } >ModalBackdrop</div>
+    <div onClick={()=>closeModal()} className={ isBackDropOpen ? `${styles.backdrop} ${styles.backdrop__active} ` : `${styles.backdrop}` } >ModalBackdrop</div>
   )
 }
 

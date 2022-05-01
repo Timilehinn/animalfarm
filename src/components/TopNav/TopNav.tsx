@@ -1,14 +1,18 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import { useAppSelector, useAppDispatch } from 'state/hooks'
+import { toggleModalBackDrop } from 'state/toggle'
 import styles from './TopNav.module.scss'
 import { useConnectWalletModal, useConnectWallet } from '../../state/wallet/hooks'
 import wallet from '../../assets/wallet.png'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
+
 function TopNav() {
 	const location = useLocation()
 	const routeName = location.pathname.split('/')[1]
 	const { account } = useActiveWeb3React()
+	const dispatch = useAppDispatch()
 	console.log(routeName)
 
 	const { toggleConnectWalletModal } = useConnectWalletModal()
@@ -16,6 +20,7 @@ function TopNav() {
 
 	const connect = () => {
 		toggleConnectWalletModal(true)
+		dispatch( toggleModalBackDrop(true) )
 	}
 
 	

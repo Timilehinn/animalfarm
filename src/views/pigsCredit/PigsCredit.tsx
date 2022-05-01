@@ -39,6 +39,7 @@ function PigsCredit() {
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 	const pigsBalance = useAppSelector((state)=>state.balanceReducer.pigsBalance)
+	const busdBalance = useAppSelector((state)=>state.balanceReducer.busdBalance)
 
 
 	// useEffect(()=>{
@@ -127,10 +128,10 @@ function PigsCredit() {
 			<div className={styles.pigscredit}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard amount={pigsBalance} />
+						<PigsCreditCard title="PIGS balance" amount={`${pigsBalance.toFixed(2)}PIGS`} />
 					</div>
 					<div>
-						<PigsCreditCard  />
+						<PigsCreditCard title='BUSD balance'  amount={`${busdBalance.toFixed(2)}BUSD`}  />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>

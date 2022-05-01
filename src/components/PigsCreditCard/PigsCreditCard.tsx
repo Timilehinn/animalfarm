@@ -2,14 +2,15 @@ import React from 'react'
 import styles from './PigsCredit.module.scss'
 
 interface cardProps {
-  amount : number
+  amount : string
+  title : string
 }
 
-function PigsCreditCard({amount}:cardProps) {
+function PigsCreditCard({amount,title}:cardProps) {
   return (
     <div className={styles.card}>
-      <p className={styles.total}>Pigs Balance</p>
-      <p className={styles.value}>{amount} PIGS</p>
+      <p className={styles.total}>{title}</p>
+      <p className={styles.value}>{amount}</p>
     </div>
   )
 }
