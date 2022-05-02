@@ -12,11 +12,7 @@ import GenericBackground from 'components/GenericBackground/GenericBackground'
 import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import Toast from 'components/Toast/Toast'
-<<<<<<< HEAD
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
-=======
-import ConfirmModal from '../../components/confirmModal/confirmModal'
->>>>>>> 85a6890 (rename components)
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
 
