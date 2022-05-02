@@ -18,11 +18,12 @@ import pig from '../../assets/pig.png'
 function PigsCredit() {
 
 	const { account,library } = useActiveWeb3React()
+	const availablePigsToClaim = useAppSelector((state)=>state.pigsCreditReducer.pigsAvailableToClaim)
 	const signer = library.getSigner()
 
 	useEffect(()=>{
 		Promise.all([getBusdPrice(),getAllowance()])
-	},[])
+	})
 
 	
 
@@ -40,6 +41,7 @@ function PigsCredit() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 	const pigsBalance = useAppSelector((state)=>state.balanceReducer.pigsBalance)
 	const busdBalance = useAppSelector((state)=>state.balanceReducer.busdBalance)
+	
 
 
 	// useEffect(()=>{
@@ -118,7 +120,7 @@ function PigsCredit() {
 	}
 
 	
-
+	const estimatedBusdToPair = Math.ceil(pigsBusdPrice * availablePigsToClaim)
 	const isButtonEnabled = Boolean(allowance < (busdValue * 10**18 ).toString() && busdValue !== null && lockDuration > 0)
 	console.log(allowance, (busdValue * 10**18 ).toString() )
 	
@@ -150,7 +152,6 @@ function PigsCredit() {
 						Lock 
 						pair 
 						text="PIGS/BUSD LP Tokens" 
-						allowance={allowance}  
 						sliderRequired 
 						title='Submit PIGS/BUSD LP'
 						busdValue={busdValue} 
@@ -162,6 +163,13 @@ function PigsCredit() {
 						lockDuration={lockDuration}
 						setLockDuration={setLockDuration}
 						_confirmFunction={claimToPiggy}
+						available={`${busdBalance.toFixed(2).toString()}BUSD` }
+						infoTitle="Available PIGS to claim"
+						infoValue={availablePigsToClaim.toFixed(2)}
+						infoTitle2="Estimated BUSD to pair"
+						infoValue2 = {estimatedBusdToPair}
+						token="BUSD"
+						
 						
 					/>}
 				</div>

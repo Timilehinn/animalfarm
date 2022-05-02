@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
+import styles from './RangeSlider.module.scss'
 
 interface rangeProps {
 	color: string
-	opacity: any
 	setLockDuration:any
 }
 
@@ -15,13 +15,13 @@ const sliderThumbStyles = (props: rangeProps) => `
   border-radius : 50%;
   cursor:pointer;
   outline: 3px solid #F3BA2FE5;
-  opacity: ${props.opacity};
+  opacity: 0.3;
   -webkit-transition: .2s;
   transition: opacity .2s;
   
 `
 
-const Styles = styled.div`
+const Styles = styled.div` 
 	display: flex;
 	align-items: center;
 	color: #888;
@@ -57,7 +57,7 @@ const Styles = styled.div`
 	}
 `
 
-function RangeSlider({ color, opacity, setLockDuration }: rangeProps) {
+function RangeSlider({ color, setLockDuration }: rangeProps) {
 	const [value, setValue] = React.useState(50)
 
 	const handleChange = (e: any) => {
@@ -66,10 +66,10 @@ function RangeSlider({ color, opacity, setLockDuration }: rangeProps) {
 	}
 
 	return (
-		<Styles color={color} opacity={opacity}>
-			<input type='range' min={0} max={156} value={value} className='slider' onChange={(e) => handleChange(e)} />
+		<div className={styles.range} color={color} >
+			<input type='range' min={0} max={156} value={value} className={styles.slider}  onChange={(e) => handleChange(e)} />
 			<div className='value'>{value}</div>
-		</Styles>
+		</div>
 	)
 }
 

@@ -60,6 +60,7 @@ $gold :  #F3BA2F;
     
                     display: flex;
                     align-items: center;
+                    // background-color: red;
     
                     img {
                         margin-right: 10px;
@@ -68,6 +69,7 @@ $gold :  #F3BA2F;
                     p {
                         color: $gold;
                         font-weight: bold;
+                       
                     }
     
                 }
@@ -124,6 +126,9 @@ $gold :  #F3BA2F;
         color: white;
         font-weight: 500;
         margin-top: 10px;font-size: 12px;
+        span{
+            color: #424242;
+        }
     }
 
     .timelock{

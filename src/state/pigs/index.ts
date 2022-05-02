@@ -2,11 +2,11 @@ import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
 
-    pigsAvailableToClaim : 0
+    pigsAvailableToClaim : 0,
 }
 
 
-const pigsCreditSlice = createSlice({
+const pigsSlice = createSlice({
     name : 'pigsCredit',
     initialState,
     reducers : {
@@ -19,5 +19,5 @@ const pigsCreditSlice = createSlice({
 })
 
 
-export const { setPigsAvailableToClaim  } = pigsCreditSlice.actions
-export default pigsCreditSlice.reducer
+export const { setPigsAvailableToClaim  } = pigsSlice.actions
+export default pigsSlice.reducer

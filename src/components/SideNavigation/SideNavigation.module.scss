@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
+
 @mixin flex($dir, $align-item, $justift-content) {
     display: flex;
     flex-direction: $dir;
@@ -10,7 +12,7 @@ $dark : #000000;
 
 .side{
     height: calc(100vh - 20px);
-    width: 250px;
+    width: 300px;
     border-radius: 20px;
     background: $dark;
     padding: 20px 20px 0px 0px;
@@ -25,11 +27,11 @@ $dark : #000000;
         
         padding-top: 6px;
         margin-bottom: 50px;
-        padding-left: 15px;
+        padding-left: 30px;
 
         h3{
             color: orange;
-            font-size: 16px;
+            font-size: 1.1rem;
         }
 
         img{
@@ -39,25 +41,32 @@ $dark : #000000;
         }
     }
     
-    ul{
-        color: white;
+    .ul{
+        // color: white;
+        padding-top: 30px;
         list-style: none;
+        // margin-top: 30px;
 
         .link{
-            padding: 0px 0px 0px 15px;
+            padding: 0px 0px 0px 30px;
             display: flex;
             align-items: center;
             cursor: pointer;
             transition: 0.3s ease;
             color: white;
             text-decoration: none;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
             transition: 0.3s;
+            font-family: 'Poppins',
+            sans-serif;
             
 
             p{
-                font-size: 12px;
+                font-size: 0.8rem;
                 cursor: pointer;
+                font-weight: 100;
+                color: #D9E0E899;
+                line-height: 1.6rem;
             }
 
             img{
@@ -67,7 +76,7 @@ $dark : #000000;
             }
 
             svg{
-                color: white;
+                color: #D9E0E899;
                 margin-right: 10px;
                 font-size: 20px;
             }
@@ -105,17 +114,21 @@ $dark : #000000;
         position: absolute;
         bottom: 48px;
         right: 0px;
-        height: 100px;
+        // height: 100px;
 
         .side__coinprice__in{
             width: 100%;
-            height: 100%;
+            
             padding-left: 20px;
+            padding-top: 20px;
+            
             padding-top: 8px;
             background:  #000000;
-            border-radius: 5px;
+            border-radius: 10px;
+            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
 
             ul{
+                padding: 10px;
                 li{
                     display: flex;
                     align-items: center;
@@ -128,7 +141,8 @@ $dark : #000000;
                     }
 
                     p{
-                        font-size: 12px;
+                        font-size: 1rem;
+                        color: white;
                     }
                 }
             }
@@ -139,14 +153,18 @@ $dark : #000000;
 }
 .side__socials {
     display: flex;
-    justify-content: space-evenly;
+    width: 100%;
+    justify-content: center;
     position: absolute;
         bottom: 10px;
         right: 14px;
 }
 .side__socials__icon {
-    margin-left: 14px;
-    margin-right: 14px;
+    // margin-left: 14px;
+    // margin-right: 14px;
+    img{
+        height: 0.8rem;
+    }
 }
 
 @media screen and (max-width : 768px ) {
