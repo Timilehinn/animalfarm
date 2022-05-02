@@ -20,11 +20,11 @@ function PiggyBankRow(props) {
                     <div className={style.action}>
                         <button className={style.button} type='button' onClick={() => showModal(!state)} >
                             Action 
-                            {state === false ? <img src={down} alt=""/> :  <img src={up} alt="" />}
+                            {state === false ? <img src={up} alt="" />  :<img src={down} alt=""/>}
                         </button>
                         <div className={state ? style.modal : style.modal_off}>
                             <button type='button' className={style.modal__button}>Sell</button><hr/>
-                            <button type='button' className={style.modal__button}>Dompound</button><hr/>
+                            <button type='button' className={style.modal__button}>compound</button><hr/>
                             <button type='button' className={style.modal__button}>Deposit</button>
                         </div>
                     </div>

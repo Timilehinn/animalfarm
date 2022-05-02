@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,KAAK,CAAA;EACD,KAAK,EAAE,IAAI;EACX,eAAe,EAAE,aAAa;EAC9B,OAAO,EAAE,IAAI;EAEb,OAAO,EAAE,IAAI;CAOhB;;AAZD,AAQI,KARC,CAQD,CAAC,CAAC;EACE,KAAK,EAAE,wBAAwB;EAC/B,SAAS,EAAE,IAAI;CAClB",
+    "sources": [
+        "Info.module.scss"
+    ],
+    "names": [],
+    "file": "Info.module.css"
+}

@@ -1,0 +1,25 @@
+.toast {
+  width: 350px;
+  border: 1px solid #F3BA2F;
+  color: white;
+  border-radius: 10px;
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) translateY(-20);
+          transform: translate(-50%, -50%) translateY(-20);
+  z-index: 10000;
+  padding: 20px;
+  visibility: hidden;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.toast__active {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transform: translate(-50%, -50%) translateY(0);
+          transform: translate(-50%, -50%) translateY(0);
+}
+/*# sourceMappingURL=Toast.module.css.map */

@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
-.pigscredit {
+.pigscredit__wrap {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -15,10 +15,27 @@
       -ms-flex-align: center;
           align-items: center;
   padding-top: 50px;
-  width: 100%;
 }
 
-.pigscredit .cards {
+.pigscredit__wrap .pigscredit {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100%;
+  max-width: 1500px;
+}
+
+.pigscredit__wrap .pigscredit .cards {
   width: 30%;
   display: -ms-grid;
   display: grid;
@@ -28,71 +45,72 @@
   margin-bottom: 50px;
 }
 
-.pigscredit .cards div {
+.pigscredit__wrap .pigscredit .cards div {
   background: #221E16;
   height: 80px;
   border-radius: 10px;
 }
 
-.pigscredit .credit__wrap {
-  border-top: 1px solid #f3bb2f6c;
-  border-right: 1px solid #f3bb2f6c;
-  border-left: 1px solid #f3bb2f6c;
-  border-bottom: 1px solid black;
+.pigscredit__wrap .pigscredit .credit__wrap {
+  background: -webkit-gradient(linear, left top, left bottom, from(#121212), to(#121212)) padding-box, -webkit-gradient(linear, left top, left bottom, from(#f3ba2a), to(#121212)) border-box;
+  background: linear-gradient(#121212, #121212) padding-box, linear-gradient(#f3ba2a, #121212) border-box;
+  border-style: solid;
+  border-width: 1px;
+  border-color: transparent;
   border-radius: 10px;
   padding: 20px;
   width: 30%;
   z-index: 5;
 }
 
-.pigscredit .credit__wrap .tabs {
+.pigscredit__wrap .pigscredit .credit__wrap .tabs {
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.pigscredit .credit__wrap .tabs .tab__one {
+.pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__one {
   color: white;
   width: 50%;
   height: 40px;
   cursor: pointer;
-  border-bottom: 3px solid #333333;
+  border-bottom: 2px solid #333333;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.pigscredit .credit__wrap .tabs .tab__one p {
+.pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__one p {
   text-align: center;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
   letter-spacing: 2;
 }
 
-.pigscredit .credit__wrap .tabs .tab__one__active {
-  border-bottom: 3px solid #F3BA2FE5;
+.pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__one__active {
+  border-bottom: 2px solid #F3BA2FE5;
 }
 
-.pigscredit .credit__wrap .tabs .tab__two {
+.pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__two {
   color: white;
   width: 50%;
   cursor: pointer;
-  border-bottom: 3px solid #333333;
+  border-bottom: 2px solid #333333;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
-.pigscredit .credit__wrap .tabs .tab__two p {
+.pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__two p {
   text-align: center;
   font-size: 14px;
   font-family: "Poppins", sans-serif;
 }
 
-.pigscredit .credit__wrap .tabs .tab__two__active {
-  border-bottom: 3px solid #F3BA2FE5;
+.pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__two__active {
+  border-bottom: 2px solid #F3BA2FE5;
 }
 
-.pigscredit .pig {
+.pigscredit__wrap .pigscredit .pig {
   position: fixed;
   right: 0px;
   bottom: 0px;
@@ -100,18 +118,25 @@
   z-index: 3;
 }
 
-@media screen and (max-width: 768px) {
-  .pigscredit {
-    padding: 50px 20px 0px 20px;
+@media screen and (max-width: 1200px) {
+  .pigscredit__wrap .pigscredit {
+    padding: 0px 20px 50px 20px;
     width: 100%;
   }
-  .pigscredit .cards {
+  .pigscredit__wrap .pigscredit .cards {
     width: 100%;
   }
-  .pigscredit .credit__wrap {
+  .pigscredit__wrap .pigscredit .credit__wrap {
     width: 100%;
   }
-  .pigscredit .pig {
+  .pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__one p {
+    font-size: 12px;
+  }
+  .pigscredit__wrap .pigscredit .credit__wrap .tabs .tab__two p {
+    font-size: 12px;
+  }
+  .pigscredit__wrap .pigscredit .pig {
+    display: none;
     height: 150px;
   }
 }

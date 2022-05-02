@@ -1,10 +1,23 @@
-.nav {
-  width: calc(100vw - 240px);
-  height: 70px;
-  padding: 0px 20px 0px 20px;
+.nav__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
-.nav .nav__in {
+.nav__wrap .nav {
+  width: 100%;
+  height: 70px;
+  padding: 0px 20px 0px 50px;
+}
+
+.nav__wrap .nav .nav__in {
   width: 100%;
   height: 100%;
   border-bottom: 1px solid #FFFFFF33;
@@ -17,20 +30,20 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding: 0px 20px 0px 20px;
 }
 
-.nav .nav__in h3 {
+.nav__wrap .nav .nav__in h3 {
   color: white;
 }
 
-.nav .nav__in button {
+.nav__wrap .nav .nav__in button {
   width: 200px;
   height: 40px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
   color: white;
+  cursor: pointer;
   background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
   display: -webkit-box;
   display: -ms-flexbox;
@@ -48,7 +61,7 @@
   margin-right: 20px;
 }
 
-.nav .nav__in button img {
+.nav__wrap .nav .nav__in button img {
   height: 20px;
   margin-right: 10px;
 }
