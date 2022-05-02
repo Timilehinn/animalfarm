@@ -48,7 +48,10 @@ function MobileSideNav() {
 =======
 				</Link>
 				<Link onClick={() => closeNav()} to='/piggy-bank' className={styles.link}>
+<<<<<<< HEAD
 >>>>>>> 0e79139 (fix: table padding)
+=======
+>>>>>>> 4865211a1ff9e3abf44369a14cd4dfe470ab95aa
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
