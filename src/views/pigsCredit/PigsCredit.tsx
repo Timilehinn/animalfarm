@@ -172,6 +172,7 @@ function PigsCredit() {
 						token="BUSD"
 						icon={busdIcon}
 						rewardCenter={false}
+						buttonText="Enter amount to claim"
 						
 						
 					/>}
