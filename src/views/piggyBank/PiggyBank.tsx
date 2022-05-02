@@ -18,7 +18,7 @@ function PiggyBank() {
 		<div>
 			<div className={styles.piggybank}>
 
-				{/* <div className={styles.credit__wrap}>
+				<div className={styles.credit__wrap}>
 					<div className={styles.tabs}>
 						<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
 							<p>Buy Piglets</p>
@@ -29,14 +29,14 @@ function PiggyBank() {
 					</div>
 					{activeTab === 1 ? 
 						<RewardsCenter 
-
-							sliderRequired={false} 
+							sliderRequired={false}
 							title='Buy Piglets with LP token' 
 							Lock 
 							pair={false}
 							
-							infoValue={pigsBusdLpBalance}
+							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
 							infoTitle = "Your PIGS/BUSD LP balance"
+						
 							token="PIGS/BUSD LP"
 
 
@@ -48,7 +48,7 @@ function PiggyBank() {
 							title='Gift Piglets with LP token' 
 						/>
 					}
-				</div> */}
+				</div>
 
 				<PiggyBankTable />
 				<ReferralTable />

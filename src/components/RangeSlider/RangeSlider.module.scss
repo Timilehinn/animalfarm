@@ -10,6 +10,7 @@
             flex: 6;
             -webkit-appearance: none;
             width: 100%;
+            cursor: pointer;
             height: 3px;
             border-radius: 5px;
             background: #424242;
@@ -17,8 +18,10 @@
             &::-webkit-slider-thumb {
                 // -webkit-appearance: none;
                 // appearance: none;
-                background: #F3BA2F;
+                background: #121212;
                 border-radius:50%;
+                cursor: pointer;
+                outline: 3px solid #F3BA2FE5;
             
             }
             // &::-webkit-slider-thumb {
@@ -33,6 +36,18 @@
             // }
         
     }
+    .value{
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        border: 1px solid #ffffff4d;
+        padding: 5px;
+        border-radius: 5px;
+        margin-left: 10px;
+        color: #FFFFFFDE;
+    }
 }
 
  input[type=range] {
@@ -46,6 +61,6 @@ input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
     background-color:#F3BA2F;
     // opacity: 0.5;
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
 }

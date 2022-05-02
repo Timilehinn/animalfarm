@@ -33,7 +33,7 @@ function PigsPen() {
 								<p>Withdraw Pigs</p>
 							</div>
 						</div>
-						{/* {activeTab === 1 ? <RewardsCenter sliderRequired={false} title='Submit PIGS to be deposited'  /> : <RewardsCenter sliderRequired={false} xLock={false} title='Withdraw your staked PIGS' />} */}
+						{activeTab === 1 ? <RewardsCenter sliderRequired={false} title='Submit PIGS to be deposited'  /> : <RewardsCenter sliderRequired={false}  title='Withdraw your staked PIGS' />}
 					</div>
 				</div>
 

@@ -14,7 +14,7 @@ import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../st
 
 interface rewardProps {
 
-	sliderRequired: boolean
+	sliderRequired?: boolean
 	title?: string
 	Lock?: boolean
 	pair?:boolean
@@ -22,16 +22,16 @@ interface rewardProps {
 	text?:string
 	busdValue?:number,
 	setBusdValue?:any
-	isButtonEnabled:boolean
+	isButtonEnabled?:boolean
 	approve?:any
 	pending?:any
 	isApproved?:boolean
 	lockDuration?:any
-	setLockDuration:any
+	setLockDuration?:any
 	available?:string
 	infoTitle?:string
 	infoValue?:any
-	infoTitle2:string
+	infoTitle2?:string
 	infoValue2 ?: number
 	token?:string
 	_confirmFunction?: () => void
@@ -128,22 +128,13 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 			{Lock && <p className={styles.lock}>Lock Duration <span>(Optional)</span></p>}
 			{sliderRequired && <RangeSlider setLockDuration={setLockDuration} color='#121212' />}
 			<p className={styles.timelock} >Timelock Bonus <span>{getLockBonus()}%</span></p>
-			{	
+			{/* {	
 				(!isApproved) ?
 				<button type='button' disabled={!isButtonEnabled } className={!isButtonEnabled ? styles.button__disabled : styles.button__enabled}  onClick={()=>approve()} >{ pending ? "Pending" : "Approve" }</button> 
 				:
 				<button type='button' onClick={() => openModal()} className={styles.button__enabled}>claim</button>
-			}
-			{/* { !canApprove &&
-				<button  disabled={buttonDisabled} className={isButtonEnabled ? styles.button__enabled : styles.button__disabled} type='button'>
-					Enter amount 
-				</button> 
-			}
-			{	pending ? 
-				<button  onClick={()=>approve()} className={styles.button__enabled} >{ pending ? "Pending" : "Approve"}</button> : 
-				<button onClick={() => openModal()} className={styles.button__enabled} >Continue</button> 
-				
 			} */}
+			<button type='button'  className={styles.button__disabled}>claim</button>
 		</animated.div>
 	)
 }

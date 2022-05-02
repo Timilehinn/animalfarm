@@ -13,12 +13,12 @@ $gold :  #F3BA2F;
     }
 
     h3{
-        color: white;
+        color: rgba(217 217 212 / 90%);
         margin-top: 30px;
         margin-bottom: 10px;
         font-size: 14px;
         font-family: $boldFont;
-        letter-spacing: 2px;
+        // letter-spacing: 2px;
     }
 
     .reward__claim{
@@ -78,7 +78,7 @@ $gold :  #F3BA2F;
     
                     background: none;
                     border: none;
-                    color: white;
+                    color: rgba(217 217 212 / 90%);
                     border: none;
                     outline: none;
                     font-weight: bold;
@@ -112,7 +112,7 @@ $gold :  #F3BA2F;
 
     .xpigs{
         
-        color: white;
+        color: rgba(217 217 212 / 90%);
         font-size: 12px;
         margin-top: 20px;
 
@@ -123,7 +123,7 @@ $gold :  #F3BA2F;
     }
 
     .lock{
-        color: white;
+        color: rgba(217 217 212 / 90%);
         font-weight: 500;
         margin-top: 10px;font-size: 12px;
         span{

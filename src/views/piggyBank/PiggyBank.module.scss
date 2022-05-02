@@ -25,7 +25,7 @@
     
             .tab__one {
     
-                color: white;
+                color: rgba(217 217 212 / 90%);
                 width: 60%;
                 height: 40px;
                 cursor: pointer;
@@ -47,7 +47,7 @@
             }
     
             .tab__two {
-                color: white;
+                color: rgba(217 217 212 / 90%);
                 width: 50%;
                 cursor: pointer;
                 border-bottom: 2px solid #333333;
@@ -75,5 +75,31 @@
     .piggybank {
         margin-left: 24px;
         margin-right: 24px;
+
+        .cards {
+        
+            width: 100%;
+        }
+        
+        .credit__wrap {
+        
+            width: 100%;
+        
+            .tabs {
+                .tab__one {
+        
+                    p {
+                        font-size: 12px;
+                    }
+                }
+        
+                .tab__two {
+        
+                    p {
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
     }
 }
