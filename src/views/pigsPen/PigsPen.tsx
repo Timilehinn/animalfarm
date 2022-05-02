@@ -64,7 +64,7 @@ function PigsPen() {
 							Lock={false}
 							buttonText = "Enter amount to claim"
 							pTitle="Enter amount of PIGS to be withdrawn from the PIG Pen"
-							rewardCenter
+							rewardCenter={false}
 						/>
 						}
 					</div>

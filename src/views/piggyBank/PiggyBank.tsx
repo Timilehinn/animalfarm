@@ -4,6 +4,8 @@ import PiggyBankTable from 'components/PiggyBankTable/PiggyBankTable'
 import ReferralTable from 'components/ReferralTable/ReferralTable'
 import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useNavigate } from 'react-router-dom'
 
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
@@ -15,6 +17,10 @@ function PiggyBank() {
 
 	const [activeTab, setActiveTab] = React.useState(1)
 	const pigsBusdLpBalance = useAppSelector((state)=>state.balanceReducer.pigsBusdLpBalance)
+	const { account } = useActiveWeb3React()
+	const navigate = useNavigate()
+	
+
 
 	return (
 		<div>
@@ -23,9 +29,9 @@ function PiggyBank() {
 					<div>
 						<PigsCreditCard title="Total LP Locked" amount="25,000PIGS/BUSD" />
 					</div>
-					<div>
+					{/* <div>
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
-					</div>
+					</div> */}
 				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.tabs}>
@@ -58,7 +64,7 @@ function PiggyBank() {
 							sliderRequired
 							title='Gift Piglets with LP token' 
 							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
-							infoTitle = "Your PIGS/BUSD LP balance"
+							infoTitle = "PIGS/BUSD LP balance"
 							token="PIGS/BUSD LP"
 							icon={pig}
 							buttonText = "Enter amount"
@@ -68,7 +74,7 @@ function PiggyBank() {
 					}
 				</div>
 				<div className={styles.btn__wrap} >
-					<button type='button' className={styles.btn} >Copy refferal link</button>
+					<button  type='button' className={styles.btn} ><a style={{color:"white",textDecoration:"none"}} href={`http://doman.com/piggy-bank${account}/`} >Copy refferal link</a></button>
 				</div>
 				
 				<PiggyBankTable />

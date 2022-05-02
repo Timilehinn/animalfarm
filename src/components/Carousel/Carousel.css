@@ -66,3 +66,21 @@ button.rec-dot:focus {
     background: #FED900;
     box-shadow: 0 0 1px 3px rgba(7, 4, 4, 0.5);
 }
+
+.rec-arrow {
+
+    background-color: var(--blue) !important;
+    transition: all 0.3s ease;
+    font-size: 1.1rem !important;
+    color: white !important;
+    width: 1.7rem !important;
+    height: 1.7rem !important;
+    min-width: 1.7rem !important;
+    line-height: 1.7rem !important;
+
+}
+
+.rec-arrow:hover:not(:disabled) {
+    transform: scale(1.2);
+    border: 1px solid #FED900;
+}

@@ -16,6 +16,7 @@ function TopNav() {
 	const { account } = useActiveWeb3React()
 	const dispatch = useAppDispatch()
 	console.log(routeName)
+	
 
 	const { toggleConnectWalletModal } = useConnectWalletModal()
 	const { isWalletConnected } = useConnectWallet()
