@@ -7,7 +7,6 @@ import { ClaimToPiggyBank } from 'api/claimPigs'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import RangeSlider from 'components/RangeSlider/RangeSlider'
 import Info from 'components/Info/Info'
-import confirmModal from 'components/ConfirmModal/ConfirmModal'
 import logo from '../../assets/svgg.png'
 
 import styles from './RewardsCenter.module.scss'
