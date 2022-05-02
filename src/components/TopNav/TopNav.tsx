@@ -3,9 +3,11 @@ import { useLocation } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import { toggleModalBackDrop } from 'state/toggle'
 import styles from './TopNav.module.scss'
+import logo from '../../assets/svgg.png'
 import { useConnectWalletModal, useConnectWallet } from '../../state/wallet/hooks'
 import wallet from '../../assets/wallet.png'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
+
 
 
 function TopNav() {

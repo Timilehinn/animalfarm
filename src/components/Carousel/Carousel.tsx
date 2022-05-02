@@ -29,17 +29,21 @@ function AnimalCarousel() {
 			paragraph: 'All taxes associated with core tokens go towards rewarding platform participants and generating BUSD rewards for stakers!!',
 		},
 		{
-			title: 'Fee Distribution',
-			paragraph: 'Deposit fees and taxes go to PIGS stakers as BUSD rewards!!',
+			title: 'Dynamic Emission',
+			paragraph: 'Dynamic emission rates based on current demand, allowing for price appreciation of DOGS and PIGS in all market conditions!!',
 		},
 		{
-			title: 'Fee Distribution',
-			paragraph: 'Deposit fees and taxes go to PIGS stakers as BUSD rewards!!',
+			title: 'Governance',
+			paragraph: 'Full governance protocol giving PIGS stakers a vote in future opportunities!!',
 		},
 		{
-			title: 'Fee Distribution',
-			paragraph: 'Deposit fees and taxes go to PIGS stakers as BUSD rewards!!',
+			title: 'Lending',
+			paragraph: 'Collateral staked on the platform is rehypothecated to Pancakeswaps lending protocol to earn additional yield, which gets converted to BUSD and injected into PigPen dividend vault.',
 		},
+		{
+			title: 'Integrity',
+			paragraph: 'From the Developers of DRIP, the fastest growing and highest ranked DeFi protocol on BSC!!',
+		}
 	]
 
 	return (
