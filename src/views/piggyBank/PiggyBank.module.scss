@@ -4,6 +4,72 @@
     align-content: center;
     justify-content: center;
     margin: auto;
+    padding-top: 50px;
+
+    .credit__wrap {
+        padding: 20px;
+        width: 40%;
+        margin: auto;
+        background: linear-gradient(#121212, #121212) padding-box,
+        linear-gradient(#f3ba2a, #121212) border-box;
+        border-style: solid;
+        border-width: 1px;
+        border-color: transparent;
+        border-radius: 10px;
+    
+        // background: black;
+        .tabs {
+            width: 100%;
+    
+            display: flex;
+    
+            .tab__one {
+    
+                color: white;
+                width: 60%;
+                height: 40px;
+                cursor: pointer;
+                border-bottom: 2px solid #333333;
+                transition: 0.5s;
+    
+    
+                p {
+                    text-align: center;
+                    font-size: 14px;
+                    text-align: center;
+                    font-size: 14px;
+                    font-family: $boldFont;
+                }
+            }
+    
+            .tab__one__active {
+                border-bottom: 2px solid #F3BA2FE5;
+            }
+    
+            .tab__two {
+                color: white;
+                width: 50%;
+                cursor: pointer;
+                border-bottom: 2px solid #333333;
+                transition: 0.5s;
+    
+                p {
+                    text-align: center;
+                    font-size: 14px;
+                    // font-weight: 600;
+                    text-align: center;
+                    font-size: 14px;
+                    // font-weight: 600;
+                    font-family: $boldFont;
+                }
+            }
+    
+            .tab__two__active {
+                border-bottom: 2px solid #F3BA2FE5;
+                ;
+            }
+        }
+    }
 }
 @media (max-width: 890px) {
     .piggybank {

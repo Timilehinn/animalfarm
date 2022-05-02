@@ -29,7 +29,7 @@ function TopNav() {
 		<div className={styles.nav__wrap} >
 			<div className={styles.nav}>
 				<div className={styles.nav__in}>
-					<h3>{routeName.length === 0 ? 'Home' : routeName}</h3>
+					<h3>{routeName.length === 0 ? 'HOME' : routeName.split("-").join(" ").toUpperCase()}</h3>
 					<button onClick={() => connect()} type='button'>
 						<img src={wallet} alt='' />
 						{	isWalletConnected ?

@@ -14,29 +14,36 @@ import styles from './RewardsCenter.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
 
 interface rewardProps {
+
 	sliderRequired: boolean
-	title: string
-	Lock: boolean
-	pair:boolean
-	pigsBusdPrice:number
-	text:string
-	busdValue:number,
-	setBusdValue:any
+	title?: string
+	Lock?: boolean
+	pair?:boolean
+	pigsBusdPrice?:number
+	text?:string
+	busdValue?:number,
+	setBusdValue?:any
 	isButtonEnabled:boolean
-	approve:any
-	pending:any
-	isApproved:boolean
-	lockDuration:any
+	approve?:any
+	pending?:any
+	isApproved?:boolean
+	lockDuration?:any
 	setLockDuration:any
-	_confirmFunction: () => void
+	available?:string
+	infoTitle?:string
+	infoValue?:any
+	infoTitle2:string
+	infoValue2 ?: number
+	token?:string
+	_confirmFunction?: () => void
 	
 }
 
-function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction }: rewardProps) {
+function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, token }: rewardProps) {
 
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
-	const availablePigsToClaim = useAppSelector((state)=>state.pigsCreditReducer.pigsAvailableToClaim)
+	
 	const { account,library } = useActiveWeb3React()
 
 	const [value, setValue] = React.useState(0)
@@ -87,7 +94,7 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 
 	console.log(lockDuration)
 
-	const estimatedBusdToPair = Math.ceil(pigsBusdPrice * availablePigsToClaim)
+	// const estimatedBusdToPair = Math.ceil(pigsBusdPrice * availablePigsToClaim)
 
 	const buttonDisabled = busdValue < 1
 
@@ -96,8 +103,8 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 			<h3>{title}</h3>
 			<p className={styles.header}>Enter amount of BUSD to be paired with Pigs</p>
 			<div className={styles.reward__claim}>
-				<Info title="Available PIGS to claim" info={availablePigsToClaim.toFixed(3)} />
-				<Info title="Estimated BUSD to pair" info={estimatedBusdToPair.toFixed(3)} />
+				<Info title={infoTitle} info={infoValue} />
+				{ infoTitle2 &&  <Info title={infoTitle2} info={infoValue2} /> }
 
 			</div>
 			<form action=''>
@@ -105,12 +112,12 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 					<div className={styles.inputBox}>
 						<div className={styles.logo}>
 							<img src={logo} alt='' />
-							<p>BUSD</p>
+							<p>{token}</p>
 						</div>
 						<input  onChange={(e) => handleChange(e)} value={busdValue} type='number' placeholder='000' />
 					</div>
 					<div>
-						<p className={styles.claimable}>Available BUSD: 0 BUSD</p>
+						<p className={styles.claimable}>Availble : {available}</p>
 					</div>
 				</div>
 			</form>
@@ -119,8 +126,8 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 					<span>{(busdValue / pigsBusdPrice).toFixed(3)} PIGS</span> will be paired with <span>{busdValue} BUSD</span>
 				</p>
 			)}
-			{Lock && <p className={styles.lock}>Lock Duration (Optional)</p>}
-			{sliderRequired && <RangeSlider setLockDuration={setLockDuration} color='#121212' opacity={3} />}
+			{Lock && <p className={styles.lock}>Lock Duration <span>(Optional)</span></p>}
+			{sliderRequired && <RangeSlider setLockDuration={setLockDuration} color='#121212' />}
 			<p className={styles.timelock} >Timelock Bonus <span>{getLockBonus()}%</span></p>
 			{	
 				(!isApproved) ?
