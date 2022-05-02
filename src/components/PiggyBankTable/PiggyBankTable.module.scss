@@ -4,7 +4,7 @@
 
 .tableheader {
     margin: auto;   
-    color: #FFFFFF; 
+    color: rgba(217 217 212 / 90%);
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -25,6 +25,7 @@
     font-family: $boldFont;
     overflow-x: scroll;
     overflow-y: scroll;
+    color: rgba(217 217 212 / 90%);
     max-height: 500px;
     margin: auto;   
     max-width: 1000px;
@@ -56,7 +57,7 @@
 }
 .table {
     width: 1000px;
-    color: #FFFFFF; 
+    color: rgba(217 217 212 / 90%);
     margin: auto;
     overflow-x: scroll;
     overflow-y: scroll;

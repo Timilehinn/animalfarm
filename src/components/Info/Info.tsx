@@ -9,8 +9,8 @@ interface infoProps {
 function Info({title,info}:infoProps) {
   return (
     <div className={styles.info} >
-        <p>{title}</p>
-        <p>{info}</p>
+        <p className={styles.title}>{title}</p>
+        <p className={styles.value}>{info}</p>
     </div>
   )
 }

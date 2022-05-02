@@ -28,7 +28,7 @@
 .box__p{
     font-size: 0.8rem;
     line-height: 20px;
- 
+    color: rgba(217 217 212 / 90%);
     font-weight: 100;
     line-height: 1.5rem;
 }
@@ -39,7 +39,7 @@
 }
 
 .carousel__h{
-    color: white;
+    color: rgba(217 217 212 / 90%);
     margin-bottom: 30px;
     font-size: 32px;
     font-size: 1.2rem;
