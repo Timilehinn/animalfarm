@@ -6,6 +6,23 @@
     margin: auto;
     padding-top: 50px;
 
+    .cards {
+        margin: auto;
+        width: 40%;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 50px;
+    
+        div {
+    
+            background: #221E16;
+            ;
+            // height: 80px;
+            border-radius: 10px;
+        }
+    }
+
     .credit__wrap {
         padding: 20px;
         width: 40%;

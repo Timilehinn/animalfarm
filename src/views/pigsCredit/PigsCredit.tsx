@@ -171,6 +171,7 @@ function PigsCredit() {
 						infoValue2 = {estimatedBusdToPair}
 						token="BUSD"
 						icon={busdIcon}
+						rewardCenter={false}
 						
 						
 					/>}

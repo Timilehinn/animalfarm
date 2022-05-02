@@ -40,11 +40,12 @@ interface rewardProps {
 	pTitle?:any
 	buttonText?:any
 	recipient?:boolean
+	rewardCenter?:boolean
 	_confirmFunction?: () => void
 	
 }
 
-function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, infoValue3, infoTitle3, token, icon, buttonText, recipient }: rewardProps) {
+function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, infoValue3, infoTitle3, token, icon, buttonText, recipient, rewardCenter }: rewardProps) {
 
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -138,7 +139,7 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 			)}
 			{Lock && <p className={styles.lock}>Lock Duration <span>(Optional)</span></p>}
 			{sliderRequired && <RangeSlider setLockDuration={setLockDuration} color='#121212' />}
-			<p className={styles.timelock} >Timelock Bonus <span>{getLockBonus()}%</span></p>
+			{Lock && <p className={styles.timelock} >Timelock Bonus <span>{getLockBonus()}%</span></p>}
 			{/* {	
 				(!isApproved) ?
 				<button type='button' disabled={!isButtonEnabled } className={!isButtonEnabled ? styles.button__disabled : styles.button__enabled}  onClick={()=>approve()} >{ pending ? "Pending" : "Approve" }</button> 
@@ -146,6 +147,17 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 				<button type='button' onClick={() => openModal()} className={styles.button__enabled}>claim</button>
 			} */}
 			<button type='button'  className={styles.button__disabled}>{buttonText}</button>
+			{ rewardCenter && <div className={styles.center} >
+				<p className={styles.center__header} >Reward Center</p>
+				<div className={styles.center__box} >
+					<Info title="Claimable BUSD" info="X BUSD" />
+					<Info title="Claimable PIGS" info="X PIGS" />
+				</div>
+				<div className={styles.center__buttons}>
+					<button type='button' style={{marginRight:"10px"}}>Claim reward</button>
+					<button type='button' style={{marginLeft:"10px"}}>Compound PIGS</button>
+				</div>
+			</div>}
 		</animated.div>
 	)
 }

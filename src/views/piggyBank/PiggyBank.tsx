@@ -3,6 +3,7 @@ import React from 'react'
 import PiggyBankTable from 'components/PiggyBankTable/PiggyBankTable'
 import ReferralTable from 'components/ReferralTable/ReferralTable'
 import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
+import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
@@ -18,7 +19,14 @@ function PiggyBank() {
 	return (
 		<div>
 			<div className={styles.piggybank}>
-
+				<div className={styles.cards}>
+					<div>
+						<PigsCreditCard title="Total LP Locked" amount="25,000PIGS/BUSD" />
+					</div>
+					<div>
+						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
+					</div>
+				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.tabs}>
 						<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
@@ -36,8 +44,8 @@ function PiggyBank() {
 							pair={false}
 							buttonText = "Enter amount"
 							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
-							infoTitle = "Your PIGS/BUSD LP balance"
-						
+							infoTitle = "PIGS/BUSD LP balance"
+							rewardCenter={false}
 							token="PIGS/BUSD LP"
 							icon={pig}
 
@@ -55,6 +63,7 @@ function PiggyBank() {
 							icon={pig}
 							buttonText = "Enter amount"
 							recipient
+							rewardCenter={false}
 						/>
 					}
 				</div>

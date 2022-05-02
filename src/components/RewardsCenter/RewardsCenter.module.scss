@@ -201,4 +201,49 @@ $gold :  #F3BA2F;
         background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
         ;
     }
+
+    .center{
+
+        padding-top: 30px;
+        margin-top: 20px;
+        border-style: dashed;
+        border-top: 1px solid #474E47;
+        border-left: 1px solid #121212;
+        ;
+        border-right: 1px solid #121212;;
+        // background-image: linear-gradient(to right, #FFFFFF33 50%);
+        // background-position: top;
+        background-size: 10px 1px;
+        // background-repeat: repeat-x;
+       
+        border-width: 2px;
+        border-style: dashed;
+        .center__header{
+            color:  rgba(217 217 212 / 90%);
+            font-weight: 600;
+            margin-bottom: 20px;
+
+            
+        }
+
+        .center__box{
+            background: #221E16;
+            // padding: 20px;
+            border-radius: 5px;
+        }
+
+        .center__buttons{
+            margin-top: 20px;
+            display: flex;
+            button{
+                width: 50%;
+                height: 60px;
+                background: #474E47;
+                border-radius: 10px;
+                color: rgba(255, 255, 255, 0.6);
+                font-weight: 500;
+                border:none;
+            }
+        }
+    }
 }
