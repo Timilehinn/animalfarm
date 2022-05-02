@@ -1,0 +1,86 @@
+.confirmModal {
+  width: 350px;
+  background: #221E16;
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%) scale(0.8);
+          transform: translate(-50%, -50%) scale(0.8);
+  z-index: 10000;
+  padding: 20px;
+  visibility: hidden;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  opacity: 0;
+}
+
+.confirmModal header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.confirmModal header p {
+  font-weight: 500;
+  color: #FFFFFF99;
+}
+
+.confirmModal header img {
+  cursor: pointer;
+}
+
+.confirmModal .lp {
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+.confirmModal .pigs {
+  text-align: center;
+  color: #FFFFFF99;
+  font-size: 12px;
+}
+
+.confirmModal .infoBox {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: #262523;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.confirmModal .msg {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+}
+
+.confirmModal button {
+  width: 100%;
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  opacity: 1;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+}
+
+.confirmModal__active {
+  visibility: visible;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+          transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+}
+/*# sourceMappingURL=ConfirmModal.module.css.map */
