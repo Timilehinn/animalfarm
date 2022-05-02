@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link,NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
@@ -31,22 +31,22 @@ function MobileSideNav() {
 		<div className={isNavActive ? `${styles.mobile} ${styles.mobile__active}` : `${styles.mobile}`}>
 			<header>AnimalFarm</header>
 			<ul>
-				<Link onClick={() => closeNav()} className={styles.link} to='/'>
+				<NavLink onClick={() => closeNav()} className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)} to='/'>
 					<Icon icon='clarity:home-line' />
 					<p>Home</p>
-				</Link>
-				<Link onClick={() => closeNav()} className={styles.link} to='pigs-credit'>
+				</NavLink>
+				<NavLink onClick={() => closeNav()} className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)} to='pigs-credit'>
 					<Icon icon='iconoir:small-shop' />
 					<p>Pigs Credit</p>
-				</Link>
-				<Link onClick={() => closeNav()} to='/pigs-pen' className={styles.link}>
+				</NavLink>
+				<NavLink onClick={() => closeNav()} to='/pigs-pen' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='fluent:book-20-regular' />
 					<p>Pigs Pen</p>
-				</Link>
-				<Link onClick={() => closeNav()} to='/piggy-bank' className={styles.link}>
+				</NavLink>
+				<NavLink onClick={() => closeNav()} to='/piggy-bank' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
-				</Link>
+				</NavLink>
 			</ul>
 			<button onClick={()=>connect()} type='button'>
 				{	isWalletConnected ?

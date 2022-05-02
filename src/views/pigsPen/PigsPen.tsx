@@ -47,6 +47,7 @@ function PigsPen() {
 								pTitle="Enter amount of PIGS to be staked in the PIG Pen"
 								token='PIGS'
 								buttonText = "Enter amount to deposit"
+								Lock={false}
 						/> :
 						 <RewardsCenter 
 						 	sliderRequired={false}  
@@ -59,6 +60,8 @@ function PigsPen() {
 							infoValue3='4.3PIGS'
 							token='PIGS'
 							icon={pig}
+							Lock={false}
+							buttonText = "Enter amount to claim"
 							pTitle="Enter amount of PIGS to be withdrawn from the PIG Pen"
 						/>
 						}

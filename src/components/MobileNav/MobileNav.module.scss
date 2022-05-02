@@ -4,6 +4,7 @@ $gold : #F3BA2F;
 
     display : none;
     color: white;
+    z-index: 30;
 
     nav{
 
@@ -25,8 +26,14 @@ $gold : #F3BA2F;
 
         h3{
             color: $gold;
+            }
+        svg{
+            color: white;
+            font-size: 25px;
         }
     }
+
+    
 }
 
 @media screen and (max-width:768px){
