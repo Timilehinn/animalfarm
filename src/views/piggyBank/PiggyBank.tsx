@@ -7,6 +7,7 @@ import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import styles from './PiggyBank.module.scss'
+import pig from '../../assets/svgg.png'
 
 
 function PiggyBank() {
@@ -38,6 +39,7 @@ function PiggyBank() {
 							infoTitle = "Your PIGS/BUSD LP balance"
 						
 							token="PIGS/BUSD LP"
+							icon={pig}
 
 
 						/> 

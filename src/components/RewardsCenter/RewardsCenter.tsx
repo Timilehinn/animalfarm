@@ -32,13 +32,16 @@ interface rewardProps {
 	infoTitle?:string
 	infoValue?:any
 	infoTitle2?:string
-	infoValue2 ?: number
+	infoValue2 ?: any
 	token?:string
+	icon?:any
+	pTitle?:any
+	buttonText?:any
 	_confirmFunction?: () => void
 	
 }
 
-function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, token }: rewardProps) {
+function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, token, icon, buttonText }: rewardProps) {
 
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -100,7 +103,7 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 	return (
 		<animated.div style={props} className={styles.reward}>
 			<h3>{title}</h3>
-			<p className={styles.header}>Enter amount of BUSD to be paired with Pigs</p>
+			<p className={styles.header}>{pTitle}</p>
 			<div className={styles.reward__claim}>
 				<Info title={infoTitle} info={infoValue} />
 				{ infoTitle2 &&  <Info title={infoTitle2} info={infoValue2} /> }
@@ -110,14 +113,14 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 				<div className={styles.inputWrap}>
 					<div className={styles.inputBox}>
 						<div className={styles.logo}>
-							<img src={logo} alt='' />
+							<img src={icon} alt='' />
 							<p>{token}</p>
 						</div>
 						<input  onChange={(e) => handleChange(e)} value={busdValue} type='number' placeholder='000' />
 					</div>
 					<div>
-						<p className={styles.claimable}>Availble : {available}</p>
-					</div>
+						{/* <p className={styles.claimable}>Availble : {available}</p> */}
+					</div> 
 				</div>
 			</form>
 			{pair && (
@@ -134,7 +137,7 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 				:
 				<button type='button' onClick={() => openModal()} className={styles.button__enabled}>claim</button>
 			} */}
-			<button type='button'  className={styles.button__disabled}>claim</button>
+			<button type='button'  className={styles.button__disabled}>{buttonText}</button>
 		</animated.div>
 	)
 }

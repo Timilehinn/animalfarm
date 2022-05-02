@@ -6,7 +6,7 @@ import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import styles from './PigsPen.module.scss'
 
-import pig from '../../assets/pig.png'
+import pig from '../../assets/svgg.png'
 
 function PigsPen() {
 	const [activeTab, setActiveTab] = React.useState(1)
@@ -27,13 +27,30 @@ function PigsPen() {
 					<div className={styles.credit__wrap__in}>
 						<div className={styles.tabs}>
 							<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
-								<p>Deposit Pigs</p>
+								<p>Stake PIGS</p>
 							</div>
 							<div onClick={() => setActiveTab(2)} className={activeTab === 2 ? `${styles.tab__two} ${styles.tab__two__active}` : `${styles.tab__two}`}>
-								<p>Withdraw Pigs</p>
+								<p>Withdraw PIGS</p>
 							</div>
 						</div>
-						{activeTab === 1 ? <RewardsCenter sliderRequired={false} title='Submit PIGS to be deposited'  /> : <RewardsCenter sliderRequired={false}  title='Withdraw your staked PIGS' />}
+						{activeTab === 1 ? 
+							<RewardsCenter 
+								sliderRequired={false} 
+								title='Submit PIGS to be deposited'  
+								infoTitle='Earn' 
+								infoValue2="BUSD"
+								infoValue='50days'
+								infoTitle2='Stake Lockup'
+								icon={pig}
+								pTitle="Enter amount of PIGS to be staked in the PIG Pen"
+								token='PIGS'
+								buttonText = "Enter amount to deposit"
+						/> :
+						 <RewardsCenter 
+						 	sliderRequired={false}  
+							 title='Withdraw your staked PIGS' 
+						/>
+						}
 					</div>
 				</div>
 
