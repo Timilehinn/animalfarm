@@ -68,7 +68,7 @@ function RangeSlider({ color, setLockDuration }: rangeProps) {
 	return (
 		<div className={styles.range} color={color} >
 			<input type='range' min={0} max={156} value={value} className={styles.slider}  onChange={(e) => handleChange(e)} />
-			<div className={styles.value}>{value}</div>
+			<div className={styles.value}>{value}weeks</div>
 		</div>
 	)
 }

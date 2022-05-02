@@ -6,6 +6,17 @@ $gold : #F3BA2F;
     color: white;
 
     nav{
+
+        .log{
+            display: flex;
+            align-items: center;
+
+            img{
+                height: 20px;
+                margin-right: 10px;
+            }
+        }
+
         display: flex;
         justify-content: space-between;
         height: 60px;

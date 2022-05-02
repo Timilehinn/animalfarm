@@ -2,6 +2,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
+import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
+import { toggleModalBackDrop } from 'state/toggle'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { toggleMobileNav } from 'state/toggle'
 
 import styles from './MobileSideNav.module.scss'
@@ -9,8 +12,18 @@ import styles from './MobileSideNav.module.scss'
 function MobileSideNav() {
 	const isNavActive = useAppSelector((state) => state.toggleReducer.isMobileNavActive)
 	const dispatch = useAppDispatch()
+	const { account } = useActiveWeb3React()
 
 	const closeNav = () => {
+		dispatch(toggleMobileNav(false))
+	}
+
+	const { toggleConnectWalletModal } = useConnectWalletModal()
+	const { isWalletConnected } = useConnectWallet()
+
+	const connect = () => {
+		toggleConnectWalletModal(true)
+		dispatch( toggleModalBackDrop(true) )
 		dispatch(toggleMobileNav(false))
 	}
 
@@ -35,7 +48,12 @@ function MobileSideNav() {
 					<p>Piggy Bank</p>
 				</Link>
 			</ul>
-			<button type='button'>Connect wallet</button>
+			<button onClick={()=>connect()} type='button'>
+				{	isWalletConnected ?
+							<p>{account ? account.substring(0, 6) : ''}...{account ? account.substring(account.length - 4) : ''}</p> :
+							<p>Connect Wallet</p>
+						}
+			</button>
 		</div>
 	)
 }
