@@ -30,7 +30,7 @@ function MobileSideNav() {
 					<Icon icon='fluent:book-20-regular' />
 					<p>Pigs Pen</p>
 				</Link>
-				<Link onClick={() => closeNav()} to='/' className={styles.link}>
+				<Link onClick={() => closeNav()} to='/piggy-bank' className={styles.link}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</Link>
