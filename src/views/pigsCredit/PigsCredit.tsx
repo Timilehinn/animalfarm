@@ -170,8 +170,11 @@ function PigsCredit() {
 						infoTitle2="Estimated BUSD to pair"
 						infoValue2 = {estimatedBusdToPair}
 						token="BUSD"
+<<<<<<< HEAD
 						icon={busdIcon}
 						rewardCenter={false}
+=======
+>>>>>>> c919bd8 (changed styles)
 						
 						
 					/>}
