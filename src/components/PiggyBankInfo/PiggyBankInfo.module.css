@@ -8,7 +8,13 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-top: 60px;
+  margin-top: 100px;
+}
+
+p, li {
+  color: #d9d9d9e6;
+  line-height: 1.6em;
+  font-size: 1.12em;
 }
 
 @media (max-width: 890px) {
@@ -35,10 +41,6 @@
 .card1 > h2 {
   color: #F3BA2F;
   margin-bottom: 32px;
-}
-
-.card1 > P {
-  color: #FFFFFF;
 }
 
 .aboutimg {
@@ -153,7 +155,6 @@
 }
 
 .card3 > P {
-  color: #FFFFFF;
   margin-bottom: 20px;
 }
 
@@ -216,10 +217,6 @@
 
 .card4 {
   max-width: 580px;
-}
-
-.card4 > P {
-  color: #FFFFFF;
 }
 
 .referrallist {
