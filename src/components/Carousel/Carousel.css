@@ -28,7 +28,11 @@
 .box__p{
     font-size: 0.8rem;
     line-height: 20px;
+<<<<<<< HEAD
     color: rgba(217 217 212 / 90%);
+=======
+ 
+>>>>>>> c919bd8 (changed styles)
     font-weight: 100;
     line-height: 1.5rem;
 }

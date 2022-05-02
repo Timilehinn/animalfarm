@@ -3,12 +3,18 @@ import React from 'react'
 import PiggyBankTable from 'components/PiggyBankTable/PiggyBankTable'
 import ReferralTable from 'components/ReferralTable/ReferralTable'
 import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
+<<<<<<< HEAD
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
+=======
+>>>>>>> c919bd8 (changed styles)
 
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import styles from './PiggyBank.module.scss'
+<<<<<<< HEAD
 import pig from '../../assets/svgg.png'
+=======
+>>>>>>> c919bd8 (changed styles)
 
 
 function PiggyBank() {
@@ -19,6 +25,7 @@ function PiggyBank() {
 	return (
 		<div>
 			<div className={styles.piggybank}>
+<<<<<<< HEAD
 				<div className={styles.cards}>
 					<div>
 						<PigsCreditCard title="Total LP Locked" amount="25,000PIGS/BUSD" />
@@ -28,6 +35,10 @@ function PiggyBank() {
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
+=======
+
+				{/* <div className={styles.credit__wrap}>
+>>>>>>> c919bd8 (changed styles)
 					<div className={styles.tabs}>
 						<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
 							<p>Buy Piglets</p>
@@ -38,6 +49,7 @@ function PiggyBank() {
 					</div>
 					{activeTab === 1 ? 
 						<RewardsCenter 
+<<<<<<< HEAD
 							sliderRequired
 							title='Buy Piglets with LP token' 
 							Lock
@@ -71,6 +83,29 @@ function PiggyBank() {
 					<button type='button' className={styles.btn} >Copy refferal link</button>
 				</div>
 				
+=======
+
+							sliderRequired={false} 
+							title='Buy Piglets with LP token' 
+							Lock 
+							pair={false}
+							
+							infoValue={pigsBusdLpBalance}
+							infoTitle = "Your PIGS/BUSD LP balance"
+							token="PIGS/BUSD LP"
+
+
+						/> 
+						: 
+						<RewardsCenter 
+							pair={false}
+							sliderRequired
+							title='Gift Piglets with LP token' 
+						/>
+					}
+				</div> */}
+
+>>>>>>> c919bd8 (changed styles)
 				<PiggyBankTable />
 				<ReferralTable />
 				<PiggyBankInfo />

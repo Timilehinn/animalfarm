@@ -8,7 +8,8 @@ import dogart from '../../assets/dogart.png'
 function ReferralTable() {
     return (
         <div>
-            <div className={style.about}>
+            <div className={style.aboutbody}>
+			<div className={style.about}>
 				<div className={style.card1}>
 					<h2>About Piggy Bank</h2>
 					<p>
@@ -71,6 +72,7 @@ function ReferralTable() {
 				<div>
 					<img src={dogart} className={style.referralimg} alt='' />
 				</div>
+			</div>
 			</div>
 		</div>
     )

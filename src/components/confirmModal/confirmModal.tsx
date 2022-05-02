@@ -2,7 +2,7 @@ import React from 'react'
 import { toggleModalBackDrop,toggleConfirmModal } from 'state/toggle'
 import { useAppSelector,useAppDispatch } from 'state/hooks'
 import Info from 'components/Info/Info'
-import styles from './confirmModal.module.scss'
+import styles from './ConfirmModal.module.scss'
 import cancle from '../../assets/cancel.png'
 
 

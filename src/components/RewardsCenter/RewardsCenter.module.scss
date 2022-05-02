@@ -65,7 +65,11 @@ $gold :  #F3BA2F;
                     display: flex;
                     width: 40%;
                     align-items: center;
+<<<<<<< HEAD
                     
+=======
+                    // background-color: red;
+>>>>>>> c919bd8 (changed styles)
     
                     img {
                         margin-right: 10px;
@@ -74,8 +78,11 @@ $gold :  #F3BA2F;
                     p {
                         color: $gold;
                         font-weight: bold;
+<<<<<<< HEAD
                         font-size: 1rem;
                         
+=======
+>>>>>>> c919bd8 (changed styles)
                        
                     }
     
@@ -155,7 +162,11 @@ $gold :  #F3BA2F;
     .lock{
         color: rgba(217 217 212 / 90%);
         font-weight: 500;
+<<<<<<< HEAD
         margin-top: 20px;font-size: 12px;
+=======
+        margin-top: 10px;font-size: 12px;
+>>>>>>> c919bd8 (changed styles)
         span{
             color: #424242;
         }
