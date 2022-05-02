@@ -22,32 +22,31 @@
     margin-left: 6px;
 }
 .tablebody {
+    z-index: -400;
     font-family: $boldFont;
     overflow-x: scroll;
     overflow-y: scroll;
-    max-height: 500px;
+    // max-height: 500px;
     margin: auto;   
-    max-width: 1000px;
+    max-width: 62.5em;
     background: rgba(243, 186, 47, 0.1);
     border-image: linear-gradient(180deg, #F3BA2F, #121212) 1;
 
-    // background: linear-gradient(#f3ba2f1a, #f3ba2f1a) padding-box, 
-    //     linear-gradient(180deg, #F3BA2F, #121212) border-box;
-
-    border-radius: 6px;
+    border-radius: 10px;
     border-width: 0.6px;
     border-style: solid;
     border-color: transparent;
+    background: linear-gradient(#121212,#121212) padding-box, linear-gradient(#f3ba2a,#121212) border-box;
     margin-bottom: 22px;
 }
 @media (min-width: 800px) and (max-width:1200px) { 
     .tablebody {
-        max-width: 800px;
+        max-width: 700px;
     }
 }
 @media (min-width: 600px) and (max-width: 800px) { 
     .tablebody {
-        max-width: 600px;
+        max-width: 560px;
     }
 }
 
@@ -60,7 +59,8 @@
     margin: auto;
     overflow-x: scroll;
     overflow-y: scroll;
-    max-height: 500px;
+    // max-height: 500px;
+    z-index: -200;
 
 }
 @media (min-width: 600px) and (max-width: 800px) { 
@@ -80,3 +80,6 @@ th {
     line-height: 4;
 }
 table{border-collapse:collapse}
+td {
+    font-size: x-small;
+}

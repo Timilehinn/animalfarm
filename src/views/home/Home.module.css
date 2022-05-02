@@ -1,37 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
-.home {
-  max-width: calc(100vw - 240px);
-  padding-left: 60px;
-  padding-right: 60px;
-  padding-top: 50px;
-  height: 90;
+.home__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.home .home__farm {
+.home__wrap .home {
+  padding-left: 50px;
+  padding-right: 60px;
+  padding-top: 50px;
+  height: 100vh;
+  max-width: 1500px;
+}
+
+.home__wrap .home .home__farm {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
 }
 
-.home .home__farm .home__farm__one {
+.home__wrap .home .home__farm .home__farm__one {
   width: 50%;
 }
 
-.home .home__farm .home__farm__one h3 {
+.home__wrap .home .home__farm .home__farm__one h3 {
   color: white;
   margin-bottom: 20px;
-  font-size: 32px;
+  font-size: 1.5rem;
+  font-family: "Poppins", sans-serif;
 }
 
-.home .home__farm .home__farm__one p {
+.home__wrap .home .home__farm .home__farm__one p {
   color: white;
   line-height: 30px;
   font-size: 14px;
   font-family: "Open Sans", sans-serif;
 }
 
-.home .home__farm .home__farm__two {
+.home__wrap .home .home__farm .home__farm__two {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -41,33 +51,33 @@
   width: 50%;
 }
 
-.home .home__farm .home__farm__two img {
+.home__wrap .home .home__farm .home__farm__two img {
   height: 300px;
 }
 
 @media screen and (max-width: 1024px) {
-  .home {
+  .home__wrap .home {
     width: 100%;
     padding-left: 20px;
     padding-right: 20px;
   }
-  .home .home__farm {
+  .home__wrap .home .home__farm {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
   }
-  .home .home__farm .home__farm__one {
+  .home__wrap .home .home__farm .home__farm__one {
     width: 100%;
   }
-  .home .home__farm .home__farm__two {
+  .home__wrap .home .home__farm .home__farm__two {
     width: 100%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
     padding: 20px 0px 20px 0px;
   }
-  .home .home__farm .home__farm__two img {
+  .home__wrap .home .home__farm .home__farm__two img {
     height: 200px;
     width: 100%;
     max-width: 500px;
