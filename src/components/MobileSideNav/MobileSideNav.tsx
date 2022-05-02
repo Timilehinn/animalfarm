@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
-import { toggleModalBackDrop } from 'state/toggle'
+import { toggleModalBackDrop,toggleMobileNav } from 'state/toggle'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { toggleMobileNav } from 'state/toggle'
+
 
 import styles from './MobileSideNav.module.scss'
 
