@@ -10,13 +10,13 @@ function PiggyBankRow(props) {
 
     return (
             <tr className={style.tr}>
-                <td className={style.td}>{id}</td>
-                <td className={style.td}>{piglets}</td>
-                <td className={style.td}>{trufflesavailable}</td>
-                <td className={style.td}>{trufflesvalue}</td>
-                <td className={style.td}>{time}</td>
-                <td className={style.td}>{ maxpayout}</td>
-                <td className={style.td}>
+                <td >{id}</td>
+                <td>{piglets}</td>
+                <td >{trufflesavailable}</td>
+                <td >{trufflesvalue}</td>
+                <td >{time}</td>
+                <td >{ maxpayout}</td>
+                <td >
                     <div className={style.action}>
                         <button className={style.button} type='button' onClick={() => showModal(!state)} >
                             Action 
