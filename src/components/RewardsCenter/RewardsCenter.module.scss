@@ -46,21 +46,26 @@ $gold :  #F3BA2F;
     
     
         .inputWrap {
-            border-radius: 10px;
+            
             margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #FFFFFF4D;
+            
+            
     
             .inputBox {
-    
+                
+                padding: 20px;
+                border-radius: 10px;
+                border: 1px solid #FFFFFF4D;
                 display: flex;
                 justify-content: space-between;
+                margin-bottom: 20px;
     
                 .logo {
     
                     display: flex;
+                    width: 40%;
                     align-items: center;
-                    // background-color: red;
+                    
     
                     img {
                         margin-right: 10px;
@@ -69,6 +74,8 @@ $gold :  #F3BA2F;
                     p {
                         color: $gold;
                         font-weight: bold;
+                        font-size: 1rem;
+                        
                        
                     }
     
@@ -83,9 +90,32 @@ $gold :  #F3BA2F;
                     outline: none;
                     font-weight: bold;
                     text-align: right;
-                    width: 100%;
+                    width: 60%;
                     font-size: 20px;
     
+                }
+            }
+
+            .inputBox2{
+                padding: 20px;
+                border-radius: 10px;
+                border: 1px solid #FFFFFF4D;
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+
+                input {
+                
+                    background: none;
+                    border: none;
+                    color: rgba(217 217 212 / 90%);
+                    border: none;
+                    outline: none;
+                    font-weight: light;
+                    // text-align: right;
+                    width: 100%;
+                    font-size: 1rem;
+                
                 }
             }
     

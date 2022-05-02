@@ -27,7 +27,7 @@ function PigsPen() {
 					<div className={styles.credit__wrap__in}>
 						<div className={styles.tabs}>
 							<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
-								<p>Stake PIGS</p>
+								<p>Deposit PIGS</p>
 							</div>
 							<div onClick={() => setActiveTab(2)} className={activeTab === 2 ? `${styles.tab__two} ${styles.tab__two__active}` : `${styles.tab__two}`}>
 								<p>Withdraw PIGS</p>
@@ -38,9 +38,11 @@ function PigsPen() {
 								sliderRequired={false} 
 								title='Submit PIGS to be deposited'  
 								infoTitle='Earn' 
-								infoValue2="BUSD"
-								infoValue='50days'
+								infoValue2="50 days"
+								infoValue='BUSD'
 								infoTitle2='Stake Lockup'
+								infoTitle3='Total Liquidity'
+								infoValue3='$1308,456,544'
 								icon={pig}
 								pTitle="Enter amount of PIGS to be staked in the PIG Pen"
 								token='PIGS'
@@ -49,6 +51,15 @@ function PigsPen() {
 						 <RewardsCenter 
 						 	sliderRequired={false}  
 							 title='Withdraw your staked PIGS' 
+							 infoValue2="2% per day"
+							 infoTitle='PIGS staked'
+							infoValue='43PIGS'
+							infoTitle2='Withdraw limit'
+							infoTitle3='Available PIGS to withdraw'
+							infoValue3='4.3PIGS'
+							token='PIGS'
+							icon={pig}
+							pTitle="Enter amount of PIGS to be withdrawn from the PIG Pen"
 						/>
 						}
 					</div>

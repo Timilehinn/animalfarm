@@ -70,6 +70,28 @@
             }
         }
     }
+
+    .btn__wrap{
+        display: flex;
+        justify-content: center;
+        .btn{
+
+            width: 40%;
+            margin: auto;
+            height: 50px;
+            margin-top: 50px;
+            max-width: 500px;
+            margin-bottom: 100px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+            background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
+        }
+    }
+
+    
 }
 @media (max-width: 890px) {
     .piggybank {
@@ -99,6 +121,28 @@
                         font-size: 12px;
                     }
                 }
+            }
+        }
+
+        .btn__wrap {
+            display: flex;
+            justify-content: center;
+            padding: 0px 20px 0px 20px;
+        
+            .btn {
+        
+                width: 100%;
+                margin: auto;
+                height: 50px;
+                margin-top: 50px;
+                max-width: 500px;
+                margin-bottom: 100px;
+                border-radius: 10px;
+                border: none;
+                font-weight: 600;
+                cursor: pointer;
+                color: white;
+                background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
             }
         }
     }

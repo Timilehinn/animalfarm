@@ -30,11 +30,11 @@ function PiggyBank() {
 					</div>
 					{activeTab === 1 ? 
 						<RewardsCenter 
-							sliderRequired={false}
+							sliderRequired
 							title='Buy Piglets with LP token' 
-							Lock 
+							Lock
 							pair={false}
-							
+							buttonText = "Enter amount"
 							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
 							infoTitle = "Your PIGS/BUSD LP balance"
 						
@@ -46,12 +46,22 @@ function PiggyBank() {
 						: 
 						<RewardsCenter 
 							pair={false}
+							Lock 
 							sliderRequired
 							title='Gift Piglets with LP token' 
+							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
+							infoTitle = "Your PIGS/BUSD LP balance"
+							token="PIGS/BUSD LP"
+							icon={pig}
+							buttonText = "Enter amount"
+							recipient
 						/>
 					}
 				</div>
-
+				<div className={styles.btn__wrap} >
+					<button type='button' className={styles.btn} >Copy refferal link</button>
+				</div>
+				
 				<PiggyBankTable />
 				<ReferralTable />
 				<PiggyBankInfo />

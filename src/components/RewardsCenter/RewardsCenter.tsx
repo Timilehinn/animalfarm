@@ -33,15 +33,18 @@ interface rewardProps {
 	infoValue?:any
 	infoTitle2?:string
 	infoValue2 ?: any
+	infoTitle3?:string
+	infoValue3 ?: any
 	token?:string
 	icon?:any
 	pTitle?:any
 	buttonText?:any
+	recipient?:boolean
 	_confirmFunction?: () => void
 	
 }
 
-function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, token, icon, buttonText }: rewardProps) {
+function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, infoValue3, infoTitle3, token, icon, buttonText, recipient }: rewardProps) {
 
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -107,6 +110,7 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 			<div className={styles.reward__claim}>
 				<Info title={infoTitle} info={infoValue} />
 				{ infoTitle2 &&  <Info title={infoTitle2} info={infoValue2} /> }
+				{ infoTitle3 &&  <Info title={infoTitle3} info={infoValue3} /> }
 
 			</div>
 			<form action=''>
@@ -117,7 +121,11 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 							<p>{token}</p>
 						</div>
 						<input  onChange={(e) => handleChange(e)} value={busdValue} type='number' placeholder='000' />
+						
 					</div>
+					{ recipient && <div className={styles.inputBox2} >
+						<input  placeholder='Input recipients address' />
+					</div>}
 					<div>
 						{/* <p className={styles.claimable}>Availble : {available}</p> */}
 					</div> 
