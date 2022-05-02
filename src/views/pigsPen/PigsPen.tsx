@@ -17,10 +17,10 @@ function PigsPen() {
 			<div className={styles.pigspen}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title="PIGS balance" amount="50" />
+						<PigsCreditCard title="Total PIGS Locked" amount="25000PIGS" />
 					</div>
 					<div>
-						<PigsCreditCard title='BUSD balance'  amount="60"  />
+						<PigsCreditCard title='Total Value Locked'  amount="$656,868"  />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -48,6 +48,7 @@ function PigsPen() {
 								token='PIGS'
 								buttonText = "Enter amount to deposit"
 								Lock={false}
+								rewardCenter
 						/> :
 						 <RewardsCenter 
 						 	sliderRequired={false}  
@@ -63,13 +64,14 @@ function PigsPen() {
 							Lock={false}
 							buttonText = "Enter amount to claim"
 							pTitle="Enter amount of PIGS to be withdrawn from the PIG Pen"
+							rewardCenter
 						/>
 						}
 					</div>
 				</div>
 
 				{/* absolute */}
-				<img className={styles.pig} src={pig} alt='' />
+				{/* <img className={styles.pig} src={pig} alt='' /> */}
 			</div>
 		</div>
 		
