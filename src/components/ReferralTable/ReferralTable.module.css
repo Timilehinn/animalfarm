@@ -2,9 +2,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
 .tableheader {
   margin: auto;
-  color: #FFFFFF;
+  color: #d9d9d9e6;
   text-align: center;
-  margin-top: 20px;
   margin-bottom: 20px;
   font-size: 20px;
   font-family: "Poppins", sans-serif;
@@ -55,7 +54,7 @@
 
 .table {
   width: 860px;
-  color: #FFFFFF;
+  color: #d9d9d9e6;
   margin: auto;
   overflow-x: scroll;
   overflow-y: scroll;

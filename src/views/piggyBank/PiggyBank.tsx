@@ -29,7 +29,7 @@ function PiggyBank() {
 					<div>
 						<PigsCreditCard title="Total LP Locked" amount="25,000PIGS/BUSD" />
 					</div>
-					{/* <div>
+					{/* <div> 
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
 					</div> */}
 				</div>
