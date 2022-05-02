@@ -6,11 +6,7 @@ import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import styles from './PigsPen.module.scss'
 
-<<<<<<< HEAD
 import pig from '../../assets/svgg.png'
-=======
-import pig from '../../assets/pig.png'
->>>>>>> c919bd8 (changed styles)
 
 function PigsPen() {
 	const [activeTab, setActiveTab] = React.useState(1)
@@ -21,17 +17,10 @@ function PigsPen() {
 			<div className={styles.pigspen}>
 				<div className={styles.cards}>
 					<div>
-<<<<<<< HEAD
 						<PigsCreditCard title="Total PIGS Locked" amount="25000PIGS" />
 					</div>
 					<div>
 						<PigsCreditCard title='Total Value Locked'  amount="$656,868"  />
-=======
-						<PigsCreditCard title="PIGS balance" amount="50" />
-					</div>
-					<div>
-						<PigsCreditCard title='BUSD balance'  amount="60"  />
->>>>>>> c919bd8 (changed styles)
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -44,7 +33,6 @@ function PigsPen() {
 								<p>Withdraw PIGS</p>
 							</div>
 						</div>
-<<<<<<< HEAD
 						{activeTab === 1 ? 
 							<RewardsCenter 
 								sliderRequired={false} 
@@ -79,9 +67,6 @@ function PigsPen() {
 							rewardCenter
 						/>
 						}
-=======
-						{/* {activeTab === 1 ? <RewardsCenter sliderRequired={false} title='Submit PIGS to be deposited'  /> : <RewardsCenter sliderRequired={false} xLock={false} title='Withdraw your staked PIGS' />} */}
->>>>>>> c919bd8 (changed styles)
 					</div>
 				</div>
 

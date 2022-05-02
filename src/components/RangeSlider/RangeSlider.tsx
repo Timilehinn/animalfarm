@@ -58,11 +58,7 @@ const Styles = styled.div`
 `
 
 function RangeSlider({ color, setLockDuration }: rangeProps) {
-<<<<<<< HEAD
 	const [value, setValue] = React.useState(0)
-=======
-	const [value, setValue] = React.useState(50)
->>>>>>> c919bd8 (changed styles)
 
 	const handleChange = (e: any) => {
 		setValue(e.target.value)
@@ -72,11 +68,7 @@ function RangeSlider({ color, setLockDuration }: rangeProps) {
 	return (
 		<div className={styles.range} color={color} >
 			<input type='range' min={0} max={156} value={value} className={styles.slider}  onChange={(e) => handleChange(e)} />
-<<<<<<< HEAD
 			<div className={styles.value}>{value}weeks</div>
-=======
-			<div className='value'>{value}</div>
->>>>>>> c919bd8 (changed styles)
 		</div>
 	)
 }

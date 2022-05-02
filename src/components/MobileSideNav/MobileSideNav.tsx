@@ -42,16 +42,8 @@ function MobileSideNav() {
 				<NavLink onClick={() => closeNav()} to='/pigs-pen' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='fluent:book-20-regular' />
 					<p>Pigs Pen</p>
-<<<<<<< HEAD
 				</NavLink>
 				<NavLink onClick={() => closeNav()} to='/piggy-bank' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-=======
-				</Link>
-				<Link onClick={() => closeNav()} to='/piggy-bank' className={styles.link}>
-<<<<<<< HEAD
->>>>>>> 0e79139 (fix: table padding)
-=======
->>>>>>> 4865211a1ff9e3abf44369a14cd4dfe470ab95aa
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
