@@ -1,6 +1,5 @@
 @import '../../global.scss';
-// $boldFont : 'Poppins',
-// sans-serif;
+
 .tableheader {
     margin: auto;   
     color: rgba(217 217 212 / 90%);
@@ -21,28 +20,15 @@
     margin-left: 6px;
 }
 .tablebody {
-    z-index: -400;
     font-family: $boldFont;
     overflow-x: scroll;
     margin: auto;   
     max-width: 62.5em;
-    // background-image: transparent;
     border-radius: 10px;
-    // border-width: 0.6px;
-    // border-style: solid;
-    // border-color: transparent;
-    // background: linear-gradient(#121212,#121212) padding-box, linear-gradient(#f3ba2a,#121212) border-box;
-    margin-bottom: 22px;
-
 }
 @media (min-width: 800px) and (max-width:1200px) { 
     .tablebody {
         max-width: 700px;
-    }
-}
-@media (min-width: 600px) and (max-width: 800px) { 
-    .tablebody {
-        max-width: 560px;
     }
 }
 
@@ -56,15 +42,12 @@
     overflow-x: scroll;
     overflow-y: scroll;
     overflow-y: visible;
-    z-index: -200;
-    //
     border-radius: 10px;
     border-width: 0.6px;
     border-style: solid;
     border-color: transparent;
     background: linear-gradient(#121212,#121212) padding-box, linear-gradient(#f3ba2a,#121212) border-box;
-    //
-    margin-bottom: 80px;   // testing theory
+    margin-bottom: 110px;
 }
 @media (min-width: 600px) and (max-width: 800px) { 
     .table {
