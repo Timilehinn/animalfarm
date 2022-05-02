@@ -13,7 +13,7 @@ $gold : #F3BA2F;
     visibility: hidden;
     transform: translateX(-100%);
     transition: 0.5s;
-    z-index: 20;
+    z-index: 30;
 
     header{
         color :$gold;
@@ -63,6 +63,18 @@ $gold : #F3BA2F;
         }
     
         .link:focus p {
+            color: #F3BA2F;
+        }
+
+        .link__active {
+            // border-left: 3px solid #F3BA2F;
+        }
+        
+        .link__active svg {
+            color: #F3BA2F;
+        }
+        
+        .link__active p {
             color: #F3BA2F;
         }
     }
