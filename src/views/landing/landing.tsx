@@ -12,9 +12,10 @@ import GenericBackground from 'components/GenericBackground/GenericBackground'
 import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import Toast from 'components/Toast/Toast'
+import ConfirmModal from '../../components/confirmModal/confirmModal'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
+
 
 import Home from '../home/Home'
 import style from './Landing.module.scss'
@@ -26,7 +27,7 @@ function Landing() {
 
 	const connect = () => {
 		toggleConnectWalletModal(true)
-	}
+	} 
 
 
 	

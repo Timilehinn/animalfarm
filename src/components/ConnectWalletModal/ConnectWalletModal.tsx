@@ -1,10 +1,12 @@
 import React, { Fragment } from 'react'
 import WalletButton from 'components/ConnectWalletModal/WalletButton/WalletButton'
 import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
-import config, { walletLocalStorageKey } from './config'
-import { Config, Login } from './types'
 import { useAppDispatch } from 'state/hooks'
 import { toggleModalBackDrop } from 'state/toggle'
+import config, { walletLocalStorageKey } from './config'
+import { Config, Login } from './types'
+
+
 
 import style from './connectWalletModal.module.css'
 import help from './Icons/help-circle.png'

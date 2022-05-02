@@ -3,7 +3,9 @@ import { useSpring, animated } from 'react-spring'
 
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
+import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import styles from './PigsPen.module.scss'
+
 import pig from '../../assets/pig.png'
 
 function PigsPen() {
@@ -13,6 +15,14 @@ function PigsPen() {
 	return (
 		<div className={styles.pigspen__wrap} >
 			<div className={styles.pigspen}>
+				<div className={styles.cards}>
+					<div>
+						<PigsCreditCard title="PIGS balance" amount="50" />
+					</div>
+					<div>
+						<PigsCreditCard title='BUSD balance'  amount="60"  />
+					</div>
+				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.credit__wrap__in}>
 						<div className={styles.tabs}>
@@ -23,7 +33,7 @@ function PigsPen() {
 								<p>Withdraw Pigs</p>
 							</div>
 						</div>
-						{activeTab === 1 ? <RewardsCenter sliderRequired={false} title='Submit PIGS to be deposited' xLock={false} /> : <RewardsCenter sliderRequired={false} xLock={false} title='Withdraw your staked PIGS' />}
+						{/* {activeTab === 1 ? <RewardsCenter sliderRequired={false} title='Submit PIGS to be deposited'  /> : <RewardsCenter sliderRequired={false} xLock={false} title='Withdraw your staked PIGS' />} */}
 					</div>
 				</div>
 

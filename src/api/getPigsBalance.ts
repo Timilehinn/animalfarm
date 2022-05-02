@@ -44,6 +44,27 @@ export const getBusdBalance = async(account:string) => {
     
 }
 
+export const getPigsBusdLpBalance = async(account:string) => {
+
+    const { pigsBusdLpContract  } = getPigsContract()
+
+    let pigsBusdLpBalance
+    try{
+        const result: ethers.BigNumber = await pigsBusdLpContract.balanceOf(account);
+        const balance = ethers.BigNumber.from(result).toString()
+        pigsBusdLpBalance = {
+            amount : balance,
+            amountString : new BigNumber(balance).toFormat(0)
+        }
+        console.log(result);
+    }catch(err){
+        console.log(err)
+    }
+
+    return pigsBusdLpBalance
+    
+}
+
 export const availablePigsToClaim = async(account:string) => {
     const { pigsCreditContract } = getPigsContract();
     let availablePigs

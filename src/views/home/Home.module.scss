@@ -1,4 +1,5 @@
 @import '../../global.scss';
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
 .home__wrap{
     display: flex;
@@ -7,7 +8,7 @@
     .home{
 
         // width: calc(100vw - 340px);
-        padding-left: 50px;padding-right: 60px;
+        padding-left: 80px;padding-right: 60px;
         padding-top: 50px;
         height: 100vh;
         max-width: 1500px;
@@ -21,25 +22,28 @@
                 width: 50%;
                 h3{
                     color: white;
-                    margin-bottom: 20px;
+                    margin-bottom: 30px;
                     font-size: 1.5rem;
                     font-family: $boldFont;
                 }
                 p{
                     color: white;
                     line-height: 30px;
-                    font-size: 14px;
-                    font-family: $lightFont;
+                    font-size: 1rem;
+                     font-family: 'Poppins',
+                
+                    sans-serif;
+                    font-weight: 200;
                 }
             }
             .home__farm__two{
-
+                
                 display: flex;
                 justify-content: flex-end;
                 width: 50%;
 
                 img{
-                    height: 300px;
+                    height: 100%
                 }
             }
         }
