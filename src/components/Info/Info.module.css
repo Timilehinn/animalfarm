@@ -6,11 +6,17 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding: 10px;
+  padding: 10px 20px 10px 20px;
 }
 
-.info p {
+.info .title {
   color: rgba(255, 255, 255, 0.6);
   font-size: 12px;
+}
+
+.info .value {
+  color: #FFFFFFDE;
+  font-weight: 400;
+  font-size: 14px;
 }
 /*# sourceMappingURL=Info.module.css.map */

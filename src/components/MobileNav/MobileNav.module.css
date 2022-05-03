@@ -1,6 +1,7 @@
 .mobilenav {
   display: none;
   color: white;
+  z-index: 30;
 }
 
 .mobilenav nav {
@@ -17,8 +18,27 @@
   padding: 0px 20px 0px 20px;
 }
 
+.mobilenav nav .log {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mobilenav nav .log img {
+  height: 20px;
+  margin-right: 10px;
+}
+
 .mobilenav nav h3 {
   color: #F3BA2F;
+}
+
+.mobilenav nav svg {
+  color: white;
+  font-size: 25px;
 }
 
 @media screen and (max-width: 768px) {
