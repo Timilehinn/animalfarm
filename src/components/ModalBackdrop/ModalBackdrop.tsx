@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
-import { toggleModalBackDrop } from 'state/toggle'
+import { toggleModalBackDrop,toggleDepositModal } from 'state/toggle'
 import { useConnectWalletModal } from 'state/wallet/hooks'
 import styles from './ModalBackdrop.module.scss'
 
@@ -14,6 +14,7 @@ function ModalBackdrop() {
   const closeModal = () => {
     toggleConnectWalletModal(false)
     dispatch( toggleModalBackDrop(false) )
+    dispatch( toggleDepositModal(false) )
   }
 
   return (
