@@ -1,32 +1,32 @@
+.landing {
+	padding: 20px;
+	display: flex;
+	// position: relative;
 
+	.landing__wrap {
+		// padding: 0px 50px 0px 50px;
+		// background-color: blue;
+		width: 100%;
+	}
+}
 
-.landing{
+body {
+	// background: linear-gradient(10deg, #000000dd, #000000ef), url(../../assets/5.png);
+	// background-repeat: no-repeat;
+	// background-size: cover;
 
-    padding: 20px;
-    display: flex;
-    // position: relative;
+	// background-position: center;
 
-    .landing__wrap{
-        // padding: 0px 50px 0px 50px;
-        // background-color: blue;
-        width: 100%;
-    }
-    
-} 
+	// background-image: url(../../assets/5.png);
+	// background-size: auto 1000px;
+	// background-size: contain;
+	// background-position: center;
+	// background-repeat: no-repeat;
+	background-color: rgb(24, 24, 24);
+}
 
-body{
-
-    background:linear-gradient(10deg, #000000dd, #000000ef),url(../../assets/pigdog.jpg);
-    // background: #121212;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    background-position: center;
-} 
-
-@media screen and (max-width:481px) {
-    
-    .landing{
-        padding: 0px;
-    }
+@media screen and (max-width: 481px) {
+	.landing {
+		padding: 0px;
+	}
 }

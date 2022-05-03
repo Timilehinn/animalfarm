@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PiggyBankTable from 'components/PiggyBankTable/PiggyBankTable'
 import ReferralTable from 'components/ReferralTable/ReferralTable'
 import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
@@ -15,6 +15,18 @@ import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 
 function PiggyBank() {
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(./bg/pigscredit.jpeg);
+		background-size: contain;
+		background-position: top;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
+
 	const pigsBusdLpBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
 	const { account } = useActiveWeb3React()
 	const dispatch = useAppDispatch()

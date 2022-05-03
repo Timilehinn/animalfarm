@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
 
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
@@ -9,6 +9,17 @@ import styles from './PigsPen.module.scss'
 import pig from '../../assets/svgg.png'
 
 function PigsPen() {
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(./bg/pigpen.png);
+		background-size: contain;
+		background-position: top;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 

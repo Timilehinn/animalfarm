@@ -22,6 +22,18 @@ import pig from '../../assets/pig.png'
 import busdIcon from '../../assets/busd.png'
 
 function PigsCredit() {
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(./bg/pigscredit.jpeg);
+		background-size: contain;
+		background-position: bottom right;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
+
 	const { account, library } = useActiveWeb3React()
 	const { pigsBalance, setPigsBalance } = usePigsBalance()
 	// const pigsBalance = useAppSelector((state) => state.balanceReducer.pigsBalance)
@@ -194,7 +206,7 @@ function PigsCredit() {
 					)}
 				</div>
 
-				<img className={styles.pig} src={pig} alt='' />
+				{/* <img className={styles.pig} src={pig} alt='' /> */}
 			</div>
 		</animated.div>
 	)

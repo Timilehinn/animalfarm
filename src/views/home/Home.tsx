@@ -11,7 +11,19 @@ import { useAppDispatch } from '../../state/hooks'
 function Home() {
 	const { account } = useActiveWeb3React()
 	const dispatch = useAppDispatch()
-	console.log(account)
+	// console.log(account)
+
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(./bg/home.png);
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
 
 	const _getPigsBalance = async () => {
 		const res = await getPigsBalance(account)
