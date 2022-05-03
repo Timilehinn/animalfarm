@@ -19,7 +19,7 @@ function PiggyBank() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/pigscredit.jpeg);
+		background-image: url(./bg/piggybank.png);
 		background-size: contain;
 		background-position: top;
 		background-repeat: no-repeat;

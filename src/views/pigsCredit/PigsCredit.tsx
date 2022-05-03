@@ -26,9 +26,9 @@ function PigsCredit() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/pigscredit.jpeg);
+		background-image: url(./bg/pigscredit.png);
 		background-size: contain;
-		background-position: bottom right;
+		background-position: right;
 		background-repeat: no-repeat;
 		background-color: rgb(24, 24, 24);`
 		)
