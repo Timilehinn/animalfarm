@@ -7,27 +7,45 @@ import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useNavigate } from 'react-router-dom'
 
+import { toggleToastNotification } from 'state/toggle'
+
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 
-
 function PiggyBank() {
-
 	const [activeTab, setActiveTab] = React.useState(1)
-	const pigsBusdLpBalance = useAppSelector((state)=>state.balanceReducer.pigsBusdLpBalance)
+	const pigsBusdLpBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
 	const { account } = useActiveWeb3React()
+	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
-	
 
+	const copyRefLink = () => {
+		if (navigator.clipboard && navigator.permissions) {
+			navigator.clipboard.writeText(`${window.location.origin}/piggy-bank/${account}`).then(() => {
+				// ..
+				dispatch(toggleToastNotification({ state: true, msg: 'Copied Success!' }))
+				setTimeout(() => {
+					dispatch(toggleToastNotification(false))
+				}, 3000)
+			})
+		} else if (document.queryCommandSupported('copy')) {
+			const ele = document.createElement('textarea')
+			ele.value = account
+			document.body.appendChild(ele)
+			ele.select()
+			document.execCommand('copy')
+			document.body.removeChild(ele)
+		}
+	}
 
 	return (
 		<div>
 			<div className={styles.piggybank}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title="Total LP Locked" amount="25,000PIGS/BUSD" />
+						<PigsCreditCard title='Total LP Locked' amount='25,000PIGS/BUSD' />
 					</div>
 					{/* <div> 
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
@@ -42,45 +60,43 @@ function PiggyBank() {
 							<p>Gift Piglets</p>
 						</div>
 					</div>
-					{activeTab === 1 ? 
-						<RewardsCenter 
+					{activeTab === 1 ? (
+						<RewardsCenter
 							sliderRequired
-							title='Buy Piglets with LP token' 
+							title='Buy Piglets with LP token'
 							Lock
 							pair={false}
-							buttonText = "Enter amount"
+							buttonText='Enter amount'
 							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
-							infoTitle = "PIGS/BUSD LP balance"
+							infoTitle='PIGS/BUSD LP balance'
 							rewardCenter={false}
-							token="PIGS/BUSD LP"
+							token='PIGS/BUSD LP'
 							icon={pig}
-							
-							warningMsg={false}
-
-
-						/> 
-						: 
-						<RewardsCenter 
-							pair={false}
-							Lock 
-							sliderRequired
-							title='Gift Piglets with LP token' 
-							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
-							infoTitle = "PIGS/BUSD LP balance"
-							token="PIGS/BUSD LP"
-							icon={pig}
-							buttonText = "Enter amount"
-							recipient
-							rewardCenter={false}
-						
 							warningMsg={false}
 						/>
-					}
+					) : (
+						<RewardsCenter
+							pair={false}
+							Lock
+							sliderRequired
+							title='Gift Piglets with LP token'
+							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
+							infoTitle='PIGS/BUSD LP balance'
+							token='PIGS/BUSD LP'
+							icon={pig}
+							buttonText='Enter amount'
+							recipient
+							rewardCenter={false}
+							warningMsg={false}
+						/>
+					)}
 				</div>
-				<div className={styles.btn__wrap} >
-					<button  type='button' className={styles.btn} ><a style={{color:"white",textDecoration:"none"}} href={`http://doman.com/piggy-bank${account}/`} >Copy refferal link</a></button>
+				<div className={styles.btn__wrap}>
+					<button type='button' className={styles.btn} onClick={copyRefLink}>
+						Copy referral link
+					</button>
 				</div>
-				
+
 				<PiggyBankTable />
 				<ReferralTable />
 				<PiggyBankInfo />

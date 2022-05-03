@@ -4,8 +4,7 @@ import BigNumber from 'bignumber.js'
 
 import { web3Provider } from 'utils/providers'
 
-import getSurgeContracts from 'utils/getSurgeContracts'
-import { pancakeswapRouterAddress, WBNBAddress, BUSDAddress, BEP_ETH, VaultTokens } from 'config/constants/'
+import { pancakeswapRouterAddress, WBNBAddress, BUSDAddress, BEP_ETH, AnimalFarmTokens } from 'config/constants/'
 import IUniswapV2Router02 from 'config/abi/IUniswapV2Router02.json'
 
 const IUniswapV2RouterABI: any = IUniswapV2Router02
@@ -37,54 +36,14 @@ export const getETHPrice: any = () => {
 	})
 }
 
-const getVaultXBnbPrice: any = () => {
+export const getPigsBUSDPrice: any = () => {
 	return new Promise((resolve) => {
-		const path = [VaultTokens.vaultBTC.address, WBNBAddress]
+		const path = [AnimalFarmTokens.pigsToken.address, BUSDAddress]
 		web3PancakeRouterContract.methods
-			.getAmountsOut(web3.utils.toBN(1 * 10 ** 9), path)
+			.getAmountsOut(web3.utils.toBN(1 * 10 ** AnimalFarmTokens.pigsToken.decimals), path)
 			.call()
 			.then((data) => {
 				resolve(parseFloat(ethers.utils.formatUnits(`${data[data.length - 1]}`, 18)))
 			})
 	})
-}
-
-export const getVaultXPrice = async (): Promise<number> => {
-	const bnbPrice = await getBNBPrice()
-	const vaultXBnbPrice = await getVaultXBnbPrice()
-	const vaultXPrice = vaultXBnbPrice * bnbPrice
-	return vaultXPrice
-}
-
-const getVaultSBnbPrice: any = () => {
-	return new Promise((resolve) => {
-		const path = [VaultTokens.vaultS.address, WBNBAddress]
-		web3PancakeRouterContract.methods
-			.getAmountsOut(web3.utils.toBN(1 * 10 ** 9), path)
-			.call()
-			.then((data) => {
-				resolve(parseFloat(ethers.utils.formatUnits(`${data[data.length - 1]}`, 18)))
-			})
-	})
-}
-
-export const getVaultSPrice = async (): Promise<number> => {
-	const bnbPrice = await getBNBPrice()
-	const vaultSBnbPrice = await getVaultSBnbPrice()
-	const vaultSPrice = vaultSBnbPrice * bnbPrice
-	return vaultSPrice
-}
-
-export const getXUSDPrice = async (): Promise<number> => {
-	const { surgeXUSDContract } = getSurgeContracts()
-	let xUSDPrice: number
-
-	try {
-		const calculatedPrice: ethers.BigNumber = await surgeXUSDContract.calculatePrice()
-		xUSDPrice = new BigNumber(ethers.BigNumber.from(calculatedPrice).toString()).toNumber() / 10 ** 18
-	} catch (error) {
-		console.error('Error while fetching SurgeXUSD price: ', error)
-	}
-
-	return xUSDPrice
 }

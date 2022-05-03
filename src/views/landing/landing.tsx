@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react'
-import { useConnectWallet, useAllBalance, useConnectWalletModal } from 'state/wallet/hooks'
+import { useConnectWallet, useConnectWalletModal } from 'state/wallet/hooks'
 import { useRoutes, Route, Routes } from 'react-router-dom'
 // import useActiveWeb3React from 'hooks/useActiveWeb3React'
 // import { getAllBalance } from 'api/getBalance'
