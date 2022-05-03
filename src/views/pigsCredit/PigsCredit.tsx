@@ -32,7 +32,7 @@ function PigsCredit() {
 	const dispatch = useAppDispatch()
 	const [pigsBusdPrice, setPigsBusdPrice] = useState(0)
 	const [allowance, setAllowance] = useState(null)
-	const [busdValue, setBusdValue] = useState(0)
+	const [busdValue, setBusdValue] = useState('')
 	const [canApprove, setCanApprove] = useState(false)
 	const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(true)
@@ -68,7 +68,7 @@ function PigsCredit() {
 		setPending(true)
 		try {
 			console.log(busdValue, 'tesss')
-			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', (busdValue * 10 ** 18).toString(), signer)
+			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', (Number(busdValue) * 10 ** 18).toString(), signer)
 			setPending(false)
 			setIsApproved(true)
 			const data = {
@@ -89,7 +89,7 @@ function PigsCredit() {
 
 	const claimToPiggy = async () => {
 		try {
-			const res = await ClaimToPiggyBank(((busdValue / pigsBusdPrice) * 10 ** 18).toString(), (busdValue * 10 ** 18).toString(), lockDuration, signer)
+			const res = await ClaimToPiggyBank(((Number(busdValue) / pigsBusdPrice) * 10 ** 18).toString(), (Number(busdValue) * 10 ** 18).toString(), lockDuration, signer)
 			console.log(res)
 
 			if (res.success) {
@@ -137,7 +137,6 @@ function PigsCredit() {
 	const estimatedBusdToPair = Math.ceil(pigsBusdPrice * availablePigsToClaim)
 	// const isButtonEnabled = Boolean(allowance < (busdValue * 10 ** 18).toString() && busdValue !== null)
 	// console.log(isButtonEnabled, 'isButtonEnabled')
-	console.log(allowance, (busdValue * 10 ** 18).toString())
 
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>

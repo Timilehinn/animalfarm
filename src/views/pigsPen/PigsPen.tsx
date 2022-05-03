@@ -17,7 +17,7 @@ function PigsPen() {
 			<div className={styles.pigspen}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total PIGS Locked' amount='25000PIGS' />
+						<PigsCreditCard title='Total PIGS Locked' amount='25000 PIGS' />
 					</div>
 					<div>
 						<PigsCreditCard title='Total Value Locked' amount='$656,868' />

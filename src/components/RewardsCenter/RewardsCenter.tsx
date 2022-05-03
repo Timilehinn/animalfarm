@@ -19,7 +19,7 @@ interface rewardProps {
 	pair?: boolean
 	pigsBusdPrice?: number
 	text?: string
-	busdValue?: number
+	busdValue?: string
 	setBusdValue?: any
 	isButtonEnabled?: boolean
 	approve?: any
@@ -105,7 +105,7 @@ function RewardsCenter({
 		text,
 		warning: 'Wwarning set',
 		infoValues: [
-			{ title: 'Pigs deposited', value: Math.ceil(busdValue / pigsBusdPrice) },
+			{ title: 'Pigs deposited', value: Math.ceil(Number(busdValue) / pigsBusdPrice) },
 			{ title: 'BUSD deposited', value: busdValue },
 			{ title: 'Time Lock', value: `${longerPaysBetterBonusPercents[lockDuration - 1]}%` },
 			{ title: '1 PIGS(s)', value: pigsBusdPrice },
@@ -138,7 +138,7 @@ function RewardsCenter({
 							<img src={icon} alt='' />
 							<p>{token}</p>
 						</div>
-						<input onChange={(e) => handleChange(e)} value={busdValue} type='number' placeholder='000' />
+						<input onChange={(e) => handleChange(e)} value={busdValue} type='number' placeholder='0' />
 					</div>
 					{recipient && (
 						<div className={styles.inputBox2}>
@@ -150,7 +150,7 @@ function RewardsCenter({
 			</form>
 			{pair && (
 				<p className={styles.xpigs}>
-					<span>{(busdValue / pigsBusdPrice).toFixed(3)} PIGS</span> will be paired with <span>{busdValue} BUSD</span>
+					<span>{(Number(busdValue) / pigsBusdPrice).toFixed(3)} PIGS</span> will be paired with <span>{busdValue} BUSD</span>
 				</p>
 			)}
 			{Lock && (
@@ -181,8 +181,8 @@ function RewardsCenter({
 				<div className={styles.center}>
 					<p className={styles.center__header}>Reward Center</p>
 					<div className={styles.center__box}>
-						<Info title='Claimable BUSD' info='X BUSD' />
-						<Info title='Claimable PIGS' info='X PIGS' />
+						<Info title='Claimable BUSD' info='0 BUSD' />
+						<Info title='Claimable PIGS' info='0 PIGS' />
 					</div>
 					<div className={styles.center__buttons}>
 						<button type='button' style={{ marginRight: '10px' }}>
