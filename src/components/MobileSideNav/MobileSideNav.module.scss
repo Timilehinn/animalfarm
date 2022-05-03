@@ -6,7 +6,7 @@ $gold : #F3BA2F;
     width: 50%;
     background: #121212;
     display: none;
-    position: absolute;
+    position: fixed;
     padding: 20px;
     top: 0;
     left: 0;
@@ -37,7 +37,7 @@ $gold : #F3BA2F;
     
     
             p {
-                font-size: 12px;
+                font-size: 14px;
                 cursor: pointer;
             }
     
@@ -49,7 +49,7 @@ $gold : #F3BA2F;
     
             svg {
                 color: white;
-                margin-right: 10px;
+                margin-right: 15px;
                 font-size: 20px;
             }
         }
