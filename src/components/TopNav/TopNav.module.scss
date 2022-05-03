@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Podkova:wght@500&display=swap');
+
 @mixin flex($dir, $align-item, $justift-content) {
     display: flex;
     flex-direction: $dir;
@@ -34,7 +37,10 @@
             h3{
                 color: rgba(217 217 212 / 90%);
                 margin-left: 20px;
-                font-family: 1.1rem;
+                // font-family: 1.1rem;
+                color: #F3BA2F;
+                font-family: 'Podkova',
+                serif;
             }
 
             button{

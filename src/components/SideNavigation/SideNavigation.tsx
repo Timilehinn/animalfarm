@@ -43,6 +43,10 @@ function SideNavigation() {
 					<Icon icon='ep:document-checked' />
 					<p>Documentation</p>
 				</a>
+				<NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+					<Icon icon='iconoir:piggy-bank' />
+					<p>Migrate</p>
+				</NavLink>
 			</ul>
 			<div className={styles.side__coinprice}>
 				<div className={styles.side__coinprice__in}>
