@@ -49,7 +49,7 @@ function PigsPen() {
 								buttonText = "Enter amount to deposit"
 								Lock={false}
 								rewardCenter
-								warningMsg={true}
+								warningMsg
 						/> :
 						 <RewardsCenter 
 						 	sliderRequired={false}  
