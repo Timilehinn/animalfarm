@@ -1,8 +1,10 @@
 .toast{
     width: 350px;
     // height: 300px;
-    border: 1px solid #F3BA2F;
-    color: white;
+    background: #49944b61;
+    color: #47A348;
+    font-weight: 800;
+    text-align:center;
     border-radius: 10px;
     position: fixed;
     bottom: 5%;
@@ -18,5 +20,5 @@
 .toast__active{
     visibility: visible;
     opacity: 1;
-    transform: translate(-50%, -50%) translateY(0);
+    transform:  translateY(0);
 }
