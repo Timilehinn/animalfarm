@@ -51,11 +51,11 @@ function PigsPen() {
 								rewardCenter
 								warningMsg
 						/> :
-						 <RewardsCenter 
+						<RewardsCenter 
 						 	sliderRequired={false}  
-							 title='Withdraw your staked PIGS' 
-							 infoValue2="2% per day"
-							 infoTitle='PIGS staked'
+							title='Withdraw your staked PIGS' 
+							infoValue2="2% per day"
+							infoTitle='PIGS staked'
 							infoValue='43PIGS'
 							infoTitle2='Withdraw limit'
 							infoTitle3='Available PIGS to withdraw'
