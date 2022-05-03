@@ -41,11 +41,12 @@ interface rewardProps {
 	buttonText?:any
 	recipient?:boolean
 	rewardCenter?:boolean
+	warningMsg?:boolean
 	_confirmFunction?: () => void
 	
 }
 
-function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, infoValue3, infoTitle3, token, icon, buttonText, recipient, rewardCenter }: rewardProps) {
+function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,busdValue, setBusdValue,pTitle, isButtonEnabled,isApproved, approve, pending, lockDuration, setLockDuration, _confirmFunction, available, infoTitle, infoTitle2, infoValue, infoValue2, infoValue3, infoTitle3, token, icon, buttonText, recipient, rewardCenter, warningMsg }: rewardProps) {
 
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -147,12 +148,13 @@ function RewardsCenter({ sliderRequired, title, Lock, pair, pigsBusdPrice,text,b
 				<button type='button' onClick={() => openModal()} className={styles.button__enabled}>claim</button>
 			} */}
 			<button type='button'  className={styles.button__disabled}>{buttonText}</button>
+			{ warningMsg && <p className={styles.warning} >NOTE: You’ll be able to withdraw 2% of your staked PIGS once every 24 hours</p>}
 			{ rewardCenter && <div className={styles.center} >
 				<p className={styles.center__header} >Reward Center</p>
 				<div className={styles.center__box} >
 					<Info title="Claimable BUSD" info="X BUSD" />
 					<Info title="Claimable PIGS" info="X PIGS" />
-				</div>
+				</div> 
 				<div className={styles.center__buttons}>
 					<button type='button' style={{marginRight:"10px"}}>Claim reward</button>
 					<button type='button' style={{marginLeft:"10px"}}>Compound PIGS</button>
