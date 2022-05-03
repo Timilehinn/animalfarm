@@ -19,7 +19,8 @@ interface initialStateProps {
     
     }
     isToastNotificationOpen : boolean,
-    toastNotificationMsg
+    toastNotificationMsg,
+    isDepositModalOpen:boolean
 }
 
 const initialState:initialStateProps = {
@@ -37,7 +38,8 @@ const initialState:initialStateProps = {
         confirmFunction : null
     },
     isToastNotificationOpen:false,
-    toastNotificationMsg: ''
+    toastNotificationMsg: '',
+    isDepositModalOpen:false
 
 
 }
@@ -62,6 +64,9 @@ const toggleSlice = createSlice({
             state.isToastNotificationOpen = action.payload.state
             state.toastNotificationMsg = action.payload.msg
         },
+        toggleDepositModal:(state,action:PayloadAction<any>) =>{
+            state.isDepositModalOpen = action.payload
+        },
         
     }
 })
@@ -72,5 +77,6 @@ export const {
     toggleModalBackDrop, 
     toggleConfirmModal, 
     setModalProps,
-    toggleToastNotification
+    toggleToastNotification,
+    toggleDepositModal
 } = toggleSlice.actions

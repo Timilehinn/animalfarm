@@ -7,15 +7,17 @@
         transform: translate(-50%,-50%) scale(0.8);
         z-index: 10000;
         padding: 20px;
-        // visibility: hidden;
-        visibility: visible;
+        visibility: hidden;
+        // visibility: visible;
         transition: 0.3s;
-        opacity: 1;
+        opacity: 0;
         border-width: 0.6px;
         border-style: solid;
         border-color:#f3ba2a;
         background: #221E16;
 }
+
+
 
 
 @media (max-width: 600px) {
@@ -74,7 +76,7 @@
         font-size: 18px;
     }
 }
-.depositemodal__active{    
+.deposite__modal__active{    
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
     opacity: 1;
