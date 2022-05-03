@@ -12,7 +12,7 @@ import GenericBackground from 'components/GenericBackground/GenericBackground'
 import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import Toast from 'components/Toast/Toast'
-import Migrate from '../migrate/Migrate'
+import Migrate from '../migratee/Migratee'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
@@ -45,7 +45,7 @@ function Landing() {
 					<Route path='/pigs-pen' element={<PigsPen />} />
 					<Route path='/piggy-bank' element={<PiggyBank />} />
 					<Route path='/migrate' element={<Migrate />} />
-					
+
 					<Route path='*' element={<div>Not found</div>} />
 				</Routes>
 			</div>
