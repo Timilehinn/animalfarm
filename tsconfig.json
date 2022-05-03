@@ -17,7 +17,7 @@
 		"jsx": "react-jsx",
 		"strictNullChecks": false,
 		"noImplicitAny": false,
-		"noFallthroughCasesInSwitch": true,
+		"noFallthroughCasesInSwitch": false,
 		"downlevelIteration": true
 	},
 	"exclude": ["node_modules"],
