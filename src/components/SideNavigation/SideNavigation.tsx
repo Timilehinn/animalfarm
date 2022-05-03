@@ -10,7 +10,7 @@ import telegram from '../../assets/telegram.png'
 import home from '../../assets/home.png'
 import shop from '../../assets/shop.png'
 import book from '../../assets/book.png'
-import pdf from '../../docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf'
+
 
 function SideNavigation() {
 
@@ -42,11 +42,11 @@ function SideNavigation() {
 					<Icon icon="maki:garden" />
 					<p>Drip Garden</p>	
 				</a>
-				<a  className={ styles.link} href={pdf} download="../../../docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf">
+				<div className={ styles.link}>
 					<Icon icon="ep:document-checked" />
 					<p>Documentation</p>
-				</a>
-				
+				</div>
+				 
 			</ul>
 			<div className={styles.side__coinprice}>
 				<div className={styles.side__coinprice__in}>
