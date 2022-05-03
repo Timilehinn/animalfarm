@@ -45,6 +45,7 @@ function Landing() {
 					<Route path='/pigs-pen' element={<PigsPen />} />
 					<Route path='/piggy-bank' element={<PiggyBank />} />
 					<Route path='/migrate' element={<Migrate />} />
+					
 					<Route path='*' element={<div>Not found</div>} />
 				</Routes>
 			</div>
