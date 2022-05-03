@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from 'react'
+import React, { useState } from 'react'
 import PiggyBankTable from 'components/PiggyBankTable/PiggyBankTable'
 import ReferralTable from 'components/ReferralTable/ReferralTable'
 import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
@@ -15,11 +15,12 @@ import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 
 function PiggyBank() {
-	const [activeTab, setActiveTab] = React.useState(1)
 	const pigsBusdLpBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
 	const { account } = useActiveWeb3React()
 	const dispatch = useAppDispatch()
 	const navigate = useNavigate()
+	const [activeTab, setActiveTab] = useState(1)
+	const [lockDuration, setLockDuration] = useState(0)
 
 	const copyRefLink = () => {
 		if (navigator.clipboard && navigator.permissions) {
@@ -45,7 +46,7 @@ function PiggyBank() {
 			<div className={styles.piggybank}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total LP Locked' amount='25,000PIGS/BUSD' />
+						<PigsCreditCard title='Total LP Locked' amount='25,000 PIGS/BUSD' />
 					</div>
 					{/* <div> 
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
@@ -62,25 +63,26 @@ function PiggyBank() {
 					</div>
 					{activeTab === 1 ? (
 						<RewardsCenter
-							sliderRequired
 							title='Buy Piglets with LP token'
 							Lock
 							pair={false}
 							buttonText='Enter amount'
-							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
+							infoValue={`${pigsBusdLpBalance} PIGS/BUSD`}
 							infoTitle='PIGS/BUSD LP balance'
 							rewardCenter={false}
 							token='PIGS/BUSD LP'
 							icon={pig}
 							warningMsg={false}
+							sliderRequired
+							lockDuration={lockDuration}
+							setLockDuration={setLockDuration}
 						/>
 					) : (
 						<RewardsCenter
 							pair={false}
 							Lock
-							sliderRequired
 							title='Gift Piglets with LP token'
-							infoValue={`${pigsBusdLpBalance}PIGS/BUSD`}
+							infoValue={`${pigsBusdLpBalance} PIGS/BUSD`}
 							infoTitle='PIGS/BUSD LP balance'
 							token='PIGS/BUSD LP'
 							icon={pig}
@@ -88,6 +90,9 @@ function PiggyBank() {
 							recipient
 							rewardCenter={false}
 							warningMsg={false}
+							sliderRequired
+							lockDuration={lockDuration}
+							setLockDuration={setLockDuration}
 						/>
 					)}
 				</div>

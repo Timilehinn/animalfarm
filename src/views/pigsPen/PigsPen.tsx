@@ -42,7 +42,7 @@ function PigsPen() {
 								infoValue='BUSD'
 								infoTitle2='Stake Lockup'
 								infoTitle3='Total Liquidity'
-								infoValue3='$1308,456,544'
+								infoValue3='$0.00'
 								icon={pig}
 								pTitle='Enter amount of PIGS to be staked in the PIG Pen'
 								token='PIGS'
@@ -57,10 +57,10 @@ function PigsPen() {
 								title='Withdraw your staked PIGS'
 								infoValue2='2% per day'
 								infoTitle='PIGS staked'
-								infoValue='43PIGS'
+								infoValue='0 PIGS'
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
-								infoValue3='4.3PIGS'
+								infoValue3='0 PIGS'
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton

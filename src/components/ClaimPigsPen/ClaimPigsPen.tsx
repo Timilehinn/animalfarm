@@ -8,7 +8,7 @@ interface claimProps {
 }
 
 function ClaimPigsPen({ title }: claimProps) {
-	const styleProps = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: -20 }, delay: 100 }) // TODO: Look into the correct props. For some reasons, it is saying opacity is not compatible
+	const styleProps = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: -20 }, delay: 100 })
 
 	const [value, setValue] = useState('')
 
@@ -32,7 +32,7 @@ function ClaimPigsPen({ title }: claimProps) {
 						<input onChange={(e) => handleChange(e)} type='number' placeholder='000' />
 					</div>
 					<div>
-						<p className={styles.claimable}>Amount Claimable: 376 PIGS</p>
+						<p className={styles.claimable}>Amount Claimable: 0 PIGS</p>
 					</div>
 				</div>
 				<button onClick={() => alert('Hello')} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>

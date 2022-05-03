@@ -177,7 +177,7 @@ function PigsCredit() {
 							lockDuration={lockDuration}
 							setLockDuration={setLockDuration}
 							_confirmFunction={claimToPiggy}
-							available={`${Number(busdBalance).toFixed(2).toString()}BUSD`}
+							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
 							infoValue={availablePigsToClaim.toFixed(2)}
 							infoTitle2='Estimated BUSD to pair'
