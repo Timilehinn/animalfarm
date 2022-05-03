@@ -46,11 +46,15 @@
     font-family: 'Poppins',
     sans-serif;
 }
+
+
+
 @media (min-width: 890px) {
 
     .carousel__container {
         margin-left: -22px;
         margin-right: -22px;
+
     }
 }
 

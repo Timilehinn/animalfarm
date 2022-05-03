@@ -54,6 +54,8 @@ function PiggyBank() {
 							rewardCenter={false}
 							token="PIGS/BUSD LP"
 							icon={pig}
+							
+							warningMsg={false}
 
 
 						/> 
@@ -70,6 +72,8 @@ function PiggyBank() {
 							buttonText = "Enter amount"
 							recipient
 							rewardCenter={false}
+						
+							warningMsg={false}
 						/>
 					}
 				</div>

@@ -49,6 +49,7 @@ function PigsPen() {
 								buttonText = "Enter amount to deposit"
 								Lock={false}
 								rewardCenter
+								warningMsg
 						/> :
 						 <RewardsCenter 
 						 	sliderRequired={false}  
@@ -65,6 +66,7 @@ function PigsPen() {
 							buttonText = "Enter amount to claim"
 							pTitle="Enter amount of PIGS to be withdrawn from the PIG Pen"
 							rewardCenter={false}
+							warningMsg={false}
 						/>
 						}
 					</div>
