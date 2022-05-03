@@ -18,7 +18,7 @@ function SideNavigation() {
 				<img src={logo} alt='' />
 				<h3>Animal Farm</h3>
 			</header>
-			<ul className={styles.ul} >
+			<ul className={styles.ul}>
 				<NavLink to='/' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='clarity:home-line' />
 					<p>Home</p>
@@ -29,7 +29,7 @@ function SideNavigation() {
 				</NavLink>
 				<NavLink to='/pigs-pen' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='fluent:book-20-regular' />
-					<p>Pigs Pen</p>
+					<p>Pig Pen</p>
 				</NavLink>
 				<NavLink to='/piggy-bank' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
@@ -38,6 +38,10 @@ function SideNavigation() {
 				<NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Drip Garden</p>
+				</NavLink>
+				<NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+					<Icon icon='iconoir:piggy-bank' />
+					<p>Documentation</p>
 				</NavLink>
 			</ul>
 			<div className={styles.side__coinprice}>
@@ -58,7 +62,7 @@ function SideNavigation() {
 				<a href='http://localhost:3000/' className={styles.side__socials__icon}>
 					<img src={twitter} alt='' />
 				</a>
-				<a style={{marginRight:"20px",marginLeft:"20px"}} href='http://localhost:3000/' className={styles.side__socials__icon}>
+				<a style={{ marginRight: '20px', marginLeft: '20px' }} href='http://localhost:3000/' className={styles.side__socials__icon}>
 					<img src={discord} alt='' />
 				</a>
 				<a href='http://localhost:3000/' className={styles.side__socials__icon}>

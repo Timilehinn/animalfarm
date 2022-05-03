@@ -13,14 +13,14 @@ function PigsPen() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
 	return (
-		<div className={styles.pigspen__wrap} >
+		<div className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title="Total PIGS Locked" amount="25000PIGS" />
+						<PigsCreditCard title='Total PIGS Locked' amount='25000PIGS' />
 					</div>
 					<div>
-						<PigsCreditCard title='Total Value Locked'  amount="$656,868"  />
+						<PigsCreditCard title='Total Value Locked' amount='$656,868' />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -33,42 +33,45 @@ function PigsPen() {
 								<p>Withdraw PIGS</p>
 							</div>
 						</div>
-						{activeTab === 1 ? 
-							<RewardsCenter 
-								sliderRequired={false} 
-								title='Submit PIGS to be deposited'  
-								infoTitle='Earn' 
-								infoValue2="50 days"
+						{activeTab === 1 ? (
+							<RewardsCenter
+								sliderRequired={false}
+								title='Submit PIGS to be deposited'
+								infoTitle='Earn'
+								infoValue2='50 days'
 								infoValue='BUSD'
 								infoTitle2='Stake Lockup'
 								infoTitle3='Total Liquidity'
 								infoValue3='$1308,456,544'
 								icon={pig}
-								pTitle="Enter amount of PIGS to be staked in the PIG Pen"
+								pTitle='Enter amount of PIGS to be staked in the PIG Pen'
 								token='PIGS'
-								buttonText = "Enter amount to deposit"
+								buttonText='Enter amount to deposit'
 								Lock={false}
 								rewardCenter
 								warningMsg
-						/> :
-						<RewardsCenter 
-						 	sliderRequired={false}  
-							title='Withdraw your staked PIGS' 
-							infoValue2="2% per day"
-							infoTitle='PIGS staked'
-							infoValue='43PIGS'
-							infoTitle2='Withdraw limit'
-							infoTitle3='Available PIGS to withdraw'
-							infoValue3='4.3PIGS'
-							token='PIGS'
-							icon={pig}
-							Lock={false}
-							buttonText = "Enter amount to claim"
-							pTitle="Enter amount of PIGS to be withdrawn from the PIG Pen"
-							rewardCenter={false}
-							warningMsg={false}
-						/>
-						}
+							/>
+						) : (
+							<RewardsCenter
+								sliderRequired={false}
+								title='Withdraw your staked PIGS'
+								infoValue2='2% per day'
+								infoTitle='PIGS staked'
+								infoValue='43PIGS'
+								infoTitle2='Withdraw limit'
+								infoTitle3='Available PIGS to withdraw'
+								infoValue3='4.3PIGS'
+								token='PIGS'
+								hideAmountInput
+								hideApproveButton
+								icon={pig}
+								Lock={false}
+								buttonText='Withdraw PIGS'
+								pTitle='Enter amount of PIGS to be withdrawn from the PIG Pen'
+								rewardCenter={false}
+								warningMsg={false}
+							/>
+						)}
 					</div>
 				</div>
 
@@ -76,7 +79,6 @@ function PigsPen() {
 				{/* <img className={styles.pig} src={pig} alt='' /> */}
 			</div>
 		</div>
-		
 	)
 }
 
