@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Migrate.module.scss'
+import styles from './migrate.module.scss'
 import pig from '../../assets/pigs.png'
 import pigdog from '../../assets/dogg.png'
 import curve from '../../assets/curve.png'
