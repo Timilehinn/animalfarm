@@ -47,6 +47,14 @@ function MobileSideNav() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
+				<a className={styles.link} href='https://themanor.farm/garden'>
+					<Icon icon='maki:garden' />
+					<p>Drip Garden</p>
+				</a>
+				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
+					<Icon icon='ep:document-checked' />
+					<p>Documentation</p>
+				</a>
 			</ul>
 			<button onClick={()=>connect()} type='button'>
 				{	isWalletConnected ?

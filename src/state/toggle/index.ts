@@ -61,7 +61,8 @@ const toggleSlice = createSlice({
         toggleToastNotification:(state,action:PayloadAction<any>) =>{
             state.isToastNotificationOpen = action.payload.state
             state.toastNotificationMsg = action.payload.msg
-        }
+        },
+        
     }
 })
 
