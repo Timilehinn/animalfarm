@@ -16,7 +16,7 @@ import Migrate from 'views/migrate/migrate'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
-
+ 
 import Home from '../home/Home'
 import style from './Landing.module.scss'
 
@@ -45,7 +45,7 @@ function Landing() {
 					<Route path='/pigs-pen' element={<PigsPen />} />
 					<Route path='/piggy-bank' element={<PiggyBank />} />
 					<Route path='/migrate' element={<Migrate />} />
-					
+
 					<Route path='*' element={<div>Not found</div>} />
 				</Routes>
 			</div>

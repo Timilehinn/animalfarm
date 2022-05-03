@@ -55,6 +55,10 @@ function MobileSideNav() {
 					<Icon icon='ep:document-checked' />
 					<p>Documentation</p>
 				</a>
+				<NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+					<Icon icon='iconoir:piggy-bank' />
+					<p>Migrate</p>
+				</NavLink>
 			</ul>
 			<button onClick={()=>connect()} type='button'>
 				{	isWalletConnected ?
