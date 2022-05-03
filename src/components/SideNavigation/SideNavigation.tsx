@@ -10,8 +10,11 @@ import telegram from '../../assets/telegram.png'
 import home from '../../assets/home.png'
 import shop from '../../assets/shop.png'
 import book from '../../assets/book.png'
+import pdf from '../../docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf'
 
 function SideNavigation() {
+
+	
 	return (
 		<div className={styles.side}>
 			<header>
@@ -34,15 +37,16 @@ function SideNavigation() {
 				<NavLink to='/piggy-bank' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
-				</NavLink>
-				<NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='iconoir:piggy-bank' />
-					<p>Drip Garden</p>
-				</NavLink>
-				<NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='iconoir:piggy-bank' />
+				</NavLink>		
+				<a className={ styles.link} href="https://themanor.farm/garden">
+					<Icon icon="maki:garden" />
+					<p>Drip Garden</p>	
+				</a>
+				<a  className={ styles.link} href={pdf} download="../../../docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf">
+					<Icon icon="ep:document-checked" />
 					<p>Documentation</p>
-				</NavLink>
+				</a>
+				
 			</ul>
 			<div className={styles.side__coinprice}>
 				<div className={styles.side__coinprice__in}>
