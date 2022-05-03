@@ -9,7 +9,7 @@ function PiggyBankRow(props) {
     const [state, showModal] = useState(false)
 
     return (
-            <tr className={style.tr}>
+                <tr className={style.tr}>
                 <td >{id}</td>
                 <td>{piglets}</td>
                 <td >{trufflesavailable}</td>
