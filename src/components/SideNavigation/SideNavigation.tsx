@@ -53,11 +53,11 @@ function SideNavigation() {
 					<ul>
 						<li>
 							<img src={logo} alt='' />
-							<p>$146</p>
+							<p>$0.00</p>
 						</li>
 						<li>
 							<img src={doglogo} alt='' />
-							<p>$146</p>
+							<p>$0.00</p>
 						</li>
 					</ul>
 				</div>

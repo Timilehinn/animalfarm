@@ -156,7 +156,10 @@ function PigsCredit() {
 			<div className={styles.pigscredit}>
 				<div className={styles.pigscredit__header}>
 					<p>
-					Users who were in PigPen when we paused for v2 migration are the only users who need to utilize the PIGS Crediting UI. If this applies to you,  LEARN MORE <a href='https://animal-farm-v2.netlify.app/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D' className={styles.header__a}>HERE: </a> 
+						Users who were in PigPen when we paused for v2 migration are the only users who need to utilize the PIGS Crediting UI. If this applies to you, LEARN MORE:{' '}
+						<a href='https://animal-farm-v2.netlify.app/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D' className={styles.header__a}>
+							HERE{' '}
+						</a>
 					</p>
 				</div>
 				<div className={styles.cards}>

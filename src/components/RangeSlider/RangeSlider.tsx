@@ -4,7 +4,7 @@ import styles from './RangeSlider.module.scss'
 
 interface rangeProps {
 	color: string
-	setLockDuration:any
+	setLockDuration: any
 }
 
 const sliderThumbStyles = (props: rangeProps) => `
@@ -21,7 +21,7 @@ const sliderThumbStyles = (props: rangeProps) => `
   
 `
 
-const Styles = styled.div` 
+const Styles = styled.div`
 	display: flex;
 	align-items: center;
 	color: #888;
@@ -66,9 +66,9 @@ function RangeSlider({ color, setLockDuration }: rangeProps) {
 	}
 
 	return (
-		<div className={styles.range} color={color} >
-			<input type='range' min={0} max={156} value={value} className={styles.slider}  onChange={(e) => handleChange(e)} />
-			<div className={styles.value}>{value}weeks</div>
+		<div className={styles.range} color={color}>
+			<input type='range' min={0} max={156} value={value} className={styles.slider} onChange={(e) => handleChange(e)} />
+			<div className={styles.value}>{value} weeks</div>
 		</div>
 	)
 }

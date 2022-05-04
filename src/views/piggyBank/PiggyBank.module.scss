@@ -151,19 +151,23 @@
 	}
 }
 .piggybank__header {
-	max-width: 1100px;
+	max-width: 1400px;
 	margin-bottom: 14px;
 }
 .piggybank__header > p {
 	text-align: center;
-	line-height: 2.1em;
+	// line-height: 1.5em;
 	font-size: 1.5em;
 	color: #f3ba2f;
 	justify-content: center;
-	margin-left: 150px;
 	margin-bottom: 30px;
 	// margin: auto;
+	font-family: 'Poppins', sans-serif;
+	line-height: calc(1ex / 0.37);
+	word-break: break-word;
+	// margin: calc(1ex / 0.37) 0;
 }
+
 .header__a {
 	color: #f3ba2f;
 }
