@@ -1,180 +1,168 @@
 @import '../../global.scss';
 .piggybank {
-    max-width: 1500px;
-    align-content: center;
-    justify-content: center;
-    margin: auto;
-    padding-top: 50px;
+	max-width: 1500px;
+	align-content: center;
+	justify-content: center;
+	margin: auto;
+	padding-top: 50px;
 
-    .cards {
-        margin: auto;
-        width: 40%;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin-bottom: 50px;
-    
-        div {
-    
-            background: #221E16;
-            ;
-            // height: 80px;
-            border-radius: 10px;
-        }
-    }
+	.cards {
+		margin: auto;
+		width: 40%;
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 20px;
+		margin-bottom: 50px;
 
-    .credit__wrap {
-        padding: 20px;
-        width: 40%;
-        margin: auto;
-        background: linear-gradient(#121212, #121212) padding-box,
-        linear-gradient(#f3ba2a, #121212) border-box;
-        border-style: solid;
-        border-width: 1px;
-        border-color: transparent;
-        border-radius: 10px;
-    
-        // background: black;
-        .tabs {
-            width: 100%;
-    
-            display: flex;
-    
-            .tab__one {
-    
-                color: rgba(217 217 212 / 90%);
-                width: 60%;
-                height: 40px;
-                cursor: pointer;
-                border-bottom: 2px solid #333333;
-                transition: 0.5s;
-    
-    
-                p {
-                    text-align: center;
-                    font-size: 14px;
-                    text-align: center;
-                    font-size: 14px;
-                    font-family: $boldFont;
-                }
-            }
-    
-            .tab__one__active {
-                border-bottom: 2px solid #F3BA2FE5;
-            }
-    
-            .tab__two {
-                color: rgba(217 217 212 / 90%);
-                width: 50%;
-                cursor: pointer;
-                border-bottom: 2px solid #333333;
-                transition: 0.5s;
-    
-                p {
-                    text-align: center;
-                    font-size: 14px;
-                    // font-weight: 600;
-                    text-align: center;
-                    font-size: 14px;
-                    // font-weight: 600;
-                    font-family: $boldFont;
-                }
-            }
-    
-            .tab__two__active {
-                border-bottom: 2px solid #F3BA2FE5;
-                ;
-            }
-        }
-    }
+		div {
+			background: #221e16;
+			// height: 80px;
+			border-radius: 10px;
+		}
+	}
 
-    .btn__wrap{
-        display: flex;
-        justify-content: center;
-        .btn{
+	.credit__wrap {
+		padding: 20px;
+		width: 40%;
+		margin: auto;
+		background: linear-gradient(#121212, #121212) padding-box, linear-gradient(#f3ba2a, #121212) border-box;
+		border-style: solid;
+		border-width: 1px;
+		border-color: transparent;
+		border-radius: 10px;
 
-            width: 40%;
-            margin: auto;
-            height: 50px;
-            margin-top: 50px;
-            max-width: 500px;
-            margin-bottom: 100px;
-            border-radius: 10px;
-            border: none;
-            font-weight: 600;
-            cursor: pointer;
-            color: white;
-            background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
-        }
-    }
+		// background: black;
+		.tabs {
+			width: 100%;
 
-    
+			display: flex;
+
+			.tab__one {
+				color: rgba(217 217 212 / 90%);
+				width: 60%;
+				height: 40px;
+				cursor: pointer;
+				border-bottom: 2px solid #333333;
+				transition: 0.5s;
+
+				p {
+					text-align: center;
+					font-size: 14px;
+					text-align: center;
+					font-size: 14px;
+					font-family: $boldFont;
+				}
+			}
+
+			.tab__one__active {
+				border-bottom: 2px solid #f3ba2fe5;
+			}
+
+			.tab__two {
+				color: rgba(217 217 212 / 90%);
+				width: 50%;
+				cursor: pointer;
+				border-bottom: 2px solid #333333;
+				transition: 0.5s;
+
+				p {
+					text-align: center;
+					font-size: 14px;
+					// font-weight: 600;
+					text-align: center;
+					font-size: 14px;
+					// font-weight: 600;
+					font-family: $boldFont;
+				}
+			}
+
+			.tab__two__active {
+				border-bottom: 2px solid #f3ba2fe5;
+			}
+		}
+	}
+
+	.btn__wrap {
+		display: flex;
+		justify-content: center;
+		.btn {
+			width: 40%;
+			margin: auto;
+			height: 50px;
+			margin-top: 50px;
+			max-width: 500px;
+			margin-bottom: 100px;
+			border-radius: 10px;
+			border: none;
+			font-weight: 600;
+			cursor: pointer;
+			color: white;
+			background: linear-gradient(93.41deg, #47a348 1.19%, #3d6b3d 99.16%);
+		}
+	}
 }
 @media (max-width: 890px) {
-    .piggybank {
-        margin-left: 24px;
-        margin-right: 24px;
+	.piggybank {
+		margin-left: 24px;
+		margin-right: 24px;
 
-        .cards {
-        
-            width: 100%;
-        }
-        
-        .credit__wrap {
-        
-            width: 100%;
-        
-            .tabs {
-                .tab__one {
-        
-                    p {
-                        font-size: 12px;
-                    }
-                }
-        
-                .tab__two {
-        
-                    p {
-                        font-size: 12px;
-                    }
-                }
-            }
-        }
+		.cards {
+			width: 100%;
+		}
 
-        .btn__wrap {
-            display: flex;
-            justify-content: center;
-            padding: 0px 20px 0px 20px;
-        
-            .btn {
-        
-                width: 100%;
-                margin: auto;
-                height: 50px;
-                margin-top: 50px;
-                max-width: 500px;
-                margin-bottom: 100px;
-                border-radius: 10px;
-                border: none;
-                font-weight: 600;
-                cursor: pointer;
-                color: white;
-                background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);
-            }
-        }
-    }
+		.credit__wrap {
+			width: 100%;
+
+			.tabs {
+				.tab__one {
+					p {
+						font-size: 12px;
+					}
+				}
+
+				.tab__two {
+					p {
+						font-size: 12px;
+					}
+				}
+			}
+		}
+
+		.btn__wrap {
+			display: flex;
+			justify-content: center;
+			padding: 0px 20px 0px 20px;
+
+			.btn {
+				width: 100%;
+				margin: auto;
+				height: 50px;
+				margin-top: 50px;
+				max-width: 500px;
+				margin-bottom: 100px;
+				border-radius: 10px;
+				border: none;
+				font-weight: 600;
+				cursor: pointer;
+				color: white;
+				background: linear-gradient(93.41deg, #47a348 1.19%, #3d6b3d 99.16%);
+			}
+		}
+	}
 }
 .piggybank__header {
-    max-width: 1100px;
-    margin-bottom: 14px;
+	max-width: 1100px;
+	margin-bottom: 14px;
 }
-.piggybank__header > p{
-    text-align: center;
-    margin-bottom: 14px;
-    color: #F3BA2F;
-    justify-content: center;
-    margin: auto;
+.piggybank__header > p {
+	text-align: center;
+	line-height: 2.1em;
+	font-size: 1.5em;
+	margin-bottom: 14px;
+	color: #f3ba2f;
+	justify-content: center;
+	margin: auto;
 }
 .header__a {
-    color: #F3BA2F;
+	color: #f3ba2f;
 }
