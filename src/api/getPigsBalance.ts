@@ -116,3 +116,25 @@ export const availablePigsToClaim = async (account: string) => {
 
 	return availablePigs
 }
+
+
+// get pigs my piggy banks
+
+// export const getMyPiggyBanks = async (account: string) => {
+// 	const { piggyBankContract } = getPigsContract()
+// 	let piggyBanks
+
+// 	try {
+// 		const result: ethers.BigNumber = await piggyBankContract.getMyPiggyBanks(account)
+// 		// const balance = ethers.BigNumber.from(result).toJSON()
+// 		// piggyBanks = {
+// 		// 	amount: balance,
+// 		// 	amountString: new BigNumber(balance).toFormat(0),
+// 		// }
+// 		console.log(result)
+// 	} catch (err) {
+// 		console.log(err)
+// 	}
+
+// 	return piggyBanks
+// }
