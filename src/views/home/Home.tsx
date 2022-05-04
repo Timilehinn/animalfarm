@@ -73,8 +73,8 @@ function Home() {
 						<img src={chart} alt='' />
 					</div>
 				</section>
-				{/* <Carousel /> */}
-				<Carousel2 />
+				<Carousel />
+				{/* <Carousel2 /> */}
 			</div>
 		</div>
 	)
