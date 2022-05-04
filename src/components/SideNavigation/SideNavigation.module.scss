@@ -13,13 +13,14 @@ $dark : #000000;
 .side{
     height: calc(100vh - 20px);
     width: 300px;
-    border-radius: 20px;
+    // border-radius: 20px;
     background: $dark;
     padding: 20px 20px 0px 0px;
     position: sticky;
     top: 0;
     transition: 0.3s;
     background: #1A1A1A;
+    overflow-y: auto;
     z-index:10;
 
     header{
@@ -112,9 +113,9 @@ $dark : #000000;
     .side__coinprice{
         width: 100%;
         padding: 16px;
-        position: absolute;
-        bottom: 48px;
-        right: 0px;
+        // position: absolute;
+        // bottom: 48px;
+        // right: 0px;
         // height: 100px;
 
         .side__coinprice__in{
@@ -156,9 +157,9 @@ $dark : #000000;
     display: flex;
     width: 100%;
     justify-content: center;
-    position: absolute;
-        bottom: 10px;
-        right: 14px;
+    // position: absolute;
+    //     bottom: 10px;
+    //     right: 14px;
 }
 .side__socials__icon {
     // margin-left: 14px;
@@ -166,6 +167,30 @@ $dark : #000000;
     img{
         height: 0.8rem;
     }
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    border-radius: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+    
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #121212;
+    border-radius: 5px;
+    
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #121212;
 }
 
 @media screen and (max-width : 768px ) {

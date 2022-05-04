@@ -28,7 +28,7 @@ function ReferralTable() {
 					<div>
 						<ul className={style.cardlist}>
 							<li>Earn up to 3% roi a day on your principal</li>
-							<li>Your principal in increased through a time locking multiplier, creating an extremely powerful opportunity for compound growth</li>
+							<li>Your principal is increased through a time locking multiplier, creating an extremely powerful opportunity for compound growth</li>
 							<li>&quot;Longer pays better&quot; mechanics with non-linear on increase in principal buying power for longer time staking.</li>
 							<li>Stake airdropping functions</li>
 							<li>Early end staking ability in case of emergency where 100% of penalty paid goes to staker who do not emergency end stake</li>
@@ -45,7 +45,7 @@ function ReferralTable() {
 				<div className={style.card3}>
 					<h2>The Multiplier</h2>
 					<p>The multiplier for time locking rewards is placed on the stakes principle, not tacked on to claimable divs at the end of the stake.</p>
-					<p>This makes the bonus rewards for time locking staked exponentially more powerful as the stake compounds the incereased roi generated from the bonus multiplied principle.</p>
+					<p>This makes the bonus rewards for time locking staked exponentially more powerful as the stake compounds the increased roi generated from the bonus multiplied principle.</p>
 					<p>The bonus is not fully applied to the principle on day 1 of the time locked stake and is instead applied to the principle using the above displayed distribution curve with:</p>
 					<ul className={style.multiplierlist}>
 						<li>30% of the multiplier bonous being added to the principle in the first 75% of the stake&apos;s length</li>

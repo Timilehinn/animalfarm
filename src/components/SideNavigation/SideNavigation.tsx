@@ -47,6 +47,10 @@ function SideNavigation() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Migrate</p>
 				</NavLink>
+				<a className={styles.link} href="https://theanimal.farm/dripliberation">
+					<Icon icon="bx:bar-chart-alt-2" />
+					<p>Drip Liberation</p>
+				</a>
 			</ul>
 			<div className={styles.side__coinprice}>
 				<div className={styles.side__coinprice__in}>
