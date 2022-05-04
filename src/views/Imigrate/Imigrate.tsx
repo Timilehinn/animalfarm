@@ -10,8 +10,9 @@ function Migrate() {
 			'style',
 			`
 		background-image: url(./bg/try.png);
-		background-size: contain;
+		background-size: cover;
 		background-position: center;
+		background-attachment: fixed;
 		background-repeat: no-repeat;
 		background-color: rgb(24, 24, 24);`
 		)

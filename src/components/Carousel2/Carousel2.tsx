@@ -7,7 +7,6 @@ interface cardProps {
 }
 
 function Carousel2() {
-
 	const boxItem = [
 		{
 			title: 'High Yield',
@@ -36,19 +35,19 @@ function Carousel2() {
 		{
 			title: 'Integrity',
 			paragraph: 'From the Developers of DRIP, the fastest growing and highest ranked DeFi protocol on BSC!!',
-		}
+		},
 	]
 
 	return (
-		<div className='carousel__page'>
+		<div className='carousel__page' style={{ color: 'white', paddingTop: '50px' }}>
+			<h3 className='carousel__heading'>Animal Farm Features</h3>
 			<div className='carousel__container'>
-            <h3 className='carousel__heading'>Animal Farm Features</h3>
-                <div className='carousel'>
-                    {boxItem.map((item, index) => (
-                        <Card title={item.title} paragraph={item.paragraph} />
-                    ))}	
-                </div>
-            </div>
+				<div className='carousel'>
+					{boxItem.map((item, index) => (
+						<Card title={item.title} paragraph={item.paragraph} />
+					))}
+				</div>
+			</div>
 		</div>
 	)
 }

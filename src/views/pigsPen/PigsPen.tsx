@@ -14,8 +14,9 @@ function PigsPen() {
 			'style',
 			`
 		background-image: url(./bg/pigpen.png);
-		background-size: contain;
-		background-position: top;
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
 		background-repeat: no-repeat;
 		background-color: rgb(24, 24, 24);`
 		)

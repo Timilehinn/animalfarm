@@ -27,8 +27,9 @@ function PigsCredit() {
 			'style',
 			`
 		background-image: url(./bg/pigscredit.png);
-		background-size: contain;
-		background-position: right;
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
 		background-repeat: no-repeat;
 		background-color: rgb(24, 24, 24);`
 		)
