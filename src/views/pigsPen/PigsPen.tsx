@@ -27,17 +27,20 @@ function PigsPen() {
 	return (
 		<div className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
-			<div className={styles.pigspen__header}>
+				<div className={styles.pigspen__header}>
 					<p>
-					THE PIGPEN IS OUR STAKING PROTOCOL WHERE HOLDERS OF THE PIGS TOKENS BECOME OWNERS OF THE PLATFORM! EARN HIGH YIELD DIVIDENDS IN PIGS AND BUSD. LEARN MORE <a href='https://animal-farm-v2.netlify.app/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D' className={styles.header__a}>HERE: </a> 
+						THE PIGPEN IS OUR STAKING PROTOCOL WHERE HOLDERS OF THE PIGS TOKENS BECOME OWNERS OF THE PLATFORM! EARN HIGH YIELD DIVIDENDS IN PIGS AND BUSD. LEARN MORE{' '}
+						<a href='https://animal-farm-v2.netlify.app/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D' className={styles.header__a}>
+							HERE:{' '}
+						</a>
 					</p>
 				</div>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total PIGS Locked' amount='25000 PIGS' />
+						<PigsCreditCard title='Total PIGS Locked' amount='0.00 PIGS' />
 					</div>
 					<div>
-						<PigsCreditCard title='Total Value Locked' amount='$656,868' />
+						<PigsCreditCard title='Total Value Locked' amount='$0.00' />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
