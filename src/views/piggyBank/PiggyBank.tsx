@@ -8,7 +8,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useNavigate } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
 import { toggleToastNotification, toggleTourModal } from 'state/toggle'
-
+import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import styles from './PiggyBank.module.scss'
@@ -69,6 +69,23 @@ function PiggyBank() {
 		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
+
+	const _getMyPiggyBanks = async() => {
+		try{
+			const res = await getMyPiggyBanks(account);
+
+		}catch(err){
+			console.log(err)
+		}
+		
+	}
+
+	useEffect(()=>{
+		_getMyPiggyBanks()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	},[])
+
+
 
 
 	return (
