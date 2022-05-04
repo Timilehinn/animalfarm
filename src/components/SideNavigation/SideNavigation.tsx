@@ -63,13 +63,13 @@ function SideNavigation() {
 				</div>
 			</div>
 			<div className={styles.side__socials}>
-				<a href='http://localhost:3000/' className={styles.side__socials__icon}>
+				<a href={`${window.location.origin}`} className={styles.side__socials__icon}>
 					<img src={twitter} alt='' />
 				</a>
-				<a style={{ marginRight: '20px', marginLeft: '20px' }} href='http://localhost:3000/' className={styles.side__socials__icon}>
+				<a style={{ marginRight: '20px', marginLeft: '20px' }} href={`${window.location.origin}`} className={styles.side__socials__icon}>
 					<img src={discord} alt='' />
 				</a>
-				<a href='http://localhost:3000/' className={styles.side__socials__icon}>
+				<a href={`${window.location.origin}`} className={styles.side__socials__icon}>
 					<img src={telegram} alt='' />
 				</a>
 			</div>
