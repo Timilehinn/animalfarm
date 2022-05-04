@@ -34,7 +34,7 @@ function PigsPen() {
 		dispatch( toggleTourModal({state:false,msg:""}) )
 		const data = {
 			state : true,
-			msg : "The PIGPEN is our staking protocol where holders of the PIGS token become owners of the platform by staking there PIGS. Pigpen pays out high yield dividends in both BUSD and PIGS that are generated from the platform fees and DOGs token taxes!!"
+			msg : "The PIGPEN is our staking protocol where holders of the PIGS token become owners of the platform by staking their PIGS. Pigpen pays out high yield dividends in both BUSD and PIGS that are generated from the platform fees and DOGs token taxes!!"
 		}
 		setTimeout(()=>{
 			dispatch( toggleTourModal(data) )
