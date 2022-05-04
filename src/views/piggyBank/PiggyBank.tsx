@@ -5,12 +5,14 @@ import ReferralTable from 'components/ReferralTable/ReferralTable'
 import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
 import { toggleToastNotification, toggleTourModal } from 'state/toggle'
-import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
+// import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
+import { fetchPiggyBankData } from 'api/Ipiggybank'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
+import { usePiggyBank } from 'state/piggybank/hooks'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 
@@ -31,7 +33,8 @@ function PiggyBank() {
 	const pigsBusdLpBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
 	const { account } = useActiveWeb3React()
 	const dispatch = useAppDispatch()
-	const navigate = useNavigate()
+	const { piggybank, isInitialized, isLoading, setFetchFailed, setFetchStart, setPiggyBank } = usePiggyBank()
+	// const navigate = useNavigate()
 	const [activeTab, setActiveTab] = useState(1)
 	const [lockDuration, setLockDuration] = useState(0)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
@@ -55,41 +58,42 @@ function PiggyBank() {
 		}
 	}
 
-	useEffect(()=>{
-		dispatch( toggleTourModal({state:false,msg:""}) )
+	useEffect(() => {
+		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
-			state : true,
-			msg : "The piggy bank is the first ever non-inflatory variable time staking annuity. Stake PIGS/BUSD LP tokens to earn up to 3% daily ROI!! Earn a 20% refferal bonus for on boarding new users."
+			state: true,
+			msg: 'The piggy bank is the first ever non-inflatory variable time staking annuity. Stake PIGS/BUSD LP tokens to earn up to 3% daily ROI!! Earn a 20% refferal bonus for on boarding new users.',
 		}
-		setTimeout(()=>{
-			dispatch( toggleTourModal(data) )
-				
-		},3000)
+		setTimeout(() => {
+			dispatch(toggleTourModal(data))
+		}, 3000)
 
-		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	}, [])
 
-	const _getMyPiggyBanks = async() => {
-		try{
-			const res = await getMyPiggyBanks(account);
-
-		}catch(err){
+	const getMyPiggyBank = async () => {
+		try {
+			setFetchStart()
+			const res = await fetchPiggyBankData(account)
+			console.log(res)
+			setPiggyBank(res.data)
+		} catch (err) {
 			console.log(err)
 		}
-		
 	}
 
-	useEffect(()=>{
-		_getMyPiggyBanks()
+	useEffect(() => {
+		getMyPiggyBank()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	}, [])
 
-
-
+	/** The usePiggyBank hook. This is used to only set data.
+	 * piggybank - This returns ALL the piggybank related data you need
+	 * isLoading - is true when fetcing the data
+	 */
 
 	return (
-		<animated.div style={props} >
+		<animated.div style={props}>
 			<div className={styles.piggybank}>
 				<div className={styles.piggybank__header}>
 					{/* <p>
