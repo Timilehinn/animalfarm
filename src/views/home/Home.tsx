@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import Carousel from 'components/Carousel/Carousel'
+import Carousel2 from 'components/Carousel2/Carousel2'
 import { getPigsBalance, availablePigsToClaim, getBusdBalance, getPigsBusdLpBalance } from '../../api/getPigsBalance'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import styles from './Home.module.scss'
@@ -71,7 +72,8 @@ function Home() {
 						<img src={chart} alt='' />
 					</div>
 				</section>
-				<Carousel />
+				{/* <Carousel /> */}
+				<Carousel2 />
 			</div>
 		</div>
 	)
