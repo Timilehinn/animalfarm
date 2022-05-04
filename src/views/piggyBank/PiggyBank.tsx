@@ -62,7 +62,7 @@ function PiggyBank() {
 		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
 			state: true,
-			msg: 'The piggy bank is the first ever non-inflatory variable time staking annuity. Stake PIGS/BUSD LP tokens to earn up to 3% daily ROI!! Earn a 20% refferal bonus for on boarding new users.',
+			msg: 'The piggy bank is the first ever non-inflationary variable time staking annuity. Stake PIGS/BUSD LP tokens to earn up to 3% daily ROI!! Earn a 2% referral bonus for on boarding new users.',
 		}
 		setTimeout(() => {
 			dispatch(toggleTourModal(data))
