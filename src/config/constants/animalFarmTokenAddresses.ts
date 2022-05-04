@@ -4,5 +4,6 @@ export const AnimalFarmTokens = {
 		name: 'PIGS',
 		symbol: 'PIGS',
 		decimals: 18,
+		BUSD_LP: '0xba6418100dB9B93356bFB6A472411FDCfa2e4141',
 	},
 }
