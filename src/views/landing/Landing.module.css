@@ -10,8 +10,10 @@
 }
 
 body {
-  background: #121212;
+  background: linear-gradient(10deg, #000000dd, #000000ef), url(../../assets/pigdog.jpg);
+  background-repeat: no-repeat;
   background-size: cover;
+  background-position: center;
 }
 
 @media screen and (max-width: 481px) {
