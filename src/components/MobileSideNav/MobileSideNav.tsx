@@ -55,10 +55,14 @@ function MobileSideNav() {
 					<Icon icon='ep:document-checked' />
 					<p>Documentation</p>
 				</a>
-				<NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				<NavLink onClick={() => closeNav()} to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Migrate</p>
 				</NavLink>
+				<a className={styles.link} href="https://theanimal.farm/dripliberation">
+					<Icon icon="bx:bar-chart-alt-2" />
+					<p>Drip Liberation</p>
+				</a>
 			</ul>
 			<button onClick={()=>connect()} type='button'>
 				{	isWalletConnected ?

@@ -16,9 +16,11 @@
     z-index: 10000;
     opacity: 0;
     transition: 0.3s;
-    visibility: 0;
+    visibility: hidden;
     display: flex;
     flex-direction: column;
+
+
     
     nav{
         display: flex;
@@ -65,7 +67,7 @@
 
 .tour__active{
     opacity:1;
-    visibility: 1;
+    visibility: visible;
     transform: translateY(0px);
 }
 

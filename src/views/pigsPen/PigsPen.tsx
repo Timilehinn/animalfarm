@@ -47,8 +47,10 @@ function PigsPen() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	},[])
 
+	
+
 	return (
-		<div className={styles.pigspen__wrap}>
+		<animated.div style={props} className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
 				{/* <div className={styles.pigspen__header}>
 					<p>
@@ -121,7 +123,7 @@ function PigsPen() {
 				{/* absolute */}
 				{/* <img className={styles.pig} src={pig} alt='' /> */}
 			</div>
-		</div>
+		</animated.div>
 	)
 }
 

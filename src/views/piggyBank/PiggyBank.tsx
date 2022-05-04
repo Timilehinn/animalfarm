@@ -6,7 +6,7 @@ import PiggyBankInfo from 'components/PiggyBankInfo/PiggyBankInfo'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useNavigate } from 'react-router-dom'
-
+import { useSpring, animated } from 'react-spring'
 import { toggleToastNotification, toggleTourModal } from 'state/toggle'
 
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
@@ -34,6 +34,7 @@ function PiggyBank() {
 	const navigate = useNavigate()
 	const [activeTab, setActiveTab] = useState(1)
 	const [lockDuration, setLockDuration] = useState(0)
+	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
 	const copyRefLink = () => {
 		if (navigator.clipboard && navigator.permissions) {
@@ -71,7 +72,7 @@ function PiggyBank() {
 
 
 	return (
-		<div>
+		<animated.div style={props} >
 			<div className={styles.piggybank}>
 				<div className={styles.piggybank__header}>
 					{/* <p>
@@ -144,7 +145,7 @@ function PiggyBank() {
 				<ReferralTable />
 				<PiggyBankInfo />
 			</div>
-		</div>
+		</animated.div>
 	)
 }
 
