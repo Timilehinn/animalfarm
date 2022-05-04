@@ -1,72 +1,74 @@
 @import '../../global.scss';
 
 .tableheader {
-    margin: auto;   
-    color: rgba(217 217 212 / 90%);
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-size: 20px;
-    font-family: $boldFont;
+	margin: auto;
+	color: rgba(217 217 212 / 90%);
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-family: $boldFont;
 }
 .totalpiggybank {
-    font-size: 10px;
-    padding: 3px;
-    padding-right: 12px;
-    padding-left: 12px;
-    height: 10px;
-    border-radius: 8px;
-    background-color: #808183;
-    margin-left: 6px;
+	font-size: 10px;
+	padding: 3px;
+	padding-right: 12px;
+	padding-left: 12px;
+	height: 10px;
+	border-radius: 8px;
+	background-color: #808183;
+	margin-left: 6px;
 }
 .tablebody {
-    font-family: $boldFont;
-    overflow-x: scroll;
-    margin: auto;   
-    max-width: 62.5em;
-    border-radius: 10px;
+	font-family: $boldFont;
+	overflow-x: scroll;
+	margin: auto;
+	max-width: 62.5em;
+	border-radius: 10px;
 }
-@media (min-width: 800px) and (max-width:1200px) { 
-    .tablebody {
-        max-width: 700px;
-    }
+@media (min-width: 800px) and (max-width: 1200px) {
+	.tablebody {
+		max-width: 700px;
+	}
 }
 
 .tablebody::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 .table {
-    width: 1000px;
-    color: rgba(217 217 212 / 90%);
-    margin: auto;
-    overflow-x: scroll;
-    overflow-y: scroll;
-    overflow-y: visible;
-    border-radius: 10px;
-    border-width: 0.6px;
-    border-style: solid;
-    border-color: transparent;
-    background: linear-gradient(#121212,#121212) padding-box, linear-gradient(#f3ba2a,#121212) border-box;
-    margin-bottom: 110px;
+	width: 1000px;
+	color: rgba(217 217 212 / 90%);
+	margin: auto;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	overflow-y: visible;
+	border-radius: 10px;
+	border-width: 0.6px;
+	border-style: solid;
+	border-color: transparent;
+	background: linear-gradient(#121212, #121212) padding-box, linear-gradient(#f3ba2a, #121212) border-box;
+	margin-bottom: 110px;
 }
-@media (min-width: 600px) and (max-width: 800px) { 
-    .table {
-        max-width: 600px;
-    }
+@media (min-width: 600px) and (max-width: 800px) {
+	.table {
+		max-width: 600px;
+	}
 }
 .table::-webkit-scrollbar {
-    display: none;
+	display: none;
 }
 tbody {
-    text-align: center;
-    padding: 40px;
+	text-align: center;
+	padding: 40px;
 }
 th {
-    font-size: 14px;
-    line-height: 4;
+	font-size: 14px;
+	line-height: 4;
 }
-table{border-collapse:collapse}
+table {
+	border-collapse: collapse;
+}
 td {
-    font-size:1em;
-    font-weight: 400;
+	font-size: 1.5em;
+	font-weight: 400;
 }
