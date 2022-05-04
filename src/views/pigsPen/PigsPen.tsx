@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
-
+import { toggleTourModal } from 'state/toggle'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
+import { useAppDispatch } from 'state/hooks'
 import styles from './PigsPen.module.scss'
+
 
 import pig from '../../assets/svgg.png'
 
@@ -23,18 +25,39 @@ function PigsPen() {
 	}, [])
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
+	const dispatch = useAppDispatch()
+
+	
+
+	// open tour modal
+	useEffect(()=>{
+		dispatch( toggleTourModal({state:false,msg:""}) )
+		const data = {
+			state : true,
+			msg : "THE PIGPEN IS OUR STAKING PROTOCOL WHERE HOLDERS OF THE PIGS TOKENS BECOME OWNERS OF THE PLATFORM BY STAKING THEIR PIGS. PIGPEN PAYS OUT HIGH YIELD DIVIDENDS IN BOTH BUSD AND PIGS THAT ARE GENERATED FROM PLATFORM FEES AND DOGS TOKEN TAXES!! LEARN MORE HERE"
+		}
+		setTimeout(()=>{
+			dispatch( toggleTourModal(data) )
+				// setTimeout(()=>{
+				// dispatch( toggleTourModal({state:false,msg:""}) )
+			// },10000)
+		},4000)
+
+		
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	},[])
 
 	return (
 		<div className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
-				<div className={styles.pigspen__header}>
+				{/* <div className={styles.pigspen__header}>
 					<p>
 						THE PIGPEN IS OUR STAKING PROTOCOL WHERE HOLDERS OF THE PIGS TOKENS BECOME OWNERS OF THE PLATFORM! EARN HIGH YIELD DIVIDENDS IN PIGS AND BUSD. LEARN MORE:{' '}
 						<a href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D`} className={styles.header__a}>
 							HERE{' '}
 						</a>
 					</p>
-				</div>
+				</div> */}
 				<div className={styles.cards}>
 					<div>
 						<PigsCreditCard title='Total PIGS Locked' amount='0.00 PIGS' />

@@ -22,7 +22,9 @@ body {
 	// background-size: contain;
 	// background-position: center;
 	// background-repeat: no-repeat;
-	background-color: rgb(24, 24, 24);
+	// background-color: rgba(24, 24, 24, 0.355);
+	background: linear-gradient(10deg, #000000dd, #000000ef);
+	
 }
 
 @media screen and (max-width: 481px) {

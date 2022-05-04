@@ -1,0 +1,75 @@
+.tour{
+    // height: 200px;
+    width: 400px;
+    padding: 20px;
+    font-size: 0.8rem;
+    background-color: #121212;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 10px;
+    transform: translateY(-50px);
+    position: fixed;
+    top: 30px;
+    right: 50px;
+    // float: right;
+    position: -webkit-sticky;
+    /* Safari */
+    z-index: 10000;
+    opacity: 0;
+    transition: 0.3s;
+    visibility: 0;
+    display: flex;
+    flex-direction: column;
+    
+    nav{
+        display: flex;
+        justify-content: flex-start;
+
+        svg{
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+    }
+
+    p{
+         line-height: 30px;
+    }
+
+    &::before {
+        content: " ";
+        position: absolute;
+        right: 30px;
+        top: -15px;
+        border-top: none;
+        border-right: 15px solid transparent;
+        border-left: 15px solid transparent;
+        border-bottom: 15px solid black;
+        cursor: pointer;
+    }
+
+    .learn{
+        text-decoration: underline;
+        color: #f3ba2f;
+        margin-bottom: 10px;
+    }
+
+    button{
+        width: 80px;
+        height: 40px;
+        border-radius: 5px;
+        cursor: pointer;
+        
+    }
+}
+
+.tour__active{
+    opacity:1;
+    visibility: 1;
+    transform: translateY(0px);
+}
+
+@media screen and (max-width:768px) {
+    .tour{
+        width: 80%;
+    }
+}

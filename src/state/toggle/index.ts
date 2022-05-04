@@ -6,6 +6,11 @@ interface InfoValue {
     value : number
 }
 
+interface tourMod {
+    state : boolean,
+    msg : string
+}
+
 interface initialStateProps {
     isMobileNavActive : boolean
     isConfirmModalActive : boolean
@@ -20,7 +25,8 @@ interface initialStateProps {
     }
     isToastNotificationOpen : boolean,
     toastNotificationMsg,
-    isDepositModalOpen:boolean
+    isDepositModalOpen:boolean,
+    isTourModalOpen: tourMod
 }
 
 const initialState:initialStateProps = {
@@ -39,7 +45,11 @@ const initialState:initialStateProps = {
     },
     isToastNotificationOpen:false,
     toastNotificationMsg: '',
-    isDepositModalOpen:false
+    isDepositModalOpen:false,
+    isTourModalOpen:{
+        state : false,
+        msg : ''
+    }
 
 
 }
@@ -67,6 +77,10 @@ const toggleSlice = createSlice({
         toggleDepositModal:(state,action:PayloadAction<any>) =>{
             state.isDepositModalOpen = action.payload
         },
+        toggleTourModal:(state,action:PayloadAction<any>) =>{
+            state.isTourModalOpen.msg = action.payload.msg
+            state.isTourModalOpen.state = action.payload.state
+        },
         
     }
 })
@@ -78,5 +92,6 @@ export const {
     toggleConfirmModal, 
     setModalProps,
     toggleToastNotification,
-    toggleDepositModal
+    toggleDepositModal,
+    toggleTourModal
 } = toggleSlice.actions
