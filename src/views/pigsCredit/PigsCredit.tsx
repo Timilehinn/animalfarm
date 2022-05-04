@@ -6,7 +6,7 @@ import { useSpring, animated } from 'react-spring'
 import { ClaimToPiggyBank } from 'api/claimPigs'
 import { PigsCreditAddress } from 'config/constants'
 
-import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal } from 'state/toggle'
+import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
 import { getPigsBUSDPrice } from 'utils/getPrice'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
@@ -151,17 +151,35 @@ function PigsCredit() {
 	// const isButtonEnabled = Boolean(allowance < (busdValue * 10 ** 18).toString() && busdValue !== null)
 	// console.log(isButtonEnabled, 'isButtonEnabled')
 
+	// tour modal
+
+	useEffect(()=>{
+		dispatch( toggleTourModal({state:false,msg:""}) )
+		const data = {
+			state : true,
+			msg : "Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options!Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 20% bonus!! "
+		}
+		setTimeout(()=>{
+			
+			dispatch( toggleTourModal(data) )
+				
+		},6000)
+
+		
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	},[])
+
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
 			<div className={styles.pigscredit}>
-				<div className={styles.pigscredit__header}>
+				{/* <div className={styles.pigscredit__header}>
 					<p>
 						Users who were in PigPen when we paused for v2 migration are the only users who need to utilize the PIGS Crediting UI. If this applies to you, LEARN MORE:{' '}
 						<a href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D`} className={styles.header__a}>
 							HERE{' '}
 						</a>
 					</p>
-				</div>
+				</div> */}
 				<div className={styles.cards}>
 					<div>
 						<PigsCreditCard title='PIGS balance' amount={`${pigsBalance.amount.toFixed(2)} PIGS`} />

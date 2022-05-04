@@ -14,9 +14,11 @@ import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import Toast from 'components/Toast/Toast'
 import Migrate from 'views/Imigrate/Imigrate'
 import DepositeModal from 'components/DepositeModal/DepositeModal'
+import TourModal from 'components/TourModal/TourModal'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
+
 
  
 import Home from '../home/Home'
@@ -42,6 +44,7 @@ function Landing() {
 				<ConfirmModal />
 				<Toast />
 				<DepositeModal />
+				<TourModal />
 				<Routes>
 					
 					<Route path='/' element={<Home />} />

@@ -7,7 +7,7 @@ import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useNavigate } from 'react-router-dom'
 
-import { toggleToastNotification } from 'state/toggle'
+import { toggleToastNotification, toggleTourModal } from 'state/toggle'
 
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
@@ -54,17 +54,33 @@ function PiggyBank() {
 		}
 	}
 
+	useEffect(()=>{
+		dispatch( toggleTourModal({state:false,msg:""}) )
+		const data = {
+			state : true,
+			msg : "THE PIGGY BANK IS THE FIRST EVER NON-INFLATIONARY VARIABLE TIME STAKING ANNUITY. STAKE PIGS/BUSD LP TOKENS TO EARN UP TO 3% DAILY ROI!! EARN A 2% REFERRAL BONUS FOR ON BOARDNING NEW USERS."
+		}
+		setTimeout(()=>{
+			dispatch( toggleTourModal(data) )
+				
+		},3000)
+
+		
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	},[])
+
+
 	return (
 		<div>
 			<div className={styles.piggybank}>
 				<div className={styles.piggybank__header}>
-					<p>
+					{/* <p>
 						THE PIGGY BANK IS THE FIRST EVER NON-INFLATIONARY VARIABLE TIME STAKING ANNUITY. LEARN MORE:
 						<a href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D`} className={styles.header__a}>
 							{' '}
 							HERE{' '}
 						</a>
-					</p>
+					</p> */}
 				</div>
 				<div className={styles.cards}>
 					<div>
