@@ -35,7 +35,7 @@ function SideNavigation() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
-				<a className={styles.link} href='https://themanor.farm/garden'>
+				<a className={styles.link} href='https://theanimal.farm/garden'>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
 				</a>
