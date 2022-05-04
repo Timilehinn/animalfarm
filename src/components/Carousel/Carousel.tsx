@@ -9,10 +9,10 @@ interface cardProps {
 
 function AnimalCarousel() {
 	const breakPoints = [
-		{ width: 1, itemsToShow: 1 },
-		{ width: 550, itemsToShow: 2, itemsToScroll: 2 },
-		{ width: 768, itemsToShow: 3 },
-		{ width: 1200, itemsToShow: 4 },
+		{ width: 1, itemsToShow: 1.5 },
+		{ width: 550, itemsToShow: 2.5, itemsToScroll: 2.5 },
+		{ width: 768, itemsToShow: 3.5 },
+		{ width: 1200, itemsToShow: 4.5 },
 	]
 
 	const boxItem = [
@@ -50,7 +50,7 @@ function AnimalCarousel() {
 		<div className='carousel' style={{ color: 'white',paddingTop:"50px" }}>
 			<h3 className='carousel__h'>Animal Farm Features</h3>
 			<div className='carousel__container'>
-				<Carousel isRTL={false} showArrows={false}   transitionMs={600} breakPoints={breakPoints} itemsToShow={5}>
+				<Carousel isRTL={false} showArrows={false}   transitionMs={600} breakPoints={breakPoints} itemsToShow={2.5}>
 					{boxItem.map((item, index) => (
 						<Card title={item.title} paragraph={item.paragraph} />
 					))}
