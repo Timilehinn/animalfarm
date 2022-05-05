@@ -1,12 +1,14 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { longerPaysBetterBonusPercents } from 'utils/lockBonusPercentage'
 import { ToggleWalletModal } from 'state/wallet'
 import { ClaimToPiggyBank } from 'api/claimPigs'
+import { usePigPen } from 'state/pigpen/hooks'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import RangeSlider from 'components/RangeSlider/RangeSlider'
 import Info from 'components/Info/Info'
+import { getBalanceAmountString } from 'utils/formatBalance'
 import logo from '../../assets/svgg.png'
 
 import styles from './RewardsCenter.module.scss'
@@ -50,6 +52,8 @@ interface rewardProps {
 	setInputValue?: any
 	inputValue2?: string
 	setInputValue2?: any
+	claimRewards?: any
+	compoundPigs?: any
 }
 
 function RewardsCenter({
@@ -88,13 +92,14 @@ function RewardsCenter({
 	setInputValue,
 	inputValue2,
 	setInputValue2,
+	claimRewards,
+	compoundPigs,
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
+	const { userData, pigPenData } = usePigPen()
 
 	const { account, library } = useActiveWeb3React()
-
-	
 
 	const handleChange = (e: any) => {
 		// setBusdValue(e.target.value)
@@ -105,7 +110,6 @@ function RewardsCenter({
 	const handleChange2 = (e: any) => {
 		// setBusdValue(e.target.value)
 		setInputValue2(e.target.value)
-		
 	}
 
 	const handleApprove = () => {
@@ -119,6 +123,25 @@ function RewardsCenter({
 
 	const handleConfirm = async () => {
 		confirmFunction()
+	}
+
+	const handleClaimReward = async () => {
+		claimRewards()
+	}
+
+	const handleCompound = async () => {
+		compoundPigs()
+	}
+
+	const shouldEnableClaimButton = (): boolean => {
+		if (userData.earningsBusd === '0' && userData.earningsPigs === '0') {
+			return false
+		}
+
+		if (userData.earningsBusd !== '0' || userData.earningsPigs !== '0') {
+			return true
+		}
+		return true
 	}
 
 	// modal properties to be set to state
@@ -203,14 +226,14 @@ function RewardsCenter({
 				<div className={styles.center}>
 					<p className={styles.center__header}>Reward Center</p>
 					<div className={styles.center__box}>
-						<Info title='Claimable BUSD' info='0 BUSD' />
-						<Info title='Claimable PIGS' info='0 PIGS' />
+						<Info title='Claimable BUSD' info={`${getBalanceAmountString(userData.earningsBusd)} BUSD`} />
+						<Info title='Claimable PIGS' info={`${getBalanceAmountString(userData.earningsBusd)} PIGS`} />
 					</div>
 					<div className={styles.center__buttons}>
-						<button type='button' style={{ marginRight: '10px' }}>
-							Claim reward
+						<button type='button' onClick={handleClaimReward} style={{ marginRight: '10px' }} disabled={shouldEnableClaimButton()} className={styles.button__enabled}>
+							Claim Rewards
 						</button>
-						<button type='button' style={{ marginLeft: '10px' }}>
+						<button type='button' onClick={handleCompound} style={{ marginLeft: '10px' }} className={styles.button__enabled}>
 							Compound PIGS
 						</button>
 					</div>
