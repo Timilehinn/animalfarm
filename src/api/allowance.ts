@@ -62,11 +62,11 @@ export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress
 
 
 export const approvePigBusd = async (spenderAddress: string, amount: string, signer: ethers.Signer) => {
-	const { piggyBankContract } = getContract()
+	const { pigsBusdLpContract } = getContract()
 	let approval
 
 	try {
-		const result: ethers.BigNumber = await piggyBankContract.connect(signer).approve(spenderAddress, amount)
+		const result: ethers.BigNumber = await pigsBusdLpContract.connect(signer).approve(spenderAddress, amount)
 		// const balance = ethers.BigNumber.from(result).toString()
 		// approval={
 		//     approval: balance
