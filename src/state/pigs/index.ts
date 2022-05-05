@@ -1,27 +1,27 @@
-import { createSlice,PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const initialState = {
-
-    pigsAvailableToClaim : 0,
-    pigsBusdPrice : 0
+	data: {
+		busdAllowance: '0',
+		busdBalance: '0',
+		pigsBalance: '0',
+		pigsAvailableToClaim: '0',
+		pigsBusdPrice: '0',
+	},
 }
 
-
-const pigsSlice = createSlice({
-    name : 'pigsCredit',
-    initialState,
-    reducers : {
-        setPigsAvailableToClaim: (state, action:PayloadAction<number>) => {
-            state.pigsAvailableToClaim = action.payload
-        },
-        setPigsBusdPrice: (state, action:PayloadAction<number>) => {
-            state.pigsAvailableToClaim = action.payload
-        }
-    }
-
-
+const pigsCreditSlice = createSlice({
+	name: 'pigsCredit',
+	initialState,
+	reducers: {
+		setPigsCreditData: (state, action) => {
+			state.data = { ...state, ...action.payload }
+		},
+		setPigsBusdPrice: (state, action: PayloadAction<string>) => {
+			state.data.pigsBusdPrice = action.payload
+		},
+	},
 })
 
-
-export const { setPigsAvailableToClaim, setPigsBusdPrice  } = pigsSlice.actions
-export default pigsSlice.reducer
+export const { setPigsCreditData, setPigsBusdPrice } = pigsCreditSlice.actions
+export default pigsCreditSlice.reducer

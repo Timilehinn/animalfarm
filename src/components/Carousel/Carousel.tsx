@@ -43,16 +43,16 @@ function AnimalCarousel() {
 		{
 			title: 'Integrity',
 			paragraph: 'From the Developers of DRIP, the fastest growing and highest ranked DeFi protocol on BSC!!',
-		}
+		},
 	]
 
 	return (
-		<div className='carousel' style={{ color: 'white',paddingTop:"50px" }}>
+		<div className='carousel' style={{ color: 'white', paddingTop: '50px' }}>
 			<h3 className='carousel__h'>Animal Farm Features</h3>
 			<div className='carousel__container'>
-				<Carousel isRTL={false} showArrows={false}   transitionMs={600} breakPoints={breakPoints} itemsToShow={2.5}>
+				<Carousel isRTL={false} showArrows={false} transitionMs={600} breakPoints={breakPoints} itemsToShow={2.5}>
 					{boxItem.map((item, index) => (
-						<Card title={item.title} paragraph={item.paragraph} />
+						<Card key={`${index + item.title}`} title={item.title} paragraph={item.paragraph} />
 					))}
 				</Carousel>
 			</div>

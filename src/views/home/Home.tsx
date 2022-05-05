@@ -6,7 +6,7 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import styles from './Home.module.scss'
 import chart from '../../assets/chart.png'
 import { setPigsBalance, setBusdBalance, setPigsBusdLpBalance } from '../../state/balances'
-import { setPigsAvailableToClaim } from '../../state/pigs'
+// import { setPigsAvailableToClaim } from '../../state/pigs'
 import { useAppDispatch } from '../../state/hooks'
 
 function Home() {
@@ -39,11 +39,11 @@ function Home() {
 		dispatch(setBusdBalance((res.amount / 10 ** 18).toString()))
 	}
 
-	const getPigsToClaim = async () => {
-		const res = await availablePigsToClaim(account)
-		console.log(Number(res.amount) / 10 ** 18)
-		dispatch(setPigsAvailableToClaim(Number(res.amount) / 10 ** 18))
-	}
+	// const getPigsToClaim = async () => {
+	// 	const res = await availablePigsToClaim(account)
+	// 	console.log(Number(res.amount) / 10 ** 18)
+	// 	dispatch(setPigsAvailableToClaim(Number(res.amount) / 10 ** 18))
+	// }
 
 	const _getPigsBusdLpBalance = async () => {
 		const res = await getPigsBusdLpBalance(account)
@@ -53,7 +53,7 @@ function Home() {
 
 	useEffect(() => {
 		if (account) {
-			Promise.all([getPigsToClaim(), _getPigsBalance(), _getBusdBalance(), _getPigsBusdLpBalance()])
+			Promise.all([_getPigsBalance(), _getBusdBalance(), _getPigsBusdLpBalance()])
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])

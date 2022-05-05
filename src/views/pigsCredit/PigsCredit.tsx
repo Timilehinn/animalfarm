@@ -1,4 +1,5 @@
-import React, { useEffect, useState, useCallback } from 'react'
+/* eslint-disable import/order */
+import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useSpring, animated } from 'react-spring'
 // import { getBUSDPrice } from 'api/getPrice'
@@ -11,18 +12,18 @@ import { getPigsBUSDPrice } from 'utils/getPrice'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
-import { getDecimalAmount } from 'utils/formatBalance'
-import { setPigsBusdPrice } from 'state/pigs'
+import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
+import { setPigsBusdPrice, setPigsCreditData } from 'state/pigs'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { checkAllowance, approveBusd } from '../../api/allowance'
 import { getPigsBalance } from '../../api/getPigsBalance'
+import { fetchPigsCreditData, approvePigsCreditSpendBUSD, claimInToPigPen } from 'api/pigscredit'
 
 import { useAppSelector, useAppDispatch } from '../../state/hooks'
 import { usePigsBalance } from '../../state/balances/hooks'
 import styles from './PigsCredit.module.scss'
 import pig from '../../assets/pig.png'
 import busdIcon from '../../assets/busd.png'
-
 
 function PigsCredit() {
 	useEffect(() => {
@@ -39,17 +40,14 @@ function PigsCredit() {
 	}, [])
 
 	const { account, library } = useActiveWeb3React()
-	const { pigsBalance, setPigsBalance } = usePigsBalance()
-	// const pigsBalance = useAppSelector((state) => state.balanceReducer.pigsBalance)
-	const _busdBalance = useAppSelector((state) => state.balanceReducer.busdBalance)
-	const availablePigsToClaim = useAppSelector((state) => state.pigsCreditReducer.pigsAvailableToClaim)
+
+	/// THIS IS ALL THE DATA NEEDED ///
+	const { busdAllowance, busdBalance, pigsBalance, pigsBusdPrice, pigsAvailableToClaim } = useAppSelector((state) => state.pigsCreditReducer.data)
 	const signer = library.getSigner()
 
 	const dispatch = useAppDispatch()
-	const [pigsBusdPrice, _setPigsBusdPrice] = useState(0)
-	const [allowance, setAllowance] = useState(null)
 	const [inputValue, setInputValue] = useState('')
-	const [canApprove, setCanApprove] = useState(false)
+	const [claimToPigPenAmount, setClaimToPigPenAmount] = useState('')
 	const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(true)
 	const [isDisabled, setIsDisabled] = useState(false)
@@ -62,66 +60,56 @@ function PigsCredit() {
 		try {
 			const res = await getPigsBUSDPrice()
 			console.log(Number(res), 'busdpigs price')
-			setPigsBusdPrice(res)
-			_setPigsBusdPrice(res)
+			dispatch(setPigsBusdPrice(res))
+			// _setPigsBusdPrice(res)
 		} catch (err) {
 			console.log(err)
 		}
 	}
-
-	const getAllowanceCallback = useCallback(async () => {
-		try {
-			const res = await checkAllowance(account, PigsCreditAddress)
-			console.log(res, 'allowance')
-			setAllowance(res.allowance)
-			// if ()
-		} catch (err) {
-			console.log(err)
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
 
 	const approve = async () => {
 		setPending(true)
 		try {
 			console.log(inputValue, 'tesss')
-			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', '115792089237316195423570985008687907853269984665640564039457584007913129639935', signer)
+			await approvePigsCreditSpendBUSD(signer)
 			setPending(false)
 			setIsApproved(true)
-			const data = {
-				success: true,
-				msg: 'approved',
-			}
-			console.log(data)
 		} catch (err) {
 			console.log(err)
-			const data = {
-				success: false,
-				msg: 'not approved',
-			} 
+
 			setPending(false)
 			setIsApproved(false)
 		}
 	}
 
+	// claimInToPigPen
+
+	const claimToPigPen = async () => {
+		try {
+			await claimInToPigPen(claimToPigPenAmount, signer)
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
 	const claimToPiggy = async () => {
 		try {
-			const res = await ClaimToPiggyBank(((Number(inputValue) / pigsBusdPrice) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
+			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
 			console.log(res)
 
-			if (res.success===true) {
+			if (res.success === true) {
 				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
-					setTimeout(() => {
+				setTimeout(() => {
 					dispatch(toggleToastNotification(false))
 				}, 3000)
 			}
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
-			if(res.success===false){
+			if (res.success === false) {
 				dispatch(toggleToastNotification({ state: true, msg: 'Transcation Failed' }))
 				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
-					setTimeout(() => {
+				setTimeout(() => {
 					dispatch(toggleToastNotification(false))
 				}, 3000)
 			}
@@ -132,14 +120,14 @@ function PigsCredit() {
 
 	useEffect(() => {
 		Promise.all([getBusdPrice()])
-	})
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	useEffect(() => {
 		const exec = async () => {
 			if (account) {
 				//
-				setPigsBalance(await getPigsBalance(account))
-				getAllowanceCallback()
+				dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
 			}
 		}
 
@@ -148,22 +136,19 @@ function PigsCredit() {
 	}, [account])
 
 	const checkButtonAndApproval = (inputvalue: string) => {
-		if (new BigNumber(allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
 
-		if (new BigNumber(allowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+		if (new BigNumber(busdAllowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsApproved(true)
 		}
 	}
 
-	const estimatedBusdToPair = Math.ceil(pigsBusdPrice * availablePigsToClaim)
-	// const isButtonEnabled = Boolean(allowance < (busdValue * 10 ** 18).toString() && busdValue !== null)
-	// console.log(isButtonEnabled, 'isButtonEnabled')
+	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
 
 	// tour modal
-
 	useEffect(() => {
 		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
@@ -190,10 +175,10 @@ function PigsCredit() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='PIGS balance' amount={`${pigsBalance.amount.toFixed(2)} PIGS`} />
+						<PigsCreditCard title='PIGS balance' amount={`${Number(pigsBalance).toFixed(2)} PIGS`} />
 					</div>
 					<div>
-						<PigsCreditCard title='BUSD balance' amount={`${Number(_busdBalance).toFixed(2)} BUSD`} />
+						<PigsCreditCard title='BUSD balance' amount={`${Number(busdBalance).toFixed(2)} BUSD`} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -206,10 +191,10 @@ function PigsCredit() {
 						</div>
 					</div>
 					{activeTab === 1 ? (
-						<ClaimPigsPen title='Submit Pigs' />
+						<ClaimPigsPen title='Submit Pigs' pigsAvailableToClaim={pigsAvailableToClaim} claimToPigPenAmount={claimToPigPenAmount} setClaimToPigPenAmount={setClaimToPigPenAmount} claimToPigPen={claimToPigPen} />
 					) : (
 						<RewardsCenter
-							pigsBusdPrice={pigsBusdPrice}
+							pigsBusdPrice={Number(pigsBusdPrice)}
 							Lock
 							pair
 							text='PIGS/BUSD LP Tokens'
@@ -224,9 +209,9 @@ function PigsCredit() {
 							lockDuration={lockDuration}
 							setLockDuration={setLockDuration}
 							confirmFunction={claimToPiggy}
-							available={`${Number(_busdBalance).toFixed(2).toString()} BUSD`}
+							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
-							infoValue={availablePigsToClaim.toFixed(2)}
+							infoValue={getBalanceAmountString(pigsAvailableToClaim)}
 							infoTitle2='Estimated BUSD to pair'
 							infoValue2={estimatedBusdToPair}
 							token='BUSD'
