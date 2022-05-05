@@ -4,13 +4,15 @@ import { useSpring, animated } from 'react-spring'
 // import { toggleTourModal } from 'state/toggle'
 import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
+// eslint-disable-next-line import/no-named-as-default-member
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import { useAppDispatch } from 'state/hooks'
 import { usePigPen } from 'state/pigpen/hooks'
+import useToast from 'hooks/useToast'
 import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
 
-import { fetchPigPenData, approvePigPenSpendPIGS, depositIntoPigPen } from 'api/pigpen'
+import { fetchPigPenData, approvePigPenSpendPIGS, depositIntoPigPen, claimRewardPigPen, withdrawFromPigPen } from 'api/pigpen'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styles from './PigsPen.module.scss'
 
@@ -36,6 +38,7 @@ function PigsPen() {
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 	const dispatch = useAppDispatch()
+	const { toastSuccess, toastError } = useToast()
 
 	/// Generic States to be used for all pages that requires approval
 	const [pending, setPending] = useState(false)
@@ -105,7 +108,8 @@ function PigsPen() {
 		try {
 			await depositIntoPigPen(getDecimalAmount(inputValue.toString()), signer)
 			setInputValue('')
-			dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
+			toastSuccess('Deposit Successful!')
+			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
@@ -118,7 +122,67 @@ function PigsPen() {
 		}
 	}
 
-	const modalDetails = {
+	const claimMyRewards = async () => {
+		// setPending(true)
+		try {
+			await claimRewardPigPen(false, signer)
+			toastSuccess('Claim Rewards Successful!')
+			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
+			dispatch(toggleConfirmModal(false))
+			dispatch(toggleModalBackDrop(false))
+
+			setTimeout(() => {
+				dispatch(toggleToastNotification(false))
+			}, 3000)
+			await fetchData()
+		} catch (err) {
+			// Do something here
+		}
+	}
+
+	const compoundPigs = async () => {
+		// setPending(true)
+		try {
+			await claimRewardPigPen(true, signer)
+			toastSuccess('Successful!')
+			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
+			dispatch(toggleConfirmModal(false))
+			dispatch(toggleModalBackDrop(false))
+
+			setTimeout(() => {
+				dispatch(toggleToastNotification(false))
+			}, 3000)
+			await fetchData()
+		} catch (err) {
+			// Do something here
+		}
+	}
+
+	const withdrawPigs = async () => {
+		// require((block.timestamp - user.startLockTimestamp) >= 24 hours, "withdraw: Cannot withdraw until after 24 hours!");
+		// setPending(true)
+		// console.log('Okay')
+
+		try {
+			await withdrawFromPigPen(signer)
+			toastSuccess('Withdrawal Successful!')
+			// dispatch(toggleToastNotification({ state: true, msg: 'Withdraw Successful' }))
+			dispatch(toggleConfirmModal(false))
+			dispatch(toggleModalBackDrop(false))
+
+			setTimeout(() => {
+				dispatch(toggleToastNotification(false))
+			}, 3000)
+			await fetchData()
+		} catch (err) {
+			// Do something here
+			toastError('Cannot withdraw until after 24 hours!')
+		}
+	}
+
+	// withdrawFromPigPen
+
+	const modalDetailsForDeposit = {
 		modalTitleText: 'Confirm Deposit',
 		confirmButtonText: 'Deposit',
 		value: inputValue,
@@ -131,6 +195,21 @@ function PigsPen() {
 			},
 		],
 		confirmFunction: depositPigs,
+	}
+
+	const modalDetailsForWithdraw = {
+		modalTitleText: 'Confirm Withdrawal',
+		confirmButtonText: 'Withdraw',
+		value: getBalanceAmountString(userData.pigAvailableForWithdrawal),
+		text: 'PIGS',
+		warning: 'Withdraw from PigPen',
+		infoValues: [
+			{
+				title: 'Rewards',
+				value: 'BUSD & PIGS',
+			},
+		],
+		confirmFunction: withdrawPigs,
 	}
 
 	return (
@@ -189,7 +268,10 @@ function PigsPen() {
 								checkButtonAndApproval={checkButtonAndApproval}
 								approve={approve}
 								// Confirm Props for Confirm Modal
-								confirmModalProps={modalDetails}
+								confirmModalProps={modalDetailsForDeposit}
+								// Rewards
+								claimRewards={claimMyRewards}
+								compoundPigs={compoundPigs}
 							/>
 						) : (
 							<RewardsCenter
@@ -200,7 +282,7 @@ function PigsPen() {
 								infoValue={`${getBalanceAmountString(userData.stakedBalance)} PIGS`}
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
-								infoValue3='0 PIGS'
+								infoValue3={`${getBalanceAmountString(userData.pigAvailableForWithdrawal)} PIGS`}
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton
@@ -210,6 +292,10 @@ function PigsPen() {
 								pTitle='Enter amount of PIGS to be withdrawn from the PIG Pen'
 								rewardCenter={false}
 								warningMsg={false}
+								// Confirm Props for Confirm Modal
+								confirmModalProps={modalDetailsForWithdraw}
+								// Approval for button
+								isApproved
 							/>
 						)}
 					</div>
