@@ -7,7 +7,7 @@ import lpTokenAbi from 'config/Iabi/lpToken.json'
 import MultiCallAbi from 'config/Iabi/Multicall.json'
 import piggyBankABI from 'config/Iabi/PiggyBank.json'
 import PigCreditsABI from 'config/Iabi/PigCredits.json'
-import PigPenV2ABI from 'config/Iabi/PigPenV2.json'
+import PigPenV2ABI from 'config/abi/PigPenV2.json'
 
 // Addresses
 import { PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress } from '../config/constants'

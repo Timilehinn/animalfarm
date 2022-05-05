@@ -1,12 +1,17 @@
 import React, { useEffect } from 'react'
+import BigNumber from 'bignumber.js'
 import { useSpring, animated } from 'react-spring'
 import { toggleTourModal } from 'state/toggle'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import { useAppDispatch } from 'state/hooks'
-import styles from './PigsPen.module.scss'
+import { usePigPen } from 'state/pigpen/hooks'
+import { getBalanceAmountString } from 'utils/formatBalance'
 
+import { fetchPigPenData } from 'api/pigpen'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import styles from './PigsPen.module.scss'
 
 import pig from '../../assets/svgg.png'
 
@@ -23,31 +28,54 @@ function PigsPen() {
 		background-color: rgb(24, 24, 24);`
 		)
 	}, [])
+
+	const { account } = useActiveWeb3React()
+	const { userData, pigPenData, setPigPenData, setUserData } = usePigPen()
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 	const dispatch = useAppDispatch()
 
-	
-
 	// open tour modal
-	useEffect(()=>{
-		dispatch( toggleTourModal({state:false,msg:""}) )
+	useEffect(() => {
+		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
-			state : true,
-			msg : "The PIGPEN is our staking protocol where holders of the PIGS token become owners of the platform by staking their PIGS. Pigpen pays out high yield dividends in both BUSD and PIGS that are generated from the platform fees and DOGs token taxes!!"
+			state: true,
+			msg: 'The PIGPEN is our staking protocol where holders of the PIGS token become owners of the platform by staking their PIGS. Pigpen pays out high yield dividends in both BUSD and PIGS that are generated from the platform fees and DOGs token taxes!!',
 		}
-		setTimeout(()=>{
-			dispatch( toggleTourModal(data) )
-				// setTimeout(()=>{
-				// dispatch( toggleTourModal({state:false,msg:""}) )
+		setTimeout(() => {
+			dispatch(toggleTourModal(data))
+			// setTimeout(()=>{
+			// dispatch( toggleTourModal({state:false,msg:""}) )
 			// },10000)
-		},4000)
+		}, 4000)
 
-		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	}, [])
 
-	
+	useEffect(() => {
+		async function fetchData() {
+			const res = await fetchPigPenData(account)
+			setPigPenData(res.pigPenData)
+			setUserData(res.userData)
+			console.log(res)
+		}
+
+		if (account) {
+			fetchData()
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [account])
+
+	// const checkButtonAndApproval = (inputValue: number) => {
+	// 	if (new BigNumber(allowance).isLessThan((inputValue * 10 ** 18).toString()) && inputValue !== null) {
+	// 		setIsDisabled(true)
+	// 		setIsApproved(false)
+	// 	}
+
+	// 	if (new BigNumber(allowance).isGreaterThanOrEqualTo((inputValue * 10 ** 18).toString()) && inputValue !== null) {
+	// 		setIsApproved(true)
+	// 	}
+	// }
 
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
@@ -62,7 +90,7 @@ function PigsPen() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total PIGS Locked' amount='0.00 PIGS' />
+						<PigsCreditCard title='Total PIGS Locked' amount={getBalanceAmountString(pigPenData.pigsSupply)} />
 					</div>
 					<div>
 						<PigsCreditCard title='Total Value Locked' amount='$0.00' />
@@ -91,7 +119,7 @@ function PigsPen() {
 								icon={pig}
 								pTitle='Enter amount of PIGS to be staked in the PIG Pen'
 								token='PIGS'
-								buttonText='Enter amount to deposit'
+								buttonText='Deposit'
 								Lock={false}
 								rewardCenter
 								warningMsg
