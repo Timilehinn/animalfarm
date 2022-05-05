@@ -45,7 +45,7 @@ function PigsCredit() {
 	const dispatch = useAppDispatch()
 	const [pigsBusdPrice, setPigsBusdPrice] = useState(0)
 	const [allowance, setAllowance] = useState(null)
-	const [busdValue, setBusdValue] = useState('')
+	const [inputValue, setInputValue] = useState('')
 	const [canApprove, setCanApprove] = useState(false)
 	const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(true)
@@ -80,8 +80,8 @@ function PigsCredit() {
 	const approve = async () => {
 		setPending(true)
 		try {
-			console.log(busdValue, 'tesss')
-			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', (Number(busdValue) * 10 ** 18).toString(), signer)
+			console.log(inputValue, 'tesss')
+			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', (Number(inputValue) * 10 ** 18).toString(), signer)
 			setPending(false)
 			setIsApproved(true)
 			const data = {
@@ -102,7 +102,7 @@ function PigsCredit() {
 
 	const claimToPiggy = async () => {
 		try {
-			const res = await ClaimToPiggyBank(((Number(busdValue) / pigsBusdPrice) * 10 ** 18).toString(), (Number(busdValue) * 10 ** 18).toString(), lockDuration, signer)
+			const res = await ClaimToPiggyBank(((Number(inputValue) / pigsBusdPrice) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
 			console.log(res)
 
 			if (res.success) {
@@ -136,13 +136,13 @@ function PigsCredit() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 
-	const checkButtonAndApproval = (inputValue: number) => {
-		if (new BigNumber(allowance).isLessThan((inputValue * 10 ** 18).toString()) && inputValue !== null) {
+	const checkButtonAndApproval = (inputvalue: number) => {
+		if (new BigNumber(allowance).isLessThan((inputvalue * 10 ** 18).toString()) && inputvalue !== null) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
 
-		if (new BigNumber(allowance).isGreaterThanOrEqualTo((inputValue * 10 ** 18).toString()) && inputValue !== null) {
+		if (new BigNumber(allowance).isGreaterThanOrEqualTo((inputvalue * 10 ** 18).toString()) && inputvalue !== null) {
 			setIsApproved(true)
 		}
 	}
@@ -207,8 +207,8 @@ function PigsCredit() {
 							text='PIGS/BUSD LP Tokens'
 							sliderRequired
 							title='Submit PIGS/BUSD LP'
-							busdValue={busdValue}
-							setBusdValue={setBusdValue}
+							inputValue={inputValue}
+							setInputValue={setInputValue}
 							isButtonEnabled={isDisabled}
 							approve={approve}
 							pending={pending}

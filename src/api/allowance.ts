@@ -38,3 +38,44 @@ export const approveBusd = async (spenderAddress: string, amount: string, signer
 
 	return approval
 }
+
+
+// pigs/busd
+
+export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress: string) => {
+	const { pigsBusdLpContract } = getContract()
+	let allowance
+
+	try {
+		const result: ethers.BigNumber = await pigsBusdLpContract.allowance(ownerAddress, spenderAddress)
+		const balance = ethers.BigNumber.from(result).toString()
+		allowance = {
+			allowance: balance,
+		}
+		console.log(result)
+	} catch (err) {
+		console.log(err)
+	}
+
+	return allowance
+}
+
+
+export const approvePigBusd = async (spenderAddress: string, amount: string, signer: ethers.Signer) => {
+	const { piggyBankContract } = getContract()
+	let approval
+
+	try {
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).approve(spenderAddress, amount)
+		// const balance = ethers.BigNumber.from(result).toString()
+		// approval={
+		//     approval: balance
+		// }
+		// console.log(result);
+		console.log('success')
+	} catch (err) {
+		console.log(err)
+	}
+
+	return approval
+}
