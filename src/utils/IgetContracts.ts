@@ -5,12 +5,13 @@ import { simpleRpcProvider } from 'utils/providers'
 import bep20Abi from 'config/Iabi/erc20.json'
 import lpTokenAbi from 'config/Iabi/lpToken.json'
 import MultiCallAbi from 'config/Iabi/Multicall.json'
+import PigsTokenAbi from 'config/abi/PigsTokenAbi.json'
 import piggyBankABI from 'config/Iabi/PiggyBank.json'
 import PigCreditsABI from 'config/Iabi/PigCredits.json'
 import PigPenV2ABI from 'config/abi/PigPenV2.json'
 
 // Addresses
-import { PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress } from '../config/constants'
+import { PIGSAddress, PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress } from '../config/constants'
 
 const getContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
 	const signerOrProvider = signer ?? simpleRpcProvider
@@ -26,6 +27,10 @@ export const getLpContract = (address: string, signer?: ethers.Signer | ethers.p
 
 export const getMulticallContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
 	return getContract(MultiCallAbi, MultiCallAddress, signer)
+}
+
+export const getPigsTokenV2Contract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+	return getContract(PigsTokenAbi, PIGSAddress, signer)
 }
 
 export const getPiggyBankContract = (signer?: ethers.Signer | ethers.providers.Provider) => {

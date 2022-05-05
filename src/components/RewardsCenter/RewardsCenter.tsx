@@ -19,13 +19,10 @@ interface rewardProps {
 	pair?: boolean
 	pigsBusdPrice?: number
 	text?: string
-	// form pigs crredut input
-	busdValue?: string
 	// from piggybank input
 	// pigsBusd?:string
-	setBusdValue?: any
 	isButtonEnabled?: boolean
-	approve?: any
+	approve?: () => void
 	pending?: any
 	isApproved?: boolean
 	lockDuration?: any
@@ -44,12 +41,13 @@ interface rewardProps {
 	recipient?: boolean
 	rewardCenter?: boolean
 	warningMsg?: boolean
-	_confirmFunction?: () => void
-	checkButtonAndApproval?: (inputValue: number) => void
+	confirmFunction?: () => void
+	confirmModalProps?: any
+	checkButtonAndApproval?: (inputValue: string) => void
 	hideAmountInput?: boolean
 	hideApproveButton?: boolean
-	inputValue?:any
-	setInputValue?:any
+	inputValue?: string
+	setInputValue?: any
 }
 
 function RewardsCenter({
@@ -59,8 +57,6 @@ function RewardsCenter({
 	pair,
 	pigsBusdPrice,
 	text,
-	busdValue,
-	setBusdValue,
 	pTitle,
 	isButtonEnabled,
 	isApproved,
@@ -68,7 +64,8 @@ function RewardsCenter({
 	pending,
 	lockDuration,
 	setLockDuration,
-	_confirmFunction,
+	confirmFunction,
+	confirmModalProps,
 	available,
 	infoTitle,
 	infoTitle2,
@@ -86,7 +83,7 @@ function RewardsCenter({
 	hideAmountInput,
 	hideApproveButton,
 	inputValue,
-	setInputValue
+	setInputValue,
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -99,36 +96,41 @@ function RewardsCenter({
 		checkButtonAndApproval(e.target.value)
 	}
 
+	const handleApprove = () => {
+		// setBusdValue(e.target.value)
+		approve()
+	}
+
 	const getLockBonus = () => {
 		return longerPaysBetterBonusPercents[lockDuration - 1]
 	}
 
-	const confirmFunction = async () => {
-		_confirmFunction()
+	const handleConfirm = async () => {
+		confirmFunction()
 	}
 
 	// modal properties to be set to state
-	const confirmModalProps = {
-		value: 50,
-		text,
-		warning: 'Wwarning set',
-		infoValues: [
-			{ title: 'Pigs deposited', value: Math.ceil(Number(busdValue) / pigsBusdPrice) },
-			{ title: 'BUSD deposited', value: busdValue },
-			{ title: 'Time Lock', value: `${longerPaysBetterBonusPercents[lockDuration - 1]}%` },
-			{ title: '1 PIGS(s)', value: pigsBusdPrice },
-			{ title: '1 BUSD', value: 1 / pigsBusdPrice },
-		],
-		confirmFunction,
-	}
+	// const confirmModalProps = {
+	// 	value: 50,
+	// 	text,
+	// 	warning: 'Wwarning set',
+	// 	infoValues: [
+	// 		{ title: 'Pigs deposited', value: Math.ceil(Number(busdValue) / pigsBusdPrice) },
+	// 		{ title: 'BUSD deposited', value: busdValue },
+	// 		{ title: 'Time Lock', value: `${longerPaysBetterBonusPercents[lockDuration - 1]}%` },
+	// 		{ title: '1 PIGS(s)', value: pigsBusdPrice },
+	// 		{ title: '1 BUSD', value: 1 / pigsBusdPrice },
+	// 	],
+	// 	confirmFunction,
+	// }
 
 	const openModal = () => {
-		dispatch(toggleConfirmModal(true))
-		dispatch(toggleModalBackDrop(true))
-		dispatch(setModalProps(confirmModalProps))
+		if (confirmModalProps) {
+			dispatch(toggleConfirmModal(true))
+			dispatch(toggleModalBackDrop(true))
+			dispatch(setModalProps(confirmModalProps))
+		}
 	}
-
-	console.log(lockDuration)
 
 	return (
 		<animated.div style={props} className={styles.reward}>
@@ -146,7 +148,7 @@ function RewardsCenter({
 							<img src={icon} alt='' />
 							<p>{token}</p>
 						</div>
-						<input onChange={(e) => handleChange(e)} value={busdValue} type='number' placeholder='0' />
+						<input onChange={(e) => handleChange(e)} value={inputValue} type='number' placeholder='0.00' />
 					</div>
 					{recipient && (
 						<div className={styles.inputBox2}>
@@ -158,7 +160,7 @@ function RewardsCenter({
 			</form>
 			{pair && (
 				<p className={styles.xpigs}>
-					<span>{(Number(busdValue) / pigsBusdPrice).toFixed(3)} PIGS</span> will be paired with <span>{busdValue} BUSD</span>
+					<span>{(Number(inputValue) / pigsBusdPrice).toFixed(3)} PIGS</span> will be paired with <span>{inputValue} BUSD</span>
 				</p>
 			)}
 			{Lock && (
@@ -173,7 +175,7 @@ function RewardsCenter({
 				</p>
 			)}
 			{!isApproved && !hideApproveButton ? (
-				<button type='button' disabled={!isButtonEnabled} className={!isButtonEnabled ? styles.button__disabled : styles.button__enabled} onClick={() => approve()}>
+				<button type='button' disabled={!isButtonEnabled} className={!isButtonEnabled ? styles.button__disabled : styles.button__enabled} onClick={handleApprove}>
 					{pending ? 'Pending' : 'Approve'}
 				</button>
 			) : (

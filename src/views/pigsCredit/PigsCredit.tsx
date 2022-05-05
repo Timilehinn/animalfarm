@@ -11,6 +11,7 @@ import { getPigsBUSDPrice } from 'utils/getPrice'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
+import { getDecimalAmount } from 'utils/formatBalance'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { checkAllowance, approveBusd } from '../../api/allowance'
 import { getPigsBalance } from '../../api/getPigsBalance'
@@ -136,13 +137,13 @@ function PigsCredit() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 
-	const checkButtonAndApproval = (inputvalue: number) => {
-		if (new BigNumber(allowance).isLessThan((inputvalue * 10 ** 18).toString()) && inputvalue !== null) {
+	const checkButtonAndApproval = (inputvalue: string) => {
+		if (new BigNumber(allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
 
-		if (new BigNumber(allowance).isGreaterThanOrEqualTo((inputvalue * 10 ** 18).toString()) && inputvalue !== null) {
+		if (new BigNumber(allowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsApproved(true)
 		}
 	}
@@ -153,21 +154,18 @@ function PigsCredit() {
 
 	// tour modal
 
-	useEffect(()=>{
-		dispatch( toggleTourModal({state:false,msg:""}) )
+	useEffect(() => {
+		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
-			state : true,
-			msg : "Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options!Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 20% bonus!! "
+			state: true,
+			msg: 'Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options!Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 20% bonus!! ',
 		}
-		setTimeout(()=>{
-			
-			dispatch( toggleTourModal(data) )
-				
-		},6000)
+		setTimeout(() => {
+			dispatch(toggleTourModal(data))
+		}, 6000)
 
-		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	},[])
+	}, [])
 
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
@@ -215,7 +213,7 @@ function PigsCredit() {
 							isApproved={isApproved}
 							lockDuration={lockDuration}
 							setLockDuration={setLockDuration}
-							_confirmFunction={claimToPiggy}
+							confirmFunction={claimToPiggy}
 							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
 							infoValue={availablePigsToClaim.toFixed(2)}

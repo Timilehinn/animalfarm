@@ -1,15 +1,16 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
 import { useSpring, animated } from 'react-spring'
-import { toggleTourModal } from 'state/toggle'
+// import { toggleTourModal } from 'state/toggle'
+import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import { useAppDispatch } from 'state/hooks'
 import { usePigPen } from 'state/pigpen/hooks'
-import { getBalanceAmountString } from 'utils/formatBalance'
+import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
 
-import { fetchPigPenData } from 'api/pigpen'
+import { fetchPigPenData, approvePigPenSpendPIGS, depositIntoPigPen } from 'api/pigpen'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styles from './PigsPen.module.scss'
 
@@ -29,11 +30,20 @@ function PigsPen() {
 		)
 	}, [])
 
-	const { account } = useActiveWeb3React()
+	const { account, library } = useActiveWeb3React()
+	const signer = library.getSigner()
 	const { userData, pigPenData, setPigPenData, setUserData } = usePigPen()
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 	const dispatch = useAppDispatch()
+
+	/// Generic States to be used for all pages that requires approval
+	const [pending, setPending] = useState(false)
+	const [isApproved, setIsApproved] = useState(false)
+	const [allowance, setAllowance] = useState(0)
+	const [isDisabled, setIsDisabled] = useState(false)
+	/// State for input
+	const [inputValue, setInputValue] = useState('')
 
 	// open tour modal
 	useEffect(() => {
@@ -52,30 +62,76 @@ function PigsPen() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	useEffect(() => {
-		async function fetchData() {
-			const res = await fetchPigPenData(account)
-			setPigPenData(res.pigPenData)
-			setUserData(res.userData)
-			console.log(res)
-		}
+	async function fetchData() {
+		const res = await fetchPigPenData(account)
+		setPigPenData(res.pigPenData)
+		setUserData(res.userData)
+		console.log(res)
+	}
 
+	useEffect(() => {
 		if (account) {
 			fetchData()
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 
-	// const checkButtonAndApproval = (inputValue: number) => {
-	// 	if (new BigNumber(allowance).isLessThan((inputValue * 10 ** 18).toString()) && inputValue !== null) {
-	// 		setIsDisabled(true)
-	// 		setIsApproved(false)
-	// 	}
+	/// Start Generic functions for pages that needs approval ///
+	const checkButtonAndApproval = (inputvalue: string) => {
+		if (new BigNumber(userData.allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+			setIsDisabled(true)
+			setIsApproved(false)
+		}
 
-	// 	if (new BigNumber(allowance).isGreaterThanOrEqualTo((inputValue * 10 ** 18).toString()) && inputValue !== null) {
-	// 		setIsApproved(true)
-	// 	}
-	// }
+		if (new BigNumber(userData.allowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+			setIsApproved(true)
+		}
+	}
+	const approve = async () => {
+		setPending(true)
+		try {
+			await approvePigPenSpendPIGS(signer)
+			setPending(false)
+			setIsApproved(true)
+		} catch (err) {
+			setPending(false)
+			setIsApproved(false)
+		}
+	}
+	/// End Generic functions for pages that needs approval ///
+
+	const depositPigs = async () => {
+		setPending(true)
+		try {
+			await depositIntoPigPen(getDecimalAmount(inputValue.toString()), signer)
+			setInputValue('')
+			dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
+			dispatch(toggleConfirmModal(false))
+			dispatch(toggleModalBackDrop(false))
+
+			setTimeout(() => {
+				dispatch(toggleToastNotification(false))
+			}, 3000)
+			await fetchData()
+		} catch (err) {
+			// Do something here
+		}
+	}
+
+	const modalDetails = {
+		modalTitleText: 'Confirm Deposit',
+		confirmButtonText: 'Deposit',
+		value: inputValue,
+		text: 'PIGS',
+		warning: 'Deposit into PigPen',
+		infoValues: [
+			{
+				title: 'Rewards',
+				value: 'BUSD & PIGS',
+			},
+		],
+		confirmFunction: depositPigs,
+	}
 
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
@@ -123,6 +179,17 @@ function PigsPen() {
 								Lock={false}
 								rewardCenter
 								warningMsg
+								// Input related props
+								inputValue={inputValue}
+								setInputValue={setInputValue}
+								// Approval-related props
+								pending={pending}
+								isApproved={isApproved}
+								isButtonEnabled={isDisabled}
+								checkButtonAndApproval={checkButtonAndApproval}
+								approve={approve}
+								// Confirm Props for Confirm Modal
+								confirmModalProps={modalDetails}
 							/>
 						) : (
 							<RewardsCenter
@@ -130,7 +197,7 @@ function PigsPen() {
 								title='Withdraw your staked PIGS'
 								infoValue2='2% per day'
 								infoTitle='PIGS staked'
-								infoValue='0 PIGS'
+								infoValue={`${getBalanceAmountString(userData.stakedBalance)} PIGS`}
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
 								infoValue3='0 PIGS'

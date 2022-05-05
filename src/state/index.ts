@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit'
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import walletReducer from './wallet'
 import toggleReducer from './toggle'
 import balanceReducer from './balances'
@@ -15,6 +15,10 @@ const store = configureStore({
 		piggyBankReducer,
 		pigPenReducer,
 	},
+	middleware: getDefaultMiddleware({
+		// TODO: This is just a temporary fix
+		serializableCheck: false,
+	}),
 })
 
 export type AppState = ReturnType<typeof store.getState>

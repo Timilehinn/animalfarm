@@ -1,8 +1,10 @@
+import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/Iabi/erc20.json'
 import pigPenABI from 'config/abi/PigPenV2.json'
 import multicall from 'utils/multicall'
-import { PIGSAddress, PigPenAddress } from 'config/constants'
+import { PIGSAddress, PigPenAddress, LARGE_NUMBER } from 'config/constants'
+import { getPigsTokenV2Contract, getPigPenContract } from 'utils/IgetContracts'
 
 // import { PigPenUserData, PigPen, PigPenState } from 'state/pigpen'
 
@@ -83,4 +85,14 @@ export const fetchPigPenData = async (account: string): Promise<any> => {
 	}
 
 	return { pigPenData, userData }
+}
+
+export const approvePigPenSpendPIGS = async (signer: ethers.Signer) => {
+	const pigsTokenV2Contract = getPigsTokenV2Contract(signer)
+	await pigsTokenV2Contract.approve(PigPenAddress, LARGE_NUMBER)
+}
+
+export const depositIntoPigPen = async (amount: string, signer: ethers.Signer) => {
+	const pigsTokenV2Contract = getPigPenContract(signer)
+	await pigsTokenV2Contract.deposit(amount)
 }

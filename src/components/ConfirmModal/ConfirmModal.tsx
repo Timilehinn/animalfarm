@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React from 'react'
 import { toggleModalBackDrop, toggleConfirmModal } from 'state/toggle'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
@@ -22,19 +23,19 @@ function ConfirmModal() {
 	return (
 		<div className={isModalActive ? `${styles.confirmModal} ${styles.confirmModal__active}` : `${styles.confirmModal}`}>
 			<header>
-				<p>Confirm Claim</p>
+				<p>{modalProps.modalTitleText}</p>
 				<img role='presentation' onClick={() => closeModal()} src={cancle} alt='' />
 			</header>
 			<h3 className={styles.lp}>{modalProps.value}</h3>
 			<p className={styles.pigs}>{modalProps.text}</p>
 			<div className={styles.infoBox}>
 				{modalProps.infoValues.map((item, index) => (
-					<Info title={item.title} info={item.value} />
+					<Info key={`${index}${item.value}`} title={item.title} info={item.value} />
 				))}
 			</div>
 			<p className={styles.msg}>{modalProps.warning}</p>
 			<button onClick={() => confirm()} type='button'>
-				Claim
+				{modalProps.confirmButtonText}
 			</button>
 		</div>
 	)
