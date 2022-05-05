@@ -96,3 +96,13 @@ export const depositIntoPigPen = async (amount: string, signer: ethers.Signer) =
 	const pigsTokenV2Contract = getPigPenContract(signer)
 	await pigsTokenV2Contract.deposit(amount)
 }
+
+export const claimRewardPigPen = async (shouldCompound: boolean, signer: ethers.Signer) => {
+	const pigsTokenV2Contract = getPigPenContract(signer)
+	await pigsTokenV2Contract.claimRewards(shouldCompound)
+}
+
+export const withdrawFromPigPen = async (signer: ethers.Signer) => {
+	const pigsTokenV2Contract = getPigPenContract(signer)
+	await pigsTokenV2Contract.withdraw()
+}
