@@ -19,7 +19,10 @@ interface rewardProps {
 	pair?: boolean
 	pigsBusdPrice?: number
 	text?: string
+	// form pigs crredut input
 	busdValue?: string
+	// from piggybank input
+	// pigsBusd?:string
 	setBusdValue?: any
 	isButtonEnabled?: boolean
 	approve?: any
@@ -45,6 +48,8 @@ interface rewardProps {
 	checkButtonAndApproval?: (inputValue: number) => void
 	hideAmountInput?: boolean
 	hideApproveButton?: boolean
+	inputValue?:any
+	setInputValue?:any
 }
 
 function RewardsCenter({
@@ -80,6 +85,8 @@ function RewardsCenter({
 	checkButtonAndApproval,
 	hideAmountInput,
 	hideApproveButton,
+	inputValue,
+	setInputValue
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -87,7 +94,8 @@ function RewardsCenter({
 	const { account, library } = useActiveWeb3React()
 
 	const handleChange = (e: any) => {
-		setBusdValue(e.target.value)
+		// setBusdValue(e.target.value)
+		setInputValue(e.target.value)
 		checkButtonAndApproval(e.target.value)
 	}
 
@@ -164,7 +172,7 @@ function RewardsCenter({
 					Timelock Bonus <span>{getLockBonus()}%</span>
 				</p>
 			)}
-			{/* {!isApproved && !hideApproveButton ? (
+			{!isApproved && !hideApproveButton ? (
 				<button type='button' disabled={!isButtonEnabled} className={!isButtonEnabled ? styles.button__disabled : styles.button__enabled} onClick={() => approve()}>
 					{pending ? 'Pending' : 'Approve'}
 				</button>
@@ -172,10 +180,10 @@ function RewardsCenter({
 				<button type='button' disabled={!isApproved} onClick={() => openModal()} className={styles.button__enabled}>
 					{buttonText}
 				</button>
-			)} */}
-			<button type='button' className={styles.button__disabled}>
+			)}
+			{/* <button type='button' className={styles.button__disabled}>
 				{buttonText}
-			</button>
+			</button> */}
 			{warningMsg && <p className={styles.warning}>NOTE: You’ll be able to withdraw 2% of your staked PIGS once every 24 hours</p>}
 			{rewardCenter && (
 				<div className={styles.center}>

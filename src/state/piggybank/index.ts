@@ -55,47 +55,64 @@ export interface PiggyBankState {
 	data: PiggyBank
 }
 
-const initialState: PiggyBankState = {
-	isInitialized: false,
-	isLoading: true,
-	data: {
-		marketTruffles: '0',
-		balance: '0',
-		userData: {
-			userPiggyBanks: [
-				{
-					ID: '0',
-					isStakeOn: false,
-					hatcheryPiglets: '0',
-					availableTruffles: '0',
-					claimedTruffles: '0',
-					lastFeeding: '0',
-					lastCompounded: '0',
-					trufflesUsed: '0',
-					trufflesSold: '0',
-					usdValue: '0',
-					timeLeftSinceLock: '0',
-					isMaxPayOut: false,
-					paddedPrecisionValue: '0',
+// const initialState: PiggyBankState = {
+// 	isInitialized: false,
+// 	isLoading: true,
+// 	data: {
+// 		marketTruffles: '0',
+// 		balance: '0',
+// 		userData: {
+// 			userPiggyBanks: [
+// 				{
+// 					ID: '0',
+// 					isStakeOn: false,
+// 					hatcheryPiglets: '0',
+// 					availableTruffles: '0',
+// 					claimedTruffles: '0',
+// 					lastFeeding: '0',
+// 					lastCompounded: '0',
+// 					trufflesUsed: '0',
+// 					trufflesSold: '0',
+// 					usdValue: '0',
+// 					timeLeftSinceLock: '0',
+// 					isMaxPayOut: false,
+// 					paddedPrecisionValue: '0',
 
-					PiggyLocker: {
-						duration: '0',
-						durationTimestamp: '0',
-						startLockTimestamp: '0',
-					},
+// 					PiggyLocker: {
+// 						duration: '0',
+// 						durationTimestamp: '0',
+// 						startLockTimestamp: '0',
+// 					},
 
-					PiggyLockBonus: {
-						isExpired: false,
-						bonus: '0',
-						distributedBonus: '0',
-						dayLastDistributed: '0',
-					},
-				},
-			],
-			referrals: [],
-			usdValue: '0',
-		},
+// 					PiggyLockBonus: {
+// 						isExpired: false,
+// 						bonus: '0',
+// 						distributedBonus: '0',
+// 						dayLastDistributed: '0',
+// 					},
+// 				},
+// 			],
+// 			referrals: [],
+// 			usdValue: '0',
+// 		},
+// 	},
+// }
+
+const initialState = {
+	isLoading : false,
+	data:{
+		
+		balance :'',
+		marketTruffles :'0',
+		userData : {
+			referrals : '0',
+			usdValue:[],
+			userPiggyBanks:[]
+		}
 	},
+	totalLpLocked: 0
+	
+
 }
 
 const piggyBankSlice = createSlice({
@@ -107,16 +124,21 @@ const piggyBankSlice = createSlice({
 		},
 		fetchFailed: (state) => {
 			state.isLoading = false
-			state.isInitialized = true
+			
 		},
-		piggybankFetchSucceeded: (state, action: PayloadAction<PiggyBank>) => {
-			state.isInitialized = true
+		piggybankFetchSucceeded: (state, action: PayloadAction<any>) => {
+			
 			state.isLoading = false
 			state.data = action.payload
 		},
+		setTotalLpLocked: (state, action: PayloadAction<any>) => {
+			
+			state.isLoading = false
+			state.data = action.payload
+		}
 	},
 })
 
-export const { fetchStart, fetchFailed, piggybankFetchSucceeded } = piggyBankSlice.actions
+export const { fetchStart, fetchFailed, piggybankFetchSucceeded, setTotalLpLocked } = piggyBankSlice.actions
 
 export default piggyBankSlice.reducer

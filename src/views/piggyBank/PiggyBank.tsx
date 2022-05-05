@@ -9,12 +9,28 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useSpring, animated } from 'react-spring'
 import { toggleToastNotification, toggleTourModal } from 'state/toggle'
 // import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
-import { fetchPiggyBankData } from 'api/Ipiggybank'
+import { fetchPiggyBankData,getTotalLpLocked  } from 'api/Ipiggybank'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
+import BigNumber from 'bignumber.js'
 import { usePiggyBank } from 'state/piggybank/hooks'
+import { approvePigBusd } from 'api/allowance'
+import {useParams} from "react-router-dom";
+import { setTotalLpLocked } from 'state/piggybank'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
+// import { setTotalLpLocked } from 'state/piggybank'
+
+
+
+import {checkPigBusdAllowance} from '../../api/allowance'
+import { PiggyBankAddress  } from '../../config/constants'
+
+
+interface ParamsType {
+    referee: string;
+}
+
 
 function PiggyBank() {
 	useEffect(() => {
@@ -29,14 +45,25 @@ function PiggyBank() {
 		background-color: rgb(24, 24, 24);`
 		)
 	}, [])
+	
 
 	const pigsBusdLpBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
-	const { account } = useActiveWeb3React()
+	const totalLpTokenLocked = useAppSelector((state)=>state.piggyBankReducer.totalLpLocked)
+	const { account,library } = useActiveWeb3React()
+	const params = useParams();
+	console.log(params.referee)
 	const dispatch = useAppDispatch()
-	const { piggybank, isInitialized, isLoading, setFetchFailed, setFetchStart, setPiggyBank } = usePiggyBank()
+	const signer = library.getSigner()
+	const { piggybank, isLoading, setFetchFailed, setFetchStart, setPiggyBank } = usePiggyBank()
 	// const navigate = useNavigate()
 	const [activeTab, setActiveTab] = useState(1)
 	const [lockDuration, setLockDuration] = useState(0)
+	const [pending, setPending] = useState(false)
+	const [isApproved, setIsApproved] = useState(false)
+	const [ allowance, setAllowance ] = useState(0)
+	const [isDisabled, setIsDisabled] = useState(false)
+	const [inputValue, setInputValue] = useState(0)
+
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
 	const copyRefLink = () => {
@@ -76,16 +103,82 @@ function PiggyBank() {
 			setFetchStart()
 			const res = await fetchPiggyBankData(account)
 			console.log(res)
-			setPiggyBank(res.data)
+			setPiggyBank(res)
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
+	const _getTotalLpLocked = async () => {
+		try{
+			const res = await getTotalLpLocked()
+			console.log(res,"total lp locked")
+			dispatch(setTotalLpLocked( Number(res.amount/10**18)) )
+		}catch(err){
+			console.log(err)
+		}
+	}
+
+	
+
 	useEffect(() => {
+		
 		getMyPiggyBank()
+		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	const getAllowanceCallback = React.useCallback(async () => {
+		try {
+			const res = await checkPigBusdAllowance (account, PiggyBankAddress)
+			console.log(res, 'allowance npigsbusdallowance')
+			setAllowance(res.allowance)
+			// if ()
+		} catch (err) {
+			console.log(err)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	useEffect(()=>{
+		getAllowanceCallback()
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	},[])
+
+	const approve = async () => {
+		setPending(true)
+		try {
+			
+			await approvePigBusd('0x19361161e8E3A67DE3818B3E5c932c43954C4918',  "115792089237316195423570985008687907853269984665640564039457584007913129639935", signer)
+			setPending(false)
+			setIsApproved(true)
+			const data = {
+				success: true,
+				msg: 'approved',
+			}
+			console.log(data)
+		} catch (err) {
+			console.log(err)
+			const data = {
+				success: false,
+				msg: 'not approved',
+			}
+			setPending(false)
+			setIsApproved(false)
+		}
+	}
+
+	const checkButtonAndApproval = (inputvalue: number) => {
+		if (new BigNumber(allowance).isLessThan((inputvalue * 10 ** 18).toString()) && inputvalue !== null) {
+			setIsDisabled(true)
+			setIsApproved(false)
+		}
+
+		if (new BigNumber(allowance).isGreaterThanOrEqualTo((inputvalue * 10 ** 18).toString()) && inputvalue !== null) {
+			setIsApproved(true)
+		}
+	}
 
 	/** The usePiggyBank hook. This is used to only set data.
 	 * piggybank - This returns ALL the piggybank related data you need
@@ -106,7 +199,7 @@ function PiggyBank() {
 				</div>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total LP Locked' amount='0.00 PIGS/BUSD' />
+						<PigsCreditCard title='Total LP Locked' amount={totalLpTokenLocked} />
 					</div>
 					{/* <div> 
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
@@ -126,7 +219,7 @@ function PiggyBank() {
 							title='Buy Piglets with LP token'
 							Lock
 							pair={false}
-							buttonText='Enter amount'
+							
 							infoValue={`${pigsBusdLpBalance} PIGS/BUSD`}
 							infoTitle='PIGS/BUSD LP balance'
 							rewardCenter={false}
@@ -136,6 +229,11 @@ function PiggyBank() {
 							sliderRequired
 							lockDuration={lockDuration}
 							setLockDuration={setLockDuration}
+							approve={approve}
+							checkButtonAndApproval={checkButtonAndApproval}
+							buttonText='Buy piglets'
+							inputValue={inputValue}
+							setInputValue={setInputValue}
 						/>
 					) : (
 						<RewardsCenter

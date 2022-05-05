@@ -6,10 +6,10 @@ export const usePiggyBank = () => {
 
 	const piggybank = useAppSelector((state) => state.piggyBankReducer.data)
 	const isLoading = useAppSelector((state) => state.piggyBankReducer.isLoading)
-	const isInitialized = useAppSelector((state) => state.piggyBankReducer.isInitialized)
-	const setPiggyBank = (value: PiggyBank) => dispatch(piggybankFetchSucceeded(value))
+	// const isInitialized = useAppSelector((state) => state.piggyBankReducer.isInitialized)
+	const setPiggyBank = (value: any) => dispatch(piggybankFetchSucceeded(value))
 	const setFetchStart = () => dispatch(fetchStart())
 	const setFetchFailed = () => dispatch(fetchFailed())
 
-	return { piggybank, isLoading, isInitialized, setPiggyBank, setFetchStart, setFetchFailed }
+	return { piggybank, isLoading, setPiggyBank, setFetchStart, setFetchFailed }
 }

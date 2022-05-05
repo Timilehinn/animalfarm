@@ -1,96 +1,18 @@
 import React from 'react'
+import { usePiggyBank } from 'state/piggybank/hooks'
 import PiggyBankRow from 'components/PiggyBankRow/PiggyBankRow'
 import style from './PiggyBankTable.module.scss'
 
+
 function ReferralTable() {
-	const refdata = [
-		// {
-		// 	id: 1,
-		// 	piglets: 14567,
-		// 	trufflesavailable: 1234567,
-		// 	trufflesvalue: 0,
-		// 	time: 456789,
-		// 	maxpayout: 4454565,
-		// },
-		// {
-		//     id: 2,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 3,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 4,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 5,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 6,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 7,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 8,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 9,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// },
-		// {
-		//     id: 10,
-		//     piglets: 1234567,
-		//     trufflesavailable: 1234567,
-		//     trufflesvalue: 12345678,
-		//     time: 456789,
-		//     maxpayout:4454565
-		// }
-	]
+	
+	const { piggybank } = usePiggyBank()
 
 	return (
 		<div>
 			<div className={style.tableheader}>
 				<h4>
-					My Piggybanks <span className={style.totalpiggybank}> {refdata.length}</span>
+					My Piggybanks <span className={style.totalpiggybank}> {piggybank?.userData?.userPiggyBanks.length}</span>
 				</h4>
 			</div>
 			<div className={style.tablebody}>
@@ -107,8 +29,8 @@ function ReferralTable() {
 						</tr>
 					</thead>
 					<tbody>
-						{refdata.map((data) => (
-							<PiggyBankRow id={data.id} piglets={data.piglets} trufflesavailable={data.trufflesavailable} trufflesvalue={data.trufflesvalue} time={data.time} maxpayout={data.maxpayout} />
+						{piggybank.userData.userPiggyBanks.map((item, index) => (
+							<PiggyBankRow id={item.ID} piglets={item.hatcheryPiglets} trufflesavailable={item.availableTruffles} trufflesvalue={item.usdValue} time={item.timeLeftSinceLock} maxpayout={item.trufflesUsed} />
 						))}
 					</tbody>
 				</table>
