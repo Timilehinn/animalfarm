@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import { useAppDispatch } from 'state/hooks'
 import { toggleModalBackDrop,toggleDepositModal } from 'state/toggle'
 import { BigNumber } from 'bignumber.js'
+import { sellPiglets,compound } from 'api/piggyBank/getMyPiggyBanks'
 import style from './PiggyBankRow.module.scss'
 import up from "../../assets/up.svg"
 import down from "../../assets/down.svg"
+
+import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 
 
@@ -15,6 +18,8 @@ function PiggyBankRow(props) {
     const { id, piglets, trufflesavailable, trufflesvalue, time, maxpayout} = props
     const [state, showModal] = useState(false)
     const dispatch = useAppDispatch()
+    const { library } = useActiveWeb3React()
+    const signer = library.getSigner()
 
     const openDepositModal = () => {
         dispatch( toggleDepositModal(true) )
@@ -30,8 +35,31 @@ function PiggyBankRow(props) {
     //     return secondsToString(Math.round(endDate - timeNow))
     // }
 
+    const _sellPiglets = async ()=> {
+
+        try{
+            const res = await sellPiglets(id,signer)
+            console.log(res,"sold piglet")
+
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+    const _compound = async ()=> {
+
+        try{
+            const res = await compound(id,signer)
+            console.log(res,"compounded")
+
+        }catch(err){
+            console.log(err)
+        }
+        
+    }
+
     return (
-                <tr className={style.tr}>
+            <tr className={style.tr}>
                 <td >{id}</td>
                 <td>{new BigNumber(piglets).toString() }</td>
                 <td >{trufflesavailable}</td>
@@ -45,8 +73,8 @@ function PiggyBankRow(props) {
                             {state === false ? <img src={up} alt="" />  :<img src={down} alt=""/>}
                         </button>
                         <div className={state ? style.modal : style.modal_off}>
-                            <button type='button' className={style.modal__button}>Sell</button><hr/>
-                            <button type='button' className={style.modal__button}>compound</button><hr/>
+                            <button onClick={()=>_sellPiglets()} type='button' className={style.modal__button}>Sell</button><hr/>
+                            <button onClick={()=>_sellPiglets()} type='button' className={style.modal__button}>compound</button><hr/>
                             <button onClick={()=>openDepositModal()} type='button' className={style.modal__button}>Deposit</button>
                         </div>
                     </div>

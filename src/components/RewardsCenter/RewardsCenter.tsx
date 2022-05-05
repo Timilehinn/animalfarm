@@ -160,9 +160,9 @@ function RewardsCenter({
 							<img src={icon} alt='' />
 							<p>{token}</p>
 						</div>
-						<input onChange={(e) => handleChange(e)} value={inputValue} type='number' placeholder='0.00' />
+						<input onChange={(e) => handleChange(e)} min="0" required value={inputValue} type='number' placeholder='0.00' />
 					</div>
-					{recipient && (
+					{recipient && ( 
 						<div className={styles.inputBox2}>
 							<input onChange={(e) => handleChange2(e)} value={inputValue2} placeholder='Input recipients address' />
 						</div>

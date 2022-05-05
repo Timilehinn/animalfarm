@@ -106,15 +106,22 @@ function PigsCredit() {
 			const res = await ClaimToPiggyBank(((Number(inputValue) / pigsBusdPrice) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
 			console.log(res)
 
-			if (res.success) {
-				dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
+			if (res.success===true) {
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
+					setTimeout(() => {
+					dispatch(toggleToastNotification(false))
+				}, 3000)
 			}
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
-			setTimeout(() => {
-				dispatch(toggleToastNotification(false))
-			}, 3000)
+			if(res.success===false){
+				dispatch(toggleToastNotification({ state: true, msg: 'Transcation Failed' }))
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
+					setTimeout(() => {
+					dispatch(toggleToastNotification(false))
+				}, 3000)
+			}
 		} catch (err) {
 			console.log(err)
 		}
