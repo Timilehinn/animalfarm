@@ -24,3 +24,67 @@ export const getMyPiggyBanks = async (account: string) => {
 
 	return piggyBanks
 }
+
+export const buyPigLets = async(amount:string, lockForNumberOfWeeks:string, referee:string, signer: ethers.Signer) => {
+
+    const { piggyBankContract } = getPigsContract()
+
+    let res
+    // const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
+
+    try {
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).buyTruffles(amount, lockForNumberOfWeeks, referee)
+		// const balance = ethers.BigNumber.from(result).toJSON()
+		// piggyBanks = {
+		// 	amount: balance,
+		// 	amountString: new BigNumber(balance).toFormat(0),
+		// }
+        res = {
+            success :true
+        }
+
+
+
+		
+    } catch (err) {
+		res = {
+            success :false
+        }
+
+        console.log(err)
+	}
+
+    return res
+}
+
+export const giftPiglet = async(giftRecipient:string, amount:string, lockForNumberOfWeeks:string, signer: ethers.Signer) => {
+
+    const { piggyBankContract } = getPigsContract()
+
+    let res
+    // const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
+
+    try {
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).giftTruffles(giftRecipient, amount, lockForNumberOfWeeks)
+		// const balance = ethers.BigNumber.from(result).toJSON()
+		// piggyBanks = {
+		// 	amount: balance,
+		// 	amountString: new BigNumber(balance).toFormat(0),
+		// }
+        res = {
+            success :true
+        }
+
+
+
+		
+    } catch (err) {
+		res = {
+            success :false
+        }
+
+        console.log(err)
+	}
+
+    return res
+}

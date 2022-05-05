@@ -9,7 +9,7 @@ import RangeSlider from 'components/RangeSlider/RangeSlider'
 import Info from 'components/Info/Info'
 import logo from '../../assets/svgg.png'
 
-import styles from './RewardsCenter.module.scss'
+import styles from './GiftPiglet.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
 
 interface rewardProps {
