@@ -67,6 +67,7 @@ function PiggyBank() {
 	const [inputValue2, setInputValue2] = useState('')
 	
 	const [lockBonus, setLockBonus] = useState(0)
+	console.log(pigsBusdLpBalance,"pls work")
 
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
@@ -126,10 +127,15 @@ function PiggyBank() {
 	}
 
 	useEffect(() => {
-		getMyPiggyBank()
+
+		if(account){
+
+			getMyPiggyBank()
+		}
+		
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [account])
 
 	const getAllowanceCallback = React.useCallback(async () => {
 		try {
@@ -164,7 +170,7 @@ function PiggyBank() {
 				success: true,
 				msg: 'approved',
 			}
-			console.log(data)
+			console.log(data) 
 		} catch (err) {
 			console.log(err)
 			const data = {
@@ -177,14 +183,14 @@ function PiggyBank() {
 	}
 
 	const checkButtonAndApproval = (inputvalue: string) => {
-		if (new BigNumber(allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+		if (new BigNumber(allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null ) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
 
 		if (new BigNumber(allowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsApproved(true)
-		}
+		} 
 	}
 
 	const getLockBonus = () => {
@@ -208,7 +214,8 @@ function PiggyBank() {
 
 		
 		try{
-			const res = await buyPigLets(inputValue,lockDuration.toString(),ref,signer)
+
+			const res = await buyPigLets((Number(inputValue)*10**18).toString(),lockDuration.toString(),ref,signer)
 			console.log(res)
 
 			if(res.success === true){
@@ -223,6 +230,9 @@ function PiggyBank() {
 
 			if(res.success === false){
 				dispatch( toggleToastNotification({state:true,msg:"Transaction Failed. Try again"}) )
+				setTimeout(()=>{
+					dispatch( toggleToastNotification({state:false,msg:""}) )
+				},3000)
 			}
 
 		}catch(err){
@@ -234,13 +244,13 @@ function PiggyBank() {
 		
 
 		try{
-			const res = await giftPiglet(inputValue2, inputValue, lockDuration.toString(),signer)
+			const res = await giftPiglet( inputValue2, (Number(inputValue )*10**18).toString() , lockDuration.toString(),signer )
 			console.log(res)
 
 			if(res.success === true){
 				dispatch( toggleToastNotification({state:true,msg:"Transaction Succesful"}) )
 				dispatch(toggleConfirmModal(false))
-				dispatch(toggleModalBackDrop(false))
+				dispatch(toggleModalBackDrop(false)) 
 
 				setTimeout(()=>{
 					dispatch( toggleToastNotification({state:false,msg:""}) )
@@ -281,24 +291,24 @@ function PiggyBank() {
 		],
 		confirmFunction: _buyPiglets,
 	}
-	// const modalDetails = {
-	// 	modalTitleText: 'Confirm Deposit',
-	// 	confirmButtonText: 'Acknowledge',
-	// 	value: inputValue,
-	// 	text: 'PIGS',
-	// 	warning: 'Deposit into PigPen',
-	// 	infoValues: [
-	// 		{
-	// 			title: 'Time Lock Duration',
-	// 			value: `${lockDuration} weeks`,
-	// 		},
-	// 		{
-	// 			title: 'Lock Bonus',
-	// 			value: `${getLockBonus()}%`,
-	// 		},
-	// 	],
-	// 	confirmFunction: _buyPiglets,
-	// }
+	const giftModalDetails = {
+		modalTitleText: 'Confirm Buy',
+		confirmButtonText: 'Acknowledge', 
+		value: inputValue,
+		text: 'PIGS',
+		warning: 'Deposit into PigPen',
+		infoValues: [
+			{
+				title: 'Time Lock Duration',
+				value: `${lockDuration} weeks`,
+			},
+			{
+				title: 'Lock Bonus',
+				value: `${getLockBonus()}%`,
+			},
+		],
+		confirmFunction: _gitfPiglets,
+	}
 
 	/** The usePiggyBank hook. This is used to only set data.
 	 * piggybank - This returns ALL the piggybank related data you need
@@ -359,7 +369,7 @@ function PiggyBank() {
 							hideApproveButton={false}
 							isButtonEnabled={isDisabled}
 							approve={approve}
-							// confirmModalProps={modalDetails}
+							
 						/>
 					) : (
 						<RewardsCenter
@@ -370,7 +380,7 @@ function PiggyBank() {
 							infoTitle='PIGS/BUSD LP balance'
 							token='PIGS/BUSD LP'
 							icon={pig}
-							buttonText='Enter amount'
+							buttonText='Gift Piglet'
 							recipient
 							rewardCenter={false}
 							warningMsg={false}
@@ -380,11 +390,13 @@ function PiggyBank() {
 							inputValue2={inputValue2}
 							setInputValue2={setInputValue2}
 							approve={approve}
+							isApproved={isApproved}
 							checkButtonAndApproval={checkButtonAndApproval}
 							isButtonEnabled={isDisabled}
 							hideApproveButton={false}
 							inputValue={inputValue}
 							setInputValue={setInputValue}
+							confirmModalProps={giftModalDetails}
 							
 						/>
 					)}

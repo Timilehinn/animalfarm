@@ -59,7 +59,7 @@ const balanceSlice = createSlice({
 			state.busdBalance = action.payload
 		},
 		setPigsBusdLpBalance: (state, action: PayloadAction<string>) => {
-			state.busdBalance = action.payload
+			state.pigsBusdLpBalance = action.payload
 		},
 		setAllBalance: (state, action: PayloadAction<Balance[]>) => {
 			state.allBalance = action.payload

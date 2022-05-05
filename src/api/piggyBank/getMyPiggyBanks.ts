@@ -88,3 +88,102 @@ export const giftPiglet = async(giftRecipient:string, amount:string, lockForNumb
 
     return res
 }
+
+
+export const sellPiglets = async(id:string,signer:ethers.Signer) => {
+
+    const { piggyBankContract } = getPigsContract()
+
+    let res
+    // const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
+
+    try {
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).sellTruffles(id)
+		// const balance = ethers.BigNumber.from(result).toJSON()
+		// piggyBanks = {
+		// 	amount: balance,
+		// 	amountString: new BigNumber(balance).toFormat(0),
+		// }
+        res = {
+            success :true
+        }
+
+
+
+		
+    } catch (err) {
+		res = {
+            success :false
+        }
+
+        console.log(err)
+	}
+
+    return res
+}
+
+
+export const compound = async(id:string,signer:ethers.Signer) => {
+
+    const { piggyBankContract } = getPigsContract()
+
+    let res
+    // const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
+
+    try {
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).feedPiglets(id)
+		// const balance = ethers.BigNumber.from(result).toJSON()
+		// piggyBanks = {
+		// 	amount: balance,
+		// 	amountString: new BigNumber(balance).toFormat(0),
+		// }
+        res = {
+            success :true
+        }
+
+
+
+		
+    } catch (err) {
+		res = {
+            success :false
+        }
+
+        console.log(err)
+	}
+
+    return res
+}
+
+
+export const  claimToPigsPen = async( amount:string, signer:ethers.Signer ) => {
+
+	const { pigsPenContract } = getPigsContract()
+
+    let res
+    // const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
+
+    try {
+		const result: ethers.BigNumber = await pigsPenContract.connect(signer).claimPigsV2ToPigPen(amount)
+		// const balance = ethers.BigNumber.from(result).toJSON()
+		// piggyBanks = {
+		// 	amount: balance,
+		// 	amountString: new BigNumber(balance).toFormat(0),
+		// }
+        res = {
+            success :true
+        }
+
+
+
+		
+    } catch (err) {
+		res = {
+            success :false
+        }
+
+        console.log(err)
+	}
+
+    return res
+}
