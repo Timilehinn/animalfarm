@@ -154,3 +154,36 @@ export const compound = async(id:string,signer:ethers.Signer) => {
 
     return res
 }
+
+
+export const  claimToPigsPen = async( amount:string, signer:ethers.Signer ) => {
+
+	const { pigsPenContract } = getPigsContract()
+
+    let res
+    // const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
+
+    try {
+		const result: ethers.BigNumber = await pigsPenContract.connect(signer).claimPigsV2ToPigPen(amount)
+		// const balance = ethers.BigNumber.from(result).toJSON()
+		// piggyBanks = {
+		// 	amount: balance,
+		// 	amountString: new BigNumber(balance).toFormat(0),
+		// }
+        res = {
+            success :true
+        }
+
+
+
+		
+    } catch (err) {
+		res = {
+            success :false
+        }
+
+        console.log(err)
+	}
+
+    return res
+}

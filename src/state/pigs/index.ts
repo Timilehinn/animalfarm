@@ -3,6 +3,7 @@ import { createSlice,PayloadAction } from '@reduxjs/toolkit'
 const initialState = {
 
     pigsAvailableToClaim : 0,
+    pigsBusdPrice : 0
 }
 
 
@@ -12,6 +13,9 @@ const pigsSlice = createSlice({
     reducers : {
         setPigsAvailableToClaim: (state, action:PayloadAction<number>) => {
             state.pigsAvailableToClaim = action.payload
+        },
+        setPigsBusdPrice: (state, action:PayloadAction<number>) => {
+            state.pigsAvailableToClaim = action.payload
         }
     }
 
@@ -19,5 +23,5 @@ const pigsSlice = createSlice({
 })
 
 
-export const { setPigsAvailableToClaim  } = pigsSlice.actions
+export const { setPigsAvailableToClaim, setPigsBusdPrice  } = pigsSlice.actions
 export default pigsSlice.reducer

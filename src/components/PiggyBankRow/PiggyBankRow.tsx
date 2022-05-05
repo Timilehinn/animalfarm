@@ -15,7 +15,7 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 function PiggyBankRow(props) {
 
-    const { id, piglets, trufflesavailable, trufflesvalue, time, maxpayout} = props
+    const { id, piglets, trufflesavailable, truffleLocker, trufflesvalue, time, maxpayout} = props
     const [state, showModal] = useState(false)
     const dispatch = useAppDispatch()
     const { library } = useActiveWeb3React()
@@ -26,14 +26,28 @@ function PiggyBankRow(props) {
         dispatch( toggleModalBackDrop(true) )
     }
 
-    // function getRemainingTime(item){
-    //     const durationTimestamp = item.truffleLocker?.durationTimestamp
-    //     const startLockTimestamp = item.truffleLocker?.startLockTimestamp
-    //     const timeNow = Date.now() / 1000
-    //     const endDate = Number(startLockTimestamp) + Number(durationTimestamp)
+    function secondsToString(seconds) {
+        const secondsMaxxed = Math.max(seconds, 0)
+        const numdays = Math.floor(secondsMaxxed / 86400)
+        const numhours = Math.floor((secondsMaxxed % 86400) / 3600)
+        const numminutes = Math.floor(((secondsMaxxed % 86400) % 3600) / 60)
+        const numseconds = ((secondsMaxxed % 86400) % 3600) % 60
+        const endstr = ''
+        // return numhours + "h " + numminutes + "m "//+numseconds+"s";
+        return `${numdays}d ${numhours}h ${numminutes}m`
+    }
 
-    //     return secondsToString(Math.round(endDate - timeNow))
-    // }
+    function getRemainingTime(){
+        const durationTimestamp = truffleLocker?.durationTimestamp
+        const startLockTimestamp = truffleLocker?.startLockTimestamp
+        const timeNow = Date.now() / 1000
+        const endDate = Number(startLockTimestamp) + Number(durationTimestamp)
+
+        return secondsToString(Math.round(endDate - timeNow))
+    }
+
+    
+
 
     const _sellPiglets = async ()=> {
 
@@ -64,7 +78,7 @@ function PiggyBankRow(props) {
                 <td>{new BigNumber(piglets).toString() }</td>
                 <td >{trufflesavailable}</td>
                 <td >{trufflesvalue}</td>
-                <td >{time}</td>
+                <td >{getRemainingTime()}</td>
                 <td >{maxpayout}</td>
                 <td >
                     <div className={style.action}>

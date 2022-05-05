@@ -12,6 +12,7 @@ import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { getDecimalAmount } from 'utils/formatBalance'
+import { setPigsBusdPrice } from 'state/pigs'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { checkAllowance, approveBusd } from '../../api/allowance'
 import { getPigsBalance } from '../../api/getPigsBalance'
@@ -21,6 +22,7 @@ import { usePigsBalance } from '../../state/balances/hooks'
 import styles from './PigsCredit.module.scss'
 import pig from '../../assets/pig.png'
 import busdIcon from '../../assets/busd.png'
+
 
 function PigsCredit() {
 	useEffect(() => {
@@ -39,12 +41,12 @@ function PigsCredit() {
 	const { account, library } = useActiveWeb3React()
 	const { pigsBalance, setPigsBalance } = usePigsBalance()
 	// const pigsBalance = useAppSelector((state) => state.balanceReducer.pigsBalance)
-	const busdBalance = useAppSelector((state) => state.balanceReducer.busdBalance)
+	const _busdBalance = useAppSelector((state) => state.balanceReducer.busdBalance)
 	const availablePigsToClaim = useAppSelector((state) => state.pigsCreditReducer.pigsAvailableToClaim)
 	const signer = library.getSigner()
 
 	const dispatch = useAppDispatch()
-	const [pigsBusdPrice, setPigsBusdPrice] = useState(0)
+	const [pigsBusdPrice, _setPigsBusdPrice] = useState(0)
 	const [allowance, setAllowance] = useState(null)
 	const [inputValue, setInputValue] = useState('')
 	const [canApprove, setCanApprove] = useState(false)
@@ -59,8 +61,9 @@ function PigsCredit() {
 	const getBusdPrice = async () => {
 		try {
 			const res = await getPigsBUSDPrice()
-			console.log(res, 'busd')
+			console.log(Number(res), 'busdpigs price')
 			setPigsBusdPrice(res)
+			_setPigsBusdPrice(res)
 		} catch (err) {
 			console.log(err)
 		}
@@ -82,7 +85,7 @@ function PigsCredit() {
 		setPending(true)
 		try {
 			console.log(inputValue, 'tesss')
-			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', (Number(inputValue) * 10 ** 18).toString(), signer)
+			await approveBusd('0xb5c4569617320146c8510A9Cf432dd2f86acf6d1', '115792089237316195423570985008687907853269984665640564039457584007913129639935', signer)
 			setPending(false)
 			setIsApproved(true)
 			const data = {
@@ -95,7 +98,7 @@ function PigsCredit() {
 			const data = {
 				success: false,
 				msg: 'not approved',
-			}
+			} 
 			setPending(false)
 			setIsApproved(false)
 		}
@@ -190,7 +193,7 @@ function PigsCredit() {
 						<PigsCreditCard title='PIGS balance' amount={`${pigsBalance.amount.toFixed(2)} PIGS`} />
 					</div>
 					<div>
-						<PigsCreditCard title='BUSD balance' amount={`${Number(busdBalance).toFixed(2)} BUSD`} />
+						<PigsCreditCard title='BUSD balance' amount={`${Number(_busdBalance).toFixed(2)} BUSD`} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -221,7 +224,7 @@ function PigsCredit() {
 							lockDuration={lockDuration}
 							setLockDuration={setLockDuration}
 							confirmFunction={claimToPiggy}
-							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
+							available={`${Number(_busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
 							infoValue={availablePigsToClaim.toFixed(2)}
 							infoTitle2='Estimated BUSD to pair'

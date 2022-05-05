@@ -106,3 +106,4 @@ export const withdrawFromPigPen = async (signer: ethers.Signer) => {
 	const pigsTokenV2Contract = getPigPenContract(signer)
 	await pigsTokenV2Contract.withdraw()
 }
+

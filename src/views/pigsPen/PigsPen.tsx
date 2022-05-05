@@ -7,7 +7,7 @@ import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 // eslint-disable-next-line import/no-named-as-default-member
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
-import { useAppDispatch } from 'state/hooks'
+import { useAppDispatch ,useAppSelector} from 'state/hooks'
 import { usePigPen } from 'state/pigpen/hooks'
 import useToast from 'hooks/useToast'
 import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
@@ -17,6 +17,8 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styles from './PigsPen.module.scss'
 
 import pig from '../../assets/svgg.png'
+
+
 
 function PigsPen() {
 	useEffect(() => {
@@ -45,6 +47,7 @@ function PigsPen() {
 	const [isApproved, setIsApproved] = useState(false)
 	const [allowance, setAllowance] = useState(0)
 	const [isDisabled, setIsDisabled] = useState(false)
+	const pigsBusdPrice = useAppSelector((state)=>state.pigsCreditReducer.pigsBusdPrice)
 	/// State for input
 	const [inputValue, setInputValue] = useState('')
 
@@ -228,7 +231,7 @@ function PigsPen() {
 						<PigsCreditCard title='Total PIGS Locked' amount={getBalanceAmountString(pigPenData.pigsSupply)} />
 					</div>
 					<div>
-						<PigsCreditCard title='Total Value Locked' amount='$0.00' />
+						<PigsCreditCard title='Total Value Locked' amount={Number(pigPenData.pigsSupply) * pigsBusdPrice } />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -242,7 +245,7 @@ function PigsPen() {
 							</div>
 						</div>
 						{activeTab === 1 ? (
-							<RewardsCenter
+							<RewardsCenter 
 								sliderRequired={false}
 								title='Submit PIGS to be deposited'
 								infoTitle='Earn'

@@ -135,7 +135,7 @@ function PiggyBank() {
 		
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [account])
 
 	const getAllowanceCallback = React.useCallback(async () => {
 		try {
@@ -214,6 +214,7 @@ function PiggyBank() {
 
 		
 		try{
+
 			const res = await buyPigLets((Number(inputValue)*10**18).toString(),lockDuration.toString(),ref,signer)
 			console.log(res)
 
@@ -229,6 +230,9 @@ function PiggyBank() {
 
 			if(res.success === false){
 				dispatch( toggleToastNotification({state:true,msg:"Transaction Failed. Try again"}) )
+				setTimeout(()=>{
+					dispatch( toggleToastNotification({state:false,msg:""}) )
+				},3000)
 			}
 
 		}catch(err){
