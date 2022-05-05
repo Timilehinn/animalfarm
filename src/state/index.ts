@@ -4,6 +4,7 @@ import toggleReducer from './toggle'
 import balanceReducer from './balances'
 import pigsCreditReducer from './pigs'
 import piggyBankReducer from './piggybank'
+import pigPenReducer from './pigpen'
 
 const store = configureStore({
 	reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
 		balanceReducer,
 		pigsCreditReducer,
 		piggyBankReducer,
+		pigPenReducer,
 	},
 })
 
