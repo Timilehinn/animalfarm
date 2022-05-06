@@ -167,7 +167,7 @@ function PigsCredit() {
 
 		setPending(true)
 		try {
-			await claimInToPigPen(claimToPigPenAmount, signer)
+			await claimInToPigPen(getDecimalAmount(claimToPigPenAmount), signer)
 			setPending(false)
 		} catch (err) {
 			console.log(err)
