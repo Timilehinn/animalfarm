@@ -6,8 +6,8 @@ const initialState = {
 		busdBalance: '0',
 		pigsBalance: '0',
 		pigsAvailableToClaim: '0',
-		pigsBusdPrice: '0',
 	},
+	pigsBusdPrice: '0',
 }
 
 const pigsCreditSlice = createSlice({
@@ -18,7 +18,7 @@ const pigsCreditSlice = createSlice({
 			state.data = { ...state, ...action.payload }
 		},
 		setPigsBusdPrice: (state, action: PayloadAction<string>) => {
-			state.data.pigsBusdPrice = action.payload
+			state.pigsBusdPrice = action.payload
 		},
 	},
 })

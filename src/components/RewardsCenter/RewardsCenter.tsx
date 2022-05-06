@@ -102,18 +102,15 @@ function RewardsCenter({
 	const { account, library } = useActiveWeb3React()
 
 	const handleChange = (e: any) => {
-		// setBusdValue(e.target.value)
 		setInputValue(e.target.value)
 		checkButtonAndApproval(e.target.value)
 	}
 
 	const handleChange2 = (e: any) => {
-		// setBusdValue(e.target.value)
 		setInputValue2(e.target.value)
 	}
 
 	const handleApprove = () => {
-		// setBusdValue(e.target.value)
 		approve()
 	}
 
@@ -144,21 +141,6 @@ function RewardsCenter({
 		return true
 	}
 
-	// modal properties to be set to state
-	// const confirmModalProps = {
-	// 	value: 50,
-	// 	text,
-	// 	warning: 'Wwarning set',
-	// 	infoValues: [
-	// 		{ title: 'Pigs deposited', value: Math.ceil(Number(busdValue) / pigsBusdPrice) },
-	// 		{ title: 'BUSD deposited', value: busdValue },
-	// 		{ title: 'Time Lock', value: `${longerPaysBetterBonusPercents[lockDuration - 1]}%` },
-	// 		{ title: '1 PIGS(s)', value: pigsBusdPrice },
-	// 		{ title: '1 BUSD', value: 1 / pigsBusdPrice },
-	// 	],
-	// 	confirmFunction,
-	// }
-
 	const openModal = () => {
 		if (confirmModalProps) {
 			dispatch(toggleConfirmModal(true))
@@ -183,9 +165,9 @@ function RewardsCenter({
 							<img src={icon} alt='' />
 							<p>{token}</p>
 						</div>
-						<input onChange={(e) => handleChange(e)} min="0" required value={inputValue} type='number' placeholder='0.00' />
+						<input onChange={(e) => handleChange(e)} min='0' required value={inputValue} type='number' placeholder='0.00' />
 					</div>
-					{recipient && ( 
+					{recipient && (
 						<div className={styles.inputBox2}>
 							<input onChange={(e) => handleChange2(e)} value={inputValue2} placeholder='Input recipients address' />
 						</div>

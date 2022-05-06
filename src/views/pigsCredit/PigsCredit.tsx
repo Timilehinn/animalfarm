@@ -42,7 +42,10 @@ function PigsCredit() {
 	const { account, library } = useActiveWeb3React()
 
 	/// THIS IS ALL THE DATA NEEDED ///
-	const { busdAllowance, busdBalance, pigsBalance, pigsBusdPrice, pigsAvailableToClaim } = useAppSelector((state) => state.pigsCreditReducer.data)
+	const {
+		pigsBusdPrice,
+		data: { busdAllowance, busdBalance, pigsBalance, pigsAvailableToClaim },
+	} = useAppSelector((state) => state.pigsCreditReducer)
 	const signer = library.getSigner()
 
 	const dispatch = useAppDispatch()
@@ -59,9 +62,7 @@ function PigsCredit() {
 	const getBusdPrice = async () => {
 		try {
 			const res = await getPigsBUSDPrice()
-			console.log(Number(res), 'busdpigs price')
 			dispatch(setPigsBusdPrice(res))
-			// _setPigsBusdPrice(res)
 		} catch (err) {
 			console.log(err)
 		}
@@ -81,8 +82,6 @@ function PigsCredit() {
 			setIsApproved(false)
 		}
 	}
-
-	// claimInToPigPen
 
 	const claimToPigPen = async () => {
 		try {
@@ -119,18 +118,16 @@ function PigsCredit() {
 	}
 
 	useEffect(() => {
-		Promise.all([getBusdPrice()])
+		getBusdPrice()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	useEffect(() => {
 		const exec = async () => {
 			if (account) {
-				//
 				dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
 			}
 		}
-
 		exec()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
@@ -162,6 +159,21 @@ function PigsCredit() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
+	const modalDetailsForClaimToPiggyBank = {
+		modalTitleText: 'Confirm Claim',
+		confirmButtonText: 'Claim',
+		value: inputValue,
+		text: 'PIGS',
+		warning: 'All the values above are estimated.',
+		infoValues: [
+			{ title: 'PIGS deposited', value: Math.ceil(Number(inputValue) / Number(pigsBusdPrice)).toString() },
+			{ title: 'BUSD deposited', value: inputValue },
+			{ title: '1 PIGS(s)', value: pigsBusdPrice },
+			{ title: '1 BUSD', value: (1 / Number(pigsBusdPrice)).toString() },
+		],
+		confirmFunction: claimToPiggy,
+	}
+
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
 			<div className={styles.pigscredit}>
@@ -175,10 +187,10 @@ function PigsCredit() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='PIGS balance' amount={`${Number(pigsBalance).toFixed(2)} PIGS`} />
+						<PigsCreditCard title='PIGS balance' amount={`${Number(getBalanceAmountString(pigsBalance)).toFixed(5)} PIGS`} />
 					</div>
 					<div>
-						<PigsCreditCard title='BUSD balance' amount={`${Number(busdBalance).toFixed(2)} BUSD`} />
+						<PigsCreditCard title='BUSD balance' amount={`${Number(getBalanceAmountString(busdBalance)).toFixed(5)} BUSD`} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -211,9 +223,9 @@ function PigsCredit() {
 							confirmFunction={claimToPiggy}
 							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
-							infoValue={getBalanceAmountString(pigsAvailableToClaim)}
+							infoValue={`${Number(getBalanceAmountString(pigsAvailableToClaim)).toFixed(5)} PIGS`}
 							infoTitle2='Estimated BUSD to pair'
-							infoValue2={estimatedBusdToPair}
+							infoValue2={`${Number(getBalanceAmountString(estimatedBusdToPair.toString())).toFixed(5)} BUSD`}
 							token='BUSD'
 							icon={busdIcon}
 							rewardCenter={false}
@@ -222,6 +234,8 @@ function PigsCredit() {
 							checkButtonAndApproval={checkButtonAndApproval}
 							hideAmountInput={false}
 							hideApproveButton={false}
+							// Modal
+							confirmModalProps={modalDetailsForClaimToPiggyBank}
 						/>
 					)}
 				</div>
