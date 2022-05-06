@@ -260,7 +260,7 @@ function PigsPen() {
 						<PigsCreditCard title='Total PIGS Locked' amount={getBalanceAmountString(pigPenData.pigsSupply)} />
 					</div>
 					<div>
-						<PigsCreditCard title='Total Value Locked' amount={Number(pigPenData.pigsSupply) * Number(pigsBusdPrice)} />
+						<PigsCreditCard title='Total Value Locked' amount={getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice)).toString())} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
