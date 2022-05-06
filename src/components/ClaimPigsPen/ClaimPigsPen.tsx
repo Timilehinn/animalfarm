@@ -4,8 +4,10 @@ import { useSpring, animated } from 'react-spring'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import { getBalanceAmountString } from 'utils/formatBalance'
+import { claimRewardPigPen } from 'api/pigpen'
 import styles from './ClaimPigsPen.module.scss'
 import logo from '../../assets/svgg.png'
+
 
 interface claimProps {
 	title: string
@@ -22,13 +24,17 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 
 	const handleChange = (e: any) => {
 		setClaimToPigPenAmount(e.target.value)
+		console.log(claimToPigPenAmount)
 	}
 
 	const handleClick = () => {
 		claimToPigPen()
+	
 	}
 
-	const buttonDisabled = claimToPigPenAmount === '0'
+	const buttonDisabled = Number(claimToPigPenAmount) === 0
+	console.log(buttonDisabled)
+	
 
 	return (
 		<animated.div style={styleProps} className={styles.claimpigs}>
@@ -51,7 +57,7 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 				{!account ? (
 					<ConnectWalletButton />
 				) : (
-					<button onClick={handleClick} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
+					<button onClick={()=>handleClick()} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
 						Claim
 					</button>
 				)}

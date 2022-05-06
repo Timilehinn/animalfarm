@@ -1,7 +1,7 @@
 import { PiggyBank } from 'state/piggybank'
 
-// import getPigsContract from 'utils/getContracts'
-// import { ethers } from 'ethers'
+import getPigsContract from 'utils/getContracts'
+import { ethers } from 'ethers'
 // import BigNumber from 'bignumber.js'
 import { calculatePiglets, getPiggyBanks } from './helpers'
 
@@ -33,3 +33,25 @@ export const fetchPiggyBankData = async (account: string): Promise<PiggyBank> =>
 //     dispatch(fetchFailed())
 //   }
 // }
+
+export const buyMoreTrufflesToAPiggyBank = async (id: string, amount:string, referee:string, signer:ethers.Signer) => {
+	
+	const { piggyBankContract } = getPigsContract()
+	let res
+
+	try {
+		await piggyBankContract.connect(signer).buyMoreTrufflesToAPiggyBank(id,amount,referee)
+		res = {
+			success:true,
+			data:null
+		}
+	} catch (e) {
+		console.error('fetchPiggyBankData error: ', e)
+		res = {
+			success:false,
+			data:null
+		}
+	}
+
+	return res
+}

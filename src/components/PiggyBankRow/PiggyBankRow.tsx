@@ -1,14 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState,useRef } from 'react'
 import { useAppDispatch } from 'state/hooks'
 import { toggleModalBackDrop, toggleDepositModal } from 'state/toggle'
 import { usePiggyBank } from 'state/piggybank/hooks'
 import { BigNumber } from 'bignumber.js'
 import { sellPiglets, compound } from 'api/piggyBank/getMyPiggyBanks'
 import { fetchPiggyBankData } from 'api/Ipiggybank'
+import DepositeModal from 'components/DepositeModal/DepositeModal'
 import useToast from 'hooks/useToast'
 import style from './PiggyBankRow.module.scss'
 import up from '../../assets/up.svg'
 import down from '../../assets/down.svg'
+
+
 
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
@@ -20,6 +23,7 @@ function PiggyBankRow(props) {
 	const signer = library.getSigner()
 	const { setPiggyBank } = usePiggyBank()
 	const { toastError } = useToast()
+	const catMenu = useRef(null)
 
 	const getMyPiggyBank = async () => {
 		try {
@@ -31,7 +35,16 @@ function PiggyBankRow(props) {
 		}
 	}
 
+	const closeDropDown = (e:any) => {
+		if(catMenu.current && state && !catMenu.current.contains(e.target)){
+      showModal(false)
+    }
+	}
+
+	 document.addEventListener('click',closeDropDown)
+
 	const openDepositModal = () => {
+		showModal(false)
 		dispatch(toggleDepositModal(true))
 		dispatch(toggleModalBackDrop(true))
 	}
@@ -56,7 +69,10 @@ function PiggyBankRow(props) {
 		return secondsToString(Math.round(endDate - timeNow))
 	}
 
+	
+
 	const _sellPiglets = async () => {
+		showModal(false)
 		try {
 			const res = await sellPiglets(id, signer)
 			console.log(res, 'sold piglet')
@@ -70,6 +86,7 @@ function PiggyBankRow(props) {
 		}
 	}
 	const _compound = async () => {
+		showModal(false)
 		try {
 			const res = await compound(id, signer)
 			console.log(res, 'compounded')
@@ -84,7 +101,7 @@ function PiggyBankRow(props) {
 	}
 
 	return (
-		<tr className={style.tr}>
+		<tr ref={catMenu} className={style.tr}>
 			<td>{id}</td>
 			<td>{new BigNumber(piglets).toString()}</td>
 			<td>{trufflesavailable}</td>
@@ -112,6 +129,7 @@ function PiggyBankRow(props) {
 					</div>
 				</div>
 			</td>
+			<DepositeModal id={id} />
 		</tr>
 	)
 }

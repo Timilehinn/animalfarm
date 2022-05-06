@@ -165,10 +165,10 @@ function PigsCredit() {
 		}
 	}
 	const claimToPigPen = async () => {
-		if (!account) {
-			toastInfo('Connect wallet to claim to PIg Pen.')
-			return
-		}
+		// if (!account) {
+		// 	toastInfo('Connect wallet to claim to PIg Pen.')
+		// 	return
+		// }
 
 		setPending(true)
 		try {

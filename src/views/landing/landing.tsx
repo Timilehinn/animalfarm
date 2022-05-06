@@ -43,7 +43,7 @@ function Landing() {
 				<ConnectWalletModal login={login} />
 				<ConfirmModal />
 				<Toast />
-				<DepositeModal />
+				{/* <DepositeModal /> */}
 				<TourModal />
 				<Routes>
 					

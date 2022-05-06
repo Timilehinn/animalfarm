@@ -29,6 +29,7 @@ export const fetchPigsCreditData = async (account: string): Promise<any> => {
 			params: [account],
 		},
 	]
+
 	const callsToPigsCredit = [
 		{
 			// Pool Info
@@ -43,7 +44,7 @@ export const fetchPigsCreditData = async (account: string): Promise<any> => {
 
 	const pigsCreditData = {
 		busdAllowance: new BigNumber(busdAllowance).toJSON(),
-		busdBalance: new BigNumber(busdBalance).toJSON(),
+		busdBalance: new BigNumber(busdBalance).toJSON(), 
 		pigsBalance: new BigNumber(pigsBalance).toJSON(),
 		pigsAvailableToClaim: new BigNumber(availablePigsV2ToClaim).toJSON(),
 	}

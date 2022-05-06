@@ -147,7 +147,7 @@ function RewardsCenter({
 	}
 
 	const openModal = () => {
-		if (!inputValue) return
+		// if (!inputValue) return
 		if (confirmModalProps) {
 			dispatch(toggleConfirmModal(true))
 			dispatch(toggleModalBackDrop(true))

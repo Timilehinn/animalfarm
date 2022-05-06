@@ -104,7 +104,7 @@ const initialState = {
 		balance: '0',
 		marketTruffles: '0',
 		userData: {
-			referrals: '0',
+			referrals: [],
 			usdValue: [],
 			userPiggyBanks: [],
 			lpBalance: '0',

@@ -11,7 +11,7 @@ export const NODES = {
 }
 
 const getNodeUrl = (): string => {
-	const nodeUrl = sample(NODES[CHAIN_ID])
+	const nodeUrl = sample(NODES[CHAIN_ID]) 
 	if (nodeUrl === undefined) {
 		return NODES[CHAIN_ID][0]
 	}
