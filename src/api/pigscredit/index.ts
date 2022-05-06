@@ -41,16 +41,12 @@ export const fetchPigsCreditData = async (account: string): Promise<any> => {
 	const [busdAllowance, busdBalance, pigsBalance] = await multicall(erc20ABI, erc20Calls)
 	const [availablePigsV2ToClaim] = await multicall(pigsCreditAbi, callsToPigsCredit)
 
-	console.log(busdAllowance, busdBalance, pigsBalance, availablePigsV2ToClaim)
-
 	const pigsCreditData = {
 		busdAllowance: new BigNumber(busdAllowance).toJSON(),
 		busdBalance: new BigNumber(busdBalance).toJSON(),
 		pigsBalance: new BigNumber(pigsBalance).toJSON(),
 		pigsAvailableToClaim: new BigNumber(availablePigsV2ToClaim).toJSON(),
 	}
-
-	console.log(pigsCreditData)
 
 	return pigsCreditData
 }

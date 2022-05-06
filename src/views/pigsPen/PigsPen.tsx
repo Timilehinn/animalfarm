@@ -45,7 +45,7 @@ function PigsPen() {
 	const [isApproved, setIsApproved] = useState(false)
 	const [allowance, setAllowance] = useState(0)
 	const [isDisabled, setIsDisabled] = useState(false)
-	const pigsBusdPrice = useAppSelector((state) => state.pigsCreditReducer.data.pigsBusdPrice)
+	const pigsBusdPrice = useAppSelector((state) => state.pigsCreditReducer.pigsBusdPrice)
 	/// State for input
 	const [inputValue, setInputValue] = useState('')
 

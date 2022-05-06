@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react'
 import { useSpring, animated } from 'react-spring'
 import { getBalanceAmountString } from 'utils/formatBalance'
