@@ -4,9 +4,10 @@ import { useSpring, animated } from 'react-spring'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import { getBalanceAmountString } from 'utils/formatBalance'
+import { claimRewardPigPen } from 'api/pigpen'
 import styles from './ClaimPigsPen.module.scss'
 import logo from '../../assets/svgg.png'
-import { claimRewardPigPen } from 'api/pigpen'
+
 
 interface claimProps {
 	title: string

@@ -46,7 +46,6 @@ function PiggyBank() {
 
 	const { account, library } = useActiveWeb3React()
 	const params = useParams()
-	console.log(params.referee, 'REFEREE')
 	const dispatch = useAppDispatch()
 	const signer = library.getSigner()
 	const { piggybank, setPiggyBank, setAllowance } = usePiggyBank()
@@ -109,6 +108,27 @@ function PiggyBank() {
 	}, [account])
 
 	/// Helper Functions ///
+	const shouldDisableMainButton = (): boolean => {
+		if (!inputValue || (inputValue === '0' && !isApproved)) {
+			return true
+		}
+
+		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(inputValue))) {
+			return true
+		}
+		return false
+	}
+
+	const showApproveButton = (): boolean => {
+		if (!inputValue || (inputValue === '0' && isApproved)) {
+			return false
+		}
+		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(inputValue))) {
+			return true
+		}
+		return false
+	}
+
 	const checkButtonAndApproval = (inputvalue: string) => {
 		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsDisabled(true)
@@ -138,8 +158,8 @@ function PiggyBank() {
 	const getMyPiggyBank = async () => {
 		try {
 			const res = await fetchPiggyBankData(account)
-			console.log(res)
 			setPiggyBank(res)
+			console.log(res)
 		} catch (err) {
 			toastError('Error fetching PiggyBank')
 			console.log(err)
@@ -152,6 +172,7 @@ function PiggyBank() {
 			setAllowance(LARGE_NUMBER)
 			setPending(false)
 			setIsApproved(true)
+			await getMyPiggyBank()
 		} catch (err) {
 			setPending(false)
 			setIsApproved(false)
@@ -178,15 +199,13 @@ function PiggyBank() {
 
 		try {
 			const res = await buyPigLets((Number(inputValue) * 10 ** 18).toString(), lockDuration.toString(), ref, signer)
-			console.log(res)
 
 			if (res.success === true) {
-				getMyPiggyBank()
 				resetInputs()
 				dispatch(toggleConfirmModal(false))
 				dispatch(toggleModalBackDrop(false))
 				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Succesful' }))
-
+				await getMyPiggyBank()
 				setTimeout(() => {
 					dispatch(toggleToastNotification({ state: false, msg: '' }))
 				}, 3000)
@@ -205,13 +224,13 @@ function PiggyBank() {
 	const _gitfPiglets = async () => {
 		try {
 			const res = await giftPiglet(inputValue2, (Number(inputValue) * 10 ** 18).toString(), lockDuration.toString(), signer)
-			console.log(res)
 
 			if (res.success === true) {
+				resetInputs()
 				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Succesful' }))
 				dispatch(toggleConfirmModal(false))
 				dispatch(toggleModalBackDrop(false))
-
+				await getMyPiggyBank()
 				setTimeout(() => {
 					dispatch(toggleToastNotification({ state: false, msg: '' }))
 				}, 3000)
@@ -294,6 +313,8 @@ function PiggyBank() {
 					</div>
 					{activeTab === 1 ? (
 						<RewardsCenter
+							mainButtonDisabled={shouldDisableMainButton()}
+							approveButtonVisible={showApproveButton()}
 							title='Buy Piglets with LP token'
 							Lock
 							pair={false}
@@ -318,6 +339,8 @@ function PiggyBank() {
 						/>
 					) : (
 						<RewardsCenter
+							mainButtonDisabled={shouldDisableMainButton()}
+							approveButtonVisible={showApproveButton()}
 							pair={false}
 							Lock
 							title='Gift Piglets with LP token'

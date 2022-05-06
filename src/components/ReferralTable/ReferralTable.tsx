@@ -1,8 +1,11 @@
 import React from 'react'
+import { useAppSelector } from 'state/hooks'
 import ReferralRow from 'components/ReferralRow/ReferralRow'
 import style from './ReferralTable.module.scss'
 
+
 function ReferralTable() {
+	const piggyBankData = useAppSelector((state)=>state.piggyBankReducer.data)
 	const refdata = [
 		// {
 		// 	id: 1,
@@ -46,8 +49,8 @@ function ReferralTable() {
 						</tr>
 					</thead>
 					<tbody>
-						{refdata.map((data) => (
-							<ReferralRow id={data.id} address={data.address} amount={data.amount} date={data.date} locktime={data.locktime} />
+						{piggyBankData.userData.referrals.map((data,index) => (
+							<ReferralRow id={index}  address={data.referral} amount={data.amount} date={data.timestamp} locktime={data.lockDuration} />
 						))}
 					</tbody>
 				</table>
