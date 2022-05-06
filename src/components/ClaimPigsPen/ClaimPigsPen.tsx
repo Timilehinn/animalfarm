@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react'
+import React from 'react'
 import { useSpring, animated } from 'react-spring'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import { getBalanceAmountString } from 'utils/formatBalance'
 import styles from './ClaimPigsPen.module.scss'
 import logo from '../../assets/svgg.png'
@@ -14,6 +16,8 @@ interface claimProps {
 }
 
 function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setClaimToPigPenAmount, claimToPigPen }: claimProps) {
+	const { account } = useActiveWeb3React()
+
 	const styleProps = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: -20 }, delay: 100 })
 
 	const handleChange = (e: any) => {
@@ -43,9 +47,14 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 						<p className={styles.claimable}>Amount Claimable: {getBalanceAmountString(pigsAvailableToClaim)} PIGS</p>
 					</div>
 				</div>
-				<button onClick={handleClick} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
-					claim
-				</button>
+				{/* Handle Connect Wallet */}
+				{!account ? (
+					<ConnectWalletButton />
+				) : (
+					<button onClick={handleClick} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
+						Claim
+					</button>
+				)}
 			</form>
 		</animated.div>
 	)

@@ -1,0 +1,30 @@
+@import '../../global.scss';
+$grey: #ffffff4d;
+
+.button__disabled {
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+	border-radius: 10px;
+	border: none;
+	background-color: #474e47;
+	color: $grey;
+	cursor: not-allowed;
+}
+
+.button__enabled {
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+	border-radius: 10px;
+	border: none;
+	cursor: pointer;
+	color: white;
+	background: linear-gradient(93.41deg, #47a348 1.19%, #3d6b3d 99.16%);
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
