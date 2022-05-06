@@ -31,7 +31,7 @@ function PigsCredit() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/pigscredit.png);
+		background-image: url(${window.location.origin}/bg/pigscredit.png);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed;
@@ -57,7 +57,7 @@ function PigsCredit() {
 	const [isApproved, setIsApproved] = useState(true)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
-	
+
 	const { toastInfo } = useToast()
 
 	const [activeTab, setActiveTab] = React.useState(1)
@@ -67,15 +67,15 @@ function PigsCredit() {
 		try {
 			const res = await getPigsBUSDPrice()
 			dispatch(setPigsBusdPrice(res))
-			console.log(res,"busdprice")
+			console.log(res, 'busdprice')
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
 	const approve = async () => {
-		if(!account){
-			toastInfo("Connect wallet to approve")
+		if (!account) {
+			toastInfo('Connect wallet to approve')
 			return
 		}
 		setPending(true)
@@ -83,11 +83,11 @@ function PigsCredit() {
 		try {
 			console.log(inputValue, 'tesss')
 			// await approvePigsCreditSpendBUSD(signer)
+
 			await approveBusd( account, inputValue, signer )
 			setPending(false)
 			setIsApproved(true)
 			setIsDisabled(false)
-			
 		} catch (err) {
 			console.log(err)
 
@@ -98,9 +98,8 @@ function PigsCredit() {
 	}
 
 	const claimToPigPen = async () => {
-		
-		if(!account){
-			toastInfo("Connect wallet to claim to PIg Pen.")	
+		if (!account) {
+			toastInfo('Connect wallet to claim to PIg Pen.')
 			return
 		}
 
@@ -114,9 +113,9 @@ function PigsCredit() {
 	}
 
 	const claimToPiggy = async () => {
-		if(!account){
-			toastInfo("Connect wallet to claim reward")
-			return 
+		if (!account) {
+			toastInfo('Connect wallet to claim reward')
+			return
 		}
 		try {
 			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
@@ -144,9 +143,7 @@ function PigsCredit() {
 	}
 
 	useEffect(() => {
-		
 		// getBusdPrice()
-		
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 

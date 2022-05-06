@@ -7,30 +7,24 @@ import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 // import { useNavigate } from 'react-router-dom'
 import { useSpring, animated } from 'react-spring'
-import { toggleToastNotification, toggleTourModal,toggleConfirmModal, toggleModalBackDrop } from 'state/toggle'
+import { toggleToastNotification, toggleTourModal, toggleConfirmModal, toggleModalBackDrop } from 'state/toggle'
 // import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
-import { fetchPiggyBankData, getTotalLpLocked } from 'api/Ipiggybank'
+import { fetchPiggyBankData } from 'api/Ipiggybank'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { getDecimalAmount } from 'utils/formatBalance'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import BigNumber from 'bignumber.js'
 import { usePiggyBank } from 'state/piggybank/hooks'
-import { approvePigBusd } from 'api/allowance'
+import { approvePiggyBankForPigBusdLP } from 'api/allowance'
 import { useParams } from 'react-router-dom'
-import { setTotalLpLocked } from 'state/piggybank'
 
 import { longerPaysBetterBonusPercents } from 'utils/lockBonusPercentage'
 import useToast from 'hooks/useToast'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
-// import { setTotalLpLocked } from 'state/piggybank'
 
-import { checkPigBusdAllowance } from '../../api/allowance'
-import { PiggyBankAddress } from '../../config/constants'
+import { PiggyBankAddress, LARGE_NUMBER, ZERO_ADDRESS } from '../../config/constants'
 import { buyPigLets, giftPiglet } from '../../api/piggyBank/getMyPiggyBanks'
-import GiftPiglet from '../../components/GiftPiglet/GiftPiglet'	
-
-
 
 interface ParamsType {
 	referee: string
@@ -41,7 +35,7 @@ function PiggyBank() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/piggybank.png);
+		background-image: url(${window.location.origin}/bg/piggybank.png);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed;
@@ -50,27 +44,22 @@ function PiggyBank() {
 		)
 	}, [])
 
-	const pigsBusdLpBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
-	const totalLpTokenLocked = useAppSelector((state) => state.piggyBankReducer.totalLpLocked)
 	const { account, library } = useActiveWeb3React()
 	const params = useParams()
-	console.log(params.referee)
+	console.log(params.referee, 'REFEREE')
 	const dispatch = useAppDispatch()
 	const signer = library.getSigner()
-	const { piggybank, isLoading, setFetchFailed, setFetchStart, setPiggyBank } = usePiggyBank()
+	const { piggybank, setPiggyBank, setAllowance } = usePiggyBank()
 	// const navigate = useNavigate()
 	const [activeTab, setActiveTab] = useState(1)
 	const [lockDuration, setLockDuration] = useState(0)
 	const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(false)
-	const [allowance, setAllowance] = useState(0)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [inputValue, setInputValue] = useState('')
 	const [inputValue2, setInputValue2] = useState('')
-	
-	const [lockBonus, setLockBonus] = useState(0)
-	
-	const { toastInfo } = useToast()
+
+	const { toastInfo, toastError } = useToast()
 
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
@@ -93,8 +82,6 @@ function PiggyBank() {
 		}
 	}
 
-	
-
 	useEffect(() => {
 		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
@@ -107,186 +94,144 @@ function PiggyBank() {
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
-
-	const getMyPiggyBank = async () => {
-		try {
-			setFetchStart()
-			const res = await fetchPiggyBankData(account)
-			console.log(res)
-			setPiggyBank(res)
-		} catch (err) {
-			console.log(err)
-		}
-	}
-
-	const _getTotalLpLocked = async () => {
-		try {
-			const res = await getTotalLpLocked()
-			console.log(res, 'total lp locked')
-			dispatch(setTotalLpLocked(Number(res.amount / 10 ** 18)))
-		} catch (err) {
-			console.log(err)
-		}
-	}
-
 	useEffect(() => {
-
-		if(account){
-
+		getMyPiggyBank()
+		if (params.referee) {
+			localStorage.setItem('ref', params.referee)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+	useEffect(() => {
+		if (account) {
 			getMyPiggyBank()
 		}
-		
-
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 
-	const getAllowanceCallback = React.useCallback(async () => {
-		try {
-			const res = await checkPigBusdAllowance(account, PiggyBankAddress)
-			console.log(res, 'allowance npigsbusdallowance')
-			setAllowance(res.allowance)
-			// if ()
-		} catch (err) {
-			console.log(err)
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	useEffect(() => {
-		getAllowanceCallback()
-
-		if(params.referee){
-			localStorage.setItem("ref",params.referee)
-		}
-		
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	const approve = async () => {
-		setPending(true)
-		try {
-			await approvePigBusd('0x19361161e8E3A67DE3818B3E5c932c43954C4918', '115792089237316195423570985008687907853269984665640564039457584007913129639935', signer)
-			setPending(false)
-			setIsApproved(true)
-			const data = {
-				success: true,
-				msg: 'approved',
-			}
-			console.log(data) 
-		} catch (err) {
-			console.log(err)
-			const data = {
-				success: false,
-				msg: 'not approved',
-			}
-			setPending(false)
-			setIsApproved(false)
-		}
-	}
-
+	/// Helper Functions ///
 	const checkButtonAndApproval = (inputvalue: string) => {
-		if (new BigNumber(allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null ) {
+		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
 
-		if (new BigNumber(allowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+		if (new BigNumber(piggybank.userData.lpAllowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
 			setIsApproved(true)
-		} 
+		}
 	}
-
+	const resetInputs = () => {
+		setInputValue('')
+		setInputValue2('')
+		setLockDuration(0)
+	}
 	const getLockBonus = () => {
-		return longerPaysBetterBonusPercents[lockDuration - 1]
+		const lockBonus = longerPaysBetterBonusPercents[lockDuration - 1]
+		if (!lockBonus) return 0
+		return lockBonus
 	}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const _buyPiglets = async() => {
+	const switchTab = (val) => {
+		setActiveTab(val)
+		resetInputs()
+	}
 
-		if(!account){
-			toastInfo("Wallet has to be connected to buy Piglets.")
+	/// API Calls
+	const getMyPiggyBank = async () => {
+		try {
+			const res = await fetchPiggyBankData(account)
+			console.log(res)
+			setPiggyBank(res)
+		} catch (err) {
+			toastError('Error fetching PiggyBank')
+			console.log(err)
+		}
+	}
+	const approve = async () => {
+		setPending(true)
+		try {
+			await approvePiggyBankForPigBusdLP(LARGE_NUMBER, signer)
+			setAllowance(LARGE_NUMBER)
+			setPending(false)
+			setIsApproved(true)
+		} catch (err) {
+			setPending(false)
+			setIsApproved(false)
+		}
+	}
+	const _buyPiglets = async () => {
+		if (!account) {
+			toastInfo('Wallet has to be connected to buy Piglets.')
 			return
 		}
 
 		let ref
 
-		const savedRef = localStorage.getItem("ref")
-		if(savedRef){
-			if(savedRef === account){
-				ref = "0x0000000000000000000000000000000000000000"
-			}else{
+		const savedRef = localStorage.getItem('ref')
+		if (savedRef) {
+			if (savedRef === account) {
+				ref = ZERO_ADDRESS
+			} else {
 				ref = savedRef
 			}
-		}else{
-			ref = "0x0000000000000000000000000000000000000000"
+		} else {
+			ref = ZERO_ADDRESS
 		}
 
-		
-		try{
-
-			const res = await buyPigLets((Number(inputValue)*10**18).toString(),lockDuration.toString(),ref,signer)
+		try {
+			const res = await buyPigLets((Number(inputValue) * 10 ** 18).toString(), lockDuration.toString(), ref, signer)
 			console.log(res)
 
-			if(res.success === true){
-				dispatch( toggleToastNotification({state:true,msg:"Transaction Succesful"}) )
+			if (res.success === true) {
+				getMyPiggyBank()
+				resetInputs()
+				dispatch(toggleConfirmModal(false))
+				dispatch(toggleModalBackDrop(false))
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Succesful' }))
+
+				setTimeout(() => {
+					dispatch(toggleToastNotification({ state: false, msg: '' }))
+				}, 3000)
+			}
+
+			if (res.success === false) {
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed. Try again' }))
+				setTimeout(() => {
+					dispatch(toggleToastNotification({ state: false, msg: '' }))
+				}, 3000)
+			}
+		} catch (err) {
+			console.log(err)
+		}
+	}
+	const _gitfPiglets = async () => {
+		try {
+			const res = await giftPiglet(inputValue2, (Number(inputValue) * 10 ** 18).toString(), lockDuration.toString(), signer)
+			console.log(res)
+
+			if (res.success === true) {
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Succesful' }))
 				dispatch(toggleConfirmModal(false))
 				dispatch(toggleModalBackDrop(false))
 
-				setTimeout(()=>{
-					dispatch( toggleToastNotification({state:false,msg:""}) )
-				},3000)
+				setTimeout(() => {
+					dispatch(toggleToastNotification({ state: false, msg: '' }))
+				}, 3000)
 			}
 
-			if(res.success === false){
-				dispatch( toggleToastNotification({state:true,msg:"Transaction Failed. Try again"}) )
-				setTimeout(()=>{
-					dispatch( toggleToastNotification({state:false,msg:""}) )
-				},3000)
+			if (res.success === false) {
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed. Try again' }))
 			}
-
-		}catch(err){
+		} catch (err) {
 			console.log(err)
 		}
 	}
 
-	const _gitfPiglets = async() => {
-		
-
-		try{
-			const res = await giftPiglet( inputValue2, (Number(inputValue )*10**18).toString() , lockDuration.toString(),signer )
-			console.log(res)
-
-			if(res.success === true){
-				dispatch( toggleToastNotification({state:true,msg:"Transaction Succesful"}) )
-				dispatch(toggleConfirmModal(false))
-				dispatch(toggleModalBackDrop(false)) 
-
-				setTimeout(()=>{
-					dispatch( toggleToastNotification({state:false,msg:""}) )
-				},3000)
-			}
-
-			if(res.success === false){
-				dispatch( toggleToastNotification({state:true,msg:"Transaction Failed. Try again"}) )
-			}
-
-		}catch(err){
-			console.log(err)
-		}
-	}
-
-	const switchTab = (val) => {
-		setActiveTab(val)
-		setInputValue('')
-	}
-
-	
-
+	/// Data Props
 	const modalDetails = {
 		modalTitleText: 'Confirm Deposit',
 		confirmButtonText: 'Acknowledge',
 		value: inputValue,
-		text: 'PIGS',
-		warning: 'Deposit into PigPen',
+		text: 'PIGS/BUSD LP',
+		warning: 'A note text here',
 		infoValues: [
 			{
 				title: 'Time Lock Duration',
@@ -301,7 +246,7 @@ function PiggyBank() {
 	}
 	const giftModalDetails = {
 		modalTitleText: 'Confirm Buy',
-		confirmButtonText: 'Acknowledge', 
+		confirmButtonText: 'Acknowledge',
 		value: inputValue,
 		text: 'PIGS',
 		warning: 'Deposit into PigPen',
@@ -318,13 +263,6 @@ function PiggyBank() {
 		confirmFunction: _gitfPiglets,
 	}
 
-	/** The usePiggyBank hook. This is used to only set data.
-	 * piggybank - This returns ALL the piggybank related data you need
-	 * isLoading - is true when fetcing the data
-	 */
-
-
-
 	return (
 		<animated.div style={props}>
 			<div className={styles.piggybank}>
@@ -339,7 +277,7 @@ function PiggyBank() {
 				</div>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total LP Locked' amount={totalLpTokenLocked} />
+						<PigsCreditCard title='Total LP Locked' amount={piggybank.balance} />
 					</div>
 					{/* <div> 
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
@@ -350,7 +288,7 @@ function PiggyBank() {
 						<div onClick={() => switchTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
 							<p>Buy Piglets</p>
 						</div>
-						<div onClick={() =>switchTab(2)} className={activeTab === 2 ? `${styles.tab__two} ${styles.tab__two__active}` : `${styles.tab__two}`}>
+						<div onClick={() => switchTab(2)} className={activeTab === 2 ? `${styles.tab__two} ${styles.tab__two__active}` : `${styles.tab__two}`}>
 							<p>Gift Piglets</p>
 						</div>
 					</div>
@@ -359,8 +297,8 @@ function PiggyBank() {
 							title='Buy Piglets with LP token'
 							Lock
 							pair={false}
-							infoValue={`${pigsBusdLpBalance} PIGS/BUSD`}
 							infoTitle='PIGS/BUSD LP balance'
+							infoValue={`${piggybank.userData.lpBalance} PIGS/BUSD`}
 							rewardCenter={false}
 							token='PIGS/BUSD LP'
 							icon={pig}
@@ -371,24 +309,23 @@ function PiggyBank() {
 							setLockDuration={setLockDuration}
 							confirmModalProps={modalDetails}
 							checkButtonAndApproval={checkButtonAndApproval}
-							buttonText='Buy piglets'
+							buttonText='Buy Piglets'
 							inputValue={inputValue}
 							setInputValue={setInputValue}
 							hideApproveButton={false}
 							isButtonEnabled={isDisabled}
 							approve={approve}
-							
 						/>
 					) : (
 						<RewardsCenter
 							pair={false}
 							Lock
 							title='Gift Piglets with LP token'
-							infoValue={`${pigsBusdLpBalance} PIGS/BUSD`}
 							infoTitle='PIGS/BUSD LP balance'
+							infoValue={`${piggybank.userData.lpBalance} PIGS/BUSD`}
 							token='PIGS/BUSD LP'
 							icon={pig}
-							buttonText='Gift Piglet'
+							buttonText='Gift Piglets'
 							recipient
 							rewardCenter={false}
 							warningMsg={false}
@@ -405,7 +342,6 @@ function PiggyBank() {
 							inputValue={inputValue}
 							setInputValue={setInputValue}
 							confirmModalProps={giftModalDetails}
-							
 						/>
 					)}
 				</div>

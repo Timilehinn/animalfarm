@@ -1,5 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+export type PiggyLocker = {
+	duration: string
+	durationTimestamp: string
+	startLockTimestamp: string
+}
+
+export type PiggyLockBonus = {
+	isExpired: boolean
+	bonus: string
+	distributedBonus: string
+	dayLastDistributed: string
+}
+
 export type UserPiggyBank = {
 	ID: string
 	isStakeOn: boolean
@@ -18,19 +31,6 @@ export type UserPiggyBank = {
 	paddedPrecisionValue: string
 }
 
-export type PiggyLocker = {
-	duration: string
-	durationTimestamp: string
-	startLockTimestamp: string
-}
-
-export type PiggyLockBonus = {
-	isExpired: boolean
-	bonus: string
-	distributedBonus: string
-	dayLastDistributed: string
-}
-
 export type PiggyBankRef = {
 	amount: string
 	lockDuration: string
@@ -40,9 +40,11 @@ export type PiggyBankRef = {
 
 export type PiggyBank = {
 	marketTruffles: string
-	calculatedTruffles?: string
+	// calculatedTruffles?: string
 	balance?: string
 	userData?: {
+		lpBalance: string
+		lpAllowance: string
 		userPiggyBanks: UserPiggyBank[]
 		referrals: PiggyBankRef[]
 		usdValue: string
@@ -50,13 +52,11 @@ export type PiggyBank = {
 }
 
 export interface PiggyBankState {
-	isInitialized: boolean
 	isLoading: boolean
 	data: PiggyBank
 }
 
 // const initialState: PiggyBankState = {
-// 	isInitialized: false,
 // 	isLoading: true,
 // 	data: {
 // 		marketTruffles: '0',
@@ -99,20 +99,18 @@ export interface PiggyBankState {
 // }
 
 const initialState = {
-	isLoading : false,
-	data:{
-		
-		balance :'',
-		marketTruffles :'0',
-		userData : {
-			referrals : '0',
-			usdValue:[],
-			userPiggyBanks:[]
-		}
+	isLoading: false,
+	data: {
+		balance: '0',
+		marketTruffles: '0',
+		userData: {
+			referrals: '0',
+			usdValue: [],
+			userPiggyBanks: [],
+			lpBalance: '0',
+			lpAllowance: '0',
+		},
 	},
-	totalLpLocked: 0
-	
-
 }
 
 const piggyBankSlice = createSlice({
@@ -124,21 +122,17 @@ const piggyBankSlice = createSlice({
 		},
 		fetchFailed: (state) => {
 			state.isLoading = false
-			
 		},
 		piggybankFetchSucceeded: (state, action: PayloadAction<any>) => {
-			
 			state.isLoading = false
 			state.data = action.payload
 		},
-		setTotalLpLocked: (state, action: PayloadAction<any>) => {
-			
-			state.isLoading = false
-			state.data = action.payload
-		}
+		setAllowance: (state, action: PayloadAction<string>) => {
+			state.data.userData.lpAllowance = action.payload
+		},
 	},
 })
 
-export const { fetchStart, fetchFailed, piggybankFetchSucceeded, setTotalLpLocked } = piggyBankSlice.actions
+export const { fetchStart, fetchFailed, piggybankFetchSucceeded, setAllowance } = piggyBankSlice.actions
 
 export default piggyBankSlice.reducer
