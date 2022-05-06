@@ -47,6 +47,7 @@ function PigsCredit() {
 		pigsBusdPrice,
 		data: { busdAllowance, busdBalance, pigsBalance, pigsAvailableToClaim },
 	} = useAppSelector((state) => state.pigsCreditReducer)
+
 	const signer = library.getSigner()
 
 	const dispatch = useAppDispatch()
@@ -66,23 +67,32 @@ function PigsCredit() {
 		try {
 			const res = await getPigsBUSDPrice()
 			dispatch(setPigsBusdPrice(res))
+			console.log(res, 'busdprice')
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
 	const approve = async () => {
+		if (!account) {
+			toastInfo('Connect wallet to approve')
+			return
+		}
 		setPending(true)
+		setIsDisabled(true)
 		try {
 			console.log(inputValue, 'tesss')
-			await approvePigsCreditSpendBUSD(signer)
+			// await approvePigsCreditSpendBUSD(signer)
+			await approveBusd(account, inputValue, signer)
 			setPending(false)
 			setIsApproved(true)
+			setIsDisabled(false)
 		} catch (err) {
 			console.log(err)
 
 			setPending(false)
 			setIsApproved(false)
+			setIsDisabled(false)
 		}
 	}
 
@@ -92,14 +102,20 @@ function PigsCredit() {
 			return
 		}
 
+		setPending(true)
 		try {
 			await claimInToPigPen(claimToPigPenAmount, signer)
+			setPending(false)
 		} catch (err) {
 			console.log(err)
 		}
 	}
 
 	const claimToPiggy = async () => {
+		if (!account) {
+			toastInfo('Connect wallet to claim reward')
+			return
+		}
 		try {
 			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
 			console.log(res)
@@ -126,7 +142,7 @@ function PigsCredit() {
 	}
 
 	useEffect(() => {
-		getBusdPrice()
+		// getBusdPrice()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
