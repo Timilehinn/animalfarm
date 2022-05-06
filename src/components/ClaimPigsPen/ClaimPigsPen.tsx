@@ -44,7 +44,7 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 					</div>
 				</div>
 				<button onClick={handleClick} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
-					Enter amount to claim
+					claim
 				</button>
 			</form>
 		</animated.div>

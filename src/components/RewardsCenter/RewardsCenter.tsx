@@ -10,7 +10,7 @@ import RangeSlider from 'components/RangeSlider/RangeSlider'
 import Info from 'components/Info/Info'
 import { getBalanceAmountString } from 'utils/formatBalance'
 import logo from '../../assets/svgg.png'
-
+import Preloader from '../prealoder/preloader'
 import styles from './RewardsCenter.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
 
@@ -192,14 +192,13 @@ function RewardsCenter({
 				</p>
 			)}
 			{!isApproved && !hideApproveButton ? (
-				<button type='button' disabled={!isButtonEnabled} className={!isButtonEnabled ? styles.button__disabled : styles.button__enabled} onClick={handleApprove}>
-					{pending ? 'Pending' : 'Approve'}
+				<button type='button' disabled={!isButtonEnabled} className={!isButtonEnabled ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled} onClick={handleApprove}>
+					{pending ? <Preloader /> : 'Approve'}
 				</button>
-			) : (
-				<button type='button' disabled={!isApproved} onClick={() => openModal()} className={styles.button__enabled}>
-					{buttonText}
-				</button>
-			)}
+			) : ""}
+			{isApproved && <button type='button'   onClick={() => openModal()} className={isApproved && isButtonEnabled ? `${styles.button__enabled}` : `${styles.button__disabled}  ${styles.button__disabled}` }  >
+				{buttonText}
+			</button>}
 			{/* <button type='button' className={styles.button__disabled}>
 				{buttonText}
 			</button> */}
