@@ -20,15 +20,15 @@ function SideNavigation() {
 			</header>
 			<ul className={styles.ul}>
 				<NavLink to='/' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='clarity:home-line' />
+					<Icon   icon="system-uicons:home-door"  />
 					<p>Home</p>
 				</NavLink>
 				<NavLink to='/pigs-credit' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='iconoir:small-shop' />
+					<Icon  icon="fluent:credit-card-person-20-regular" />
 					<p>Pig Credit</p>
 				</NavLink>
 				<NavLink to='/pigs-pen' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='fluent:book-20-regular' />
+					<Icon icon="mdi-light:book-multiple" />
 					<p>Pig Pen</p>
 				</NavLink>
 				<NavLink to='/piggy-bank' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
@@ -44,7 +44,7 @@ function SideNavigation() {
 					<p>Documentation</p>
 				</a>
 				<NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='iconoir:piggy-bank' />
+					<Icon icon="dashicons:migrate"  />
 					<p>Migrate</p>
 				</NavLink>
 				<a className={styles.link} href="https://theanimal.farm/dripliberation">

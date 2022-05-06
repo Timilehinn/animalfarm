@@ -20,6 +20,7 @@ import { useParams } from 'react-router-dom'
 import { setTotalLpLocked } from 'state/piggybank'
 
 import { longerPaysBetterBonusPercents } from 'utils/lockBonusPercentage'
+import useToast from 'hooks/useToast'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 // import { setTotalLpLocked } from 'state/piggybank'
@@ -28,6 +29,7 @@ import { checkPigBusdAllowance } from '../../api/allowance'
 import { PiggyBankAddress } from '../../config/constants'
 import { buyPigLets, giftPiglet } from '../../api/piggyBank/getMyPiggyBanks'
 import GiftPiglet from '../../components/GiftPiglet/GiftPiglet'	
+
 
 
 interface ParamsType {
@@ -67,7 +69,8 @@ function PiggyBank() {
 	const [inputValue2, setInputValue2] = useState('')
 	
 	const [lockBonus, setLockBonus] = useState(0)
-	console.log(pigsBusdLpBalance,"pls work")
+	
+	const { toastInfo } = useToast()
 
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
@@ -196,8 +199,13 @@ function PiggyBank() {
 	const getLockBonus = () => {
 		return longerPaysBetterBonusPercents[lockDuration - 1]
 	}
-
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const _buyPiglets = async() => {
+
+		if(!account){
+			toastInfo("Wallet has to be connected to buy Piglets.")
+			return
+		}
 
 		let ref
 

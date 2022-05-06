@@ -24,6 +24,7 @@ import { usePigsBalance } from '../../state/balances/hooks'
 import styles from './PigsCredit.module.scss'
 import pig from '../../assets/pig.png'
 import busdIcon from '../../assets/busd.png'
+import useToast from 'hooks/useToast'
 
 function PigsCredit() {
 	useEffect(() => {
@@ -55,6 +56,8 @@ function PigsCredit() {
 	const [isApproved, setIsApproved] = useState(true)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
+	
+	const { toastInfo } = useToast()
 
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
@@ -84,6 +87,12 @@ function PigsCredit() {
 	}
 
 	const claimToPigPen = async () => {
+
+		if(!account){
+			toastInfo("Connect wallet to claim to PIg Pen.")	
+			return
+		}
+
 		try {
 			await claimInToPigPen(claimToPigPenAmount, signer)
 		} catch (err) {

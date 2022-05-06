@@ -38,7 +38,7 @@ function PigsPen() {
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 	const dispatch = useAppDispatch()
-	const { toastSuccess, toastError } = useToast()
+	const { toastSuccess, toastError, toastInfo } = useToast()
 
 	/// Generic States to be used for all pages that requires approval
 	const [pending, setPending] = useState(false)
@@ -125,6 +125,10 @@ function PigsPen() {
 
 	const claimMyRewards = async () => {
 		// setPending(true)
+		if(!account){
+				toastInfo("Wallet has to be connected to claim rewards.")
+				return
+		}
 		try {
 			await claimRewardPigPen(false, signer)
 			toastSuccess('Claim Rewards Successful!')
@@ -142,7 +146,11 @@ function PigsPen() {
 	}
 
 	const compoundPigs = async () => {
-		// setPending(true)
+		// setPending(true) 
+		if(!account){
+				toastInfo("Wallet has to be connected to compound rewards.")
+				return
+		}
 		try {
 			await claimRewardPigPen(true, signer)
 			toastSuccess('Successful!')
