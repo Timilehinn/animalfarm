@@ -83,7 +83,8 @@ function PigsCredit() {
 		try {
 			console.log(inputValue, 'tesss')
 			// await approvePigsCreditSpendBUSD(signer)
-			await approveBusd(account, inputValue, signer)
+
+			await approveBusd( account, inputValue, signer )
 			setPending(false)
 			setIsApproved(true)
 			setIsDisabled(false)
@@ -157,7 +158,7 @@ function PigsCredit() {
 	}, [account])
 
 	const checkButtonAndApproval = (inputvalue: string) => {
-		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null ) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
