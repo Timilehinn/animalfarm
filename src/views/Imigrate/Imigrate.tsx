@@ -9,7 +9,7 @@ function Migrate() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/try.png);
+		background-image: url(${window.location.origin}/bg/try.png);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed;

@@ -1,5 +1,6 @@
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
+import { PiggyBankAddress } from 'config/constants'
 import getContract from '../utils/getContracts'
 
 export const checkAllowance = async (ownerAddress: string, spenderAddress: string) => {
@@ -39,7 +40,6 @@ export const approveBusd = async (spenderAddress: string, amount: string, signer
 	return approval
 }
 
-
 // pigs/busd
 
 export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress: string) => {
@@ -60,13 +60,12 @@ export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress
 	return allowance
 }
 
-
-export const approvePigBusd = async (spenderAddress: string, amount: string, signer: ethers.Signer) => {
+export const approvePiggyBankForPigBusdLP = async (amount: string, signer: ethers.Signer) => {
 	const { pigsBusdLpContract } = getContract()
 	let approval
 
 	try {
-		const result: ethers.BigNumber = await pigsBusdLpContract.connect(signer).approve(spenderAddress, amount)
+		await pigsBusdLpContract.connect(signer).approve(PiggyBankAddress, amount)
 		// const balance = ethers.BigNumber.from(result).toString()
 		// approval={
 		//     approval: balance

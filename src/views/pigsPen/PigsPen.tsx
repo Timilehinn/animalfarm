@@ -23,7 +23,7 @@ function PigsPen() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/pigpen.png);
+		background-image: url(${window.location.origin}/bg/pigpen.png);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed;
@@ -125,9 +125,9 @@ function PigsPen() {
 
 	const claimMyRewards = async () => {
 		// setPending(true)
-		if(!account){
-				toastInfo("Wallet has to be connected to claim rewards.")
-				return
+		if (!account) {
+			toastInfo('Wallet has to be connected to claim rewards.')
+			return
 		}
 		try {
 			await claimRewardPigPen(false, signer)
@@ -146,10 +146,10 @@ function PigsPen() {
 	}
 
 	const compoundPigs = async () => {
-		// setPending(true) 
-		if(!account){
-				toastInfo("Wallet has to be connected to compound rewards.")
-				return
+		// setPending(true)
+		if (!account) {
+			toastInfo('Wallet has to be connected to compound rewards.')
+			return
 		}
 		try {
 			await claimRewardPigPen(true, signer)

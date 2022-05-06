@@ -18,7 +18,7 @@ function Home() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/home.png);
+		background-image: url(${window.location.origin}/bg/home.png);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed;

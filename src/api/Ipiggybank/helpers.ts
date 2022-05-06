@@ -55,11 +55,38 @@ export const getPiggyBanks = async (account: string): Promise<PiggyBank> => {
 		},
 	]
 
-	const [tokenBalanceLP, busdTokenBalanceLP, lpTotalSupply] = await multicall(erc20, callsErc20)
+	let tokenBalanceLP
+	let busdTokenBalanceLP
+	let lpTotalSupply
+	let userLPBalance
+	let userBalance = '0'
+	let userLPAllowance = '0'
 
-	console.log(busdTokenBalanceLP, lpTotalSupply)
+	if (account) {
+		callsErc20.push({
+			address: AnimalFarmTokens.pigsToken.BUSD_LP,
+			name: 'balanceOf',
+			params: [account],
+		})
+		callsErc20.push({
+			address: AnimalFarmTokens.pigsToken.BUSD_LP,
+			name: 'allowance',
+			params: [account, PiggyBankAddress],
+		})
 
-	console.log(account)
+		const [_tokenBalanceLP, _busdTokenBalanceLP, _lpTotalSupply, _userLPBalance, _userLPAllowance] = await multicall(erc20, callsErc20)
+		tokenBalanceLP = _tokenBalanceLP
+		busdTokenBalanceLP = _busdTokenBalanceLP
+		lpTotalSupply = _lpTotalSupply
+		userLPBalance = _userLPBalance
+		userLPAllowance = new BigNumber(_userLPAllowance).toJSON()
+		userBalance = new BigNumber(userLPBalance.balance._hex).dividedBy(1e18).decimalPlaces(2).toJSON()
+	} else {
+		const [_tokenBalanceLP, _busdTokenBalanceLP, _lpTotalSupply] = await multicall(erc20, callsErc20)
+		tokenBalanceLP = _tokenBalanceLP
+		busdTokenBalanceLP = _busdTokenBalanceLP
+		lpTotalSupply = _lpTotalSupply
+	}
 
 	if (account) {
 		try {
@@ -258,9 +285,10 @@ export const getPiggyBanks = async (account: string): Promise<PiggyBank> => {
 		marketTruffles: _marketTruffles,
 		balance: _balance,
 		userData: {
+			lpBalance: userBalance,
+			lpAllowance: userLPAllowance,
 			userPiggyBanks: _userPiggyBanks,
 			referrals: _referrals,
-			// usdValue: usdValue.toJSON(),
 			usdValue,
 		},
 	}

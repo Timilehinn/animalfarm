@@ -31,7 +31,7 @@ function PigsCredit() {
 		document.body.setAttribute(
 			'style',
 			`
-		background-image: url(./bg/pigscredit.png);
+		background-image: url(${window.location.origin}/bg/pigscredit.png);
 		background-size: cover;
 		background-position: center;
 		background-attachment: fixed;
@@ -56,7 +56,7 @@ function PigsCredit() {
 	const [isApproved, setIsApproved] = useState(true)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
-	
+
 	const { toastInfo } = useToast()
 
 	const [activeTab, setActiveTab] = React.useState(1)
@@ -87,9 +87,8 @@ function PigsCredit() {
 	}
 
 	const claimToPigPen = async () => {
-
-		if(!account){
-			toastInfo("Connect wallet to claim to PIg Pen.")	
+		if (!account) {
+			toastInfo('Connect wallet to claim to PIg Pen.')
 			return
 		}
 

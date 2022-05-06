@@ -185,7 +185,7 @@ function RewardsCenter({
 					Lock Duration <span>(Optional)</span>
 				</p>
 			)}
-			{sliderRequired && <RangeSlider setLockDuration={setLockDuration} color='#121212' />}
+			{sliderRequired && <RangeSlider lockDuration={lockDuration} setLockDuration={setLockDuration} color='#121212' />}
 			{Lock && (
 				<p className={styles.timelock}>
 					Timelock Bonus <span>{getLockBonus()}%</span>

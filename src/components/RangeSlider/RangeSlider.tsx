@@ -4,6 +4,7 @@ import styles from './RangeSlider.module.scss'
 
 interface rangeProps {
 	color: string
+	lockDuration: number
 	setLockDuration: any
 }
 
@@ -57,18 +58,15 @@ const Styles = styled.div`
 	}
 `
 
-function RangeSlider({ color, setLockDuration }: rangeProps) {
-	const [value, setValue] = React.useState(0)
-
+function RangeSlider({ color, lockDuration, setLockDuration }: rangeProps) {
 	const handleChange = (e: any) => {
-		setValue(e.target.value)
 		setLockDuration(e.target.value)
 	}
 
 	return (
 		<div className={styles.range} color={color}>
-			<input type='range' min={0} max={156} value={value} className={styles.slider} onChange={(e) => handleChange(e)} />
-			<div className={styles.value}>{value} weeks</div>
+			<input type='range' min={0} max={156} value={lockDuration} className={styles.slider} onChange={(e) => handleChange(e)} />
+			<div className={styles.value}>{lockDuration} weeks</div>
 		</div>
 	)
 }

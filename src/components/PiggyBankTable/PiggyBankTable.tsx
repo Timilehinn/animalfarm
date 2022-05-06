@@ -3,9 +3,7 @@ import { usePiggyBank } from 'state/piggybank/hooks'
 import PiggyBankRow from 'components/PiggyBankRow/PiggyBankRow'
 import style from './PiggyBankTable.module.scss'
 
-
 function ReferralTable() {
-	
 	const { piggybank } = usePiggyBank()
 
 	return (
@@ -30,7 +28,15 @@ function ReferralTable() {
 					</thead>
 					<tbody>
 						{piggybank.userData.userPiggyBanks.map((item, index) => (
-							<PiggyBankRow id={item.ID} piglets={item.hatcheryPiglets} trufflesavailable={item.availableTruffles} truffleLocker={item.truffleLocker} trufflesvalue={item.usdValue} time={item.timeLeftSinceLock} maxpayout={item.trufflesUsed} />
+							<PiggyBankRow
+								id={item.ID}
+								piglets={item.hatcheryPiglets}
+								trufflesavailable={item.availableTruffles}
+								truffleLocker={item.truffleLocker}
+								trufflesvalue={item.usdValue}
+								time={item.timeLeftSinceLock}
+								maxpayout={item.trufflesUsed}
+							/>
 						))}
 					</tbody>
 				</table>
