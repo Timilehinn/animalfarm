@@ -345,11 +345,15 @@ function PiggyBank() {
 						/>
 					)}
 				</div>
-				<div className={styles.btn__wrap}>
-					<button type='button' className={styles.btn} onClick={copyRefLink}>
-						Copy referral link
-					</button>
-				</div>
+				{account ? (
+					<div className={styles.btn__wrap}>
+						<button type='button' className={styles.btn} onClick={copyRefLink}>
+							Copy Referral Link
+						</button>
+					</div>
+				) : (
+					''
+				)}
 
 				<PiggyBankTable />
 				<ReferralTable />

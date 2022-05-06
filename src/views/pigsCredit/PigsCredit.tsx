@@ -63,6 +63,70 @@ function PigsCredit() {
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
+	useEffect(() => {
+		// getBusdPrice()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+	// tour modal
+	useEffect(() => {
+		dispatch(toggleTourModal({ state: false, msg: '' }))
+		const data = {
+			state: true,
+			msg: 'Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options!Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 20% bonus!! ',
+		}
+		setTimeout(() => {
+			dispatch(toggleTourModal(data))
+		}, 6000)
+
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	useEffect(() => {
+		const exec = async () => {
+			if (account) {
+				dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
+			}
+		}
+		exec()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [account])
+
+	/// Helper Functions
+	const shouldDisableMainButton = (): boolean => {
+		if (!inputValue || inputValue === '0') {
+			return true
+		}
+
+		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputValue))) {
+			return true
+		}
+		return false
+	}
+
+	const showApproveButton = (): boolean => {
+		if (!inputValue || (inputValue === '0' && isApproved)) {
+			return false
+		}
+		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputValue))) {
+			return true
+		}
+		return false
+	}
+
+	const checkButtonAndApproval = (inputvalue: string) => {
+		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputvalue))) {
+			setIsDisabled(true)
+			setIsApproved(false)
+		}
+
+		if (new BigNumber(busdAllowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+			setIsApproved(true)
+		}
+	}
+
+	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
+
+	/// API CALLS
 	const getBusdPrice = async () => {
 		try {
 			const res = await getPigsBUSDPrice()
@@ -72,7 +136,6 @@ function PigsCredit() {
 			console.log(err)
 		}
 	}
-
 	const approve = async () => {
 		if (!account) {
 			toastInfo('Connect wallet to approve')
@@ -84,7 +147,7 @@ function PigsCredit() {
 			console.log(inputValue, 'tesss')
 			// await approvePigsCreditSpendBUSD(signer)
 
-			await approveBusd( account, inputValue, signer )
+			await approveBusd(account, inputValue, signer)
 			setPending(false)
 			setIsApproved(true)
 			setIsDisabled(false)
@@ -96,7 +159,6 @@ function PigsCredit() {
 			setIsDisabled(false)
 		}
 	}
-
 	const claimToPigPen = async () => {
 		if (!account) {
 			toastInfo('Connect wallet to claim to PIg Pen.')
@@ -111,7 +173,6 @@ function PigsCredit() {
 			console.log(err)
 		}
 	}
-
 	const claimToPiggy = async () => {
 		if (!account) {
 			toastInfo('Connect wallet to claim reward')
@@ -142,48 +203,7 @@ function PigsCredit() {
 		}
 	}
 
-	useEffect(() => {
-		// getBusdPrice()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	useEffect(() => {
-		const exec = async () => {
-			if (account) {
-				dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
-			}
-		}
-		exec()
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [account])
-
-	const checkButtonAndApproval = (inputvalue: string) => {
-		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null ) {
-			setIsDisabled(true)
-			setIsApproved(false)
-		}
-
-		if (new BigNumber(busdAllowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
-			setIsApproved(true)
-		}
-	}
-
-	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
-
-	// tour modal
-	useEffect(() => {
-		dispatch(toggleTourModal({ state: false, msg: '' }))
-		const data = {
-			state: true,
-			msg: 'Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options!Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 20% bonus!! ',
-		}
-		setTimeout(() => {
-			dispatch(toggleTourModal(data))
-		}, 6000)
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
+	/// Data Props
 	const modalDetailsForClaimToPiggyBank = {
 		modalTitleText: 'Confirm Claim',
 		confirmButtonText: 'Claim',
@@ -231,6 +251,8 @@ function PigsCredit() {
 						<ClaimPigsPen title='Submit Pigs' pigsAvailableToClaim={pigsAvailableToClaim} claimToPigPenAmount={claimToPigPenAmount} setClaimToPigPenAmount={setClaimToPigPenAmount} claimToPigPen={claimToPigPen} />
 					) : (
 						<RewardsCenter
+							mainButtonDisabled={shouldDisableMainButton()}
+							approveButtonVisible={showApproveButton()}
 							pigsBusdPrice={Number(pigsBusdPrice)}
 							Lock
 							pair

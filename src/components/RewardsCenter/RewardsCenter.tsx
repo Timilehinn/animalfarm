@@ -7,6 +7,7 @@ import { ClaimToPiggyBank } from 'api/claimPigs'
 import { usePigPen } from 'state/pigpen/hooks'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import RangeSlider from 'components/RangeSlider/RangeSlider'
+import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import Info from 'components/Info/Info'
 import { getBalanceAmountString } from 'utils/formatBalance'
 import logo from '../../assets/svgg.png'
@@ -15,6 +16,8 @@ import styles from './RewardsCenter.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
 
 interface rewardProps {
+	mainButtonDisabled?: boolean
+	approveButtonVisible?: boolean
 	sliderRequired?: boolean
 	title?: string
 	Lock?: boolean
@@ -57,6 +60,8 @@ interface rewardProps {
 }
 
 function RewardsCenter({
+	mainButtonDisabled,
+	approveButtonVisible,
 	sliderRequired,
 	title,
 	Lock,
@@ -97,9 +102,8 @@ function RewardsCenter({
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
+	const { account } = useActiveWeb3React()
 	const { userData, pigPenData } = usePigPen()
-
-	const { account, library } = useActiveWeb3React()
 
 	const handleChange = (e: any) => {
 		setInputValue(e.target.value)
@@ -191,14 +195,26 @@ function RewardsCenter({
 					Timelock Bonus <span>{getLockBonus()}%</span>
 				</p>
 			)}
-			{!isApproved && !hideApproveButton ? (
-				<button type='button' disabled={!isButtonEnabled} className={!isButtonEnabled ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled} onClick={handleApprove}>
-					{pending ? <Preloader /> : 'Approve'}
+			{/* Start Handle Connect Wallet */}
+			{!account ? (
+				<ConnectWalletButton />
+			) : (
+				<button type='button' disabled={mainButtonDisabled} onClick={() => openModal()} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
+					{buttonText}
 				</button>
-			) : ""}
-			{isApproved && <button type='button'   onClick={() => openModal()} className={isApproved && isButtonEnabled ? `${styles.button__enabled}` : `${styles.button__disabled}  ${styles.button__disabled}` }  >
-				{buttonText}
-			</button>}
+			)}
+			{/* End Handle Connect Wallet */}
+			{!hideApproveButton ? (
+				approveButtonVisible ? (
+					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled} onClick={handleApprove}>
+						{pending ? <Preloader /> : 'Approve'}
+					</button>
+				) : (
+					''
+				)
+			) : (
+				''
+			)}
 			{/* <button type='button' className={styles.button__disabled}>
 				{buttonText}
 			</button> */}
