@@ -70,7 +70,6 @@ function PigsPen() {
 		const res = await fetchPigPenData(account)
 		setPigPenData(res.pigPenData)
 		setUserData(res.userData)
-		console.log(res)
 	}
 
 	useEffect(() => {
@@ -81,20 +80,44 @@ function PigsPen() {
 	}, [account])
 
 	/// Start Generic functions for pages that needs approval ///
+	const shouldDisableMainButton = (): boolean => {
+		if (!inputValue || (inputValue === '0' && !isApproved)) {
+			return true
+		}
+
+		if (new BigNumber(userData.allowance).isLessThan(getDecimalAmount(inputValue))) {
+			return true
+		}
+		return false
+	}
+
+	const showApproveButton = (): boolean => {
+		if (!inputValue || (inputValue === '0' && isApproved)) {
+			return false
+		}
+		if (new BigNumber(userData.allowance).isLessThan(getDecimalAmount(inputValue))) {
+			return true
+		}
+		return false
+	}
+
 	const checkButtonAndApproval = (inputvalue: string) => {
-		if (new BigNumber(userData.allowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+		if (new BigNumber(userData.allowance).isLessThan(getDecimalAmount(inputvalue))) {
 			setIsDisabled(true)
 			setIsApproved(false)
 		}
 
 		if (new BigNumber(userData.allowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue !== null) {
+			setIsDisabled(false)
 			setIsApproved(true)
 		}
 	}
+
 	const approve = async () => {
 		setPending(true)
 		try {
 			await approvePigPenSpendPIGS(signer)
+			await fetchData()
 			setPending(false)
 			setIsApproved(true)
 		} catch (err) {
@@ -105,6 +128,7 @@ function PigsPen() {
 	/// End Generic functions for pages that needs approval ///
 
 	const depositPigs = async () => {
+		if (!inputValue) return
 		setPending(true)
 		try {
 			await depositIntoPigPen(getDecimalAmount(inputValue.toString()), signer)
@@ -170,7 +194,6 @@ function PigsPen() {
 	const withdrawPigs = async () => {
 		// require((block.timestamp - user.startLockTimestamp) >= 24 hours, "withdraw: Cannot withdraw until after 24 hours!");
 		// setPending(true)
-		// console.log('Okay')
 
 		try {
 			await withdrawFromPigPen(signer)
@@ -252,6 +275,8 @@ function PigsPen() {
 						</div>
 						{activeTab === 1 ? (
 							<RewardsCenter
+								mainButtonDisabled={shouldDisableMainButton()}
+								approveButtonVisible={showApproveButton()}
 								sliderRequired={false}
 								title='Submit PIGS to be deposited'
 								infoTitle='Earn'

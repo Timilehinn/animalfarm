@@ -106,6 +106,7 @@ function RewardsCenter({
 	const { userData, pigPenData } = usePigPen()
 
 	const handleChange = (e: any) => {
+		console.log('I can change')
 		setInputValue(e.target.value)
 		checkButtonAndApproval(e.target.value)
 	}
@@ -146,6 +147,7 @@ function RewardsCenter({
 	}
 
 	const openModal = () => {
+		if (!inputValue) return
 		if (confirmModalProps) {
 			dispatch(toggleConfirmModal(true))
 			dispatch(toggleModalBackDrop(true))

@@ -5,7 +5,7 @@ import { useSpring, animated } from 'react-spring'
 // import { getBUSDPrice } from 'api/getPrice'
 
 import { ClaimToPiggyBank } from 'api/claimPigs'
-import { PigsCreditAddress } from 'config/constants'
+import { LARGE_NUMBER, PiggyBankAddress, PigsCreditAddress } from 'config/constants'
 
 import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
 import { getPigsBUSDPrice } from 'utils/getPrice'
@@ -64,7 +64,7 @@ function PigsCredit() {
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
 	useEffect(() => {
-		// getBusdPrice()
+		getBusdPrice()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	// tour modal
@@ -82,18 +82,19 @@ function PigsCredit() {
 	}, [])
 
 	useEffect(() => {
-		const exec = async () => {
-			if (account) {
-				dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
-			}
+		if (account) {
+			getMyPigPenData()
 		}
-		exec()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
 
 	/// Helper Functions
+	const resetInputs = () => {
+		setInputValue('')
+		setLockDuration(0)
+	}
 	const shouldDisableMainButton = (): boolean => {
-		if (!inputValue || inputValue === '0') {
+		if (!inputValue || (inputValue === '0' && !isApproved)) {
 			return true
 		}
 
@@ -127,6 +128,9 @@ function PigsCredit() {
 	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
 
 	/// API CALLS
+	const getMyPigPenData = async () => {
+		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
+	}
 	const getBusdPrice = async () => {
 		try {
 			const res = await getPigsBUSDPrice()
@@ -147,7 +151,8 @@ function PigsCredit() {
 			console.log(inputValue, 'tesss')
 			// await approvePigsCreditSpendBUSD(signer)
 
-			await approveBusd(account, inputValue, signer)
+			await approveBusd(PigsCreditAddress, LARGE_NUMBER, signer)
+			getMyPigPenData()
 			setPending(false)
 			setIsApproved(true)
 			setIsDisabled(false)
@@ -169,6 +174,7 @@ function PigsCredit() {
 		try {
 			await claimInToPigPen(getDecimalAmount(claimToPigPenAmount), signer)
 			setPending(false)
+			getMyPigPenData()
 		} catch (err) {
 			console.log(err)
 		}
@@ -180,20 +186,20 @@ function PigsCredit() {
 		}
 		try {
 			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
-			console.log(res)
 
 			if (res.success === true) {
+				resetInputs()
 				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
 				setTimeout(() => {
 					dispatch(toggleToastNotification(false))
 				}, 3000)
 			}
+
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
 			if (res.success === false) {
-				dispatch(toggleToastNotification({ state: true, msg: 'Transcation Failed' }))
-				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
+				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed!' }))
 				setTimeout(() => {
 					dispatch(toggleToastNotification(false))
 				}, 3000)
