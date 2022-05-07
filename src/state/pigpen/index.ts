@@ -5,6 +5,8 @@ export interface PigPen {
 	pigsSupply?: string
 	harvestPercent?: string
 	maxLockUpDuration?: string
+	busdRewards?: string
+	pigsRewards?: string
 }
 
 export interface PigPenUserData {
@@ -30,6 +32,8 @@ const initialState: PigPenState = {
 		pigsSupply: '0',
 		harvestPercent: '0',
 		maxLockUpDuration: '0',
+		busdRewards: '0',
+		pigsRewards: '0',
 	},
 
 	userData: {

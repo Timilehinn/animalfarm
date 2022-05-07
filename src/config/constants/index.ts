@@ -18,6 +18,7 @@ export const PIGSAddress = '0x58cD6E0279F83e52DBc114af69ddEa831a50F019' // TODO:
 export const PigsCreditAddress = '0xF16D264B23E86589dF18f8Bf74d5f0D778a78fd5' // TODO: Change address
 export const PigPenAddress = '0x58c7CA8effEDDEdD5178bc76509dEC0f278Dd0eE' // TODO: Change address
 export const PiggyBankAddress = '0x3c5eC7698538a74C15Ca01C6cbb5FD6cbbae43AC' // TODO: Change address
+export const RewardsVaultAddress = '0xf72393176CE5423a703b095600c23ccA790f4419' // TODO: Change
 
 export const LARGE_NUMBER = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
 
