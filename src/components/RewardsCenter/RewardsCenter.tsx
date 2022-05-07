@@ -57,8 +57,8 @@ interface rewardProps {
 	setInputValue2?: any
 	claimRewards?: any
 	compoundPigs?: any
-	claimButton?:boolean
-	compoundButton?:boolean
+	claimButton?: boolean
+	compoundButton?: boolean
 }
 
 function RewardsCenter({
@@ -102,7 +102,7 @@ function RewardsCenter({
 	claimRewards,
 	compoundPigs,
 	claimButton,
-	compoundButton
+	compoundButton,
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -159,7 +159,7 @@ function RewardsCenter({
 		}
 	}
 
-	const rewards = useAppSelector((state)=>state.pigPenReducer.userData)
+	const rewards = useAppSelector((state) => state.pigPenReducer.userData)
 
 	const isCompoundButtonDisabled = Number(rewards.earningsPigs) === 0
 	const isClaimButtonDisabled = Number(rewards.earningsBusd) === 0 && Number(rewards.earningsPigs) === 0
@@ -236,15 +236,19 @@ function RewardsCenter({
 					<p className={styles.center__header}>Reward Center</p>
 					<div className={styles.center__box}>
 						<Info title='Claimable BUSD' info={`${getBalanceAmountString(userData.earningsBusd)} BUSD`} />
-						<Info title='Claimable PIGS' info={`${getBalanceAmountString(userData.earningsBusd)} PIGS`} />
+						<Info title='Claimable PIGS' info={`${getBalanceAmountString(userData.earningsPigs)} PIGS`} />
 					</div>
 					<div className={styles.center__buttons}>
-						{ claimButton && <button type='button' onClick={handleClaimReward} style={{ marginRight: '10px' }} disabled={isClaimButtonDisabled} className={isClaimButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled}>
-							Claim Rewards
-						</button>}
-						{compoundButton && <button disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' onClick={handleCompound} style={{ marginLeft: '10px' }} >
-							Compound PIGS
-						</button>}
+						{claimButton && (
+							<button type='button' onClick={handleClaimReward} style={{ marginRight: '10px' }} disabled={isClaimButtonDisabled} className={isClaimButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled}>
+								Claim Rewards
+							</button>
+						)}
+						{compoundButton && (
+							<button disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' onClick={handleCompound} style={{ marginLeft: '10px' }}>
+								Compound PIGS
+							</button>
+						)}
 					</div>
 				</div>
 			)}

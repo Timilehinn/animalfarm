@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/Iabi/erc20.json'
 import pigPenABI from 'config/abi/PigPenV2.json'
 import multicall from 'utils/multicall'
-import { PIGSAddress, PigPenAddress, LARGE_NUMBER } from 'config/constants'
+import { PIGSAddress, PigPenAddress, BUSDAddress, RewardsVaultAddress, LARGE_NUMBER, AnimalFarmTokens } from 'config/constants'
 import { getPigsTokenV2Contract, getPigPenContract } from 'utils/IgetContracts'
 
 // import { PigPenUserData, PigPen, PigPenState } from 'state/pigpen'
@@ -12,15 +12,27 @@ export const fetchPigPenData = async (account: string): Promise<any> => {
 	const callsToPigsToken = [
 		{
 			// Allowance
-			address: PIGSAddress,
+			address: AnimalFarmTokens.pigsToken.address,
 			name: 'allowance',
 			params: [account, PigPenAddress],
 		},
 		{
 			// User PIGS balance
-			address: PIGSAddress,
+			address: AnimalFarmTokens.pigsToken.address,
 			name: 'balanceOf',
 			params: [account],
+		},
+		{
+			// RewardsVault BUSD balance
+			address: BUSDAddress,
+			name: 'balanceOf',
+			params: [RewardsVaultAddress],
+		},
+		{
+			// RewardsVault PIGS balance
+			address: AnimalFarmTokens.pigsToken.address,
+			name: 'balanceOf',
+			params: [RewardsVaultAddress],
 		},
 	]
 	const callsToPigPen = [
@@ -59,7 +71,7 @@ export const fetchPigPenData = async (account: string): Promise<any> => {
 	let userData = {}
 	let pigPenData = {}
 
-	const [allowance, userPigsBalance] = await multicall(erc20ABI, callsToPigsToken)
+	const [allowance, userPigsBalance, busdRewards, pigsRewards] = await multicall(erc20ABI, callsToPigsToken)
 	userData = {
 		allowance: new BigNumber(allowance).toJSON(),
 		tokenBalance: new BigNumber(userPigsBalance).toJSON(),
@@ -67,11 +79,15 @@ export const fetchPigPenData = async (account: string): Promise<any> => {
 
 	const [poolInfo, pendingRewards, userInfo, pigAvailableForWithdrawal, canHarvest] = await multicall(pigPenABI, callsToPigPen)
 
+	console.log(busdRewards, pigsRewards)
+
 	pigPenData = {
 		lastRewardBlock: new BigNumber(poolInfo.lastRewardBlock._hex).toJSON(),
 		pigsSupply: new BigNumber(poolInfo.pigsSupply._hex).toJSON(),
 		harvestPercent: new BigNumber(poolInfo.harvestPercent._hex).toJSON(),
 		maxLockUpDuration: new BigNumber(poolInfo.maxLockUpDuration._hex).toJSON(),
+		busdRewards: new BigNumber(busdRewards).toJSON(),
+		pigsRewards: new BigNumber(pigsRewards).toJSON(),
 	}
 
 	userData = {
@@ -106,4 +122,3 @@ export const withdrawFromPigPen = async (signer: ethers.Signer) => {
 	const pigsTokenV2Contract = getPigPenContract(signer)
 	await pigsTokenV2Contract.withdraw()
 }
-
