@@ -266,16 +266,19 @@ function PigsPen() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total PIGS Locked' amount={getBalanceAmountString(pigPenData.pigsSupply)} />
+						<PigsCreditCard title='Total PIGS Locked' amount={`${getBalanceAmountString(pigPenData.pigsSupply)} PIGS`} />
 					</div>
 					<div>
-						<PigsCreditCard title='Total Value of PIGS Locked' amount={getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice)).toString())} />
+						<PigsCreditCard
+							title='PigPen Total Value Locked'
+							amount={`$ ${getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice) + Number(pigPenData.busdRewards) + Number(pigPenData.pigsRewards) * Number(pigsBusdPrice)).toString())}`}
+						/>
 					</div>
 					<div>
-						<PigsCreditCard title='BUSD in Rewards Vault' amount={getBalanceAmountString(pigPenData.busdRewards)} />
+						<PigsCreditCard title='BUSD in Rewards Vault' amount={`${getBalanceAmountString(pigPenData.busdRewards)} BUSD`} />
 					</div>
 					<div>
-						<PigsCreditCard title='PIGS in Rewards Vault' amount={getBalanceAmountString(pigPenData.pigsRewards)} />
+						<PigsCreditCard title='PIGS in Rewards Vault' amount={`${getBalanceAmountString(pigPenData.pigsRewards)} PIGS`} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
