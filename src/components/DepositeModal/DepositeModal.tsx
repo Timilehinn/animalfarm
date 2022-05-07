@@ -5,6 +5,8 @@ import style from './DepositeModal.module.scss'
 import { buyMoreTrufflesToAPiggyBank } from '../../api/Ipiggybank'
 import { ZERO_ADDRESS } from '../../config/constants'
 import { useAppDispatch } from '../../state/hooks'
+import { toggleModalBackDrop, toggleDepositModal  } from '../../state/toggle'
+import useToast from '../../hooks/useToast'
 
 interface depModal{
 	id : string
@@ -21,6 +23,7 @@ function DepositeModal({id}:depModal) {
 
 	const { library } = useActiveWeb3React()
 	const signer = library.getSigner()
+	const { toastSuccess, toastError } = useToast()
 
 	const isOpen = useAppSelector((state) => state.toggleReducer.isDepositModalOpen)
 
@@ -36,8 +39,12 @@ function DepositeModal({id}:depModal) {
 		try{
 			const res = await buyMoreTrufflesToAPiggyBank(id,( (Number(value) * 10 ** 18) ).toString(),ZERO_ADDRESS, signer) 
 			console.log(res)
+			toggleDepositModal(false)
+			toggleModalBackDrop(false)
+			toastSuccess("Depsit Successful!")
 		}catch(err){
 			console.log(err)
+			toastError("An error occured. Try again.")
 		}
 	}
 

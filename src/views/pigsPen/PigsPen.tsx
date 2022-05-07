@@ -229,6 +229,8 @@ function PigsPen() {
 		confirmFunction: depositPigs,
 	}
 
+	console.log( (Number(userData.stakedBalance)) - (Number(userData.pigAvailableForWithdrawal)) )  
+
 	const modalDetailsForWithdraw = {
 		modalTitleText: 'Confirm Withdrawal',
 		confirmButtonText: 'Withdraw',
@@ -237,9 +239,13 @@ function PigsPen() {
 		warning: 'Withdraw from PigPen',
 		infoValues: [
 			{
-				title: 'Rewards',
-				value: 'BUSD & PIGS',
+				title: 'Estimated PIGS remaining',
+				value: `${(Number(userData.stakedBalance)) - (Number(userData.pigAvailableForWithdrawal)) }`,
 			},
+			{
+				title:"1 PIG(s)",
+				value: pigsBusdPrice
+			}
 		],
 		confirmFunction: withdrawPigs,
 	}
@@ -306,6 +312,8 @@ function PigsPen() {
 								// Rewards
 								claimRewards={claimMyRewards}
 								compoundPigs={compoundPigs}
+								claimButton={false}
+								compoundButton
 							/>
 						) : (
 							<RewardsCenter
@@ -324,12 +332,15 @@ function PigsPen() {
 								Lock={false}
 								buttonText='Withdraw PIGS'
 								pTitle='Enter amount of PIGS to be withdrawn from the PIG Pen'
-								rewardCenter={false}
+								rewardCenter
 								warningMsg={false}
 								// Confirm Props for Confirm Modal
 								confirmModalProps={modalDetailsForWithdraw}
 								// Approval for button
 								isApproved
+								claimButton
+								claimRewards={claimMyRewards}
+								compoundButton={false}
 							/>
 						)}
 					</div>
