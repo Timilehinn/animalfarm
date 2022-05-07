@@ -213,14 +213,16 @@ function RewardsCenter({
 			{!account ? (
 				<ConnectWalletButton />
 			) : (
-				<button type='button' disabled={mainButtonDisabled} onClick={() => openModal()} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
+				// onClick={() => openModal()} UNDO to go live
+				<button type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
 					{buttonText}
 				</button>
 			)}
 			{/* End Handle Connect Wallet */}
 			{!hideApproveButton ? (
 				approveButtonVisible ? (
-					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled} onClick={handleApprove}>
+					// onClick={handleApprove} UNDO to go live
+					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled}>
 						{pending ? <Preloader /> : 'Approve'}
 					</button>
 				) : (
@@ -241,13 +243,13 @@ function RewardsCenter({
 						<Info title='Claimable PIGS' info={`${getBalanceAmountString(userData.earningsPigs)} PIGS`} />
 					</div>
 					<div className={styles.center__buttons}>
-						{claimButton && (
-							<button type='button' onClick={handleClaimReward} style={{ marginRight: '10px' }} disabled={isClaimButtonDisabled} className={isClaimButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled}>
+						{claimButton && ( // onClick={handleClaimReward} UNDO to go live
+							<button type='button' style={{ marginRight: '10px' }} disabled={isClaimButtonDisabled} className={isClaimButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled}>
 								Claim Rewards
 							</button>
 						)}
-						{compoundButton && (
-							<button disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' onClick={handleCompound} style={{ marginLeft: '10px' }}>
+						{compoundButton && ( // onClick={handleCompound} UNDO to go live
+							<button disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' style={{ marginLeft: '10px' }}>
 								Compound PIGS
 							</button>
 						)}
