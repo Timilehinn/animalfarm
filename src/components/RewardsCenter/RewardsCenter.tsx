@@ -59,6 +59,7 @@ interface rewardProps {
 	compoundPigs?: any
 	claimButton?: boolean
 	compoundButton?: boolean
+	pigBal?:boolean
 }
 
 function RewardsCenter({
@@ -103,17 +104,21 @@ function RewardsCenter({
 	compoundPigs,
 	claimButton,
 	compoundButton,
+	pigBal
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
 	const { account } = useActiveWeb3React()
 	const { userData, pigPenData } = usePigPen()
+	const pigBalance = useAppSelector((state)=>state.pigsCreditReducer.data.pigsBalance)
 
 	const handleChange = (e: any) => {
 		console.log('I can change')
 		setInputValue(e.target.value)
 		checkButtonAndApproval(e.target.value)
 	}
+
+	console.log(userData,"userData")
 
 	const handleChange2 = (e: any) => {
 		setInputValue2(e.target.value)
@@ -177,11 +182,15 @@ function RewardsCenter({
 			<form action=''>
 				<div hidden={hideAmountInput} className={styles.inputWrap}>
 					<div className={styles.inputBox}>
-						<div className={styles.logo}>
-							<img src={icon} alt='' />
-							<p>{token}</p>
+						{pigBal&& <p role="presentation"  onClick={()=>setInputValue((Number(pigBalance) / 10 **18).toFixed(3))} className={styles.bal} >Balace: {(Number(pigBalance) / 10 **18).toFixed(3)}</p>}
+						<div style={{display:"flex",justifyContent:"space-between"}} >
+							<div className={styles.logo}>
+								<img src={icon} alt='' />
+								<p>{token}</p>
+							</div>
+							<input onChange={(e) => handleChange(e)} min='0' required value={inputValue} type='number' placeholder='0.00' />	
 						</div>
-						<input onChange={(e) => handleChange(e)} min='0' required value={inputValue} type='number' placeholder='0.00' />
+						
 					</div>
 					{recipient && (
 						<div className={styles.inputBox2}>

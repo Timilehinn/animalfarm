@@ -336,6 +336,7 @@ function PiggyBank() {
 							hideApproveButton={false}
 							isButtonEnabled={isDisabled}
 							approve={approve}
+							pigBal={false}
 						/>
 					) : (
 						<RewardsCenter
@@ -365,6 +366,7 @@ function PiggyBank() {
 							inputValue={inputValue}
 							setInputValue={setInputValue}
 							confirmModalProps={giftModalDetails}
+							pigBal={false}
 						/>
 					)}
 				</div>

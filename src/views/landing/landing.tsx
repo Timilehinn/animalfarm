@@ -15,9 +15,11 @@ import Toast from 'components/Toast/Toast'
 import Migrate from 'views/Imigrate/Imigrate'
 import DepositeModal from 'components/DepositeModal/DepositeModal'
 import TourModal from 'components/TourModal/TourModal'
+import ErrorPage from 'views/404/ErrorPage'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
+
 
 
  
@@ -53,7 +55,7 @@ function Landing() {
 					<Route path='/piggy-bank' element={<PiggyBank />} />
 					<Route path='/migrate' element={<Migrate />} />
 					<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
-					<Route path='*' element={<div>Not found</div>} />
+					<Route path='*' element={<ErrorPage />} />
 				</Routes>
 			</div>
 		</div>

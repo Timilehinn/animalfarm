@@ -98,7 +98,7 @@ function PiggyBankRow(props) {
 			if (res.success) {
 				getMyPiggyBank()
 			} else {
-				toastError('An error occurred! Try agai')
+				toastError('An error occurred! Try again')
 			}
 		} catch (err) {
 			console.log(err)
@@ -109,8 +109,8 @@ function PiggyBankRow(props) {
 	// check if last time compounded is greater than 24 hours
 	const isCompoundDisabled =  ( Date.now() /1000 )  < 86400 + lastCompounded 
 
-	const isSellDisabled = ( Date.now() /1000 ) < ( (Number(truffleLocker.duration) * 7 * 86400  ) +truffleLocker.startLockTimestamp )
-	console.log(( Date.now() /1000 ) < ( (Number(truffleLocker.duration) * 7 * 86400  ) +truffleLocker.startLockTimestamp ))
+	const isSellDisabled = ( Date.now() /1000 ) < ( (Number(truffleLocker.duration) * 7 * 86400  ) + Number(truffleLocker.startLockTimestamp) )
+	console.log(( Date.now() /1000 ) < ( (Number(truffleLocker.duration) * 7 * 86400  ) +truffleLocker.startLockTimestamp ),"slldis")
 
 	return (
 		<tr ref={catMenu} className={style.tr}>

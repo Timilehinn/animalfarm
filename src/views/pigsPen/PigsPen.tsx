@@ -250,6 +250,8 @@ function PigsPen() {
 		confirmFunction: withdrawPigs,
 	}
 
+	console.log(pigPenData,"pigpendata")
+
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
@@ -263,10 +265,10 @@ function PigsPen() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total PIGS Locked' amount={getBalanceAmountString(pigPenData.pigsSupply)} />
+						<PigsCreditCard title='BUSD Reward' amount={getBalanceAmountString(pigPenData.busdRewards)} />
 					</div>
 					<div>
-						<PigsCreditCard title='Total Value Locked' amount={getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice)).toString())} />
+						<PigsCreditCard title='PIGS Reward' amount={getBalanceAmountString((Number(pigPenData.pigsRewards) * Number(pigsBusdPrice)).toString())} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -285,12 +287,13 @@ function PigsPen() {
 								approveButtonVisible={showApproveButton()}
 								sliderRequired={false}
 								title='Submit PIGS to be deposited'
-								infoTitle='Earn'
-								infoValue2='50 days'
-								infoValue='BUSD'
-								infoTitle2='Stake Lockup'
-								infoTitle3='Total Liquidity'
-								infoValue3='$0.00'
+								infoTitle='PIGS staked'
+								infoValue={`${getBalanceAmountString(userData.stakedBalance)} PIGS`}
+								infoValue2='2% per day'
+								
+								infoTitle2='Withdraw Limit'
+								// infoTitle3='Total Liquidity'
+								// infoValue3='$0.00'
 								icon={pig}
 								pTitle='Enter amount of PIGS to be staked in the PIG Pen'
 								token='PIGS'
@@ -314,6 +317,7 @@ function PigsPen() {
 								compoundPigs={compoundPigs}
 								claimButton={false}
 								compoundButton
+								pigBal
 							/>
 						) : (
 							<RewardsCenter
@@ -341,6 +345,7 @@ function PigsPen() {
 								claimButton
 								claimRewards={claimMyRewards}
 								compoundButton={false}
+								pigBal={false}
 							/>
 						)}
 					</div>
