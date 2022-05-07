@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 
 import { web3Provider } from 'utils/providers'
 
-import { pancakeswapRouterAddress, WBNBAddress, PIGSAddress, BUSDAddress, BEP_ETH, AnimalFarmTokens } from 'config/constants/'
+import { pancakeswapRouterAddress, WBNBAddress, BUSDAddress, BEP_ETH, AnimalFarmTokens } from 'config/constants/'
 import IUniswapV2Router02 from 'config/abi/IUniswapV2Router02.json'
 
 const IUniswapV2RouterABI: any = IUniswapV2Router02
@@ -38,7 +38,7 @@ export const getETHPrice: any = () => {
 
 export const getPigsBUSDPrice: any = () => {
 	return new Promise((resolve) => {
-		const path = [PIGSAddress, BUSDAddress]
+		const path = [AnimalFarmTokens.pigsToken.address, BUSDAddress]
 		web3PancakeRouterContract.methods
 			.getAmountsOut(web3.utils.toBN(1 * 10 ** 18), path)
 			.call()

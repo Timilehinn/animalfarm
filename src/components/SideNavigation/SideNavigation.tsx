@@ -1,17 +1,16 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
+import { usePricing } from 'state/pricing/hooks'
 import styles from './SideNavigation.module.scss'
 import logo from '../../assets/svgg.png'
 import doglogo from '../../assets/doglogo.png'
 import twitter from '../../assets/twitter.png'
 import discord from '../../assets/discord.png'
 import telegram from '../../assets/telegram.png'
-import home from '../../assets/home.png'
-import shop from '../../assets/shop.png'
-import book from '../../assets/book.png'
 
 function SideNavigation() {
+	const { pigsBusdPrice } = usePricing()
 	return (
 		<div className={styles.side}>
 			<header>
@@ -20,22 +19,22 @@ function SideNavigation() {
 			</header>
 			<ul className={styles.ul}>
 				<NavLink to='/' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon   icon="system-uicons:home-door"  />
+					<Icon icon='system-uicons:home-door' />
 					<p>Home</p>
 				</NavLink>
 				<NavLink to='/pigs-credit' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon  icon="fluent:credit-card-person-20-regular" />
-					<p>Pig Credit</p>
+					<Icon icon='fluent:credit-card-person-20-regular' />
+					<p>Pigs Credit</p>
 				</NavLink>
 				<NavLink to='/pigs-pen' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon="mdi-light:book-multiple" />
+					<Icon icon='mdi-light:book-multiple' />
 					<p>Pig Pen</p>
 				</NavLink>
 				<NavLink to='/piggy-bank' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
-				<a className={styles.link} href='https://theanimal.farm/garden'>
+				<a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
 				</a>
@@ -44,11 +43,11 @@ function SideNavigation() {
 					<p>Documentation</p>
 				</a>
 				<NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon="dashicons:migrate"  />
+					<Icon icon='dashicons:migrate' />
 					<p>Migrate</p>
 				</NavLink>
-				<a className={styles.link} href="https://theanimal.farm/dripliberation">
-					<Icon icon="bx:bar-chart-alt-2" />
+				<a className={styles.link} href='https://theanimal.farm/dripliberation' target='_blank' rel='noreferrer'>
+					<Icon icon='bx:bar-chart-alt-2' />
 					<p>Drip Liberation</p>
 				</a>
 			</ul>
@@ -57,23 +56,23 @@ function SideNavigation() {
 					<ul>
 						<li>
 							<img src={logo} alt='' />
-							<p>$0.00</p>
+							<p>${pigsBusdPrice}</p>
 						</li>
-						<li>
+						{/* <li>
 							<img src={doglogo} alt='' />
 							<p>$0.00</p>
-						</li>
+						</li> */}
 					</ul>
 				</div>
 			</div>
 			<div className={styles.side__socials}>
-				<a href={`${window.location.origin}`} className={styles.side__socials__icon}>
+				<a href='https://twitter.com/DRIPcommunity/' className={styles.side__socials__icon} target='_blank' rel='noreferrer'>
 					<img src={twitter} alt='' />
 				</a>
 				<a style={{ marginRight: '20px', marginLeft: '20px' }} href={`${window.location.origin}`} className={styles.side__socials__icon}>
 					<img src={discord} alt='' />
 				</a>
-				<a href={`${window.location.origin}`} className={styles.side__socials__icon}>
+				<a href='http://t.me/The_Animal_Farm' className={styles.side__socials__icon} target='_blank' rel='noreferrer'>
 					<img src={telegram} alt='' />
 				</a>
 			</div>

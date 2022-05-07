@@ -13,7 +13,7 @@ import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
-import { setPigsBusdPrice, setPigsCreditData } from 'state/pigs'
+import { setPigsBusdPrice, setPigsCreditData } from 'state/pricing'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { checkAllowance, approveBusd } from '../../api/allowance'
 import { getPigsBalance } from '../../api/getPigsBalance'
@@ -46,7 +46,7 @@ function PigsCredit() {
 	const {
 		pigsBusdPrice,
 		data: { busdAllowance, busdBalance, pigsBalance, pigsAvailableToClaim },
-	} = useAppSelector((state) => state.pigsCreditReducer)
+	} = useAppSelector((state) => state.pricingReducer) // TODO: Move pigsCredit out of pricing state
 
 	const signer = library.getSigner()
 
@@ -58,7 +58,7 @@ function PigsCredit() {
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
 
-	const { toastInfo,toastSuccess, toastError } = useToast()
+	const { toastInfo, toastSuccess, toastError } = useToast()
 
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
@@ -178,7 +178,7 @@ function PigsCredit() {
 			getMyPigPenData()
 		} catch (err) {
 			console.log(err)
-			toastError("Aan error occured. Try again.")
+			toastError('Aan error occured. Try again.')
 		}
 	}
 	const claimToPiggy = async () => {
