@@ -57,9 +57,20 @@ $gold :  #F3BA2F;
                 border-radius: 10px;
                 border: 1px solid #FFFFFF4D;
                 display: flex;
-                justify-content: space-between;
+                flex-direction: column;
                 margin-bottom: 20px;
-    
+               
+                position: relative;
+                
+                .bal{
+                    
+                    text-align: end;
+                    font-size: 1rem;
+                    color: rgba(255, 255, 255, 0.6);
+                    margin-bottom: 10px;
+                    cursor: pointer;
+                }
+
                 .logo {
     
                     display: flex;

@@ -58,7 +58,7 @@ function PigsCredit() {
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
 
-	const { toastInfo } = useToast()
+	const { toastInfo,toastSuccess, toastError } = useToast()
 
 	const [activeTab, setActiveTab] = React.useState(1)
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
@@ -66,7 +66,7 @@ function PigsCredit() {
 	useEffect(() => {
 		getBusdPrice()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [account])
 	// tour modal
 	useEffect(() => {
 		dispatch(toggleTourModal({ state: false, msg: '' }))
@@ -174,9 +174,11 @@ function PigsCredit() {
 		try {
 			await claimInToPigPen(getDecimalAmount(claimToPigPenAmount), signer)
 			setPending(false)
+			toastSuccess(`Successfully claimed ${claimToPigPenAmount}pigs to pigpen`)
 			getMyPigPenData()
 		} catch (err) {
 			console.log(err)
+			toastError("Aan error occured. Try again.")
 		}
 	}
 	const claimToPiggy = async () => {
@@ -289,6 +291,7 @@ function PigsCredit() {
 							hideApproveButton={false}
 							// Modal
 							confirmModalProps={modalDetailsForClaimToPiggyBank}
+							pigBal={false}
 						/>
 					)}
 				</div>
