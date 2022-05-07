@@ -115,7 +115,7 @@ function PiggyBankRow(props) {
 		<tr ref={catMenu} className={style.tr}>
 			<td>{id}</td>
 			<td>{new BigNumber(piglets).dividedBy(BIG_TEN.pow(paddedPrecisionValue)).toString()}</td>
-			<td>{trufflesavailable}</td>
+			<td>0</td>
 			<td>{trufflesvalue}</td>
 			<td>{getRemainingTime()}</td>
 			<td>{maxpayout}</td>

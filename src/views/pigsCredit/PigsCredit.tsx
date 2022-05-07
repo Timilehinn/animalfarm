@@ -239,12 +239,13 @@ function PigsCredit() {
 					</p>
 				</div> */}
 				<div className={styles.cards}>
-					<div>
-						<PigsCreditCard title='PIGS balance' amount={`${Number(getBalanceAmountString(pigsBalance)).toFixed(5)} PIGS`} />
-					</div>
-					<div>
+					{/* <div>
+						
+					</div> */}
+					<PigsCreditCard title='Credited PIGS' amount={`${Number(getBalanceAmountString(pigsAvailableToClaim))} PIGS`} />
+					{/* <div>
 						<PigsCreditCard title='BUSD balance' amount={`${Number(getBalanceAmountString(busdBalance)).toFixed(5)} BUSD`} />
-					</div>
+					</div> */}
 				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.tabs}>

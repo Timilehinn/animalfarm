@@ -45,9 +45,9 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 						</div>
 						<input value={claimToPigPenAmount} onChange={(e) => handleChange(e)} type='number' placeholder='0.0' />
 					</div>
-					<div>
+					{/* <div>
 						<p className={styles.claimable}>Amount Claimable: {getBalanceAmountString(pigsAvailableToClaim)} PIGS</p>
-					</div>
+					</div> */}
 				</div>
 				{/* Handle Connect Wallet */}
 				{!account ? (
