@@ -9,7 +9,7 @@ tr {
 .button {
     color: whitesmoke;
     background-color:  #47A348;;
-    height: 34px;
+    height: 40px;
     width: 140px;
     border-width: 0px;
     border-color: transparent;
@@ -35,26 +35,30 @@ tr {
     max-width: 140px;
     display: flex;
     flex-direction: column;
-    left: 44px;
+    left: 34px;
     align-items: center;
     padding-bottom: 4px;
     padding-top: 4px;
     border-width: 0.6px;
     border-style: solid;
     border-color: transparent;
-    background: linear-gradient( #262523, #262523) padding-box, linear-gradient(#f3ba2a,#121212) border-box;
+    background: linear-gradient( #262523, #262523) padding-box, linear-gradient(#f3ba2a,#e9ce8b) border-box;
     border-radius: 6px;
     height: auto;
     overflow-y: visible;
     right: 6px;
+    
 }
+
+
 .modal_off {
     display: none;
 }
 
 .modal__button {
+
     z-index: 600;
-    color: #f0f0f0;
+  
     width: 138px;
     font-size: 12px;
     border-color: rgb(85, 1, 1);
@@ -66,13 +70,25 @@ tr {
     padding-left: 20px;
     margin-left: 0px;
     margin-right: 22px;
-    font-size: 1.125em;
+    font-size: 1rem;
+    color: #FFFFFF99;
+   
 }
+
+.button__disabled{
+    cursor: not-allowed;
+    background: #262523;
+}
+
+.modal__button:hover{
+    background-color: #434240;  color: rgba(255, 255, 255, 0.87);;
+}
+
 hr {
     width: 138px;
     border-top: none;
     margin-top: 2px;
     margin-right: 21px;
     z-index: -100;
-    border-color: rgba(255, 255, 255, 0.479);
+    border-color: rgba(255, 255, 255, 0.228);
 }

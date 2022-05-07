@@ -36,6 +36,7 @@ function ReferralTable() {
 								trufflesvalue={item.usdValue}
 								time={item.timeLeftSinceLock}
 								maxpayout={item.trufflesUsed}
+								lastCompounded={item.lastCompounded}
 							/>
 						))}
 					</tbody>
