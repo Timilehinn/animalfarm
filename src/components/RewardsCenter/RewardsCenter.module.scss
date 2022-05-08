@@ -247,4 +247,55 @@ $gold: #f3ba2f;
 			}
 		}
 	}
+
+    .slippage{
+        padding-top: 20px;
+        padding-left: 5px;
+
+        p{
+            font-size: 0.8rem;
+            margin-bottom: 20px;
+            color: rgba(217 217 212 / 90%);
+        }
+
+        .slippage__buttons{
+
+            display: flex;
+            justify-content: space-between;
+
+            button{
+                width: 100%;
+                margin: 0px 5px 0px 5px;
+                height: 40px;
+                border-radius: 5px;
+                // background: #F3BA2F24;
+                background: #F3BA2F;
+                color: white; cursor: pointer;
+                border: none;
+                outline: none;
+            }
+
+            button:nth-child(1){
+                margin-left: 0px;
+            }
+
+            button:focus{
+                border: 1px solid #F3BA2F ;
+                background: #F3BA2F24;
+               
+            }
+        }
+
+        .tolerance{
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .price{
+                color:#f3ba2f;
+                font-weight:500;
+            }
+        }
+    }
 }

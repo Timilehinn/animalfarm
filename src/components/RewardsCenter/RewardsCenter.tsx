@@ -155,6 +155,12 @@ function RewardsCenter({
 		}
 	}
 
+	const [tolerance,setTolerance] = React.useState(0)
+
+	const _setTolerance = (val:number) =>{
+		setTolerance(val)
+	}
+
 	const rewards = useAppSelector((state) => state.pigPenReducer.userData)
 
 	const isCompoundButtonDisabled = Number(rewards.earningsPigs) === 0
@@ -256,6 +262,19 @@ function RewardsCenter({
 					</div>
 				</div>
 			)}
+			<div className={styles.slippage} >
+				<p>Slippage settings</p>
+				<div className={styles.slippage__buttons} >
+					<button type='button' onClick={()=>_setTolerance(0.1)} >0.1%</button>
+					<button type='button' onClick={()=>_setTolerance(0.2)}>0.2%</button>
+					<button type='button' onClick={()=>_setTolerance(0.3)}>0.3%</button>
+					<button type='button' onClick={()=>_setTolerance(0.4)}>0.4%</button>
+				</div>
+				<div className={styles.tolerance} >
+					<p>Slippage tolerance</p>
+					<p className={styles.price} >{tolerance}%</p>
+				</div>
+			</div>
 		</animated.div>
 	)
 }
