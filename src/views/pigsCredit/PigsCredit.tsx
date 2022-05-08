@@ -227,7 +227,6 @@ function PigsCredit() {
 		confirmFunction: claimToPiggy,
 	}
  
-	console.log( new BigNumber("120000000000000000000").isGreaterThan(11*10**18).toString()   ,"big number test" )
  
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>

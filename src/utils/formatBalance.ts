@@ -18,7 +18,7 @@ export const getBalanceAmount = (amount: BigNumber, decimals = 18) => {
 }
 
 export const getBalanceAmountString = (amount: string, decimals = 18) => {
-	return new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals)).toString()
+	return new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals)).toString() 
 }
 
 export const getBalanceNumber = (balance: BigNumber, decimals = 18) => {
