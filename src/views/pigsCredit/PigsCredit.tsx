@@ -226,10 +226,12 @@ function PigsCredit() {
 		],
 		confirmFunction: claimToPiggy,
 	}
-
+ 
+	console.log( new BigNumber("120000000000000000000").isGreaterThan(11*10**18).toString()   ,"big number test" )
+ 
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
-			<div className={styles.pigscredit}>
+			<div className={styles.pigscredit}> 
 				{/* <div className={styles.pigscredit__header}>
 					<p>
 						Users who were in PigPen when we paused for v2 migration are the only users who need to utilize the PIGS Crediting UI. If this applies to you, LEARN MORE:{' '}
