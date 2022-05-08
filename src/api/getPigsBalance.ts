@@ -40,7 +40,6 @@ export const getPigsBalance = async (account: string): Promise<Balance> => {
 	try {
 		const pigsBusdPrice = await getPigsBUSDPrice()
 		const result: ethers.BigNumber = await pigsTokenContract.balanceOf(account)
-		console.log(ethers.BigNumber.from(result).toString())
 		const balance = ethers.BigNumber.from(result)
 			.div(ethers.BigNumber.from((10 ** AnimalFarmTokens.pigsToken.decimals).toString()))
 			.toNumber()
@@ -70,7 +69,6 @@ export const getBusdBalance = async (account: string) => {
 			amount: balance,
 			amountString: new BigNumber(balance).toFormat(0),
 		}
-		console.log(result)
 	} catch (err) {
 		console.log(err)
 	}
@@ -90,7 +88,6 @@ export const getPigsBusdLpBalance = async (account: string) => {
 			amount: balance,
 			amountString: new BigNumber(balance).toFormat(0),
 		}
-		console.log(result)
 	} catch (err) {
 		console.log(err)
 	}
@@ -109,14 +106,12 @@ export const availablePigsToClaim = async (account: string) => {
 			amount: balance,
 			amountString: new BigNumber(balance).toFormat(0),
 		}
-		console.log(result)
 	} catch (err) {
 		console.log(err)
 	}
 
 	return availablePigs
 }
-
 
 // get pigs my piggy banks
 

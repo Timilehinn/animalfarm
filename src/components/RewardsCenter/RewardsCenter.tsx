@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { longerPaysBetterBonusPercents } from 'utils/lockBonusPercentage'
-import { ToggleWalletModal } from 'state/wallet'
-import { ClaimToPiggyBank } from 'api/claimPigs'
+// import { ToggleWalletModal } from 'state/wallet'
+// import { ClaimToPiggyBank } from 'api/claimPigs'
 import { usePigPen } from 'state/pigpen/hooks'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import RangeSlider from 'components/RangeSlider/RangeSlider'
 import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import Info from 'components/Info/Info'
 import { getBalanceAmountString } from 'utils/formatBalance'
-import logo from '../../assets/svgg.png'
 import Preloader from '../prealoder/preloader'
 import styles from './RewardsCenter.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
@@ -59,7 +58,7 @@ interface rewardProps {
 	compoundPigs?: any
 	claimButton?: boolean
 	compoundButton?: boolean
-	pigBal?:boolean
+	pigBal?: boolean
 }
 
 function RewardsCenter({
@@ -104,21 +103,18 @@ function RewardsCenter({
 	compoundPigs,
 	claimButton,
 	compoundButton,
-	pigBal
+	pigBal,
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
 	const { account } = useActiveWeb3React()
-	const { userData, pigPenData } = usePigPen()
-	const pigBalance = useAppSelector((state)=>state.pigsCreditReducer.data.pigsBalance)
+	const { userData } = usePigPen()
+	const pigBalance = useAppSelector((state) => state.pricingReducer.data.pigsBalance)
 
 	const handleChange = (e: any) => {
-		console.log('I can change')
 		setInputValue(e.target.value)
 		checkButtonAndApproval(e.target.value)
 	}
-
-	console.log(userData,"userData")
 
 	const handleChange2 = (e: any) => {
 		setInputValue2(e.target.value)
@@ -132,10 +128,6 @@ function RewardsCenter({
 		return longerPaysBetterBonusPercents[lockDuration - 1]
 	}
 
-	const handleConfirm = async () => {
-		confirmFunction()
-	}
-
 	const handleClaimReward = async () => {
 		claimRewards()
 	}
@@ -144,19 +136,18 @@ function RewardsCenter({
 		compoundPigs()
 	}
 
-	const shouldEnableClaimButton = (): boolean => {
-		if (userData.earningsBusd === '0' && userData.earningsPigs === '0') {
-			return false
-		}
+	// const shouldEnableClaimButton = (): boolean => {
+	// 	if (userData.earningsBusd === '0' && userData.earningsPigs === '0') {
+	// 		return false
+	// 	}
 
-		if (userData.earningsBusd !== '0' || userData.earningsPigs !== '0') {
-			return true
-		}
-		return true
-	}
+	// 	if (userData.earningsBusd !== '0' || userData.earningsPigs !== '0') {
+	// 		return true
+	// 	}
+	// 	return true
+	// }
 
 	const openModal = () => {
-		// if (!inputValue) return
 		if (confirmModalProps) {
 			dispatch(toggleConfirmModal(true))
 			dispatch(toggleModalBackDrop(true))
@@ -168,7 +159,6 @@ function RewardsCenter({
 
 	const isCompoundButtonDisabled = Number(rewards.earningsPigs) === 0
 	const isClaimButtonDisabled = Number(rewards.earningsBusd) === 0 && Number(rewards.earningsPigs) === 0
-	console.log(isClaimButtonDisabled)
 
 	return (
 		<animated.div style={props} className={styles.reward}>
@@ -182,15 +172,18 @@ function RewardsCenter({
 			<form action=''>
 				<div hidden={hideAmountInput} className={styles.inputWrap}>
 					<div className={styles.inputBox}>
-						{pigBal&& <p role="presentation"  onClick={()=>setInputValue((Number(pigBalance) / 10 **18).toFixed(3))} className={styles.bal} >Balace: {(Number(pigBalance) / 10 **18).toFixed(3)}</p>}
-						<div style={{display:"flex",justifyContent:"space-between"}} >
+						{pigBal && (
+							<p role='presentation' onClick={() => setInputValue((Number(pigBalance) / 10 ** 18).toFixed(3))} className={styles.bal}>
+								Wallet balance: {(Number(pigBalance) / 10 ** 18).toFixed(3)}
+							</p>
+						)}
+						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 							<div className={styles.logo}>
 								<img src={icon} alt='' />
 								<p>{token}</p>
 							</div>
-							<input onChange={(e) => handleChange(e)} min='0' required value={inputValue} type='number' placeholder='0.00' />	
+							<input onChange={(e) => handleChange(e)} min='0' required value={inputValue} type='number' placeholder='0.0' />
 						</div>
-						
 					</div>
 					{recipient && (
 						<div className={styles.inputBox2}>
@@ -220,14 +213,16 @@ function RewardsCenter({
 			{!account ? (
 				<ConnectWalletButton />
 			) : (
-				<button type='button' disabled={mainButtonDisabled} onClick={() => openModal()} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
+				// onClick={() => openModal()} UNDO to go live
+				<button type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
 					{buttonText}
 				</button>
 			)}
 			{/* End Handle Connect Wallet */}
 			{!hideApproveButton ? (
 				approveButtonVisible ? (
-					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled} onClick={handleApprove}>
+					// onClick={handleApprove} UNDO to go live
+					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled}>
 						{pending ? <Preloader /> : 'Approve'}
 					</button>
 				) : (
@@ -248,13 +243,13 @@ function RewardsCenter({
 						<Info title='Claimable PIGS' info={`${getBalanceAmountString(userData.earningsPigs)} PIGS`} />
 					</div>
 					<div className={styles.center__buttons}>
-						{claimButton && (
-							<button type='button' onClick={handleClaimReward} style={{ marginRight: '10px' }} disabled={isClaimButtonDisabled} className={isClaimButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled}>
+						{claimButton && ( // onClick={handleClaimReward} UNDO to go live
+							<button type='button' style={{ marginRight: '10px' }} disabled={isClaimButtonDisabled} className={isClaimButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled}>
 								Claim Rewards
 							</button>
 						)}
-						{compoundButton && (
-							<button disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' onClick={handleCompound} style={{ marginLeft: '10px' }}>
+						{compoundButton && ( // onClick={handleCompound} UNDO to go live
+							<button disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' style={{ marginLeft: '10px' }}>
 								Compound PIGS
 							</button>
 						)}

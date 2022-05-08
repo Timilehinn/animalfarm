@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 import erc20ABI from 'config/Iabi/erc20.json'
 import pigPenABI from 'config/abi/PigPenV2.json'
 import multicall from 'utils/multicall'
-import { PIGSAddress, PigPenAddress, BUSDAddress, RewardsVaultAddress, LARGE_NUMBER, AnimalFarmTokens } from 'config/constants'
+import { PigPenAddress, BUSDAddress, RewardsVaultAddress, LARGE_NUMBER, AnimalFarmTokens } from 'config/constants'
 import { getPigsTokenV2Contract, getPigPenContract } from 'utils/IgetContracts'
 
 // import { PigPenUserData, PigPen, PigPenState } from 'state/pigpen'
@@ -78,8 +78,6 @@ export const fetchPigPenData = async (account: string): Promise<any> => {
 	}
 
 	const [poolInfo, pendingRewards, userInfo, pigAvailableForWithdrawal, canHarvest] = await multicall(pigPenABI, callsToPigPen)
-
-	console.log(busdRewards, pigsRewards)
 
 	pigPenData = {
 		lastRewardBlock: new BigNumber(poolInfo.lastRewardBlock._hex).toJSON(),

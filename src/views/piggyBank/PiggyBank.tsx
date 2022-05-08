@@ -159,7 +159,6 @@ function PiggyBank() {
 		try {
 			const res = await fetchPiggyBankData(account)
 			setPiggyBank(res)
-			console.log(res)
 		} catch (err) {
 			toastError('Error fetching PiggyBank')
 			console.log(err)
@@ -250,7 +249,7 @@ function PiggyBank() {
 		confirmButtonText: 'Acknowledge',
 		value: inputValue,
 		text: 'PIGS/BUSD LP',
-		warning: 'A note text here',
+		warning: '',
 		infoValues: [
 			{
 				title: 'Time Lock Duration',
@@ -268,7 +267,7 @@ function PiggyBank() {
 		confirmButtonText: 'Acknowledge',
 		value: inputValue,
 		text: 'PIGS',
-		warning: 'Deposit into PigPen',
+		warning: '',
 		infoValues: [
 			{
 				title: 'Time Lock Duration',

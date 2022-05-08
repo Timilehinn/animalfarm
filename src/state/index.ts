@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import walletReducer from './wallet'
 import toggleReducer from './toggle'
 import balanceReducer from './balances'
-import pigsCreditReducer from './pigs'
+import pricingReducer from './pricing'
 import piggyBankReducer from './piggybank'
 import pigPenReducer from './pigpen'
 
@@ -11,7 +11,7 @@ const store = configureStore({
 		walletReducer,
 		toggleReducer,
 		balanceReducer,
-		pigsCreditReducer,
+		pricingReducer,
 		piggyBankReducer,
 		pigPenReducer,
 	},

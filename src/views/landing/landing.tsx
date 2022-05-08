@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react'
+import React from 'react'
 import { useConnectWallet, useConnectWalletModal } from 'state/wallet/hooks'
 import { useRoutes, Route, Routes } from 'react-router-dom'
 // import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -20,9 +20,6 @@ import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
 
-
-
- 
 import Home from '../home/Home'
 import style from './Landing.module.scss'
 
@@ -48,7 +45,6 @@ function Landing() {
 				{/* <DepositeModal /> */}
 				<TourModal />
 				<Routes>
-					
 					<Route path='/' element={<Home />} />
 					<Route path='/pigs-credit' element={<PigsCredit />} />
 					<Route path='/pigs-pen' element={<PigsPen />} />

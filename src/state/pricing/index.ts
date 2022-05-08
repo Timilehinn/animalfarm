@@ -7,11 +7,11 @@ const initialState = {
 		pigsBalance: '0',
 		pigsAvailableToClaim: '0',
 	},
-	pigsBusdPrice: '0',
+	pigsBusdPrice: '0.00',
 }
 
-const pigsCreditSlice = createSlice({
-	name: 'pigsCredit',
+const pricingSlice = createSlice({
+	name: 'pricing',
 	initialState,
 	reducers: {
 		setPigsCreditData: (state, action) => {
@@ -23,5 +23,5 @@ const pigsCreditSlice = createSlice({
 	},
 })
 
-export const { setPigsCreditData, setPigsBusdPrice } = pigsCreditSlice.actions
-export default pigsCreditSlice.reducer
+export const { setPigsCreditData, setPigsBusdPrice } = pricingSlice.actions
+export default pricingSlice.reducer

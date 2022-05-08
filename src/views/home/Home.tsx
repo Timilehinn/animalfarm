@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react'
 import Carousel from 'components/Carousel/Carousel'
-import Carousel2 from 'components/Carousel2/Carousel2'
-import { getPigsBalance, availablePigsToClaim, getBusdBalance, getPigsBusdLpBalance } from '../../api/getPigsBalance'
+import { getPigsBUSDPrice } from 'utils/getPrice'
+import { usePricing } from 'state/pricing/hooks'
+import { getPigsBalance, getBusdBalance, getPigsBusdLpBalance } from '../../api/getPigsBalance'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import styles from './Home.module.scss'
 import chart from '../../assets/chart.png'
 import { setPigsBalance, setBusdBalance, setPigsBusdLpBalance } from '../../state/balances'
-// import { setPigsAvailableToClaim } from '../../state/pigs'
 import { useAppDispatch } from '../../state/hooks'
 
 function Home() {
 	const { account } = useActiveWeb3React()
 	const dispatch = useAppDispatch()
-	// console.log(account)
+	const { setPigsBusdPrice } = usePricing()
 
 	useEffect(() => {
 		document.body.setAttribute(
@@ -27,33 +27,38 @@ function Home() {
 		)
 	}, [])
 
+	const getBusdPrice = async () => {
+		try {
+			const res = await getPigsBUSDPrice()
+			dispatch(setPigsBusdPrice(res))
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
 	const _getPigsBalance = async () => {
 		const res = await getPigsBalance(account)
-		console.log(res)
 		dispatch(setPigsBalance(res))
 	}
 
 	const _getBusdBalance = async () => {
 		const res = await getBusdBalance(account)
-		console.log(res)
 		dispatch(setBusdBalance((res.amount / 10 ** 18).toString()))
 	}
 
-	// const getPigsToClaim = async () => {
-	// 	const res = await availablePigsToClaim(account)
-	// 	console.log(Number(res.amount) / 10 ** 18)
-	// 	dispatch(setPigsAvailableToClaim(Number(res.amount) / 10 ** 18))
-	// }
-
 	const _getPigsBusdLpBalance = async () => {
 		const res = await getPigsBusdLpBalance(account)
-		console.log(res, 'pigsBusdLpBalance')
 		dispatch(setPigsBusdLpBalance((Number(res.amount) / 10 ** 18).toString()))
 	}
 
 	useEffect(() => {
+		getBusdPrice()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	useEffect(() => {
 		if (account) {
-			Promise.all([_getPigsBalance(), _getBusdBalance(), _getPigsBusdLpBalance()])
+			Promise.all([getBusdPrice(), _getPigsBalance(), _getBusdBalance(), _getPigsBusdLpBalance()])
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
@@ -74,7 +79,6 @@ function Home() {
 					</div>
 				</section>
 				<Carousel />
-				{/* <Carousel2 /> */}
 			</div>
 		</div>
 	)

@@ -42,7 +42,7 @@ const initialState: PigPenState = {
 		stakedBalance: '0',
 		startLockTimestamp: '',
 		canHarvest: false,
-
+		pigAvailableForWithdrawal: '0',
 		earningsBusd: '0',
 		earningsPigs: '0',
 	},

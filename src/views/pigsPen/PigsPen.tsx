@@ -45,7 +45,7 @@ function PigsPen() {
 	const [isApproved, setIsApproved] = useState(false)
 	const [allowance, setAllowance] = useState(0)
 	const [isDisabled, setIsDisabled] = useState(false)
-	const pigsBusdPrice = useAppSelector((state) => state.pigsCreditReducer.pigsBusdPrice)
+	const pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
 	/// State for input
 	const [inputValue, setInputValue] = useState('')
 
@@ -71,6 +71,11 @@ function PigsPen() {
 		setPigPenData(res.pigPenData)
 		setUserData(res.userData)
 	}
+
+	useEffect(() => {
+		fetchData()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	useEffect(() => {
 		if (account) {
@@ -229,8 +234,6 @@ function PigsPen() {
 		confirmFunction: depositPigs,
 	}
 
-	console.log( (Number(userData.stakedBalance)) - (Number(userData.pigAvailableForWithdrawal)) )  
-
 	const modalDetailsForWithdraw = {
 		modalTitleText: 'Confirm Withdrawal',
 		confirmButtonText: 'Withdraw',
@@ -240,17 +243,15 @@ function PigsPen() {
 		infoValues: [
 			{
 				title: 'Estimated PIGS remaining',
-				value: `${(Number(userData.stakedBalance)) - (Number(userData.pigAvailableForWithdrawal)) }`,
+				value: `${Number(userData.stakedBalance) - Number(userData.pigAvailableForWithdrawal)}`,
 			},
 			{
-				title:"1 PIG(s)",
-				value: pigsBusdPrice
-			}
+				title: '1 PIG(s)',
+				value: pigsBusdPrice,
+			},
 		],
 		confirmFunction: withdrawPigs,
 	}
-
-	console.log(pigPenData,"pigpendata")
 
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
@@ -265,10 +266,19 @@ function PigsPen() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='BUSD Reward' amount={getBalanceAmountString(pigPenData.busdRewards)} />
+						<PigsCreditCard title='Total PIGS Locked' amount={`${getBalanceAmountString(pigPenData.pigsSupply)} PIGS`} />
 					</div>
 					<div>
-						<PigsCreditCard title='PIGS Reward' amount={getBalanceAmountString((Number(pigPenData.pigsRewards) * Number(pigsBusdPrice)).toString())} />
+						<PigsCreditCard
+							title='PigPen Total Value Locked'
+							amount={`$ ${getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice) + Number(pigPenData.busdRewards) + Number(pigPenData.pigsRewards) * Number(pigsBusdPrice)).toString())}`}
+						/>
+					</div>
+					<div>
+						<PigsCreditCard title='BUSD in Rewards Vault' amount={`${getBalanceAmountString(pigPenData.busdRewards)} BUSD`} />
+					</div>
+					<div>
+						<PigsCreditCard title='PIGS in Rewards Vault' amount={`${getBalanceAmountString(pigPenData.pigsRewards)} PIGS`} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -287,15 +297,14 @@ function PigsPen() {
 								approveButtonVisible={showApproveButton()}
 								sliderRequired={false}
 								title='Submit PIGS to be deposited'
-								infoTitle='PIGS staked'
+								infoTitle='Staked Balance'
 								infoValue={`${getBalanceAmountString(userData.stakedBalance)} PIGS`}
 								infoValue2='2% per day'
-								
-								infoTitle2='Withdraw Limit'
+								infoTitle2='Withdrawal Limit'
 								// infoTitle3='Total Liquidity'
 								// infoValue3='$0.00'
 								icon={pig}
-								pTitle='Enter amount of PIGS to be staked in the PIG Pen'
+								pTitle='Enter amount of PIGS to be staked in the PIG Pen, to earn PIGS and BUSD dividends.'
 								token='PIGS'
 								buttonText='Deposit'
 								Lock={false}
