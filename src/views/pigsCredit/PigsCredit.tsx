@@ -294,6 +294,7 @@ function PigsCredit() {
 							// Modal
 							confirmModalProps={modalDetailsForClaimToPiggyBank}
 							pigBal={false}
+							slippage
 						/>
 					)}
 				</div>

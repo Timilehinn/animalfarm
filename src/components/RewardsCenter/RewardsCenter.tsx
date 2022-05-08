@@ -59,6 +59,7 @@ interface rewardProps {
 	claimButton?: boolean
 	compoundButton?: boolean
 	pigBal?: boolean
+	slippage?:boolean
 }
 
 function RewardsCenter({
@@ -104,6 +105,7 @@ function RewardsCenter({
 	claimButton,
 	compoundButton,
 	pigBal,
+	slippage
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -259,10 +261,10 @@ function RewardsCenter({
 								Compound PIGS
 							</button>
 						)}
-					</div>
+					</div> 
 				</div>
 			)}
-			<div className={styles.slippage} >
+			{slippage && <div className={styles.slippage} > 
 				<p>Slippage settings</p>
 				<div className={styles.slippage__buttons} >
 					<button type='button' onClick={()=>_setTolerance(0.1)} >0.1%</button>
@@ -274,7 +276,7 @@ function RewardsCenter({
 					<p>Slippage tolerance</p>
 					<p className={styles.price} >{tolerance}%</p>
 				</div>
-			</div>
+			</div>}
 		</animated.div>
 	)
 }
