@@ -269,10 +269,11 @@ $gold: #f3ba2f;
                 height: 40px;
                 border-radius: 5px;
                 // background: #F3BA2F24;
-                background: #F3BA2F;
-                color: white; cursor: pointer;
+                 cursor: pointer;
                 border: none;
-                outline: none;
+                outline: none; 
+                border: 1px solid #F3BA2F ;
+                background: #F3BA2F24; color: white;
             }
 
             button:nth-child(1){
@@ -280,8 +281,8 @@ $gold: #f3ba2f;
             }
 
             button:focus{
-                border: 1px solid #F3BA2F ;
-                background: #F3BA2F24;
+               background: #F3BA2F;
+               
                
             }
         }

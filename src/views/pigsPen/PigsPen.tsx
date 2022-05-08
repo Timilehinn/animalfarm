@@ -119,14 +119,14 @@ function PigsPen() {
 	}
 
 	const approve = async () => {
-		setPending(true)
-		try {
+		setPending(true) 
+		try { 
 			await approvePigPenSpendPIGS(signer)
 			await fetchData()
-			setPending(false)
+			setPending(false) 
 			setIsApproved(true)
 		} catch (err) {
-			setPending(false)
+			setPending(false) 
 			setIsApproved(false)
 		}
 	}
@@ -327,6 +327,7 @@ function PigsPen() {
 								claimButton={false}
 								compoundButton
 								pigBal
+								slippage={false}
 							/>
 						) : (
 							<RewardsCenter
@@ -355,6 +356,7 @@ function PigsPen() {
 								claimRewards={claimMyRewards}
 								compoundButton={false}
 								pigBal={false}
+								slippage={false}
 							/>
 						)}
 					</div>
