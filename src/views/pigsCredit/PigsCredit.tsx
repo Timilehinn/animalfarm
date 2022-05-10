@@ -176,11 +176,11 @@ function PigsCredit() {
 		try {
 			await claimInToPigPen(getDecimalAmount(claimToPigPenAmount), signer)
 			setPending(false)
-			toastSuccess(`Successfully claimed ${claimToPigPenAmount}pigs to pigpen`)
+			toastSuccess(`Successfully claimed ${claimToPigPenAmount} PIGS to PigPen!`)
 			getMyPigPenData()
 		} catch (err) {
 			console.log(err)
-			toastError('Aan error occured. Try again.')
+			toastError('An error occured. Try again.')
 		}
 	}
 	const claimToPiggy = async () => {
@@ -193,20 +193,23 @@ function PigsCredit() {
 
 			if (res.success === true) {
 				resetInputs()
-				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
-				setTimeout(() => {
-					dispatch(toggleToastNotification(false))
-				}, 3000)
+				toastSuccess(`Successfully claimed to PiggyBank!`)
+				getMyPigPenData()
+				// dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
+				// setTimeout(() => {
+				// 	dispatch(toggleToastNotification(false))
+				// }, 3000)
 			}
 
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
 			if (res.success === false) {
-				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed!' }))
-				setTimeout(() => {
-					dispatch(toggleToastNotification(false))
-				}, 3000)
+				// dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed!' }))
+				// setTimeout(() => {
+				// 	dispatch(toggleToastNotification(false))
+				// }, 3000)
+				toastError('An error occured. Try again.')
 			}
 		} catch (err) {
 			console.log(err)

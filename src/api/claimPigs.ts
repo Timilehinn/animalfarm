@@ -14,12 +14,11 @@ export const ClaimToPiggyBank = async (pigsAmount: string, busdAmount: string, w
 	}
 
 	try {
-		const result: ethers.BigNumber = await pigsCreditContract.connect(signer).claimPigsV2ToPiggyBank(pigsAmount, busdAmount, weeksToLock, pigsAmountMin.toString(), busdAmountMin.toString())
+		await pigsCreditContract.connect(signer).claimPigsV2ToPiggyBank(pigsAmount, busdAmount, weeksToLock, pigsAmountMin.toString(), busdAmountMin.toString())
 		res = {
 			success: true,
 			data: null,
 		}
-		console.log(result)
 	} catch (err) {
 		res = {
 			success: false,

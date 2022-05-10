@@ -230,7 +230,7 @@ function RewardsCenter({
 				<ConnectWalletButton />
 			) : (
 				// onClick={() => openModal()} UNDO to go live
-				<button onClick={() => openModal()} type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
+				<button type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
 					{buttonText}
 				</button>
 			)}
@@ -238,7 +238,7 @@ function RewardsCenter({
 			{account && !hideApproveButton ? (
 				approveButtonVisible ? (
 					// onClick={handleApprove} UNDO to go live
-					<button onClick={handleApprove} type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled}>
+					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled}>
 						{pending ? <Preloader /> : 'Approve'}
 					</button>
 				) : (
@@ -276,17 +276,17 @@ function RewardsCenter({
 				<div className={styles.slippage}>
 					<p>Slippage settings</p>
 					<div className={styles.slippage__buttons}>
-						<button className={Number(tolerance) === 0.1 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(0.1)}>
-							0.1%
+						<button className={Number(tolerance) === 1 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(1)}>
+							1%
 						</button>
-						<button className={Number(tolerance) === 0.5 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(0.5)}>
-							0.5%
+						<button className={Number(tolerance) === 5 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(5)}>
+							5%
 						</button>
-						<button className={Number(tolerance) === 1 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(1.0)}>
-							1.0%
+						<button className={Number(tolerance) === 10 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(10)}>
+							10%
 						</button>
 						<input
-							className={Number(tolerance) !== 0.1 && Number(tolerance) !== 0.5 && Number(tolerance) !== 1 ? `${styles.active}` : ''}
+							className={Number(tolerance) !== 1 && Number(tolerance) !== 5 && Number(tolerance) !== 10 ? `${styles.active}` : ''}
 							onChange={(e) => handleChangeSlippage(e)}
 							min='0'
 							max='100'
