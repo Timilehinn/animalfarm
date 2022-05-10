@@ -189,7 +189,7 @@ function PigsCredit() {
 			return
 		}
 		try {
-			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, tolerance, signer)
+			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(inputValue).div(pigsBusdPrice).toFixed(0)), getDecimalAmount(inputValue), lockDuration, tolerance, signer)
 
 			if (res.success === true) {
 				resetInputs()
