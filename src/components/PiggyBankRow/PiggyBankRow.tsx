@@ -16,7 +16,7 @@ import down from '../../assets/down.svg'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 function PiggyBankRow(props) {
-	const { id, piglets, trufflesavailable, truffleLocker, trufflesvalue, time, maxpayout, lastCompounded, paddedPrecisionValue } = props
+	const { id, piglets, trufflesavailable, truffleLocker, trufflesvalue, timeLeftSinceLock, maxpayout, lastCompounded, paddedPrecisionValue } = props
 	const [state, showModal] = useState(false)
 	const dispatch = useAppDispatch()
 	const { account, library } = useActiveWeb3React()
@@ -45,7 +45,7 @@ function PiggyBankRow(props) {
 	document.addEventListener('click', closeDropDown)
 
 	const openDepositModal = () => {
-		return // UNDO
+		// return // UNDO
 		showModal(false)
 		dispatch(toggleDepositModal(true))
 		dispatch(toggleModalBackDrop(true))
@@ -63,16 +63,17 @@ function PiggyBankRow(props) {
 	}
 
 	function getRemainingTime() {
-		const durationTimestamp = truffleLocker?.durationTimestamp
-		const startLockTimestamp = truffleLocker?.startLockTimestamp
-		const timeNow = Date.now() / 1000
-		const endDate = Number(startLockTimestamp) + Number(durationTimestamp)
+		// const durationTimestamp = truffleLocker?.durationTimestamp
+		// const startLockTimestamp = truffleLocker?.startLockTimestamp
+		// const timeNow = Date.now() / 1000
+		// const endDate = Number(startLockTimestamp) + Number(durationTimestamp)
 
-		return secondsToString(Math.round(endDate - timeNow))
+		// return secondsToString(Math.round(endDate - timeNow))
+		return secondsToString(timeLeftSinceLock)
 	}
 
 	const _sellPiglets = async () => {
-		return // UNDO
+		// return // UNDO
 		showModal(false)
 		try {
 			const res = await sellPiglets(id, signer)
@@ -88,7 +89,7 @@ function PiggyBankRow(props) {
 		}
 	}
 	const _compound = async () => {
-		return // UNDO
+		// return // UNDO
 		showModal(false)
 		try {
 			const res = await compound(id, signer)
@@ -109,13 +110,12 @@ function PiggyBankRow(props) {
 	const isCompoundDisabled = Date.now() / 1000 < 86400 + lastCompounded
 
 	const isSellDisabled = Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + Number(truffleLocker.startLockTimestamp)
-	console.log(Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + truffleLocker.startLockTimestamp, 'slldis')
 
 	return (
 		<tr ref={catMenu} className={style.tr}>
 			<td>{id}</td>
 			<td>{new BigNumber(piglets).dividedBy(BIG_TEN.pow(paddedPrecisionValue)).toString()}</td>
-			<td>0</td>
+			<td>{trufflesavailable}</td>
 			<td>{trufflesvalue}</td>
 			<td>{getRemainingTime()}</td>
 			<td>{maxpayout}</td>
@@ -132,7 +132,7 @@ function PiggyBankRow(props) {
 							</button>
 							<hr />
 							<button disabled={isCompoundDisabled} onClick={() => _compound()} type='button' className={isCompoundDisabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
-								compound
+								Compound
 							</button>
 							<hr />
 							<button disabled={isCompoundDisabled} onClick={() => openDepositModal()} type='button' className={isCompoundDisabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>

@@ -58,6 +58,9 @@ function PigsCredit() {
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
 
+	// For Slippage tolerance
+	const [tolerance, setTolerance] = React.useState('0.5')
+
 	const { toastInfo, toastSuccess, toastError } = useToast()
 
 	const [activeTab, setActiveTab] = React.useState(1)
@@ -135,7 +138,6 @@ function PigsCredit() {
 		try {
 			const res = await getPigsBUSDPrice()
 			dispatch(setPigsBusdPrice(res))
-			console.log(res, 'busdprice')
 		} catch (err) {
 			console.log(err)
 		}
@@ -165,10 +167,10 @@ function PigsCredit() {
 		}
 	}
 	const claimToPigPen = async () => {
-		// if (!account) {
-		// 	toastInfo('Connect wallet to claim to PIg Pen.')
-		// 	return
-		// }
+		if (!account) {
+			toastInfo('Connect wallet to claim to PIg Pen.')
+			return
+		}
 
 		setPending(true)
 		try {
@@ -187,7 +189,7 @@ function PigsCredit() {
 			return
 		}
 		try {
-			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, signer)
+			const res = await ClaimToPiggyBank(((Number(inputValue) / Number(pigsBusdPrice)) * 10 ** 18).toString(), (Number(inputValue) * 10 ** 18).toString(), lockDuration, tolerance, signer)
 
 			if (res.success === true) {
 				resetInputs()
@@ -215,9 +217,9 @@ function PigsCredit() {
 	const modalDetailsForClaimToPiggyBank = {
 		modalTitleText: 'Confirm Claim',
 		confirmButtonText: 'Claim',
-		value: inputValue,
-		text: 'PIGS',
-		warning: 'All the values above are estimated.',
+		value: `${Math.ceil(Number(inputValue) / Number(pigsBusdPrice)).toString()} / ${inputValue}`,
+		text: 'PIGS / BUSD',
+		warning: '*Estimated values.',
 		infoValues: [
 			{ title: 'PIGS deposited', value: Math.ceil(Number(inputValue) / Number(pigsBusdPrice)).toString() },
 			{ title: 'BUSD deposited', value: inputValue },
@@ -226,11 +228,10 @@ function PigsCredit() {
 		],
 		confirmFunction: claimToPiggy,
 	}
- 
- 
+
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
-			<div className={styles.pigscredit}> 
+			<div className={styles.pigscredit}>
 				{/* <div className={styles.pigscredit__header}>
 					<p>
 						Users who were in PigPen when we paused for v2 migration are the only users who need to utilize the PIGS Crediting UI. If this applies to you, LEARN MORE:{' '}
@@ -294,7 +295,10 @@ function PigsCredit() {
 							// Modal
 							confirmModalProps={modalDetailsForClaimToPiggyBank}
 							pigBal={false}
+							// Slippage tolerance
 							slippage
+							tolerance={tolerance}
+							setTolerance={setTolerance}
 						/>
 					)}
 				</div>

@@ -1,15 +1,15 @@
 import { ethers } from 'ethers'
 import { staticRpcProvider } from 'utils/providers'
-import { AnimalFarmTokens, PigsV2BusdLP, PigsCreditAddress, PIGSAddress, BUSDAddress, PiggyBankAddress, PigPenAddress } from '../config/constants'
+import { AnimalFarmTokens, PigsV2BusdLP, PigsCreditAddress, BUSDAddress, PiggyBankAddress, PigPenAddress } from '../config/constants'
 import PigsAbi from '../config/abi/PigsTokenAbi.json'
 import pigsCreditAbi from '../config/abi/pigsCreditAbi.json'
-import pigggyBankAbi from '../config/abi/piggyBankAbi.json'
+import pigggyBankAbi from '../config/abi/PiggyBankV2.json'
 import busdAbi from '../config/abi/busdAbi.json'
 import panCakeAbi from '../config/abi/panCake.json'
 import pigPenAbi from '../config/abi/pigPenAbi.json'
 
 const getPigsContract = () => {
-	const pigsTokenContract = new ethers.Contract(PIGSAddress, PigsAbi, staticRpcProvider)
+	const pigsTokenContract = new ethers.Contract(AnimalFarmTokens.pigsToken.address, PigsAbi, staticRpcProvider)
 	const pigsCreditContract = new ethers.Contract(PigsCreditAddress, pigsCreditAbi, staticRpcProvider)
 	const busdContract = new ethers.Contract(BUSDAddress, busdAbi, staticRpcProvider)
 	const piggyBankContract = new ethers.Contract(PiggyBankAddress, pigggyBankAbi, staticRpcProvider)

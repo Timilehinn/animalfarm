@@ -1,6 +1,6 @@
 import multicall, { multicallv2 } from 'utils/multicall'
 import { PiggyBank } from 'state/piggybank'
-import PiggyBankABI from 'config/Iabi/PiggyBankV2.json'
+import PiggyBankABI from 'config/abi/PiggyBankV2.json'
 import BigNumber from 'bignumber.js'
 import { PiggyBankAddress, BUSDAddress, AnimalFarmTokens } from 'config/constants'
 import erc20 from '../../config/Iabi/erc20.json'
@@ -169,25 +169,20 @@ export const getPiggyBanks = async (account: string): Promise<PiggyBank> => {
 
 				/** Construct PiggyBankInfo Struct */
 				const ID = new BigNumber(data.ID._hex)
-				const claimedTruffles = data.claimedTruffles
+				const { claimedTruffles, isMaxPayOut, isStakeOn, stakeType, trufflesSold } = data
 				const hatcheryPiglets = new BigNumber(data.hatcheryPiglets._hex)
 				const availableTruffles = new BigNumber(userTruffles[index][0]._hex)
-				const isMaxPayOut = data.isMaxPayOut
-				const isStakeOn = data.isStakeOn
+
 				const lastCompounded = new BigNumber(data.lastCompounded._hex)
 				const lastFeeding = new BigNumber(data.lastFeeding._hex)
 				const paddedPrecisionValue = new BigNumber(data.paddedPrecisionValue._hex)
 
-				const trufflesSold = data.trufflesSold
 				const trufflesUsed = new BigNumber(data.trufflesUsed._hex)
 
 				const timeLeftSinceLock = new BigNumber(userTimestamp[index][0]._hex)
 
 				// lockBonus
-				const bonus = data.lockBonus.bonus
-				const dayLastDistributed = data.lockBonus.dayLastDistributed
-				const distributedBonus = data.lockBonus.distributedBonus
-				const isExpired = data.lockBonus.isExpired
+				const { bonus, dayLastDistributed, distributedBonus, isExpired } = data.lockBonus
 
 				// truffle locker
 				const duration = new BigNumber(data.truffleLocker.duration._hex)
@@ -208,6 +203,7 @@ export const getPiggyBanks = async (account: string): Promise<PiggyBank> => {
 					timeLeftSinceLock: timeLeftSinceLock.toJSON(),
 					usdValue: usdValue.toJSON(),
 					paddedPrecisionValue: paddedPrecisionValue.toJSON(),
+					stakeType,
 
 					lockBonus: {
 						bonus: bonus.toJSON(),

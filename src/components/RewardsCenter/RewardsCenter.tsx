@@ -59,7 +59,9 @@ interface rewardProps {
 	claimButton?: boolean
 	compoundButton?: boolean
 	pigBal?: boolean
-	slippage?:boolean
+	slippage?: boolean
+	tolerance?: string
+	setTolerance?: any
 }
 
 function RewardsCenter({
@@ -105,7 +107,9 @@ function RewardsCenter({
 	claimButton,
 	compoundButton,
 	pigBal,
-	slippage
+	slippage,
+	tolerance,
+	setTolerance,
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -138,6 +142,10 @@ function RewardsCenter({
 		compoundPigs()
 	}
 
+	const handleChangeSlippage = (e: any) => {
+		_setTolerance(e.target.value)
+	}
+
 	// const shouldEnableClaimButton = (): boolean => {
 	// 	if (userData.earningsBusd === '0' && userData.earningsPigs === '0') {
 	// 		return false
@@ -157,10 +165,10 @@ function RewardsCenter({
 		}
 	}
 
-	const [tolerance,setTolerance] = React.useState(0)
-
-	const _setTolerance = (val:number) =>{
-		setTolerance(val)
+	const _setTolerance = (val) => {
+		if (Number(val) <= 100) {
+			setTolerance(val)
+		}
 	}
 
 	const rewards = useAppSelector((state) => state.pigPenReducer.userData)
@@ -222,15 +230,15 @@ function RewardsCenter({
 				<ConnectWalletButton />
 			) : (
 				// onClick={() => openModal()} UNDO to go live
-				<button type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
+				<button onClick={() => openModal()} type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
 					{buttonText}
 				</button>
 			)}
 			{/* End Handle Connect Wallet */}
-			{!hideApproveButton ? (
+			{account && !hideApproveButton ? (
 				approveButtonVisible ? (
 					// onClick={handleApprove} UNDO to go live
-					<button type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled}>
+					<button onClick={handleApprove} type='button' className={pending ? `${styles.button__disabled} ${styles.pending}` : styles.button__enabled}>
 						{pending ? <Preloader /> : 'Approve'}
 					</button>
 				) : (
@@ -261,22 +269,39 @@ function RewardsCenter({
 								Compound PIGS
 							</button>
 						)}
-					</div> 
+					</div>
 				</div>
 			)}
-			{slippage && <div className={styles.slippage} > 
-				<p>Slippage settings</p>
-				<div className={styles.slippage__buttons} >
-					<button type='button' onClick={()=>_setTolerance(0.1)} >0.1%</button>
-					<button type='button' onClick={()=>_setTolerance(0.2)}>0.2%</button>
-					<button type='button' onClick={()=>_setTolerance(0.3)}>0.3%</button>
-					<button type='button' onClick={()=>_setTolerance(0.4)}>0.4%</button>
+			{slippage && (
+				<div className={styles.slippage}>
+					<p>Slippage settings</p>
+					<div className={styles.slippage__buttons}>
+						<button className={Number(tolerance) === 0.1 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(0.1)}>
+							0.1%
+						</button>
+						<button className={Number(tolerance) === 0.5 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(0.5)}>
+							0.5%
+						</button>
+						<button className={Number(tolerance) === 1 ? `${styles.active}` : ''} type='button' onClick={() => _setTolerance(1.0)}>
+							1.0%
+						</button>
+						<input
+							className={Number(tolerance) !== 0.1 && Number(tolerance) !== 0.5 && Number(tolerance) !== 1 ? `${styles.active}` : ''}
+							onChange={(e) => handleChangeSlippage(e)}
+							min='0'
+							max='100'
+							required
+							value={tolerance}
+							type='number'
+							placeholder='0.0'
+						/>
+					</div>
+					<div className={styles.tolerance}>
+						<p>Slippage tolerance</p>
+						<p className={styles.price}>{tolerance}%</p>
+					</div>
 				</div>
-				<div className={styles.tolerance} >
-					<p>Slippage tolerance</p>
-					<p className={styles.price} >{tolerance}%</p>
-				</div>
-			</div>}
+			)}
 		</animated.div>
 	)
 }

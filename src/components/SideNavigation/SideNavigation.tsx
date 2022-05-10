@@ -56,7 +56,7 @@ function SideNavigation() {
 					<ul>
 						<li>
 							<img src={logo} alt='' />
-							<p>${pigsBusdPrice}</p>
+							<p>${Number(pigsBusdPrice).toFixed(2)}</p>
 						</li>
 						{/* <li>
 							<img src={doglogo} alt='' />

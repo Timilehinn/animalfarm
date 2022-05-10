@@ -6,19 +6,19 @@ export const BUSDAddress = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
 
 /**
  * - Deprecated. Use animal farm token
- */
-export const PigsV2BusdLP = '0x2ce4aE0E7D05bc6ec0c22cDf87fF899872c2cF7f' // FIX: Moved to animal farm token. - Will be taken out in future
+ */ // TODO:
+export const PigsV2BusdLP = '0x1617C07F3c6129E1B32939B4fd1538Ba535cf5C2' // FIX: Moved to animal farm token. - Will be taken out in future
 
 /**
  * - Deprecated. Use animal farm token
- */
-export const PIGSAddress = '0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' // FIX: Moved to animal farm token. - Will be taken out in future
+ */ // TODO:
+export const PIGSAddress = '0xD87De02c97F1eBd372d001fF5FD280709B0c5454' // FIX: Moved to animal farm token. - Will be taken out in future
 
 /// /// /// Animal Farm related addresses /// /// ///
-export const PigsCreditAddress = '0xf0Cc0A00A8453414e3Fe1c2730148315db03dCba'
-export const PigPenAddress = '0x1f8a98bE5C102D145aC672ded99C5bE0330d7e4F'
-export const PiggyBankAddress = '0x9179d972E37EFB61bD4d6Cc7bEE89A4f42d0a9AB'
-export const RewardsVaultAddress = '0x68Bdc7b480d5b4df3bB086Cc3f33b0AEf52F7d55'
+export const PigsCreditAddress = '0x7fAB7AEAB965240986e42729210Cf6E9Fdf26A5f' // TODO:
+export const PigPenAddress = '0x33137047cB5962C06803748Af324bDB7118B0Dc8'
+export const PiggyBankAddress = '0x66713e76897CdC363dF358C853df5eE5831c3E5a' // TODO:
+export const RewardsVaultAddress = '0x3C71DDFf2325551660c7089e5E085589B62a4E7a'
 
 export const LARGE_NUMBER = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
 

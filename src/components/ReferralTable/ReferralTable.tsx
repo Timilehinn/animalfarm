@@ -3,32 +3,9 @@ import { useAppSelector } from 'state/hooks'
 import ReferralRow from 'components/ReferralRow/ReferralRow'
 import style from './ReferralTable.module.scss'
 
-
 function ReferralTable() {
-	const piggyBankData = useAppSelector((state)=>state.piggyBankReducer.data)
-	const refdata = [
-		// {
-		// 	id: 1,
-		// 	address: '0xF0AF6F6e222d9ab9629cF0AD894C740FA3010A53',
-		// 	amount: 1234567,
-		// 	date: 12345678,
-		// 	locktime: 749248989,
-		// },
-		// {
-		//     id: 2,
-		//     address: "0xF0AF6F6e222d9ab9629cF0AD894C740FA3010A53",
-		//     amount: 1234567,
-		//     date: 12345678,
-		//     locktime: 749248989
-		// },
-		// {
-		//     id: 3,
-		//     address: "0xF0AF6F6e222d9ab9629cF0AD894C740FA3010A53",
-		//     amount: 1234567,
-		//     date: 12345678,
-		//     locktime: 749248989
-		// }
-	]
+	const piggyBankData = useAppSelector((state) => state.piggyBankReducer.data)
+	const refdata = []
 
 	return (
 		<div>
@@ -49,8 +26,8 @@ function ReferralTable() {
 						</tr>
 					</thead>
 					<tbody>
-						{piggyBankData.userData.referrals.map((data,index) => (
-							<ReferralRow id={index}  address={data.referral} amount={data.amount} date={data.timestamp} locktime={data.lockDuration} />
+						{piggyBankData.userData.referrals.map((data, index) => (
+							<ReferralRow key={`${data.timestamp}`} id={index} address={data.referral} amount={data.amount} date={data.timestamp} locktime={data.lockDuration} />
 						))}
 					</tbody>
 				</table>
