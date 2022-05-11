@@ -119,14 +119,14 @@ function PigsPen() {
 	}
 
 	const approve = async () => {
-		setPending(true) 
-		try { 
+		setPending(true)
+		try {
 			await approvePigPenSpendPIGS(signer)
 			await fetchData()
-			setPending(false) 
+			setPending(false)
 			setIsApproved(true)
 		} catch (err) {
-			setPending(false) 
+			setPending(false)
 			setIsApproved(false)
 		}
 	}
@@ -242,7 +242,7 @@ function PigsPen() {
 		warning: 'Withdraw from PigPen',
 		infoValues: [
 			{
-				title: 'Estimated PIGS remaining',
+				title: 'PIGS remaining',
 				value: `${Number(userData.stakedBalance) - Number(userData.pigAvailableForWithdrawal)}`,
 			},
 			{

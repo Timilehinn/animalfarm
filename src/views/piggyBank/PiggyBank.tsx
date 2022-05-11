@@ -249,7 +249,7 @@ function PiggyBank() {
 		confirmButtonText: 'Acknowledge',
 		value: inputValue,
 		text: 'PIGS/BUSD LP',
-		warning: '',
+		warning: 'Deposit into PiggyBank',
 		infoValues: [
 			{
 				title: 'Time Lock Duration',
@@ -263,11 +263,11 @@ function PiggyBank() {
 		confirmFunction: _buyPiglets,
 	}
 	const giftModalDetails = {
-		modalTitleText: 'Confirm Buy',
+		modalTitleText: 'Confirm Gifting',
 		confirmButtonText: 'Acknowledge',
 		value: inputValue,
-		text: 'PIGS',
-		warning: '',
+		text: 'PIGS/BUSD LP',
+		warning: `Are you sure you want to gift a PiggyBank stake ?`,
 		infoValues: [
 			{
 				title: 'Time Lock Duration',
