@@ -5,8 +5,15 @@ import getPigsContract from '../utils/getContracts'
 export const ClaimToPiggyBank = async (pigsAmount: string, busdAmount: string, weeksToLock: number, tolerance: string, signer: ethers.Signer) => {
 	const { pigsCreditContract } = getPigsContract()
 
-	const pigsAmountMin = new BigNumber(pigsAmount).multipliedBy(new BigNumber(100).minus(tolerance).dividedBy(100))
-	const busdAmountMin = new BigNumber(busdAmount).multipliedBy(new BigNumber(100).minus(tolerance).dividedBy(100))
+	let _tolerance
+	if (!tolerance) {
+		_tolerance = '10'
+	} else {
+		_tolerance = tolerance
+	}
+
+	const pigsAmountMin = new BigNumber(pigsAmount).multipliedBy(new BigNumber(100).minus(_tolerance).dividedBy(100))
+	const busdAmountMin = new BigNumber(busdAmount).multipliedBy(new BigNumber(100).minus(_tolerance).dividedBy(100))
 
 	let res = {
 		success: false,

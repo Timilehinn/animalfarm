@@ -1,10 +1,10 @@
 export const AnimalFarmTokens = {
 	pigsToken: {
-		address: '0xD87De02c97F1eBd372d001fF5FD280709B0c5454', // TODO:
+		address: '0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002',
 		name: 'PIGS',
 		symbol: 'AFP',
 		decimals: 18,
-		BUSD_LP: '0x1617C07F3c6129E1B32939B4fd1538Ba535cf5C2', // TODO:
+		BUSD_LP: '0x2ce4aE0E7D05bc6ec0c22cDf87fF899872c2cF7f',
 		WBNB_LP: '',
 	},
 }

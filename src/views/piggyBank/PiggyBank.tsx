@@ -295,7 +295,7 @@ function PiggyBank() {
 				</div>
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total LP Locked' amount={piggybank.balance} />
+						<PigsCreditCard title='Total LP Locked in PiggyBank' amount={piggybank.balance} />
 					</div>
 					{/* <div> 
 						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />

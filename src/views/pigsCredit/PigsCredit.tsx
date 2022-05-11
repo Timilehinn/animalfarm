@@ -59,7 +59,7 @@ function PigsCredit() {
 	const [lockDuration, setLockDuration] = useState(0)
 
 	// For Slippage tolerance
-	const [tolerance, setTolerance] = React.useState('0.5')
+	const [tolerance, setTolerance] = React.useState('10')
 
 	const { toastInfo, toastSuccess, toastError } = useToast()
 
