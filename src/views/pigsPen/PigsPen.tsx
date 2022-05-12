@@ -136,7 +136,7 @@ function PigsPen() {
 		if (!inputValue) return
 		setPending(true)
 		try {
-			await depositIntoPigPen(getDecimalAmount(inputValue.toString()), signer)
+			await depositIntoPigPen(getDecimalAmount(Number(inputValue).toFixed(2)), signer)
 			setInputValue('')
 			toastSuccess('Deposit Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
@@ -222,7 +222,7 @@ function PigsPen() {
 	const modalDetailsForDeposit = {
 		modalTitleText: 'Confirm Deposit',
 		confirmButtonText: 'Deposit',
-		value: inputValue,
+		value: new BigNumber(inputValue).toFormat(2),
 		text: 'PIGS',
 		warning: 'Deposit into PigPen',
 		infoValues: [
@@ -237,7 +237,7 @@ function PigsPen() {
 	const modalDetailsForWithdraw = {
 		modalTitleText: 'Confirm Withdrawal',
 		confirmButtonText: 'Withdraw',
-		value: getBalanceAmountString(userData.pigAvailableForWithdrawal),
+		value: new BigNumber(getBalanceAmountString(userData.pigAvailableForWithdrawal)).toFormat(2),
 		text: 'PIGS',
 		warning: 'Withdraw from PigPen',
 		infoValues: [
@@ -266,19 +266,21 @@ function PigsPen() {
 				</div> */}
 				<div className={styles.cards}>
 					<div>
-						<PigsCreditCard title='Total PIGS Locked' amount={`${getBalanceAmountString(pigPenData.pigsSupply)} PIGS`} />
+						<PigsCreditCard title='Total PIGS Locked' amount={`${new BigNumber(getBalanceAmountString(pigPenData.pigsSupply)).toFormat(2)} PIGS`} />
 					</div>
 					<div>
 						<PigsCreditCard
 							title='PigPen Total Value Locked'
-							amount={`$ ${getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice) + Number(pigPenData.busdRewards) + Number(pigPenData.pigsRewards) * Number(pigsBusdPrice)).toString())}`}
+							amount={`$ ${new BigNumber(getBalanceAmountString((Number(pigPenData.pigsSupply) * Number(pigsBusdPrice) + Number(pigPenData.busdRewards) + Number(pigPenData.pigsRewards) * Number(pigsBusdPrice)).toString())).toFormat(
+								2
+							)}`}
 						/>
 					</div>
 					<div>
-						<PigsCreditCard title='BUSD in Rewards Vault' amount={`${getBalanceAmountString(pigPenData.busdRewards)} BUSD`} />
+						<PigsCreditCard title='BUSD in Rewards Vault' amount={`$ ${new BigNumber(getBalanceAmountString(pigPenData.busdRewards)).toFormat(2)} BUSD`} />
 					</div>
 					<div>
-						<PigsCreditCard title='PIGS in Rewards Vault' amount={`${getBalanceAmountString(pigPenData.pigsRewards)} PIGS`} />
+						<PigsCreditCard title='PIGS in Rewards Vault' amount={`${new BigNumber(getBalanceAmountString(pigPenData.pigsRewards)).toFormat(2)} PIGS`} />
 					</div>
 				</div>
 				<div className={styles.credit__wrap}>
@@ -298,7 +300,7 @@ function PigsPen() {
 								sliderRequired={false}
 								title='Submit PIGS to be deposited'
 								infoTitle='Staked Balance'
-								infoValue={`${getBalanceAmountString(userData.stakedBalance)} PIGS`}
+								infoValue={`${new BigNumber(getBalanceAmountString(userData.stakedBalance)).toFormat(2)} PIGS`}
 								infoValue2='2% per day'
 								infoTitle2='Withdrawal Limit'
 								// infoTitle3='Total Liquidity'
@@ -335,10 +337,10 @@ function PigsPen() {
 								title='Withdraw your staked PIGS'
 								infoValue2='2% per day'
 								infoTitle='PIGS staked'
-								infoValue={`${getBalanceAmountString(userData.stakedBalance)} PIGS`}
+								infoValue={`${new BigNumber(getBalanceAmountString(userData.stakedBalance)).toFormat(2)} PIGS`}
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
-								infoValue3={`${getBalanceAmountString(userData.pigAvailableForWithdrawal)} PIGS`}
+								infoValue3={`${new BigNumber(getBalanceAmountString(userData.pigAvailableForWithdrawal)).toFormat(2)} PIGS`}
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton

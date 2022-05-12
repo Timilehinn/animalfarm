@@ -174,9 +174,9 @@ function PigsCredit() {
 
 		setPending(true)
 		try {
-			await claimInToPigPen(getDecimalAmount(claimToPigPenAmount), signer)
+			await claimInToPigPen(getDecimalAmount(Number(claimToPigPenAmount).toFixed(5)), signer)
 			setPending(false)
-			toastSuccess(`Successfully claimed ${claimToPigPenAmount} PIGS to PigPen!`)
+			toastSuccess(`Successfully claimed ${Number(claimToPigPenAmount).toFixed(5)} PIGS to PigPen!`)
 			getMyPigPenData()
 		} catch (err) {
 			console.log(err)
@@ -189,7 +189,7 @@ function PigsCredit() {
 			return
 		}
 		try {
-			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(inputValue).div(pigsBusdPrice).toFixed(0)), getDecimalAmount(inputValue), lockDuration, tolerance, signer)
+			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(Number(inputValue).toFixed(5)).div(Number(pigsBusdPrice).toFixed(5)).toFixed(0)), getDecimalAmount(inputValue), lockDuration, tolerance, signer)
 
 			if (res.success === true) {
 				resetInputs()
@@ -247,7 +247,7 @@ function PigsCredit() {
 					{/* <div>
 						
 					</div> */}
-					<PigsCreditCard title='Credited PIGS' amount={`${Number(getBalanceAmountString(pigsAvailableToClaim))} PIGS`} />
+					<PigsCreditCard title='Credited PIGS' amount={`${new BigNumber(getBalanceAmountString(pigsAvailableToClaim)).toFormat(2)} PIGS`} />
 					{/* <div>
 						<PigsCreditCard title='BUSD balance' amount={`${Number(getBalanceAmountString(busdBalance)).toFixed(5)} BUSD`} />
 					</div> */}
@@ -284,9 +284,9 @@ function PigsCredit() {
 							confirmFunction={claimToPiggy}
 							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
-							infoValue={`${Number(getBalanceAmountString(pigsAvailableToClaim)).toFixed(5)} PIGS`}
+							infoValue={`${new BigNumber(getBalanceAmountString(pigsAvailableToClaim)).toFormat(2)} PIGS`}
 							infoTitle2='Estimated BUSD to pair'
-							infoValue2={`${Number(getBalanceAmountString(estimatedBusdToPair.toString())).toFixed(5)} BUSD`}
+							infoValue2={`${new BigNumber(getBalanceAmountString(estimatedBusdToPair.toString())).toFormat(2)} BUSD`}
 							token='BUSD'
 							icon={busdIcon}
 							rewardCenter={false}
