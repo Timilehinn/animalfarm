@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useConnectWallet, useConnectWalletModal } from 'state/wallet/hooks'
 import { useRoutes, Route, Routes } from 'react-router-dom'
+import { getPigsBUSDPrice } from 'utils/getPrice'
 // import useActiveWeb3React from 'hooks/useActiveWeb3React'
 // import { getAllBalance } from 'api/getBalance'
 import useAuth from 'hooks/useAuth'
+import { useAppDispatch } from 'state/hooks'
+import { usePricing } from 'state/pricing/hooks'
 import SideNavigation from 'components/SideNavigation/SideNavigation'
 import TopNav from 'components/TopNav/TopNav'
 import PigsCredit from 'views/pigsCredit/PigsCredit'
@@ -25,12 +28,33 @@ import style from './Landing.module.scss'
 
 function Landing() {
 	const { login } = useAuth()
-
+	const dispatch = useAppDispatch()
 	const { toggleConnectWalletModal } = useConnectWalletModal()
+	const { setPigsBusdPrice } = usePricing()
 
 	const connect = () => {
 		toggleConnectWalletModal(true)
 	}
+
+	const getBusdPrice = async () => {
+		try {
+			const res = await getPigsBUSDPrice()
+			dispatch(setPigsBusdPrice(res))
+		} catch (err) {
+			console.log(err)
+		}
+	}
+
+	useEffect(() => {
+		const priceInterval = setInterval(() => {
+			// console.log('I am running every ten secs')
+			getBusdPrice()
+		}, 10000)
+		return () => {
+			clearInterval(priceInterval)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<div className={style.landing}>

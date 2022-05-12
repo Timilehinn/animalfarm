@@ -25,19 +25,15 @@ export const approveBusd = async (spenderAddress: string, amount: string, signer
 	const { busdContract } = getContract()
 	let approval
 
-	try {
-		const result: ethers.BigNumber = await busdContract.connect(signer).approve(spenderAddress, amount)
-		// const balance = ethers.BigNumber.from(result).toString()
-		// approval={
-		//     approval: balance
-		// }
-		// console.log(result);
-		console.log('success')
-	} catch (err) {
-		console.log(err)
-	}
+	// try {
 
-	return approval
+	// 	console.log('success')
+	// } catch (err) {
+	// 	console.log(err)
+	// }
+
+	// return approval
+	await busdContract.connect(signer).approve(spenderAddress, amount)
 }
 
 // pigs/busd

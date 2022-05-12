@@ -150,17 +150,17 @@ function PigsCredit() {
 		setPending(true)
 		setIsDisabled(true)
 		try {
-			console.log(inputValue, 'tesss')
 			// await approvePigsCreditSpendBUSD(signer)
 
 			await approveBusd(PigsCreditAddress, LARGE_NUMBER, signer)
+			toastSuccess(`Approve Successful!`)
 			getMyPigPenData()
 			setPending(false)
 			setIsApproved(true)
 			setIsDisabled(false)
 		} catch (err) {
 			console.log(err)
-
+			toastError('Failed to approve. Try again!')
 			setPending(false)
 			setIsApproved(false)
 			setIsDisabled(false)

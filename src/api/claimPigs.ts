@@ -21,7 +21,7 @@ export const ClaimToPiggyBank = async (pigsAmount: string, busdAmount: string, w
 	}
 
 	try {
-		await pigsCreditContract.connect(signer).claimPigsV2ToPiggyBank(pigsAmount, busdAmount, weeksToLock, pigsAmountMin.toString(), busdAmountMin.toString())
+		await pigsCreditContract.connect(signer).claimPigsV2ToPiggyBank(pigsAmount, busdAmount, weeksToLock, pigsAmountMin.toFixed(0), busdAmountMin.toString())
 		res = {
 			success: true,
 			data: null,
