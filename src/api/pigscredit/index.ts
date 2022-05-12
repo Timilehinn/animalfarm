@@ -5,6 +5,7 @@ import pigsCreditAbi from 'config/abi/pigsCreditAbi.json'
 import multicall from 'utils/multicall'
 import { PIGSAddress, LARGE_NUMBER, BUSDAddress, PigsCreditAddress } from 'config/constants'
 import { getPigCreditContract, getBep20Contract } from 'utils/IgetContracts'
+import getPigsContract from 'utils/getContracts'
 
 // import { PigPenUserData, PigPen, PigPenState } from 'state/pigpen'
 
@@ -60,4 +61,25 @@ export const approvePigsCreditSpendBUSD = async (signer: ethers.Signer) => {
 export const claimInToPigPen = async (amount: string, signer: ethers.Signer) => {
 	const pigsCreditContract = getPigCreditContract(signer)
 	await pigsCreditContract.claimPigsV2ToPigPen(amount, { gasLimit: 2500000 })
+}
+
+export const _claimToPigPen = async (amount: string, signer: ethers.Signer) => {
+	const { pigsCreditContract } = getPigsContract()
+
+	// try {
+	// 	await pigsCreditContract.connect(signer).claimPigsV2ToPigPen(amount, { gasLimit: 2500000 })
+	// 	res = {
+	// 		success: true,
+	// 		data: null,
+	// 	}
+	// } catch (err) {
+	// 	res = {
+	// 		success: false,
+	// 		data: null,
+	// 	}
+	// 	console.log(err)
+	// }
+
+	// return res
+	await pigsCreditContract.connect(signer).claimPigsV2ToPigPen(amount, { gasLimit: 2500000 })
 }

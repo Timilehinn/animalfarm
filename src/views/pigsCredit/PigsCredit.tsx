@@ -17,7 +17,7 @@ import { setPigsBusdPrice, setPigsCreditData } from 'state/pricing'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { checkAllowance, approveBusd } from '../../api/allowance'
 import { getPigsBalance } from '../../api/getPigsBalance'
-import { fetchPigsCreditData, approvePigsCreditSpendBUSD, claimInToPigPen } from 'api/pigscredit'
+import { fetchPigsCreditData, approvePigsCreditSpendBUSD, claimInToPigPen, _claimToPigPen } from 'api/pigscredit'
 
 import { useAppSelector, useAppDispatch } from '../../state/hooks'
 import { usePigsBalance } from '../../state/balances/hooks'
@@ -185,7 +185,8 @@ function PigsCredit() {
 			} else {
 				formattedNumber = `${splittedNum[0]}`
 			}
-			await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
+			// await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
+			await _claimToPigPen(getDecimalAmount(formattedNumber), signer)
 			setPending(false)
 			toastSuccess(`Successfully claimed ${Number(formattedNumber)} PIGS to PigPen!`)
 			getMyPigPenData()
