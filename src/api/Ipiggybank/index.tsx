@@ -34,22 +34,21 @@ export const fetchPiggyBankData = async (account: string): Promise<PiggyBank> =>
 //   }
 // }
 
-export const buyMoreTrufflesToAPiggyBank = async (id: string, amount:string, referee:string, signer:ethers.Signer) => {
-	
+export const buyMoreTrufflesToAPiggyBank = async (id: string, amount: string, referee: string, signer: ethers.Signer) => {
 	const { piggyBankContract } = getPigsContract()
 	let res
 
 	try {
-		await piggyBankContract.connect(signer).buyMoreTrufflesToAPiggyBank(id,amount,referee)
+		await piggyBankContract.connect(signer).buyMoreTrufflesToAPiggyBank(id, amount, referee, { gasLimit: 2500000 })
 		res = {
-			success:true,
-			data:null
+			success: true,
+			data: null,
 		}
 	} catch (e) {
 		console.error('fetchPiggyBankData error: ', e)
 		res = {
-			success:false,
-			data:null
+			success: false,
+			data: null,
 		}
 	}
 
