@@ -174,9 +174,20 @@ function PigsCredit() {
 
 		setPending(true)
 		try {
-			await claimInToPigPen(getDecimalAmount(Number(claimToPigPenAmount).toFixed(5)), signer)
+			let formattedNumber
+			const splittedNum = claimToPigPenAmount.split('.')
+			if (splittedNum[1]) {
+				if (splittedNum[1].length > 2) {
+					formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, 2)}`
+				} else {
+					formattedNumber = `${splittedNum[0]}.${splittedNum[1]}`
+				}
+			} else {
+				formattedNumber = `${splittedNum[0]}`
+			}
+			await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
 			setPending(false)
-			toastSuccess(`Successfully claimed ${Number(claimToPigPenAmount).toFixed(5)} PIGS to PigPen!`)
+			toastSuccess(`Successfully claimed ${Number(formattedNumber)} PIGS to PigPen!`)
 			getMyPigPenData()
 		} catch (err) {
 			console.log(err)
