@@ -31,7 +31,7 @@ export const buyPigLets = async (amount: string, lockForNumberOfWeeks: string, r
 	// const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
 
 	try {
-		const result: ethers.BigNumber = await piggyBankContract.connect(signer).buyTruffles(amount, lockForNumberOfWeeks, referee)
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).buyTruffles(amount, lockForNumberOfWeeks, referee, { gasLimit: 42345678 })
 		// const balance = ethers.BigNumber.from(result).toJSON()
 		// piggyBanks = {
 		// 	amount: balance,
@@ -58,7 +58,7 @@ export const giftPiglet = async (giftRecipient: string, amount: string, lockForN
 	// const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
 
 	try {
-		const result: ethers.BigNumber = await piggyBankContract.connect(signer).giftTruffles(giftRecipient, amount, lockForNumberOfWeeks)
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).giftTruffles(giftRecipient, amount, lockForNumberOfWeeks, { gasLimit: 42345678 })
 		// const balance = ethers.BigNumber.from(result).toJSON()
 		// piggyBanks = {
 		// 	amount: balance,
@@ -85,7 +85,7 @@ export const sellPiglets = async (id: string, signer: ethers.Signer) => {
 	// const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
 
 	try {
-		const result: ethers.BigNumber = await piggyBankContract.connect(signer).sellTruffles(id)
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).sellTruffles(id, { gasLimit: 42345678 })
 		// const balance = ethers.BigNumber.from(result).toJSON()
 		// piggyBanks = {
 		// 	amount: balance,
@@ -112,7 +112,7 @@ export const compound = async (id: string, signer: ethers.Signer) => {
 	// const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
 
 	try {
-		const result: ethers.BigNumber = await piggyBankContract.connect(signer).feedPiglets(id)
+		const result: ethers.BigNumber = await piggyBankContract.connect(signer).feedPiglets(id, { gasLimit: 42345678 })
 		// const balance = ethers.BigNumber.from(result).toJSON()
 		// piggyBanks = {
 		// 	amount: balance,
@@ -139,7 +139,7 @@ export const claimToPigsPen = async (amount: string, signer: ethers.Signer) => {
 	// const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
 
 	try {
-		const result: ethers.BigNumber = await pigsPenContract.connect(signer).claimPigsV2ToPigPen(amount)
+		const result: ethers.BigNumber = await pigsPenContract.connect(signer).claimPigsV2ToPigPen(amount, { gasLimit: 42345678 })
 		// const balance = ethers.BigNumber.from(result).toJSON()
 		// piggyBanks = {
 		// 	amount: balance,
