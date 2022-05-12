@@ -1,4 +1,5 @@
 import React from 'react'
+import BigNumber from 'bignumber.js'
 import { usePiggyBank } from 'state/piggybank/hooks'
 import PiggyBankRow from 'components/PiggyBankRow/PiggyBankRow'
 import style from './PiggyBankTable.module.scss'
@@ -20,7 +21,7 @@ function ReferralTable() {
 							<th>S/N</th>
 							<th>Piglets</th>
 							<th>Truffles available</th>
-							<th>Truffles value</th>
+							<th>Truffles value ($)</th>
 							<th>Time remaining</th>
 							<th>Max payout</th>
 							<th>Action</th>
@@ -33,7 +34,7 @@ function ReferralTable() {
 								piglets={item.hatcheryPiglets}
 								trufflesavailable={item.availableTruffles}
 								truffleLocker={item.truffleLocker}
-								trufflesvalue={item.usdValue}
+								trufflesvalue={new BigNumber(item.usdValue).toFormat(2)}
 								timeLeftSinceLock={item.timeLeftSinceLock}
 								maxpayout={item.trufflesUsed}
 								lastCompounded={item.lastCompounded}
