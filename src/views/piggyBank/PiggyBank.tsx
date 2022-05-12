@@ -197,7 +197,7 @@ function PiggyBank() {
 		}
 
 		try {
-			const res = await buyPigLets((Number(inputValue) * 10 ** 18).toString(), lockDuration.toString(), ref, signer)
+			const res = await buyPigLets(getDecimalAmount(inputValue), lockDuration.toString(), ref, signer)
 
 			if (res.success === true) {
 				resetInputs()
@@ -222,7 +222,7 @@ function PiggyBank() {
 	}
 	const _gitfPiglets = async () => {
 		try {
-			const res = await giftPiglet(inputValue2, (Number(inputValue) * 10 ** 18).toString(), lockDuration.toString(), signer)
+			const res = await giftPiglet(inputValue2, getDecimalAmount(inputValue), lockDuration.toString(), signer)
 
 			if (res.success === true) {
 				resetInputs()
