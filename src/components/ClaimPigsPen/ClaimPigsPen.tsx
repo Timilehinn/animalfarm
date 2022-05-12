@@ -29,8 +29,7 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 		claimToPigPen()
 	}
 
-	// const buttonDisabled = Number(claimToPigPenAmount) === 0 // TODO: undo to go live
-	const buttonDisabled = true
+	const buttonDisabled = Number(claimToPigPenAmount) === 0
 
 	return (
 		<animated.div style={styleProps} className={styles.claimpigs}>
@@ -53,8 +52,7 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 				{!account ? (
 					<ConnectWalletButton />
 				) : (
-					// onClick={() => handleClick()} // TODO: Undo to go live
-					<button disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
+					<button onClick={() => handleClick()} disabled={buttonDisabled} className={buttonDisabled ? styles.button__disabled : styles.button__enabled} type='button'>
 						Claim
 					</button>
 				)}

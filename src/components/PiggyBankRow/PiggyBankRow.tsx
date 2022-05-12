@@ -45,7 +45,6 @@ function PiggyBankRow(props) {
 	document.addEventListener('click', closeDropDown)
 
 	const openDepositModal = () => {
-		return // UNDO
 		showModal(false)
 		dispatch(toggleDepositModal(true))
 		dispatch(toggleModalBackDrop(true))
@@ -73,7 +72,6 @@ function PiggyBankRow(props) {
 	}
 
 	const _sellPiglets = async () => {
-		return // UNDO
 		showModal(false)
 		try {
 			const res = await sellPiglets(id, signer)
@@ -89,7 +87,6 @@ function PiggyBankRow(props) {
 		}
 	}
 	const _compound = async () => {
-		return // UNDO
 		showModal(false)
 		try {
 			const res = await compound(id, signer)
