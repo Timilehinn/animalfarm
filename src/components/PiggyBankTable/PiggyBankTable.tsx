@@ -34,7 +34,7 @@ function ReferralTable() {
 								piglets={item.hatcheryPiglets}
 								trufflesavailable={item.availableTruffles}
 								truffleLocker={item.truffleLocker}
-								trufflesvalue={new BigNumber(item.usdValue).toFormat(2)}
+								trufflesvalue={item.usdValue}
 								timeLeftSinceLock={item.timeLeftSinceLock}
 								maxpayout={item.trufflesUsed}
 								lastCompounded={item.lastCompounded}
