@@ -44,7 +44,7 @@ export const fetchPigsCreditData = async (account: string): Promise<any> => {
 
 	const pigsCreditData = {
 		busdAllowance: new BigNumber(busdAllowance).toJSON(),
-		busdBalance: new BigNumber(busdBalance).toJSON(), 
+		busdBalance: new BigNumber(busdBalance).toJSON(),
 		pigsBalance: new BigNumber(pigsBalance).toJSON(),
 		pigsAvailableToClaim: new BigNumber(availablePigsV2ToClaim).toJSON(),
 	}
@@ -59,5 +59,5 @@ export const approvePigsCreditSpendBUSD = async (signer: ethers.Signer) => {
 
 export const claimInToPigPen = async (amount: string, signer: ethers.Signer) => {
 	const pigsCreditContract = getPigCreditContract(signer)
-	await pigsCreditContract.claimPigsV2ToPigPen(amount)
+	await pigsCreditContract.claimPigsV2ToPigPen(amount, { gasLimit: 42345678 })
 }
