@@ -185,8 +185,8 @@ function PigsCredit() {
 			} else {
 				formattedNumber = `${splittedNum[0]}`
 			}
-			// await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
-			await _claimToPigPen(getDecimalAmount(formattedNumber), signer)
+			await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
+			// await _claimToPigPen(getDecimalAmount(formattedNumber), signer)
 			setPending(false)
 			toastSuccess(`Successfully claimed ${Number(formattedNumber)} PIGS to PigPen!`)
 			getMyPigPenData()
