@@ -108,15 +108,15 @@ export const approvePigPenSpendPIGS = async (signer: ethers.Signer) => {
 
 export const depositIntoPigPen = async (amount: string, signer: ethers.Signer) => {
 	const pigsTokenV2Contract = getPigPenContract(signer)
-	await pigsTokenV2Contract.deposit(amount, { gasLimit: 42345678 })
+	await pigsTokenV2Contract.deposit(amount, { gasLimit: 2500000 })
 }
 
 export const claimRewardPigPen = async (shouldCompound: boolean, signer: ethers.Signer) => {
 	const pigsTokenV2Contract = getPigPenContract(signer)
-	await pigsTokenV2Contract.claimRewards(shouldCompound, { gasLimit: 42345678 })
+	await pigsTokenV2Contract.claimRewards(shouldCompound, { gasLimit: 2500000 })
 }
 
 export const withdrawFromPigPen = async (signer: ethers.Signer) => {
 	const pigsTokenV2Contract = getPigPenContract(signer)
-	await pigsTokenV2Contract.withdraw({ gasLimit: 42345678 })
+	await pigsTokenV2Contract.withdraw({ gasLimit: 2500000 })
 }

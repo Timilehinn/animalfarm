@@ -59,5 +59,5 @@ export const approvePigsCreditSpendBUSD = async (signer: ethers.Signer) => {
 
 export const claimInToPigPen = async (amount: string, signer: ethers.Signer) => {
 	const pigsCreditContract = getPigCreditContract(signer)
-	await pigsCreditContract.claimPigsV2ToPigPen(amount, { gasLimit: 42345678 })
+	await pigsCreditContract.claimPigsV2ToPigPen(amount, { gasLimit: 2500000 })
 }
