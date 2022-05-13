@@ -137,16 +137,16 @@ function PigsPen() {
 		setPending(true)
 		try {
 			await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
+			await fetchData()
 			setInputValue('')
 			toastSuccess('Deposit Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
-			setTimeout(() => {
-				dispatch(toggleToastNotification(false))
-			}, 3000)
-			await fetchData()
+			// setTimeout(() => {
+			// 	dispatch(toggleToastNotification(false))
+			// }, 3000)
 		} catch (err) {
 			// Do something here
 		}
@@ -160,15 +160,15 @@ function PigsPen() {
 		}
 		try {
 			await claimRewardPigPen(false, signer)
+			await fetchData()
 			toastSuccess('Claim Rewards Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
-			setTimeout(() => {
-				dispatch(toggleToastNotification(false))
-			}, 3000)
-			await fetchData()
+			// setTimeout(() => {
+			// 	dispatch(toggleToastNotification(false))
+			// }, 3000)
 		} catch (err) {
 			// Do something here
 		}
@@ -182,15 +182,15 @@ function PigsPen() {
 		}
 		try {
 			await claimRewardPigPen(true, signer)
+			await fetchData()
 			toastSuccess('Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
-			setTimeout(() => {
-				dispatch(toggleToastNotification(false))
-			}, 3000)
-			await fetchData()
+			// setTimeout(() => {
+			// 	dispatch(toggleToastNotification(false))
+			// }, 3000)
 		} catch (err) {
 			// Do something here
 		}
@@ -202,15 +202,15 @@ function PigsPen() {
 
 		try {
 			await withdrawFromPigPen(signer)
+			await fetchData()
 			toastSuccess('Withdrawal Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Withdraw Successful' }))
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
-			setTimeout(() => {
-				dispatch(toggleToastNotification(false))
-			}, 3000)
-			await fetchData()
+			// setTimeout(() => {
+			// 	dispatch(toggleToastNotification(false))
+			// }, 3000)
 		} catch (err) {
 			// Do something here
 			toastError('Cannot withdraw until after 24 hours!')
