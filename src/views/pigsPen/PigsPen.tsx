@@ -57,10 +57,14 @@ function PigsPen() {
 			msg: 'The PIGPEN is our staking protocol where holders of the PIGS token become owners of the platform by staking their PIGS. Pigpen pays out high yield dividends in both BUSD and PIGS that are generated from the platform fees and DOGs token taxes!!',
 		}
 		setTimeout(() => {
-			dispatch(toggleTourModal(data))
-			// setTimeout(()=>{
-			// dispatch( toggleTourModal({state:false,msg:""}) )
-			// },10000)
+			
+			const pigPenInfo = localStorage.getItem("pigPenInfo")
+ 
+			if(!pigPenInfo){
+				dispatch(toggleTourModal(data))
+				localStorage.setItem("pigPenInfo","pigPenInfo")
+			}
+			
 		}, 4000)
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
