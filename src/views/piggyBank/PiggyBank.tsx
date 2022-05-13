@@ -88,7 +88,11 @@ function PiggyBank() {
 			msg: 'The piggy bank is the first ever non-inflationary variable time staking annuity. Stake PIGS/BUSD LP tokens to earn up to 3% daily ROI!! Earn a 2% referral bonus for on boarding new users.',
 		}
 		setTimeout(() => {
-			dispatch(toggleTourModal(data))
+			const piggyBankInfo = localStorage.getItem("piggyBankInfo")
+			if(!piggyBankInfo){
+				dispatch(toggleTourModal(data))
+				localStorage.setItem("piggyBankInfo","piggyBankInfo") 
+			}
 		}, 3000)
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
