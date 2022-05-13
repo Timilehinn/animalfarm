@@ -6,12 +6,12 @@ import { BIG_TEN } from './bigNumber'
 /**
  * Take a amount, e.g. 15.63833732 and converts it to 2 decimal place without rounding up, e.g. 15.63
  */
-export const amountFormatter = (amount: string): string => {
+export const amountFormatter = (amount: string, decimals = 18): string => {
 	let formattedNumber
 	const splittedNum = amount.split('.')
 	if (splittedNum[1]) {
-		if (splittedNum[1].length > 2) {
-			formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, 2)}`
+		if (splittedNum[1].length >= decimals) {
+			formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, decimals)}`
 		} else {
 			formattedNumber = `${splittedNum[0]}.${splittedNum[1]}`
 		}
