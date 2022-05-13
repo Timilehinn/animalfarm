@@ -73,7 +73,7 @@ function PigsPen() {
 	}
 
 	useEffect(() => {
-		fetchData()
+		toastInfo('Connect your wallet to see PigPen stats')
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
@@ -265,6 +265,11 @@ function PigsPen() {
 						</a>
 					</p>
 				</div> */}
+				{!account && (
+					<p style={{ fontSize: '.8em', marginBottom: '8px' }}>
+						<i>Connect your wallet to see stats</i>
+					</p>
+				)}
 				<div className={styles.cards}>
 					<div>
 						<PigsCreditCard title='Total PIGS Locked' amount={`${new BigNumber(getBalanceAmountString(pigPenData.pigsSupply)).toFormat(2)} PIGS`} />
