@@ -340,6 +340,7 @@ function PigsPen() {
 								compoundButton
 								pigBal
 								slippage={false}
+								autoFillBusd={false}
 							/>
 						) : (
 							<RewardsCenter
@@ -369,6 +370,7 @@ function PigsPen() {
 								compoundButton={false}
 								pigBal={false}
 								slippage={false}
+								autoFillBusd={false}
 							/>
 						)}
 					</div>

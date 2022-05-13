@@ -24,7 +24,7 @@ function MobileNav() {
 					<h3>AnimalFarm</h3>
 				</div>
 				
-				{ isNavActive ? <Icon onClick={() => toggleNav()} icon="pepicons:times"  /> : <Icon  onClick={() => toggleNav()} icon='dashicons:menu' />  }
+				<Icon  onClick={() => toggleNav()} icon='dashicons:menu' />  
 			</nav>
 		</div>
 	)

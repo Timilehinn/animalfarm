@@ -29,7 +29,10 @@ function MobileSideNav() {
 
 	return (
 		<div className={isNavActive ? `${styles.mobile} ${styles.mobile__active}` : `${styles.mobile}`}>
-			<header>AnimalFarm</header>
+			<header>
+				<h3>Animal Farm</h3>
+				<Icon onClick={()=>closeNav()}  icon="pepicons:times" />
+			</header>
 			<ul>
 				<NavLink onClick={() => closeNav()} className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)} to='/'>
 					<Icon icon='clarity:home-line' />
@@ -47,6 +50,10 @@ function MobileSideNav() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
+				<a className={styles.link} href='https://pancakeswap.finance/info/token/0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' target='_blank' rel='noreferrer'>
+					<Icon icon='fa6-solid:money-check-dollar' />
+					<p>Buy / Add Liquidity</p>
+				</a>
 				<a className={styles.link} href='https://themanor.farm/garden'>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>

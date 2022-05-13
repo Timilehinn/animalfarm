@@ -3,7 +3,7 @@ $gold : #F3BA2F;
 .mobile{
 
     height: 100vh;
-    width: 50%;
+    width: 100%;
     background: #121212;
     display: none;
     position: fixed;
@@ -16,8 +16,20 @@ $gold : #F3BA2F;
     z-index: 30;
 
     header{
-        color :$gold;
-        font-weight: bold;
+
+        display: flex;
+        justify-content: space-between;
+        h3{
+
+            color :$gold;
+            font-weight: bold;
+        }
+
+        svg{
+            color: white;
+            font-size: 30px;
+        }
+        
     }
 
     ul {

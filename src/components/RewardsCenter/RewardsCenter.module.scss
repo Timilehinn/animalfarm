@@ -2,6 +2,7 @@
 
 $grey: #ffffff4d;
 $gold: #f3ba2f;
+$brown : rgba(255, 255, 255, 0.6);
 
 .reward {
 	width: 100%;
@@ -61,6 +62,13 @@ $gold: #f3ba2f;
 					font-size: 0.9rem;
 					color: rgba(255, 255, 255, 0.6);
 					margin-bottom: 10px;
+					cursor: pointer;
+				}
+
+				.autoFillBusd{
+					font-size: 0.8rem;
+					text-align: right;
+					color: $brown;
 					cursor: pointer;
 				}
 

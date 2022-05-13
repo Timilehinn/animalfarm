@@ -62,6 +62,7 @@ interface rewardProps {
 	slippage?: boolean
 	tolerance?: string
 	setTolerance?: any
+	autoFillBusd?:boolean
 }
 
 function RewardsCenter({
@@ -110,12 +111,16 @@ function RewardsCenter({
 	slippage,
 	tolerance,
 	setTolerance,
+	autoFillBusd
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
 	const { account } = useActiveWeb3React()
 	const { userData } = usePigPen()
 	const pigBalance = useAppSelector((state) => state.pricingReducer.data.pigsBalance)
+	const pigsAvailableToClaim =  useAppSelector((state) => state.pricingReducer.data.pigsAvailableToClaim)
+	const _pigsBusdPrice =  useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
+	
 
 	const handleChange = (e: any) => {
 		setInputValue(e.target.value)
@@ -171,6 +176,8 @@ function RewardsCenter({
 		}
 	}
 
+	const availablePigsBusdEquivalent = ( Number( pigsAvailableToClaim) * Number(_pigsBusdPrice ) ).toString()
+
 	const rewards = useAppSelector((state) => state.pigPenReducer.userData)
 
 	const isCompoundButtonDisabled = Number(rewards.earningsPigs) === 0
@@ -193,6 +200,7 @@ function RewardsCenter({
 								Wallet balance: {amountFormatter(getBalanceAmountString(pigBalance))}
 							</p>
 						)}
+						{ autoFillBusd && <p role='presentation' onClick={()=>setInputValue(amountFormatter(getBalanceAmountString(availablePigsBusdEquivalent)))} className={styles.autoFillBusd} >Auto Fill BUSD</p>}
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 							<div className={styles.logo}>
 								<img src={icon} alt='' />

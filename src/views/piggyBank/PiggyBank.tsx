@@ -341,6 +341,7 @@ function PiggyBank() {
 							approve={approve}
 							pigBal={false}
 							slippage={false}
+							autoFillBusd={false}
 						/>
 					) : (
 						<RewardsCenter
@@ -372,6 +373,7 @@ function PiggyBank() {
 							confirmModalProps={giftModalDetails}
 							pigBal={false}
 							slippage={false}
+							autoFillBusd={false}
 						/>
 					)}
 				</div>
