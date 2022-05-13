@@ -75,7 +75,7 @@ function PigsCredit() {
 		dispatch(toggleTourModal({ state: false, msg: '' }))
 		const data = {
 			state: true,
-			msg: 'Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options! Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 2% bonus!! ',
+			msg: 'Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options! Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 2% bonus!!. If you have intentions to deposit more to a stake (unlocked stake), do not compound- rather deposit into it directly.',
 		}
 		setTimeout(() => {
 			const pigCreditInfo = localStorage.getItem("pigCreditInfo")
@@ -330,6 +330,7 @@ function PigsCredit() {
 							slippage
 							tolerance={tolerance}
 							setTolerance={setTolerance}
+							autoFillBusd
 						/>
 					)}
 				</div>
