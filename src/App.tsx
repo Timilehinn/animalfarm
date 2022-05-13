@@ -9,7 +9,7 @@ import ModalBackdrop from './components/ModalBackdrop/ModalBackdrop'
 
 BigNumber.config({
 	EXPONENTIAL_AT: 1000,
-	DECIMAL_PLACES: 10,
+	DECIMAL_PLACES: 18,
 })
 
 function App() {
