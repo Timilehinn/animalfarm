@@ -248,7 +248,7 @@ function PigsPen() {
 			},
 			{
 				title: '1 PIG(s)',
-				value: amountFormatter(pigsBusdPrice),
+				value: amountFormatter(pigsBusdPrice.toString()),
 			},
 		],
 		confirmFunction: withdrawPigs,
