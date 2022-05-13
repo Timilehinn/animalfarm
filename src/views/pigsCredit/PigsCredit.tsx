@@ -137,7 +137,7 @@ function PigsCredit() {
 
 	/// API CALLS
 	const getMyPigPenData = async () => {
-		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
+		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))  
 	}
 	const getBusdPrice = async () => {
 		try {
