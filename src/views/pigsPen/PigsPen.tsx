@@ -136,7 +136,8 @@ function PigsPen() {
 		if (!inputValue) return
 		setPending(true)
 		try {
-			await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
+			// await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
+			await depositIntoPigPen(getDecimalAmount(inputValue), signer)
 			await fetchData()
 			setInputValue('')
 			toastSuccess('Deposit Successful!')
