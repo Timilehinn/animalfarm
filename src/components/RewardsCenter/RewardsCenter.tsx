@@ -9,7 +9,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import RangeSlider from 'components/RangeSlider/RangeSlider'
 import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import Info from 'components/Info/Info'
-import { getBalanceAmountString } from 'utils/formatBalance'
+import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
 import Preloader from '../prealoder/preloader'
 import styles from './RewardsCenter.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
@@ -189,8 +189,8 @@ function RewardsCenter({
 				<div hidden={hideAmountInput} className={styles.inputWrap}>
 					<div className={styles.inputBox}>
 						{pigBal && (
-							<p role='presentation' onClick={() => setInputValue((Number(pigBalance) / 10 ** 18).toFixed(3))} className={styles.bal}>
-								Wallet balance: {(Number(pigBalance) / 10 ** 18).toFixed(3)}
+							<p role='presentation' onClick={() => setInputValue(amountFormatter(getBalanceAmountString(pigBalance)))} className={styles.bal}>
+								Wallet balance: {amountFormatter(getBalanceAmountString(pigBalance))}
 							</p>
 						)}
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>

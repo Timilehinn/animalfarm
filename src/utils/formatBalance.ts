@@ -4,6 +4,24 @@ import { formatUnits } from 'ethers/lib/utils'
 import { BIG_TEN } from './bigNumber'
 
 /**
+ * Take a amount, e.g. 15.63833732 and converts it to 2 decimal place without rounding up, e.g. 15.63
+ */
+export const amountFormatter = (amount: string): string => {
+	let formattedNumber
+	const splittedNum = amount.split('.')
+	if (splittedNum[1]) {
+		if (splittedNum[1].length > 2) {
+			formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, 2)}`
+		} else {
+			formattedNumber = `${splittedNum[0]}.${splittedNum[1]}`
+		}
+	} else {
+		formattedNumber = `${splittedNum[0]}`
+	}
+	return formattedNumber
+}
+
+/**
  * Take a formatted amount, e.g. 15 BNB and convert it to full decimal value, e.g. 15000000000000000
  */
 export const getDecimalAmount = (amount: string, decimals = 18) => {
@@ -18,7 +36,7 @@ export const getBalanceAmount = (amount: BigNumber, decimals = 18) => {
 }
 
 export const getBalanceAmountString = (amount: string, decimals = 18) => {
-	return new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals)).toString() 
+	return new BigNumber(amount).dividedBy(BIG_TEN.pow(decimals)).toString()
 }
 
 export const getBalanceNumber = (balance: BigNumber, decimals = 18) => {

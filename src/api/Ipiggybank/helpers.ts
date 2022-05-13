@@ -80,7 +80,7 @@ export const getPiggyBanks = async (account: string): Promise<PiggyBank> => {
 		lpTotalSupply = _lpTotalSupply
 		userLPBalance = _userLPBalance
 		userLPAllowance = new BigNumber(_userLPAllowance).toJSON()
-		userBalance = new BigNumber(userLPBalance.balance._hex).dividedBy(1e18).decimalPlaces(2).toJSON()
+		userBalance = new BigNumber(userLPBalance.balance._hex).dividedBy(1e18).toJSON()
 	} else {
 		const [_tokenBalanceLP, _busdTokenBalanceLP, _lpTotalSupply] = await multicall(erc20, callsErc20)
 		tokenBalanceLP = _tokenBalanceLP

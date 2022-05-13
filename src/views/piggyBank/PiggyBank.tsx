@@ -11,7 +11,7 @@ import { toggleToastNotification, toggleTourModal, toggleConfirmModal, toggleMod
 // import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
 import { fetchPiggyBankData } from 'api/Ipiggybank'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
-import { getDecimalAmount } from 'utils/formatBalance'
+import { amountFormatter, getDecimalAmount } from 'utils/formatBalance'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
 import BigNumber from 'bignumber.js'
 import { usePiggyBank } from 'state/piggybank/hooks'
@@ -318,7 +318,7 @@ function PiggyBank() {
 							Lock
 							pair={false}
 							infoTitle='PIGS/BUSD LP balance'
-							infoValue={`${piggybank.userData.lpBalance} PIGS/BUSD`}
+							infoValue={`${amountFormatter(piggybank.userData.lpBalance)} PIGS/BUSD`}
 							rewardCenter={false}
 							token='PIGS/BUSD LP'
 							icon={pig}
@@ -346,7 +346,7 @@ function PiggyBank() {
 							Lock
 							title='Gift Piglets with LP token'
 							infoTitle='PIGS/BUSD LP balance'
-							infoValue={`${piggybank.userData.lpBalance} PIGS/BUSD`}
+							infoValue={`${amountFormatter(piggybank.userData.lpBalance)} PIGS/BUSD`}
 							token='PIGS/BUSD LP'
 							icon={pig}
 							buttonText='Gift Piglets'

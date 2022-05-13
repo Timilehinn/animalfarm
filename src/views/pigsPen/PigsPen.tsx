@@ -10,7 +10,7 @@ import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
 import { usePigPen } from 'state/pigpen/hooks'
 import useToast from 'hooks/useToast'
-import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
+import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
 
 import { fetchPigPenData, approvePigPenSpendPIGS, depositIntoPigPen, claimRewardPigPen, withdrawFromPigPen } from 'api/pigpen'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -136,7 +136,7 @@ function PigsPen() {
 		if (!inputValue) return
 		setPending(true)
 		try {
-			await depositIntoPigPen(getDecimalAmount(Number(inputValue).toFixed(2)), signer)
+			await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
 			setInputValue('')
 			toastSuccess('Deposit Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
