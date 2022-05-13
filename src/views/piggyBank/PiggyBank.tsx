@@ -88,10 +88,10 @@ function PiggyBank() {
 			msg: 'The piggy bank is the first ever non-inflationary variable time staking annuity. Stake PIGS/BUSD LP tokens to earn up to 3% daily ROI!! Earn a 2% referral bonus for on boarding new users.',
 		}
 		setTimeout(() => {
-			const piggyBankInfo = localStorage.getItem("piggyBankInfo")
-			if(!piggyBankInfo){
+			const piggyBankInfo = localStorage.getItem('piggyBankInfo')
+			if (!piggyBankInfo) {
 				dispatch(toggleTourModal(data))
-				localStorage.setItem("piggyBankInfo","piggyBankInfo") 
+				localStorage.setItem('piggyBankInfo', 'piggyBankInfo')
 			}
 		}, 3000)
 
@@ -201,7 +201,7 @@ function PiggyBank() {
 		}
 
 		try {
-			const res = await buyPigLets(getDecimalAmount(inputValue), lockDuration.toString(), ref, signer)
+			const res = await buyPigLets(getDecimalAmount(amountFormatter(inputValue)), lockDuration.toString(), ref, signer)
 
 			if (res.success === true) {
 				resetInputs()
@@ -226,7 +226,7 @@ function PiggyBank() {
 	}
 	const _gitfPiglets = async () => {
 		try {
-			const res = await giftPiglet(inputValue2, getDecimalAmount(inputValue), lockDuration.toString(), signer)
+			const res = await giftPiglet(inputValue2, getDecimalAmount(amountFormatter(inputValue)), lockDuration.toString(), signer)
 
 			if (res.success === true) {
 				resetInputs()

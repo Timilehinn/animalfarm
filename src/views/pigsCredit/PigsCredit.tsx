@@ -12,7 +12,7 @@ import { getPigsBUSDPrice } from 'utils/getPrice'
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
-import { getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
+import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
 import { setPigsBusdPrice, setPigsCreditData } from 'state/pricing'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 import { checkAllowance, approveBusd } from '../../api/allowance'
@@ -78,13 +78,12 @@ function PigsCredit() {
 			msg: 'Users who were in PigPen when we paused for v2 migration are the only users who need to use the PIGS Crediting UI. If this applies to you then you have two amazing options! Click the PIGPEN crediting tab and utilize the dashboard to send your PIGS to the PigPen or click the Piggy Bank crediting tab and utilize the dashboard to pair your credited PIGS with BUSD and stake them in PIGGYBANK for a 2% bonus!!. If you have intentions to deposit more to a stake (unlocked stake), do not compound- rather deposit into it directly.',
 		}
 		setTimeout(() => {
-			const pigCreditInfo = localStorage.getItem("pigCreditInfo")
+			const pigCreditInfo = localStorage.getItem('pigCreditInfo')
 
-			if(!pigCreditInfo){
+			if (!pigCreditInfo) {
 				dispatch(toggleTourModal(data))
-				localStorage.setItem("pigCreditInfo","pigCreditInfo")
+				localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
 			}
-			
 		}, 6000)
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -136,22 +135,6 @@ function PigsCredit() {
 
 	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
 
-	// Solution to the rounding issues
-	const amountFormatter = (amount: string): string => {
-		let formattedNumber
-		const splittedNum = amount.split('.')
-		if (splittedNum[1]) {
-			if (splittedNum[1].length > 2) {
-				formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, 2)}`
-			} else {
-				formattedNumber = `${splittedNum[0]}.${splittedNum[1]}`
-			}
-		} else {
-			formattedNumber = `${splittedNum[0]}`
-		}
-		return formattedNumber
-	}
-
 	/// API CALLS
 	const getMyPigPenData = async () => {
 		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
@@ -196,7 +179,7 @@ function PigsCredit() {
 
 		setPending(true)
 		try {
-			const formattedNumber = amountFormatter(claimToPigPenAmount)
+			const formattedNumber = amountFormatter(claimToPigPenAmount, 18)
 
 			await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
 			// await _claimToPigPen(getDecimalAmount(formattedNumber), signer)
@@ -214,10 +197,10 @@ function PigsCredit() {
 			return
 		}
 		try {
-			const formattedInput = amountFormatter(inputValue)
-			const formattedPrice = amountFormatter(pigsBusdPrice.toString())
+			const formattedInput = amountFormatter(inputValue, 18)
+			const formattedPrice = amountFormatter(pigsBusdPrice.toString(), 18)
 
-			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(formattedInput).dividedBy(formattedPrice).toString()), getDecimalAmount(inputValue), lockDuration, tolerance, signer)
+			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(formattedInput).dividedBy(formattedPrice).toString()), getDecimalAmount(formattedInput), lockDuration, tolerance, signer)
 
 			if (res.success === true) {
 				resetInputs()
@@ -275,7 +258,7 @@ function PigsCredit() {
 					{/* <div>
 						
 					</div> */}
-					<PigsCreditCard title='Credited PIGS' amount={`${amountFormatter(getBalanceAmountString(pigsAvailableToClaim))} PIGS`} />
+					<PigsCreditCard title='Credited PIGS' amount={`${amountFormatter(getBalanceAmountString(pigsAvailableToClaim), 9)} PIGS`} />
 					{/* <div>
 						<PigsCreditCard title='BUSD balance' amount={`${Number(getBalanceAmountString(busdBalance)).toFixed(5)} BUSD`} />
 					</div> */}
@@ -312,7 +295,7 @@ function PigsCredit() {
 							confirmFunction={claimToPiggy}
 							available={`${Number(busdBalance).toFixed(2).toString()} BUSD`}
 							infoTitle='Available PIGS to claim'
-							infoValue={`${new BigNumber(getBalanceAmountString(pigsAvailableToClaim)).toFormat(2)} PIGS`}
+							infoValue={`${amountFormatter(getBalanceAmountString(pigsAvailableToClaim), 9)} PIGS`}
 							infoTitle2='Estimated BUSD to pair'
 							infoValue2={`${new BigNumber(getBalanceAmountString(estimatedBusdToPair.toString())).toFormat(2)} BUSD`}
 							token='BUSD'

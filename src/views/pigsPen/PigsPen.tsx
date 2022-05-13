@@ -57,14 +57,12 @@ function PigsPen() {
 			msg: 'The PIGPEN is our staking protocol where holders of the PIGS token become owners of the platform by staking their PIGS. Pigpen pays out high yield dividends in both BUSD and PIGS that are generated from the platform fees and DOGs token taxes!!',
 		}
 		setTimeout(() => {
-			
-			const pigPenInfo = localStorage.getItem("pigPenInfo")
- 
-			if(!pigPenInfo){
+			const pigPenInfo = localStorage.getItem('pigPenInfo')
+
+			if (!pigPenInfo) {
 				dispatch(toggleTourModal(data))
-				localStorage.setItem("pigPenInfo","pigPenInfo")
+				localStorage.setItem('pigPenInfo', 'pigPenInfo')
 			}
-			
 		}, 4000)
 
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,13 +75,10 @@ function PigsPen() {
 	}
 
 	useEffect(() => {
-		toastInfo('Connect your wallet to see PigPen stats')
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
-
-	useEffect(() => {
 		if (account) {
 			fetchData()
+		} else {
+			toastInfo('Connect your wallet to see PigPen stats')
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [account])
@@ -140,8 +135,7 @@ function PigsPen() {
 		if (!inputValue) return
 		setPending(true)
 		try {
-			// await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
-			await depositIntoPigPen(getDecimalAmount(inputValue), signer)
+			await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
 			await fetchData()
 			setInputValue('')
 			toastSuccess('Deposit Successful!')

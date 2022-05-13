@@ -10,9 +10,6 @@ import { WBNB_TOKEN } from 'config/constants'
 const getBnbBalance = async (account: string): Promise<Balance> => {
 	const bnbPrice = await getBNBPrice()
 
-	// eslint-disable-next-line no-param-reassign
-	// account = '0xd93ACb4da599220d260020EB3CCCF4850FC26035' // TODO: remove this assignment
-
 	const result = await staticRpcProvider.getBalance(account)
 	const balanceInEth = ethers.utils.formatEther(result)
 
@@ -32,9 +29,6 @@ const getBnbBalance = async (account: string): Promise<Balance> => {
 // const getVaultBtcBalance = async (account: string): Promise<Balance> => {
 // 	const { vaultBtcContract } = getVaultContracts()
 // 	let vaultBtcBalance: Balance
-
-// 	// eslint-disable-next-line no-param-reassign
-// 	// account = '0xd93ACb4da599220d260020EB3CCCF4850FC26035' // TODO: remove this assignment
 
 // 	try {
 // 		const vaultXPrice = await getVaultXPrice()
