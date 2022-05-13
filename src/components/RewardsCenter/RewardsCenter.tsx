@@ -10,9 +10,11 @@ import RangeSlider from 'components/RangeSlider/RangeSlider'
 import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import Info from 'components/Info/Info'
 import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
+import { availablePigsToClaim } from 'api/getPigsBalance'
 import Preloader from '../prealoder/preloader'
 import styles from './RewardsCenter.module.scss'
 import { toggleConfirmModal, toggleModalBackDrop, setModalProps } from '../../state/toggle'
+
 
 interface rewardProps {
 	mainButtonDisabled?: boolean
@@ -62,7 +64,9 @@ interface rewardProps {
 	slippage?: boolean
 	tolerance?: string
 	setTolerance?: any
-	autoFillBusd?:boolean
+	autoFillBusd?: boolean
+	autoFillLP?:boolean
+	
 }
 
 function RewardsCenter({
@@ -111,16 +115,18 @@ function RewardsCenter({
 	slippage,
 	tolerance,
 	setTolerance,
-	autoFillBusd
+	autoFillBusd,
+	autoFillLP
+
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
 	const { account } = useActiveWeb3React()
 	const { userData } = usePigPen()
 	const pigBalance = useAppSelector((state) => state.pricingReducer.data.pigsBalance)
-	const pigsAvailableToClaim =  useAppSelector((state) => state.pricingReducer.data.pigsAvailableToClaim)
-	const _pigsBusdPrice =  useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
-	
+	const pigsAvailableToClaim = useAppSelector((state) => state.pricingReducer.data.pigsAvailableToClaim)
+	const _pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
+	const pigsBusdLPBalance = useAppSelector((state=>state.piggyBankReducer.data.userData.lpBalance))
 
 	const handleChange = (e: any) => {
 		setInputValue(e.target.value)
@@ -176,7 +182,7 @@ function RewardsCenter({
 		}
 	}
 
-	const availablePigsBusdEquivalent = ( Number( pigsAvailableToClaim) * Number(_pigsBusdPrice ) ).toString()
+	const availablePigsBusdEquivalent = (Number(pigsAvailableToClaim) * Number(_pigsBusdPrice)).toString()
 
 	const rewards = useAppSelector((state) => state.pigPenReducer.userData)
 
@@ -200,7 +206,16 @@ function RewardsCenter({
 								Wallet balance: {amountFormatter(getBalanceAmountString(pigBalance))}
 							</p>
 						)}
-						{ autoFillBusd && <p role='presentation' onClick={()=>setInputValue(amountFormatter(getBalanceAmountString(availablePigsBusdEquivalent)))} className={styles.autoFillBusd} >Auto Fill BUSD</p>}
+						{autoFillBusd && (
+							<p role='presentation' onClick={() => setInputValue(amountFormatter(getBalanceAmountString(availablePigsBusdEquivalent)))} className={styles.autoFillBusd}>
+								Auto Fill BUSD
+							</p>
+						)}
+						{autoFillLP && (
+							<p role='presentation' onClick={() => setInputValue(amountFormatter(getBalanceAmountString(pigsBusdLPBalance)))} className={styles.autoFillBusd}>
+								Auto Fill PIGS/BUSD LP
+							</p>
+						)}
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 							<div className={styles.logo}>
 								<img src={icon} alt='' />

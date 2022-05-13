@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link,NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
-import { useConnectWalletModal,useConnectWallet } from 'state/wallet/hooks'
-import { toggleModalBackDrop,toggleMobileNav } from 'state/toggle'
+import { useConnectWalletModal, useConnectWallet } from 'state/wallet/hooks'
+import { toggleModalBackDrop, toggleMobileNav } from 'state/toggle'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-
 
 import styles from './MobileSideNav.module.scss'
 
@@ -23,7 +22,7 @@ function MobileSideNav() {
 
 	const connect = () => {
 		toggleConnectWalletModal(true)
-		dispatch( toggleModalBackDrop(true) )
+		dispatch(toggleModalBackDrop(true))
 		dispatch(toggleMobileNav(false))
 	}
 
@@ -31,7 +30,7 @@ function MobileSideNav() {
 		<div className={isNavActive ? `${styles.mobile} ${styles.mobile__active}` : `${styles.mobile}`}>
 			<header>
 				<h3>Animal Farm</h3>
-				<Icon onClick={()=>closeNav()}  icon="pepicons:times" />
+				<Icon onClick={() => closeNav()} icon='pepicons:times' />
 			</header>
 			<ul>
 				<NavLink onClick={() => closeNav()} className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)} to='/'>
@@ -66,16 +65,21 @@ function MobileSideNav() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Migrate</p>
 				</NavLink>
-				<a className={styles.link} href="https://theanimal.farm/dripliberation">
-					<Icon icon="bx:bar-chart-alt-2" />
+				<a className={styles.link} href='https://theanimal.farm/dripliberation'>
+					<Icon icon='bx:bar-chart-alt-2' />
 					<p>Drip Liberation</p>
 				</a>
 			</ul>
-			<button onClick={()=>connect()} type='button'>
-				{	isWalletConnected ?
-							<p>{account ? account.substring(0, 6) : ''}...{account ? account.substring(account.length - 4) : ''}</p> :
-							<p>Connect Wallet</p>
-						}
+			<button onClick={() => connect()} type='button'>
+				{isWalletConnected ? (
+					<p>
+						{account ? account.substring(0, 6) : ''}
+						...
+						{account ? account.substring(account.length - 4) : ''}
+					</p>
+				) : (
+					<p>Connect Wallet</p>
+				)}
 			</button>
 		</div>
 	)

@@ -2,10 +2,12 @@
 import React from 'react'
 import { useSpring, animated } from 'react-spring'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
-import { getBalanceAmountString } from 'utils/formatBalance'
+import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton' 
+import { availablePigsToClaim } from 'api/getPigsBalance'
 import styles from './ClaimPigsPen.module.scss'
 import logo from '../../assets/svgg.png'
+import { getBalanceAmountString, amountFormatter } from '../../utils/formatBalance'
+
 
 interface claimProps {
 	title: string
@@ -37,6 +39,7 @@ function ClaimPigsPen({ title, pigsAvailableToClaim, claimToPigPenAmount, setCla
 			<p className={styles.header}>Enter amount of pigs to be deposited to the pigs pen.</p>
 			<form action=''>
 				<div className={styles.inputWrap}>
+					<p role="presentation" onClick={()=>setClaimToPigPenAmount(amountFormatter(getBalanceAmountString(pigsAvailableToClaim)))} className={styles.pigsauto} >Auto Fill PIGS</p>
 					<div className={styles.inputBox}>
 						<div className={styles.logo}>
 							<img src={logo} alt='' />

@@ -29,8 +29,8 @@ function PiggyBankRow(props) {
 	const getMyPiggyBank = async () => {
 		try {
 			const res = await fetchPiggyBankData(account)
-			// console.log(res)
-			setPiggyBank(res)
+			console.log(res)
+			// setPiggyBank(res)
 		} catch (err) {
 			console.log(err)
 		}
