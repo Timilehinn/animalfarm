@@ -243,11 +243,11 @@ function PigsPen() {
 		infoValues: [
 			{
 				title: 'PIGS remaining',
-				value: `${Number(userData.stakedBalance) - Number(userData.pigAvailableForWithdrawal)}`,
+				value: `${amountFormatter(getBalanceAmountString((Number(userData.stakedBalance) - Number(userData.pigAvailableForWithdrawal)).toString()))}`,
 			},
 			{
 				title: '1 PIG(s)',
-				value: pigsBusdPrice,
+				value: amountFormatter(pigsBusdPrice),
 			},
 		],
 		confirmFunction: withdrawPigs,
