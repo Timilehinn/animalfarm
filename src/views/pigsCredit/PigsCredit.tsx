@@ -130,9 +130,9 @@ function PigsCredit() {
 
 	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
 
+	// Solution to the rounding issues
 	const amountFormatter = (amount: string): string => {
 		let formattedNumber
-		console.log('amount: ', amount)
 		const splittedNum = amount.split('.')
 		if (splittedNum[1]) {
 			if (splittedNum[1].length > 2) {
@@ -269,7 +269,7 @@ function PigsCredit() {
 					{/* <div>
 						
 					</div> */}
-					<PigsCreditCard title='Credited PIGS' amount={`${new BigNumber(getBalanceAmountString(pigsAvailableToClaim)).toFormat(2)} PIGS`} />
+					<PigsCreditCard title='Credited PIGS' amount={`${amountFormatter(getBalanceAmountString(pigsAvailableToClaim))} PIGS`} />
 					{/* <div>
 						<PigsCreditCard title='BUSD balance' amount={`${Number(getBalanceAmountString(busdBalance)).toFixed(5)} BUSD`} />
 					</div> */}
