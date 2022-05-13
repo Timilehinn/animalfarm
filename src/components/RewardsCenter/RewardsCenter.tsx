@@ -264,7 +264,7 @@ function RewardsCenter({
 						)}
 						{compoundButton && (
 							<button onClick={handleCompound} disabled={isCompoundButtonDisabled} className={isCompoundButtonDisabled ? `${styles.button__disabled}` : styles.reward__button__enabled} type='button' style={{ marginLeft: '10px' }}>
-								Compound PIGS
+								Compound PIGS (Claim BUSD)
 							</button>
 						)}
 					</div>

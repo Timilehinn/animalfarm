@@ -130,6 +130,22 @@ function PigsCredit() {
 
 	const estimatedBusdToPair = Math.ceil(Number(pigsBusdPrice) * Number(pigsAvailableToClaim))
 
+	const amountFormatter = (amount: string): string => {
+		let formattedNumber
+		console.log('amount: ', amount)
+		const splittedNum = amount.split('.')
+		if (splittedNum[1]) {
+			if (splittedNum[1].length > 2) {
+				formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, 2)}`
+			} else {
+				formattedNumber = `${splittedNum[0]}.${splittedNum[1]}`
+			}
+		} else {
+			formattedNumber = `${splittedNum[0]}`
+		}
+		return formattedNumber
+	}
+
 	/// API CALLS
 	const getMyPigPenData = async () => {
 		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
@@ -174,17 +190,8 @@ function PigsCredit() {
 
 		setPending(true)
 		try {
-			let formattedNumber
-			const splittedNum = claimToPigPenAmount.split('.')
-			if (splittedNum[1]) {
-				if (splittedNum[1].length > 2) {
-					formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, 2)}`
-				} else {
-					formattedNumber = `${splittedNum[0]}.${splittedNum[1]}`
-				}
-			} else {
-				formattedNumber = `${splittedNum[0]}`
-			}
+			const formattedNumber = amountFormatter(claimToPigPenAmount)
+
 			await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
 			// await _claimToPigPen(getDecimalAmount(formattedNumber), signer)
 			setPending(false)
@@ -201,7 +208,10 @@ function PigsCredit() {
 			return
 		}
 		try {
-			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(Number(inputValue).toFixed(5)).div(Number(pigsBusdPrice).toFixed(5)).toFixed(0)), getDecimalAmount(inputValue), lockDuration, tolerance, signer)
+			const formattedInput = amountFormatter(inputValue)
+			const formattedPrice = amountFormatter(pigsBusdPrice.toString())
+
+			const res = await ClaimToPiggyBank(getDecimalAmount(new BigNumber(formattedInput).dividedBy(formattedPrice).toString()), getDecimalAmount(inputValue), lockDuration, tolerance, signer)
 
 			if (res.success === true) {
 				resetInputs()
