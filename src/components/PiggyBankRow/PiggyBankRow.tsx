@@ -104,7 +104,8 @@ function PiggyBankRow(props) {
 
 	// button control
 	// check if last time compounded is greater than 24 hours
-	const isCompoundDisabled = Date.now() / 1000 < 86400 + lastCompounded
+	// const isCompoundDisabled = Date.now() / 1000 < 86400 + lastCompounded
+	const isCompoundDisabled = false
 
 	const isSellDisabled = Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + Number(truffleLocker.startLockTimestamp)
 
