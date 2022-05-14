@@ -101,7 +101,7 @@ function PiggyBankRow(props) {
 			console.log(err)
 		}
 	}
-
+	
 	// button control
 	// check if last time compounded is greater than 24 hours
 	const isCompoundDisabled = Date.now() / 1000 < 86400 + lastCompounded
