@@ -112,7 +112,8 @@ export const compound = async (id: string, signer: ethers.Signer) => {
 	// const referee = localStorage.getItem("ref") || "0x0000000000000000000000000000000000000000"
 
 	try {
-		const result: ethers.BigNumber = await piggyBankContract.connect(signer).feedPiglets(id, { gasLimit: 2500000 })
+		// await piggyBankContract.connect(signer).feedPiglets(id, { gasLimit: 300000 })
+		await piggyBankContract.connect(signer).feedPiglets(id)
 		// const balance = ethers.BigNumber.from(result).toJSON()
 		// piggyBanks = {
 		// 	amount: balance,
