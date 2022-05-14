@@ -36,7 +36,7 @@ function ReferralTable() {
 								truffleLocker={item.truffleLocker}
 								trufflesvalue={item.usdValue}
 								timeLeftSinceLock={item.timeLeftSinceLock}
-								maxpayout={item.trufflesUsed}
+								maxpayout={new BigNumber(item.trufflesUsed).multipliedBy(3)}
 								lastCompounded={item.lastCompounded}
 								paddedPrecisionValue={item.paddedPrecisionValue}
 							/>
