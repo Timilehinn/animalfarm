@@ -7,6 +7,8 @@ import style from './PiggyBankTable.module.scss'
 function ReferralTable() {
 	const { piggybank } = usePiggyBank()
 
+	// const maxPayout = new BigNumber(item.trufflesUsed).multipliedBy(3).toString()
+
 	return (
 		<div>
 			<div className={style.tableheader}>
@@ -36,7 +38,7 @@ function ReferralTable() {
 								truffleLocker={item.truffleLocker}
 								trufflesvalue={item.usdValue}
 								timeLeftSinceLock={item.timeLeftSinceLock}
-								maxpayout={item.trufflesUsed}
+								maxpayout={new BigNumber(item.trufflesUsed).multipliedBy(3).toString()}
 								lastCompounded={item.lastCompounded}
 								paddedPrecisionValue={item.paddedPrecisionValue}
 							/>

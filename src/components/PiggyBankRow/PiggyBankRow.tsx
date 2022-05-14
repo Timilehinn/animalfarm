@@ -104,7 +104,7 @@ function PiggyBankRow(props) {
 	
 	// button control
 	// check if last time compounded is greater than 24 hours
-	const isCompoundDisabled = Date.now() / 1000 < 86400 + lastCompounded
+	const isCompoundEnabled = Math.floor(Date.now() / 1000) - lastCompounded > 86400
 
 	const isSellDisabled = Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + Number(truffleLocker.startLockTimestamp)
 
@@ -128,11 +128,11 @@ function PiggyBankRow(props) {
 								Sell
 							</button>
 							<hr />
-							<button disabled={isCompoundDisabled} onClick={() => _compound()} type='button' className={isCompoundDisabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
+							<button disabled={!isCompoundEnabled} onClick={() => _compound()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
 								Compound
 							</button>
 							<hr />
-							<button disabled={isCompoundDisabled} onClick={() => openDepositModal()} type='button' className={isCompoundDisabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
+							<button disabled={!isCompoundEnabled} onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
 								Deposit
 							</button>
 						</animated.div>
