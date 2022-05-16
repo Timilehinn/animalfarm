@@ -163,6 +163,7 @@ function PiggyBank() {
 		try {
 			const res = await fetchPiggyBankData(account)
 			setPiggyBank(res)
+			
 		} catch (err) {
 			toastError('Error fetching PiggyBank')
 			console.log(err)

@@ -37,6 +37,60 @@
 			.credit__wrap__in {
 				padding: 20px;
 				// background: black;
+
+				.settings{
+					
+					svg{
+						color: white;
+						font-size: 20px;
+						cursor: pointer;
+					}
+
+					.settings__box{
+						display: flex;
+						align-items: center;
+						justify-content: space-between;
+						cursor: pointer;
+						
+						visibility: hidden;
+						opacity:0;
+						transition: 0.3s ease;
+						transform: translateY(-10px);
+
+						p{
+							font-size: 0.8rem;
+							color: rgba(217 217 212 / 90%);
+						}
+
+						.switch{
+							width: 40px;
+							height: 20px;
+							border-radius: 10px;
+							background: #3d3424;
+							padding: 2px;
+
+							.switch__button{
+								width: 50%;
+								height: 100%;
+								border-radius: 100%;
+								background-color: black;
+								transition: 0.3s ease;
+							}
+
+							.switch__button__active{
+								transform: translateX(100%);
+								background-color: #f3ba2a;
+							}
+						}
+					}
+					.settings__box__active{
+						opacity: 1;
+						visibility: visible;
+						transform: translateY(0px);
+						margin-bottom: 30px;
+						
+					}
+				}
 				.tabs {
 					width: 100%;
 
