@@ -40,6 +40,8 @@ interface rewardProps {
 	infoValue2?: any
 	infoTitle3?: string
 	infoValue3?: any
+	infoTitle4?: string
+	infoValue4?: any
 	token?: string
 	icon?: any
 	pTitle?: any
@@ -94,6 +96,8 @@ function RewardsCenter({
 	infoValue2,
 	infoValue3,
 	infoTitle3,
+	infoValue4,
+	infoTitle4,
 	token,
 	icon,
 	buttonText,
@@ -116,8 +120,7 @@ function RewardsCenter({
 	tolerance,
 	setTolerance,
 	autoFillBusd,
-	autoFillLP
-
+	autoFillLP,
 }: rewardProps) {
 	const props = useSpring({ to: { opacity: 1, x: 0 }, from: { opacity: 0, x: 20 }, delay: 100 })
 	const dispatch = useAppDispatch()
@@ -126,7 +129,7 @@ function RewardsCenter({
 	const pigBalance = useAppSelector((state) => state.pricingReducer.data.pigsBalance)
 	const pigsAvailableToClaim = useAppSelector((state) => state.pricingReducer.data.pigsAvailableToClaim)
 	const _pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
-	const pigsBusdLPBalance = useAppSelector((state=>state.piggyBankReducer.data.userData.lpBalance))
+	const pigsBusdLPBalance = useAppSelector((state) => state.piggyBankReducer.data.userData.lpBalance)
 
 	const handleChange = (e: any) => {
 		setInputValue(e.target.value)
@@ -197,6 +200,7 @@ function RewardsCenter({
 				<Info title={infoTitle} info={infoValue} />
 				{infoTitle2 && <Info title={infoTitle2} info={infoValue2} />}
 				{infoTitle3 && <Info title={infoTitle3} info={infoValue3} />}
+				{infoTitle4 && <Info title={infoTitle4} info={infoValue4} />}
 			</div>
 			<form action=''>
 				<div hidden={hideAmountInput} className={styles.inputWrap}>

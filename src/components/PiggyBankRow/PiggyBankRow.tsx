@@ -101,12 +101,25 @@ function PiggyBankRow(props) {
 			console.log(err)
 		}
 	}
-	
+
 	// button control
 	// check if last time compounded is greater than 24 hours
 	const isCompoundEnabled = Math.floor(Date.now() / 1000) - lastCompounded > 86400
 
 	const isSellDisabled = Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + Number(truffleLocker.startLockTimestamp)
+
+	// check time left to compound
+
+	const getTimeLeftToCompound = () => {
+		const timeLeftToCompoundSeconds = Math.floor(Date.now() / 1000 - (lastCompounded + 86400))
+
+		const timeLeft = secondsToString(timeLeftToCompoundSeconds)
+		return timeLeft
+	}
+
+	setTimeout(() => {
+		getTimeLeftToCompound()
+	}, 2000)
 
 	return (
 		<tr ref={catMenu} className={style.tr}>
@@ -138,6 +151,7 @@ function PiggyBankRow(props) {
 						</animated.div>
 					)}
 				</div>
+				{/* <p className={style.comp}>Compound in : {getTimeLeftToCompound()}</p> */}
 			</td>
 			<DepositeModal id={id} />
 		</tr>

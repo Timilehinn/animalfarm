@@ -13,8 +13,10 @@ import useToast from 'hooks/useToast'
 import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
 
 import { fetchPigPenData, approvePigPenSpendPIGS, depositIntoPigPen, claimRewardPigPen, withdrawFromPigPen } from 'api/pigpen'
+import { Icon } from '@iconify/react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styles from './PigsPen.module.scss'
+
 
 import pig from '../../assets/svgg.png'
 
@@ -48,6 +50,9 @@ function PigsPen() {
 	const pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
 	/// State for input
 	const [inputValue, setInputValue] = useState('')
+
+	const [isSwitchActive, setIsSwitchActive] = useState(false);
+	const [ isSettingsOpen, setIsSettingsOpen ] = useState(false)
 
 	// open tour modal
 	useEffect(() => {
@@ -135,6 +140,11 @@ function PigsPen() {
 		if (!inputValue) return
 		setPending(true)
 		try {
+			// compound if autoCompound is on.
+			const isAutoCompoundActive = localStorage.getItem("autoCompound")
+			if(isAutoCompoundActive){
+				await claimRewardPigPen(true, signer)
+			}
 			await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
 			await fetchData()
 			setInputValue('')
@@ -252,6 +262,26 @@ function PigsPen() {
 		confirmFunction: withdrawPigs,
 	}
 
+	const handleAutoCompound = () => {
+		const isAutoCompoundActive = localStorage.getItem("autoCompound")
+
+		if(!isAutoCompoundActive){
+			localStorage.setItem("autoCompound","autoCompound")	
+			setIsSwitchActive(true)
+		}else{
+			localStorage.removeItem("autoCompound")
+			setIsSwitchActive(false)
+		}
+	}
+
+	useEffect(()=>{
+		const isAutoCompoundActive = localStorage.getItem('autoCompound')
+
+		if(isAutoCompoundActive){
+			setIsSwitchActive(true)
+		}
+	},[])
+
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
@@ -289,6 +319,15 @@ function PigsPen() {
 				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.credit__wrap__in}>
+						<div className={styles.settings}>
+							<Icon onClick={() => setIsSettingsOpen(!isSettingsOpen)} icon='ci:settings-filled' />
+							<div onClick={() => handleAutoCompound()} className={isSettingsOpen ? `${styles.settings__box} ${styles.settings__box__active}` : `${styles.settings__box}`}>
+								<p>Auto Compound</p>
+								<div className={styles.switch}>
+									<div className={isSwitchActive ? `${styles.switch__button__active} ${styles.switch__button}` : `${styles.switch__button}`}>{}</div>
+								</div>
+							</div>
+						</div>
 						<div className={styles.tabs}>
 							<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
 								<p>Deposit PIGS</p>
@@ -346,6 +385,8 @@ function PigsPen() {
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
 								infoValue3={`${new BigNumber(getBalanceAmountString(userData.pigAvailableForWithdrawal)).toFormat(2)} PIGS`}
+								infoTitle4='Time left to withdraw'
+								infoValue4="4h 3m 40s"
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton

@@ -26,7 +26,7 @@ export interface PigPenState {
 	userDataLoaded: boolean
 }
 
-const initialState: PigPenState = {
+const initialState: PigPenState = {  
 	pigPendata: {
 		lastRewardBlock: '0',
 		pigsSupply: '0',

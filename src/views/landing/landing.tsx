@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, Suspense } from 'react'
 import { useConnectWallet, useConnectWalletModal } from 'state/wallet/hooks'
 import { useRoutes, Route, Routes } from 'react-router-dom'
 import { getPigsBUSDPrice } from 'utils/getPrice'
@@ -25,6 +25,8 @@ import MobileNav from '../../components/MobileNav/MobileNav'
 
 import Home from '../home/Home'
 import style from './Landing.module.scss'
+
+const AddLiquidity = React.lazy(()=>import("../addLiquidity/AddLiquidity"))
 
 function Landing() {
 	const { login } = useAuth()
@@ -68,16 +70,19 @@ function Landing() {
 				<Toast />
 				{/* <DepositeModal /> */}
 				<TourModal />
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/pigs-credit' element={<PigsCredit />} />
-					<Route path='/pigs-pen' element={<PigsPen />} />
-					<Route path='/piggy-bank' element={<PiggyBank />} />
-					<Route path='/migrate' element={<Migrate />} />
-					<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
-					<Route path='*' element={<ErrorPage />} />
-				</Routes>
-			</div>
+				<Suspense fallback={<div>Loading...</div>} >
+					<Routes>
+						<Route path='/' element={<Home />} />
+						<Route path='/pigs-credit' element={<PigsCredit />} />
+						<Route path='/pigs-pen' element={<PigsPen />} />
+						<Route path='/piggy-bank' element={<PiggyBank />} />
+						<Route path='/migrate' element={<Migrate />} />
+						<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
+						<Route path='/add-liquidity' element={<AddLiquidity />} />
+						<Route path='*' element={<ErrorPage />} />
+					</Routes>	
+				</Suspense>
+			</div> 
 		</div>
 	)
 }
