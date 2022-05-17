@@ -1,13 +1,17 @@
 import Info from 'components/Info/Info'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
+import { usePricing } from 'state/pricing/hooks'
+import Preloader from 'components/prealoder/preloader'
+import { setModalProps, toggleModalBackDrop, toggleConfirmModal } from 'state/toggle'
 import styles from './AddLiquidity.module.scss'
 import pigs from '../../assets/svgg.png'
 import busd from '../../assets/busd.png'
 
-
 function AddLiquidity() {
 	const pigsBusdLPBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
+	const { pigsBusdPrice } = usePricing()
+	const dispatch = useAppDispatch()
 	// const pigsBalance = useAppSelector((state) => state.balanceReducer.pigsBalance.amountString)
 	// const busdBalance = useAppSelector((state) => state.balanceReducer.busdBalance)
 
@@ -18,30 +22,66 @@ function AddLiquidity() {
 	const [busdValue, setBusdValue] = useState(0)
 
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+	const [isApproved, setIsApproved] = useState(false)
+	const [pending, setPending] = useState(false)
 
 	useEffect(() => {
 		if (parseInt(busdBalance) === 0 && parseInt(pigsBalance) === 0) {
 			setIsButtonDisabled(true)
+
 			return
 		}
-		if (pigsValue > 0) {
+		if (pigsValue > 0 && busdValue > 0) {
 			setIsButtonDisabled(false)
 		} else {
 			setIsButtonDisabled(true)
 		}
-	}, [pigsValue])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pigsValue, busdValue])
 
 	const setInput = (e: any) => {
 		setPigsValue(e.target.value)
 		console.log(e.target.value)
-		// if( Number(pigsBalance) === 0 && Number(busdBalance) === 0  ){
-		//     setIsButtonDisabled(true)
-		// }
-		// if( Number(pigsValue) !== 0  ){
-		//     setIsButtonDisabled(true)
-		//     return
-		// }
-		// setIsButtonDisabled(false)
+	}
+
+	useEffect(() => {
+		setBusdValue(Number(pigsBusdPrice) * pigsValue)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pigsValue])
+
+	useEffect(() => {
+		setPigsValue(busdValue / Number(pigsBusdPrice))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [busdValue])
+
+	// test function for approval
+	const approve = () => {
+		setPending(true)
+		setTimeout(() => {
+			setPending(false)
+			setIsApproved(true)
+		}, 3000)
+	}
+
+	// confirm modal props
+	const modalProps = {
+		modalTitleText: 'Add Liquidity',
+		confirmButtonText: 'Add Liquidity',
+		value: '',
+		text: 'PIGS / BUSD',
+		warning: '*Estimated values.',
+		infoValues: [
+			{ title: 'PIGS deposited', value: `${pigsValue}` },
+			{ title: 'BUSD deposited', value: `${busdValue}` },
+		],
+		// confirmFunction: claimToPiggy,
+	}
+
+	// open confirm modal
+	const openModal = () => {
+		dispatch(toggleModalBackDrop(true))
+		dispatch(toggleConfirmModal(true))
+		dispatch(setModalProps(modalProps))
 	}
 
 	return (
@@ -57,7 +97,13 @@ function AddLiquidity() {
 					</div>
 					{/* input 1 */}
 					<div className={styles.inputBox}>
-						<p role='presentation' className={styles.autoFillBusd}>
+						<p
+							onClick={() => {
+								setPigsValue(Number(pigsBalance))
+							}}
+							role='presentation'
+							className={styles.autoFillBusd}
+						>
 							Auto Fill PIGS
 						</p>
 
@@ -71,7 +117,13 @@ function AddLiquidity() {
 					</div>
 					{/* input 2 */}
 					<div className={styles.inputBox}>
-						<p role='presentation' className={styles.autoFillBusd}>
+						<p
+							onClick={() => {
+								setBusdValue(Number(busdBalance))
+							}}
+							role='presentation'
+							className={styles.autoFillBusd}
+						>
 							Auto Fill BUSD
 						</p>
 
@@ -80,7 +132,7 @@ function AddLiquidity() {
 								<img src={busd} alt='' />
 								<p>BUSD</p>
 							</div>
-							<input onChange={(e:any) => setBusdValue(e.target.value)} value={busdValue} min='0' required type='number' placeholder='0.0' />
+							<input onChange={(e: any) => setBusdValue(e.target.value)} value={busdValue} min='0' required type='number' placeholder='0.0' />
 						</div>
 					</div>
 					<p className={styles.xpigs}>
@@ -91,9 +143,23 @@ function AddLiquidity() {
 							{parseInt(pigsBalance) === 0 ? 'Insufficient fund' : 'Enter amount'}
 							{/* // { (Number(pigsBalance) === 0 && Number(busdBalance) === 0) ? "Insufficient fund" : "Enter amount" } */}
 						</button>
-					) : (
+					) : pending ? (
 						<button type='button' className={styles.button__enabled}>
-							Confirm
+							<Preloader />
+						</button>
+					) : (
+						<button
+							onClick={
+								isApproved
+									? () => openModal()
+									: () => {
+											approve()
+									  }
+							}
+							type='button'
+							className={styles.button__enabled}
+						>
+							{isApproved ? 'Confirm' : 'Approve'}
 						</button>
 					)}
 				</section>
