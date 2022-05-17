@@ -1,15 +1,19 @@
 import React, { useState } from 'react'
+import BigNumber from 'bignumber.js'
 import { useAppSelector } from 'state/hooks'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
-import style from './DepositeModal.module.scss'
+import { usePiggyBank } from 'state/piggybank/hooks'
+import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
+import { approvePiggyBankForPigBusdLP } from 'api/allowance'
 import { buyMoreTrufflesToAPiggyBank } from '../../api/Ipiggybank'
-import { ZERO_ADDRESS } from '../../config/constants'
+import { LARGE_NUMBER, ZERO_ADDRESS } from '../../config/constants'
 import { useAppDispatch } from '../../state/hooks'
-import { toggleModalBackDrop, toggleDepositModal  } from '../../state/toggle'
+import { toggleModalBackDrop, toggleDepositModal } from '../../state/toggle'
 import useToast from '../../hooks/useToast'
+import style from './DepositeModal.module.scss'
 
-interface depModal{
-	id : string
+interface depModal {
+	id: string
 }
 
 function escapeRegExp(string: string): string {
@@ -18,11 +22,15 @@ function escapeRegExp(string: string): string {
 
 const inputRegex = RegExp(`^\\d*(?:\\\\[.])?\\d*$`) // match escaped "." characters via in a non-capturing group
 
-function DepositeModal({id}:depModal) {
+function DepositeModal({ id }: depModal) {
 	const [value, setValue] = useState('')
+	const [pending, setPending] = useState(false)
+	const [isApproved, setIsApproved] = useState(false)
 
 	const { library } = useActiveWeb3React()
 	const signer = library.getSigner()
+	const dispatch = useAppDispatch()
+	const { piggybank, setPiggyBank, setAllowance } = usePiggyBank()
 	const { toastSuccess, toastError } = useToast()
 
 	const isOpen = useAppSelector((state) => state.toggleReducer.isDepositModalOpen)
@@ -30,21 +38,71 @@ function DepositeModal({id}:depModal) {
 	const enforcer = (nextUserInput: string) => {
 		if (nextUserInput === '' || inputRegex.test(escapeRegExp(nextUserInput))) {
 			setValue(nextUserInput)
+			checkButtonAndApproval(nextUserInput)
+		}
+	}
+	/// Helper Functions ///
+	const shouldDisableMainButton = (): boolean => {
+		if (!value || (value === '0' && !isApproved)) {
+			return true
+		}
+
+		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(value))) {
+			return true
+		}
+		return false
+	}
+	const showApproveButton = (): boolean => {
+		if (!value || (value === '0' && isApproved)) {
+			return false
+		}
+		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(value))) {
+			return true
+		}
+		return false
+	}
+	const checkButtonAndApproval = (inputvalue: string) => {
+		if (new BigNumber(piggybank.userData.lpAllowance).isLessThan(getDecimalAmount(inputvalue)) && inputvalue) {
+			setIsApproved(false)
+		}
+
+		if (new BigNumber(piggybank.userData.lpAllowance).isGreaterThanOrEqualTo(getDecimalAmount(inputvalue)) && inputvalue) {
+			setIsApproved(true)
 		}
 	}
 
-	const deposit = async() => {
-		console.log(value)
-		console.log((Number(value) * 10 ** 18).toString())
-		try{
-			const res = await buyMoreTrufflesToAPiggyBank(id,( (Number(value) * 10 ** 18) ).toString(),ZERO_ADDRESS, signer) 
-			console.log(res)
-			toggleDepositModal(false)
-			toggleModalBackDrop(false)
-			toastSuccess("Depsit Successful!")
-		}catch(err){
-			console.log(err)
-			toastError("An error occured. Try again.")
+	// API CALLS
+	const approve = async () => {
+		setPending(true)
+		try {
+			await approvePiggyBankForPigBusdLP(LARGE_NUMBER, signer)
+			setAllowance(LARGE_NUMBER)
+			setPending(false)
+			setIsApproved(true)
+			// await getMyPiggyBank()
+		} catch (err) {
+			setPending(false)
+			setIsApproved(false)
+		}
+	}
+
+	const deposit = async () => {
+		if (!value) return
+		try {
+			const res = await buyMoreTrufflesToAPiggyBank(id, getDecimalAmount(value), ZERO_ADDRESS, signer)
+
+			if (res.success === true) {
+				setValue('')
+				toastSuccess(res.message)
+				dispatch(toggleDepositModal(false))
+				dispatch(toggleModalBackDrop(false))
+			}
+
+			if (res.success === false) {
+				toastError(res.message)
+			}
+		} catch (err) {
+			console.error(err)
 		}
 	}
 
@@ -66,9 +124,14 @@ function DepositeModal({id}:depModal) {
 				className={style.input}
 				placeholder='Enter the amount of PIGS/BUSD LP to deposit'
 			/>
-			<button onClick={()=>deposit()} type='button' className={style.button}>
+			<button onClick={() => deposit()} disabled={shouldDisableMainButton()} type='button' className={shouldDisableMainButton() ? `${style.button__disabled}` : style.button__enabled}>
 				Deposit
 			</button>
+			{showApproveButton() && (
+				<button onClick={() => approve()} disabled={pending} type='button' className={pending ? `${style.button__disabled}` : style.button__enabled}>
+					Approve
+				</button>
+			)}
 		</div>
 	)
 }
