@@ -1,4 +1,5 @@
 import { PiggyBank } from 'state/piggybank'
+import { Response } from 'state'
 
 import getPigsContract from 'utils/getContracts'
 import { ethers } from 'ethers'
@@ -34,23 +35,20 @@ export const fetchPiggyBankData = async (account: string): Promise<PiggyBank> =>
 //   }
 // }
 
-export const buyMoreTrufflesToAPiggyBank = async (id: string, amount: string, referee: string, signer: ethers.Signer) => {
+export const buyMoreTrufflesToAPiggyBank = async (id: string, amount: string, referee: string, signer: ethers.Signer): Promise<Response> => {
 	const { piggyBankContract } = getPigsContract()
-	let res
 
 	try {
 		await piggyBankContract.connect(signer).buyMoreTrufflesToAPiggyBank(id, amount, referee, { gasLimit: 2500000 })
-		res = {
+		return {
 			success: true,
-			data: null,
+			message: 'Depsit Successful!',
 		}
 	} catch (e) {
 		console.error('fetchPiggyBankData error: ', e)
-		res = {
+		return {
 			success: false,
-			data: null,
+			message: e.code === 4001 ? 'User Rejected Transaction!' : 'An error occured. Try again!',
 		}
 	}
-
-	return res
 }

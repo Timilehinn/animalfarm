@@ -29,10 +29,9 @@ function PiggyBankRow(props) {
 	const getMyPiggyBank = async () => {
 		try {
 			const res = await fetchPiggyBankData(account)
-			console.log(res)
-			// setPiggyBank(res)
+			setPiggyBank(res)
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 
@@ -75,10 +74,9 @@ function PiggyBankRow(props) {
 		showModal(false)
 		try {
 			const res = await sellPiglets(id, signer)
-			console.log(res, 'Successfully sold piglet')
-			toastSuccess('Successfully sold piglets.')
 			if (res.success) {
 				getMyPiggyBank()
+				toastSuccess('Sell Truffles Successfully!')
 			} else {
 				toastError('An error occurred! Try again')
 			}
@@ -91,9 +89,9 @@ function PiggyBankRow(props) {
 		try {
 			const res = await compound(id, signer)
 			console.log(res, 'compounded')
-			toastSuccess('Compound Successful.')
 			if (res.success) {
 				getMyPiggyBank()
+				toastSuccess('Compound Successful!')
 			} else {
 				toastError('An error occurred! Try again')
 			}
@@ -104,7 +102,9 @@ function PiggyBankRow(props) {
 
 	// button control
 	// check if last time compounded is greater than 24 hours
-	const isCompoundEnabled = Math.floor(Date.now() / 1000) - lastCompounded > 86400
+	// TODO: Undo
+	// const isCompoundEnabled = Math.floor(Date.now() / 1000) - lastCompounded > 86400
+	const isCompoundEnabled = true
 
 	const isSellDisabled = Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + Number(truffleLocker.startLockTimestamp)
 

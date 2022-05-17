@@ -21,6 +21,7 @@ const store = configureStore({
 	}),
 })
 
+export * from './types'
 export type AppState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
 
