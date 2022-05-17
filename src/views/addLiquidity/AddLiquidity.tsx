@@ -1,12 +1,12 @@
 import Info from 'components/Info/Info'
 import React, { useLayoutEffect, useState, useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import styles from './AddLiquidity.module.scss'
-import pigs from '../../assets/svgg.png'
-import busd from '../../assets/busd.png'
 import { usePricing } from 'state/pricing/hooks'
 import Preloader from 'components/prealoder/preloader'
 import { setModalProps, toggleModalBackDrop, toggleConfirmModal } from 'state/toggle'
+import styles from './AddLiquidity.module.scss'
+import pigs from '../../assets/svgg.png'
+import busd from '../../assets/busd.png'
 
 function AddLiquidity() {
 	const pigsBusdLPBalance = useAppSelector((state) => state.balanceReducer.pigsBusdLpBalance)
@@ -15,8 +15,8 @@ function AddLiquidity() {
 	// const pigsBalance = useAppSelector((state) => state.balanceReducer.pigsBalance.amountString)
 	// const busdBalance = useAppSelector((state) => state.balanceReducer.busdBalance)
 
-	const busdBalance = '2' //TODO : remove test values
-	const pigsBalance = '2' //TODO : remove test values
+	const busdBalance = '2'
+	const pigsBalance = '2'
 
 	const [pigsValue, setPigsValue] = useState(0)
 	const [busdValue, setBusdValue] = useState(0)
@@ -36,6 +36,7 @@ function AddLiquidity() {
 		} else {
 			setIsButtonDisabled(true)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pigsValue, busdValue])
 
 	const setInput = (e: any) => {
@@ -45,10 +46,12 @@ function AddLiquidity() {
 
 	useEffect(() => {
 		setBusdValue(Number(pigsBusdPrice) * pigsValue)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [pigsValue])
 
 	useEffect(() => {
 		setPigsValue(busdValue / Number(pigsBusdPrice))
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [busdValue])
 
 	// test function for approval
@@ -74,7 +77,7 @@ function AddLiquidity() {
 		// confirmFunction: claimToPiggy,
 	}
 
-	//open confirm modal
+	// open confirm modal
 	const openModal = () => {
 		dispatch(toggleModalBackDrop(true))
 		dispatch(toggleConfirmModal(true))
@@ -141,10 +144,10 @@ function AddLiquidity() {
 							{/* // { (Number(pigsBalance) === 0 && Number(busdBalance) === 0) ? "Insufficient fund" : "Enter amount" } */}
 						</button>
 					) : pending ? (
-						<button className={styles.button__enabled}>
+						<button type='button' className={styles.button__enabled}>
 							<Preloader />
 						</button>
-					) : (  
+					) : (
 						<button
 							onClick={
 								isApproved
