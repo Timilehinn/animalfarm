@@ -31,6 +31,7 @@ function Home() {
 		try {
 			const res = await getPigsBUSDPrice()
 			dispatch(setPigsBusdPrice(res))
+			
 		} catch (err) {
 			console.log(err)
 		}
