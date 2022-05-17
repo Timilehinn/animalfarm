@@ -42,7 +42,7 @@ export const buyMoreTrufflesToAPiggyBank = async (id: string, amount: string, re
 		await piggyBankContract.connect(signer).buyMoreTrufflesToAPiggyBank(id, amount, referee, { gasLimit: 2500000 })
 		return {
 			success: true,
-			message: 'Depsit Successful!',
+			message: 'Deposit Successful!',
 		}
 	} catch (e) {
 		console.error('fetchPiggyBankData error: ', e)

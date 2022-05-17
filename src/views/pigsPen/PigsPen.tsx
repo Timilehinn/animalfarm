@@ -17,7 +17,6 @@ import { Icon } from '@iconify/react'
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styles from './PigsPen.module.scss'
 
-
 import pig from '../../assets/svgg.png'
 
 function PigsPen() {
@@ -42,6 +41,9 @@ function PigsPen() {
 	const dispatch = useAppDispatch()
 	const { toastSuccess, toastError, toastInfo } = useToast()
 
+	// State for button
+	const [depositButtonText, setDepositButtonText] = useState('Deposit')
+
 	/// Generic States to be used for all pages that requires approval
 	const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(false)
@@ -51,8 +53,8 @@ function PigsPen() {
 	/// State for input
 	const [inputValue, setInputValue] = useState('')
 
-	const [isSwitchActive, setIsSwitchActive] = useState(false);
-	const [ isSettingsOpen, setIsSettingsOpen ] = useState(false)
+	const [isSwitchActive, setIsSwitchActive] = useState(false)
+	const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
 	// open tour modal
 	useEffect(() => {
@@ -141,13 +143,17 @@ function PigsPen() {
 		setPending(true)
 		try {
 			// compound if autoCompound is on.
-			const isAutoCompoundActive = localStorage.getItem("autoCompound")
-			if(isAutoCompoundActive){
+			// const isAutoCompoundActive = localStorage.getItem('autoCompound')
+			if (new BigNumber(userData.earningsBusd).isGreaterThan(0) || new BigNumber(userData.earningsPigs).isGreaterThan(0)) {
+				setDepositButtonText('Claiming...')
+				toastInfo('Claiming pending rewards!')
 				await claimRewardPigPen(true, signer)
 			}
+			setDepositButtonText('Depositing...')
 			await depositIntoPigPen(getDecimalAmount(amountFormatter(inputValue)), signer)
 			await fetchData()
 			setInputValue('')
+			setDepositButtonText('Deposit')
 			toastSuccess('Deposit Successful!')
 			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
 			dispatch(toggleConfirmModal(false))
@@ -263,24 +269,24 @@ function PigsPen() {
 	}
 
 	const handleAutoCompound = () => {
-		const isAutoCompoundActive = localStorage.getItem("autoCompound")
+		const isAutoCompoundActive = localStorage.getItem('autoCompound')
 
-		if(!isAutoCompoundActive){
-			localStorage.setItem("autoCompound","autoCompound")	
+		if (!isAutoCompoundActive) {
+			localStorage.setItem('autoCompound', 'autoCompound')
 			setIsSwitchActive(true)
-		}else{
-			localStorage.removeItem("autoCompound")
+		} else {
+			localStorage.removeItem('autoCompound')
 			setIsSwitchActive(false)
 		}
 	}
 
-	useEffect(()=>{
+	useEffect(() => {
 		const isAutoCompoundActive = localStorage.getItem('autoCompound')
 
-		if(isAutoCompoundActive){
+		if (isAutoCompoundActive) {
 			setIsSwitchActive(true)
 		}
-	},[])
+	}, [])
 
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
@@ -319,7 +325,7 @@ function PigsPen() {
 				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.credit__wrap__in}>
-						<div className={styles.settings}>
+						{/* <div className={styles.settings}>
 							<Icon onClick={() => setIsSettingsOpen(!isSettingsOpen)} icon='ci:settings-filled' />
 							<div onClick={() => handleAutoCompound()} className={isSettingsOpen ? `${styles.settings__box} ${styles.settings__box__active}` : `${styles.settings__box}`}>
 								<p>Auto Compound</p>
@@ -327,7 +333,7 @@ function PigsPen() {
 									<div className={isSwitchActive ? `${styles.switch__button__active} ${styles.switch__button}` : `${styles.switch__button}`}>{}</div>
 								</div>
 							</div>
-						</div>
+						</div> */}
 						<div className={styles.tabs}>
 							<div onClick={() => setActiveTab(1)} className={activeTab === 1 ? `${styles.tab__one} ${styles.tab__one__active}` : `${styles.tab__one}`}>
 								<p>Deposit PIGS</p>
@@ -351,7 +357,7 @@ function PigsPen() {
 								icon={pig}
 								pTitle='Enter amount of PIGS to be staked in the PIG Pen, to earn PIGS and BUSD dividends.'
 								token='PIGS'
-								buttonText='Deposit'
+								buttonText={depositButtonText}
 								Lock={false}
 								rewardCenter
 								warningMsg
@@ -386,7 +392,7 @@ function PigsPen() {
 								infoTitle3='Available PIGS to withdraw'
 								infoValue3={`${new BigNumber(getBalanceAmountString(userData.pigAvailableForWithdrawal)).toFormat(2)} PIGS`}
 								infoTitle4='Time left to withdraw'
-								infoValue4="4h 3m 40s"
+								infoValue4='4h 3m 40s'
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton

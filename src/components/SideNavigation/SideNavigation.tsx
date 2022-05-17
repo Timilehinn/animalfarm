@@ -34,10 +34,10 @@ function SideNavigation() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
-				<NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				{/* <NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ri:refund-2-line' />
 					<p>Add Liquidity</p>
-				</NavLink>
+				</NavLink> */}
 				<a className={styles.link} href='https://pancakeswap.finance/info/token/0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' target='_blank' rel='noreferrer'>
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
