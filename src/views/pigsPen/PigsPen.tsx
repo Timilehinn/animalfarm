@@ -395,8 +395,8 @@ function PigsPen() {
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
 								infoValue3={`${new BigNumber(getBalanceAmountString(userData.pigAvailableForWithdrawal)).toFormat(2)} PIGS`}
-								infoTitle4='Time left to stake unlock'
-								infoValue4={getTimeleft(userData.startLockTimestamp)}
+								// infoTitle4='Time left to stake unlock'
+								// infoValue4={getTimeleft(userData.startLockTimestamp)}
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton
