@@ -1,5 +1,6 @@
 import { ethers } from 'ethers'
 import BigNumber from 'bignumber.js'
+import { Response } from 'state'
 import erc20ABI from 'config/Iabi/erc20.json'
 import pigPenABI from 'config/abi/PigPenV2.json'
 import multicall from 'utils/multicall'
@@ -111,12 +112,38 @@ export const depositIntoPigPen = async (amount: string, signer: ethers.Signer) =
 	await pigsTokenV2Contract.deposit(amount, { gasLimit: 2500000 })
 }
 
-export const claimRewardPigPen = async (shouldCompound: boolean, signer: ethers.Signer) => {
-	const pigsTokenV2Contract = getPigPenContract(signer)
-	await pigsTokenV2Contract.claimRewards(shouldCompound, { gasLimit: 2500000 })
+export const claimRewardPigPen = async (shouldCompound: boolean, signer: ethers.Signer): Promise<Response> => {
+	try {
+		const pigPenContract = getPigPenContract(signer)
+		await pigPenContract.claimRewards(shouldCompound, { gasLimit: 2500000 })
+
+		return {
+			success: true,
+			message: shouldCompound ? 'Compounding Successful!' : 'Claim Rewards Successful!',
+		}
+	} catch (e) {
+		console.error('claimRewardPigPen error: ', e)
+		return {
+			success: false,
+			message: e.code === 4001 ? 'User Rejected Transaction!' : 'An error occured. Try again!',
+		}
+	}
 }
 
-export const withdrawFromPigPen = async (signer: ethers.Signer) => {
-	const pigsTokenV2Contract = getPigPenContract(signer)
-	await pigsTokenV2Contract.withdraw({ gasLimit: 2500000 })
+export const withdrawFromPigPen = async (signer: ethers.Signer): Promise<Response> => {
+	try {
+		const pigPenContract = getPigPenContract(signer)
+		await pigPenContract.withdraw({ gasLimit: 2500000 })
+
+		return {
+			success: true,
+			message: 'Withdrawal Successful!',
+		}
+	} catch (e) {
+		console.error('withdrawFromPigPen error: ', e)
+		return {
+			success: false,
+			message: e.code === 4001 ? 'User Rejected Transaction!' : 'An error occured. Try again!',
+		}
+	}
 }

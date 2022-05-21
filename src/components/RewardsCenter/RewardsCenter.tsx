@@ -170,6 +170,7 @@ function RewardsCenter({
 	// }
 
 	const openModal = () => {
+		if (pending) return
 		if (confirmModalProps) {
 			dispatch(toggleConfirmModal(true))
 			dispatch(toggleModalBackDrop(true))
@@ -254,8 +255,9 @@ function RewardsCenter({
 			{!account ? (
 				<ConnectWalletButton />
 			) : (
-				<button onClick={() => openModal()} type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` : `${styles.button__disabled}`}>
-					{buttonText}
+				<button onClick={() => openModal()} type='button' disabled={mainButtonDisabled} className={!mainButtonDisabled ? `${styles.button__enabled}` || (pending ? styles.pending : ``) : `${styles.button__disabled}`}>
+					{/* {buttonText} */}
+					{pending ? <Preloader /> : buttonText}
 				</button>
 			)}
 			{/* End Handle Connect Wallet */}

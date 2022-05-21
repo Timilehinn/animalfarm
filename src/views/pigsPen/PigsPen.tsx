@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
 import { useSpring, animated } from 'react-spring'
-// import { toggleTourModal } from 'state/toggle'
-import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
-import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
+import { toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
 // eslint-disable-next-line import/no-named-as-default-member
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
@@ -53,8 +51,8 @@ function PigsPen() {
 	/// State for input
 	const [inputValue, setInputValue] = useState('')
 
-	const [isSwitchActive, setIsSwitchActive] = useState(false)
-	const [isSettingsOpen, setIsSettingsOpen] = useState(false)
+	// const [isSwitchActive, setIsSwitchActive] = useState(false)
+	// const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
 	// open tour modal
 	useEffect(() => {
@@ -140,7 +138,7 @@ function PigsPen() {
 
 	const depositPigs = async () => {
 		if (!inputValue) return
-		setPending(true)
+		// setPending(true)
 		try {
 			// compound if autoCompound is on.
 			// const isAutoCompoundActive = localStorage.getItem('autoCompound')
@@ -155,84 +153,85 @@ function PigsPen() {
 			setInputValue('')
 			setDepositButtonText('Deposit')
 			toastSuccess('Deposit Successful!')
-			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
+
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
-
-			// setTimeout(() => {
-			// 	dispatch(toggleToastNotification(false))
-			// }, 3000)
 		} catch (err) {
-			// Do something here
+			setDepositButtonText('Deposit')
 		}
 	}
 
 	const claimMyRewards = async () => {
-		// setPending(true)
+		// TODO: Make a pending state for compounding and claiming rewards button
 		if (!account) {
 			toastInfo('Wallet has to be connected to claim rewards.')
 			return
 		}
-		try {
-			await claimRewardPigPen(false, signer)
-			await fetchData()
-			toastSuccess('Claim Rewards Successful!')
-			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
-			dispatch(toggleConfirmModal(false))
-			dispatch(toggleModalBackDrop(false))
 
-			// setTimeout(() => {
-			// 	dispatch(toggleToastNotification(false))
-			// }, 3000)
+		try {
+			const res = await claimRewardPigPen(false, signer)
+
+			if (res.success === true) {
+				await fetchData()
+				toastSuccess(res.message)
+				dispatch(toggleConfirmModal(false))
+				dispatch(toggleModalBackDrop(false))
+			}
+
+			if (res.success === false) {
+				toastError(res.message)
+			}
 		} catch (err) {
-			// Do something here
+			console.error(err)
 		}
 	}
 
 	const compoundPigs = async () => {
-		// setPending(true)
 		if (!account) {
 			toastInfo('Wallet has to be connected to compound rewards.')
 			return
 		}
 		try {
-			await claimRewardPigPen(true, signer)
-			await fetchData()
-			toastSuccess('Successful!')
-			// dispatch(toggleToastNotification({ state: true, msg: 'Success' }))
-			dispatch(toggleConfirmModal(false))
-			dispatch(toggleModalBackDrop(false))
+			const res = await claimRewardPigPen(true, signer)
 
-			// setTimeout(() => {
-			// 	dispatch(toggleToastNotification(false))
-			// }, 3000)
+			if (res.success === true) {
+				await fetchData()
+				toastSuccess(res.message)
+				dispatch(toggleConfirmModal(false))
+				dispatch(toggleModalBackDrop(false))
+			}
+
+			if (res.success === false) {
+				toastError(res.message)
+			}
 		} catch (err) {
-			// Do something here
+			console.error(err)
 		}
 	}
 
 	const withdrawPigs = async () => {
-		// require((block.timestamp - user.startLockTimestamp) >= 24 hours, "withdraw: Cannot withdraw until after 24 hours!");
-		// setPending(true)
+		setPending(true)
 
 		try {
-			await withdrawFromPigPen(signer)
-			await fetchData()
-			toastSuccess('Withdrawal Successful!')
-			// dispatch(toggleToastNotification({ state: true, msg: 'Withdraw Successful' }))
-			dispatch(toggleConfirmModal(false))
-			dispatch(toggleModalBackDrop(false))
+			const res = await withdrawFromPigPen(signer)
 
-			// setTimeout(() => {
-			// 	dispatch(toggleToastNotification(false))
-			// }, 3000)
+			setPending(false)
+			if (res.success === true) {
+				await fetchData()
+				toastSuccess(res.message)
+				dispatch(toggleConfirmModal(false))
+				dispatch(toggleModalBackDrop(false))
+			}
+
+			if (res.success === false) {
+				toastError(res.message)
+			}
 		} catch (err) {
-			// Do something here
-			toastError('Cannot withdraw until after 24 hours!')
+			console.error(err)
 		}
 	}
-
-	// withdrawFromPigPen
+	// check if startLockTimestamp is greater than 24 hours
+	const isWithdrawalEnabled = Math.floor(Date.now() / 1000) - Number(userData.startLockTimestamp) > 86400
 
 	const modalDetailsForDeposit = {
 		modalTitleText: 'Confirm Deposit',
@@ -268,37 +267,29 @@ function PigsPen() {
 		confirmFunction: withdrawPigs,
 	}
 
-	const handleAutoCompound = () => {
-		const isAutoCompoundActive = localStorage.getItem('autoCompound')
+	// const handleAutoCompound = () => {
+	// 	const isAutoCompoundActive = localStorage.getItem('autoCompound')
 
-		if (!isAutoCompoundActive) {
-			localStorage.setItem('autoCompound', 'autoCompound')
-			setIsSwitchActive(true)
-		} else {
-			localStorage.removeItem('autoCompound')
-			setIsSwitchActive(false)
-		}
-	}
+	// 	if (!isAutoCompoundActive) {
+	// 		localStorage.setItem('autoCompound', 'autoCompound')
+	// 		setIsSwitchActive(true)
+	// 	} else {
+	// 		localStorage.removeItem('autoCompound')
+	// 		setIsSwitchActive(false)
+	// 	}
+	// }
 
-	useEffect(() => {
-		const isAutoCompoundActive = localStorage.getItem('autoCompound')
+	// useEffect(() => {
+	// 	const isAutoCompoundActive = localStorage.getItem('autoCompound')
 
-		if (isAutoCompoundActive) {
-			setIsSwitchActive(true)
-		}
-	}, [])
+	// 	if (isAutoCompoundActive) {
+	// 		setIsSwitchActive(true)
+	// 	}
+	// }, [])
 
 	return (
 		<animated.div style={props} className={styles.pigspen__wrap}>
 			<div className={styles.pigspen}>
-				{/* <div className={styles.pigspen__header}>
-					<p>
-						THE PIGPEN IS OUR STAKING PROTOCOL WHERE HOLDERS OF THE PIGS TOKENS BECOME OWNERS OF THE PLATFORM! EARN HIGH YIELD DIVIDENDS IN PIGS AND BUSD. LEARN MORE:{' '}
-						<a href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D`} className={styles.header__a}>
-							HERE{' '}
-						</a>
-					</p>
-				</div> */}
 				{!account && (
 					<p style={{ fontSize: '.8em', marginBottom: '8px' }}>
 						<i>Connect your wallet to see stats</i>
@@ -383,6 +374,7 @@ function PigsPen() {
 							/>
 						) : (
 							<RewardsCenter
+								mainButtonDisabled={!isWithdrawalEnabled}
 								sliderRequired={false}
 								title='Withdraw your staked PIGS'
 								infoValue2='2% per day'
@@ -406,6 +398,7 @@ function PigsPen() {
 								confirmModalProps={modalDetailsForWithdraw}
 								// Approval for button
 								isApproved
+								pending={pending}
 								claimButton
 								claimRewards={claimMyRewards}
 								compoundButton={false}
