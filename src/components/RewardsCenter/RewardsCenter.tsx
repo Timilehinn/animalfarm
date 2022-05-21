@@ -199,7 +199,7 @@ function RewardsCenter({
 				<Info title={infoTitle} info={infoValue} />
 				{infoTitle2 && <Info title={infoTitle2} info={infoValue2} />}
 				{infoTitle3 && <Info title={infoTitle3} info={infoValue3} />}
-				{/* {infoTitle4 && <Info title={infoTitle4} info={infoValue4} />} */}
+				{infoTitle4 && <Info title={infoTitle4} info={infoValue4} />}
 			</div>
 			<form action=''>
 				<div hidden={hideAmountInput} className={styles.inputWrap}>

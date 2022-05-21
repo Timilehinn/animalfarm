@@ -267,6 +267,18 @@ function PigsPen() {
 		confirmFunction: withdrawPigs,
 	}
 
+	const getTimeleft = (timestamp) => {
+		if (timestamp === '0') return `0d : 0h : 0m`
+
+		const today = Date.now()
+		const lockDuration = Number(timestamp * 1000) + Number(pigPenData.maxLockUpDuration) * 1000
+		const diffMs = lockDuration - today // milliseconds between now & lock duration
+		const diffDays = Math.floor(diffMs / 86400000) // days
+		const diffHrs = Math.floor((diffMs % 86400000) / 3600000) // hours
+		const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000) // minutes
+		return `${diffDays}d : ${diffHrs}h : ${diffMins}m`
+	}
+
 	// const handleAutoCompound = () => {
 	// 	const isAutoCompoundActive = localStorage.getItem('autoCompound')
 
@@ -383,8 +395,8 @@ function PigsPen() {
 								infoTitle2='Withdraw limit'
 								infoTitle3='Available PIGS to withdraw'
 								infoValue3={`${new BigNumber(getBalanceAmountString(userData.pigAvailableForWithdrawal)).toFormat(2)} PIGS`}
-								infoTitle4='Time left to withdraw'
-								infoValue4='4h 3m 40s'
+								infoTitle4='Time left to stake unlock'
+								infoValue4={getTimeleft(userData.startLockTimestamp)}
 								token='PIGS'
 								hideAmountInput
 								hideApproveButton
@@ -409,9 +421,6 @@ function PigsPen() {
 						)}
 					</div>
 				</div>
-
-				{/* absolute */}
-				{/* <img className={styles.pig} src={pig} alt='' /> */}
 			</div>
 		</animated.div>
 	)
