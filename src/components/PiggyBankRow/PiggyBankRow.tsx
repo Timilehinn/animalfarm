@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useAppDispatch } from 'state/hooks'
 import { toggleModalBackDrop, toggleDepositModal } from 'state/toggle'
 import { usePiggyBank } from 'state/piggybank/hooks'
@@ -17,7 +17,6 @@ import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 function PiggyBankRow(props) {
 	const { id, piglets, trufflesavailable, truffleLocker, trufflesvalue, timeLeftSinceLock, maxpayout, lastCompounded, paddedPrecisionValue } = props
-	const [state, showModal] = useState(false)
 	const dispatch = useAppDispatch()
 	const { account, library } = useActiveWeb3React()
 	const signer = library.getSigner()
@@ -25,6 +24,16 @@ function PiggyBankRow(props) {
 	const { toastError, toastSuccess } = useToast()
 	const catMenu = useRef(null)
 	const prop = useSpring({ to: { opacity: 1, y: '0px' }, from: { opacity: 0 }, delay: 600, y: '20px' })
+
+	// State
+	const [state, showModal] = useState(false)
+	// const [timerInterval, setTimerInterval] = useState<ReturnType<typeof setInterval>>()
+	const [secondsString, setSecondsString] = useState('0h 0m 0s')
+
+	useEffect(() => {
+		const timeLeftToCompoundSeconds = Math.floor(Number(lastCompounded) + 86400 - Date.now() / 1000)
+		setSecondsString(secondsToString(timeLeftToCompoundSeconds))
+	}, [lastCompounded])
 
 	const getMyPiggyBank = async () => {
 		try {
@@ -51,13 +60,12 @@ function PiggyBankRow(props) {
 
 	function secondsToString(seconds) {
 		const secondsMaxxed = Math.max(seconds, 0)
-		const numdays = Math.floor(secondsMaxxed / 86400)
+		// const numdays = Math.floor(secondsMaxxed / 86400)
 		const numhours = Math.floor((secondsMaxxed % 86400) / 3600)
 		const numminutes = Math.floor(((secondsMaxxed % 86400) % 3600) / 60)
 		const numseconds = ((secondsMaxxed % 86400) % 3600) % 60
-		const endstr = ''
-		// return numhours + "h " + numminutes + "m "//+numseconds+"s";
-		return `${numdays}d ${numhours}h ${numminutes}m`
+
+		return `${numhours}h ${numminutes}m ${numseconds}s`
 	}
 
 	function getRemainingTime() {
@@ -81,7 +89,7 @@ function PiggyBankRow(props) {
 				toastError('An error occurred! Try again')
 			}
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 	const _compound = async () => {
@@ -96,7 +104,7 @@ function PiggyBankRow(props) {
 				toastError('An error occurred! Try again')
 			}
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 
@@ -105,19 +113,6 @@ function PiggyBankRow(props) {
 	const isCompoundEnabled = Math.floor(Date.now() / 1000) - lastCompounded > 86400
 
 	const isSellDisabled = Date.now() / 1000 < Number(truffleLocker.duration) * 7 * 86400 + Number(truffleLocker.startLockTimestamp)
-
-	// check time left to compound
-
-	const getTimeLeftToCompound = () => {
-		const timeLeftToCompoundSeconds = Math.floor(Date.now() / 1000 - (lastCompounded + 86400))
-
-		const timeLeft = secondsToString(timeLeftToCompoundSeconds)
-		return timeLeft
-	}
-
-	setTimeout(() => {
-		getTimeLeftToCompound()
-	}, 2000)
 
 	return (
 		<tr ref={catMenu} className={style.tr}>
@@ -149,7 +144,7 @@ function PiggyBankRow(props) {
 						</animated.div>
 					)}
 				</div>
-				{/* <p className={style.comp}>Compound in : {getTimeLeftToCompound()}</p> */}
+				<p className={style.comp}>Compound in : {secondsString}</p>
 			</td>
 			<DepositeModal id={id} />
 		</tr>

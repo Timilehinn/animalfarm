@@ -5,12 +5,12 @@ export const BEP_ETH = '0x2170Ed0880ac9A755fd29B2688956BD959F933F8'
 export const BUSDAddress = '0xe9e7CEA3DedcA5984780Bafc599bD69ADd087D56'
 
 /**
- * - Deprecated. Use animal farm token
+ * - Deprecated: Use animal farm token
  */
 export const PigsV2BusdLP = '0x2ce4aE0E7D05bc6ec0c22cDf87fF899872c2cF7f' // FIX: Moved to animal farm token. - Will be taken out in future
 
 /**
- * - Deprecated. Use animal farm token
+ * - Deprecated: Use animal farm token
  */
 export const PIGSAddress = '0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' // FIX: Moved to animal farm token. - Will be taken out in future
 

@@ -70,7 +70,7 @@ export const getBusdBalance = async (account: string) => {
 			amountString: new BigNumber(balance).toFormat(0),
 		}
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 
 	return busdBalance
@@ -89,7 +89,7 @@ export const getPigsBusdLpBalance = async (account: string) => {
 			amountString: new BigNumber(balance).toFormat(0),
 		}
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 
 	return pigsBusdLpBalance
@@ -107,7 +107,7 @@ export const availablePigsToClaim = async (account: string) => {
 			amountString: new BigNumber(balance).toFormat(0),
 		}
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 
 	return availablePigs

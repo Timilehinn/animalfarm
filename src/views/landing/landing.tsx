@@ -1,6 +1,5 @@
 import React, { useEffect, Suspense } from 'react'
-import { useConnectWallet, useConnectWalletModal } from 'state/wallet/hooks'
-import { useRoutes, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { getPigsBUSDPrice } from 'utils/getPrice'
 // import useActiveWeb3React from 'hooks/useActiveWeb3React'
 // import { getAllBalance } from 'api/getBalance'
@@ -11,12 +10,10 @@ import SideNavigation from 'components/SideNavigation/SideNavigation'
 import TopNav from 'components/TopNav/TopNav'
 import PigsCredit from 'views/pigsCredit/PigsCredit'
 import PiggyBank from 'views/piggyBank/PiggyBank'
-import GenericBackground from 'components/GenericBackground/GenericBackground'
 import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import Toast from 'components/Toast/Toast'
 import Migrate from 'views/Imigrate/Imigrate'
-import DepositeModal from 'components/DepositeModal/DepositeModal'
 import TourModal from 'components/TourModal/TourModal'
 import ErrorPage from 'views/404/ErrorPage'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
@@ -26,24 +23,19 @@ import MobileNav from '../../components/MobileNav/MobileNav'
 import Home from '../home/Home'
 import style from './Landing.module.scss'
 
-const AddLiquidity = React.lazy(()=>import("../addLiquidity/AddLiquidity"))
+const AddLiquidity = React.lazy(() => import('../addLiquidity/AddLiquidity'))
 
 function Landing() {
 	const { login } = useAuth()
 	const dispatch = useAppDispatch()
-	const { toggleConnectWalletModal } = useConnectWalletModal()
 	const { setPigsBusdPrice } = usePricing()
-
-	const connect = () => {
-		toggleConnectWalletModal(true)
-	}
 
 	const getBusdPrice = async () => {
 		try {
 			const res = await getPigsBUSDPrice()
 			dispatch(setPigsBusdPrice(res))
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 
@@ -68,9 +60,9 @@ function Landing() {
 				<ConnectWalletModal login={login} />
 				<ConfirmModal />
 				<Toast />
-				{/* <DepositeModal /> */}
+
 				<TourModal />
-				<Suspense fallback={<div>Loading...</div>} >
+				<Suspense fallback={<div>Loading...</div>}>
 					<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/pigs-credit' element={<PigsCredit />} />
@@ -80,9 +72,9 @@ function Landing() {
 						<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
 						<Route path='/add-liquidity' element={<AddLiquidity />} />
 						<Route path='*' element={<ErrorPage />} />
-					</Routes>	
+					</Routes>
 				</Suspense>
-			</div> 
+			</div>
 		</div>
 	)
 }

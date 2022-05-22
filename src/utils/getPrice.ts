@@ -1,6 +1,6 @@
 import Web3 from 'web3'
 import { ethers } from 'ethers'
-import BigNumber from 'bignumber.js'
+// import BigNumber from 'bignumber.js'
 
 import { web3Provider } from 'utils/providers'
 

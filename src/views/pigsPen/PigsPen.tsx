@@ -11,7 +11,7 @@ import useToast from 'hooks/useToast'
 import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
 
 import { fetchPigPenData, approvePigPenSpendPIGS, depositIntoPigPen, claimRewardPigPen, withdrawFromPigPen } from 'api/pigpen'
-import { Icon } from '@iconify/react'
+
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import styles from './PigsPen.module.scss'
 
@@ -45,7 +45,7 @@ function PigsPen() {
 	/// Generic States to be used for all pages that requires approval
 	const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(false)
-	const [allowance, setAllowance] = useState(0)
+	// const [allowance, setAllowance] = useState(0)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
 	/// State for input
@@ -267,17 +267,17 @@ function PigsPen() {
 		confirmFunction: withdrawPigs,
 	}
 
-	const getTimeleft = (timestamp) => {
-		if (timestamp === '0') return `0d : 0h : 0m`
+	// const getTimeleft = (timestamp) => {
+	// 	if (timestamp === '0') return `0d : 0h : 0m`
 
-		const today = Date.now()
-		const lockDuration = Number(timestamp * 1000) + Number(pigPenData.maxLockUpDuration) * 1000
-		const diffMs = lockDuration - today // milliseconds between now & lock duration
-		const diffDays = Math.floor(diffMs / 86400000) // days
-		const diffHrs = Math.floor((diffMs % 86400000) / 3600000) // hours
-		const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000) // minutes
-		return `${diffDays}d : ${diffHrs}h : ${diffMins}m`
-	}
+	// 	const today = Date.now()
+	// 	const lockDuration = Number(timestamp * 1000) + Number(pigPenData.maxLockUpDuration) * 1000
+	// 	const diffMs = lockDuration - today // milliseconds between now & lock duration
+	// 	const diffDays = Math.floor(diffMs / 86400000) // days
+	// 	const diffHrs = Math.floor((diffMs % 86400000) / 3600000) // hours
+	// 	const diffMins = Math.round(((diffMs % 86400000) % 3600000) / 60000) // minutes
+	// 	return `${diffDays}d : ${diffHrs}h : ${diffMins}m`
+	// }
 
 	// const handleAutoCompound = () => {
 	// 	const isAutoCompoundActive = localStorage.getItem('autoCompound')

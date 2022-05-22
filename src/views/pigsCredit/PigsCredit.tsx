@@ -1,30 +1,39 @@
-/* eslint-disable import/order */
+// Libraries and packages
 import React, { useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useSpring, animated } from 'react-spring'
-// import { getBUSDPrice } from 'api/getPrice'
 
-import { ClaimToPiggyBank } from 'api/claimPigs'
-import { LARGE_NUMBER, PiggyBankAddress, PigsCreditAddress } from 'config/constants'
+// Types
+import type { PigPenUserData } from 'state/pigpen'
 
-import { toggleToastNotification, toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
-import { getPigsBUSDPrice } from 'utils/getPrice'
+// Components
 import ClaimPigsPen from 'components/ClaimPigsPen/ClaimPigsPen'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
-import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
-import { setPigsBusdPrice, setPigsCreditData } from 'state/pricing'
-import useActiveWeb3React from '../../hooks/useActiveWeb3React'
-import { checkAllowance, approveBusd } from '../../api/allowance'
-import { getPigsBalance } from '../../api/getPigsBalance'
-import { fetchPigsCreditData, approvePigsCreditSpendBUSD, claimInToPigPen, _claimToPigPen } from 'api/pigscredit'
 
-import { useAppSelector, useAppDispatch } from '../../state/hooks'
-import { usePigsBalance } from '../../state/balances/hooks'
-import styles from './PigsCredit.module.scss'
-import pig from '../../assets/pig.png'
-import busdIcon from '../../assets/busd.png'
+// State and hooks
+import { useAppSelector, useAppDispatch } from 'state/hooks'
+import { setPigsBusdPrice, setPigsCreditData } from 'state/pricing'
+import { toggleModalBackDrop, toggleConfirmModal, toggleTourModal } from 'state/toggle'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import useToast from 'hooks/useToast'
+
+// APIs
+import { ClaimToPiggyBank } from 'api/claimPigs'
+import { approveBusd } from 'api/allowance'
+import { fetchPigsCreditData, claimInToPigPen } from 'api/pigscredit'
+import { fetchPigPenData, claimRewardPigPen } from 'api/pigpen'
+
+// Utils and helpers
+import { getBalanceAmountString, getDecimalAmount, amountFormatter } from 'utils/formatBalance'
+import { getPigsBUSDPrice } from 'utils/getPrice'
+
+// Config
+import { LARGE_NUMBER, PigsCreditAddress } from 'config/constants'
+
+// Styles and Images
+import styles from './PigsCredit.module.scss'
+import busdIcon from '../../assets/busd.png'
 
 function PigsCredit() {
 	useEffect(() => {
@@ -45,7 +54,7 @@ function PigsCredit() {
 	/// THIS IS ALL THE DATA NEEDED ///
 	const {
 		pigsBusdPrice,
-		data: { busdAllowance, busdBalance, pigsBalance, pigsAvailableToClaim },
+		data: { busdAllowance, busdBalance, pigsAvailableToClaim },
 	} = useAppSelector((state) => state.pricingReducer) // TODO: Move pigsCredit out of pricing state
 
 	const signer = library.getSigner()
@@ -57,6 +66,10 @@ function PigsCredit() {
 	const [isApproved, setIsApproved] = useState(true)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [lockDuration, setLockDuration] = useState(0)
+	const [_userPigPenData, _setUserPigPenData] = useState<PigPenUserData>()
+
+	// State for button
+	const [claimButtonText, setClaimButtonText] = useState('Claim')
 
 	// For Slippage tolerance
 	const [tolerance, setTolerance] = React.useState('10')
@@ -137,14 +150,17 @@ function PigsCredit() {
 
 	/// API CALLS
 	const getMyPigPenData = async () => {
-		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))  
+		dispatch(setPigsCreditData(await fetchPigsCreditData(account)))
+		// Fetch PigPen data temporarily
+		const res = await fetchPigPenData(account)
+		_setUserPigPenData(res.pigPenData)
 	}
 	const getBusdPrice = async () => {
 		try {
 			const res = await getPigsBUSDPrice()
 			dispatch(setPigsBusdPrice(res))
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 	const approve = async () => {
@@ -155,8 +171,6 @@ function PigsCredit() {
 		setPending(true)
 		setIsDisabled(true)
 		try {
-			// await approvePigsCreditSpendBUSD(signer)
-
 			await approveBusd(PigsCreditAddress, LARGE_NUMBER, signer)
 			toastSuccess(`Approve Successful!`)
 			getMyPigPenData()
@@ -164,7 +178,7 @@ function PigsCredit() {
 			setIsApproved(true)
 			setIsDisabled(false)
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 			toastError('Failed to approve. Try again!')
 			setPending(false)
 			setIsApproved(false)
@@ -179,15 +193,21 @@ function PigsCredit() {
 
 		setPending(true)
 		try {
-			const formattedNumber = amountFormatter(claimToPigPenAmount, 18)
+			if (new BigNumber(_userPigPenData.earningsBusd).isGreaterThan(0) || new BigNumber(_userPigPenData.earningsPigs).isGreaterThan(0)) {
+				setClaimButtonText('Claiming Rewards...')
+				toastInfo('Claiming pending rewards!')
+				await claimRewardPigPen(true, signer)
+			}
 
+			setClaimButtonText('Claiming...')
+			const formattedNumber = amountFormatter(claimToPigPenAmount, 18)
 			await claimInToPigPen(getDecimalAmount(formattedNumber), signer)
-			// await _claimToPigPen(getDecimalAmount(formattedNumber), signer)
+			setClaimButtonText('Claim')
 			setPending(false)
 			toastSuccess(`Successfully claimed ${Number(formattedNumber)} PIGS to PigPen!`)
 			getMyPigPenData()
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 			toastError('An error occured. Try again.')
 		}
 	}
@@ -206,24 +226,16 @@ function PigsCredit() {
 				resetInputs()
 				toastSuccess(`Successfully claimed to PiggyBank!`)
 				getMyPigPenData()
-				// dispatch(toggleToastNotification({ state: true, msg: 'Transaction Successful' }))
-				// setTimeout(() => {
-				// 	dispatch(toggleToastNotification(false))
-				// }, 3000)
 			}
 
 			dispatch(toggleConfirmModal(false))
 			dispatch(toggleModalBackDrop(false))
 
 			if (res.success === false) {
-				// dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed!' }))
-				// setTimeout(() => {
-				// 	dispatch(toggleToastNotification(false))
-				// }, 3000)
 				toastError('An error occured. Try again.')
 			}
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 
@@ -246,22 +258,8 @@ function PigsCredit() {
 	return (
 		<animated.div style={props} className={styles.pigscredit__wrap}>
 			<div className={styles.pigscredit}>
-				{/* <div className={styles.pigscredit__header}>
-					<p>
-						Users who were in PigPen when we paused for v2 migration are the only users who need to utilize the PIGS Crediting UI. If this applies to you, LEARN MORE:{' '}
-						<a href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D`} className={styles.header__a}>
-							HERE{' '}
-						</a>
-					</p>
-				</div> */}
 				<div className={styles.cards}>
-					{/* <div>
-						
-					</div> */}
 					<PigsCreditCard title='Credited PIGS' amount={`${amountFormatter(getBalanceAmountString(pigsAvailableToClaim), 9)} PIGS`} />
-					{/* <div>
-						<PigsCreditCard title='BUSD balance' amount={`${Number(getBalanceAmountString(busdBalance)).toFixed(5)} BUSD`} />
-					</div> */}
 				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.tabs}>
@@ -301,7 +299,7 @@ function PigsCredit() {
 							token='BUSD'
 							icon={busdIcon}
 							rewardCenter={false}
-							buttonText='Claim'
+							buttonText={claimButtonText}
 							warningMsg={false}
 							checkButtonAndApproval={checkButtonAndApproval}
 							hideAmountInput={false}

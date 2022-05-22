@@ -1,8 +1,8 @@
 import { ethers } from 'ethers'
-import BigNumber from 'bignumber.js'
 import { PiggyBankAddress } from 'config/constants'
 import getContract from '../utils/getContracts'
 
+// Deprecated: - Will be removed
 export const checkAllowance = async (ownerAddress: string, spenderAddress: string) => {
 	const { busdContract } = getContract()
 	let allowance
@@ -13,9 +13,8 @@ export const checkAllowance = async (ownerAddress: string, spenderAddress: strin
 		allowance = {
 			allowance: balance,
 		}
-		console.log(result)
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 
 	return allowance
@@ -23,20 +22,9 @@ export const checkAllowance = async (ownerAddress: string, spenderAddress: strin
 
 export const approveBusd = async (spenderAddress: string, amount: string, signer: ethers.Signer) => {
 	const { busdContract } = getContract()
-	let approval
 
-	// try {
-
-	// 	console.log('success')
-	// } catch (err) {
-	// 	console.log(err)
-	// }
-
-	// return approval
 	await busdContract.connect(signer).approve(spenderAddress, amount)
 }
-
-// pigs/busd
 
 export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress: string) => {
 	const { pigsBusdLpContract } = getContract()
@@ -48,9 +36,8 @@ export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress
 		allowance = {
 			allowance: balance,
 		}
-		console.log(result)
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 
 	return allowance
@@ -67,9 +54,8 @@ export const approvePiggyBankForPigBusdLP = async (amount: string, signer: ether
 		//     approval: balance
 		// }
 		// console.log(result);
-		console.log('success')
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 	}
 
 	return approval

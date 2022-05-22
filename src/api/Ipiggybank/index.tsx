@@ -4,7 +4,7 @@ import { Response } from 'state'
 import getPigsContract from 'utils/getContracts'
 import { ethers } from 'ethers'
 // import BigNumber from 'bignumber.js'
-import { calculatePiglets, getPiggyBanks } from './helpers'
+import { getPiggyBanks } from './helpers'
 
 export const fetchPiggyBankData = async (account: string): Promise<PiggyBank> => {
 	let piggyBank: PiggyBank
