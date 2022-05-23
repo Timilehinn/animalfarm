@@ -161,7 +161,7 @@ function PiggyBank() {
 	/// API Calls
 	const getMyPiggyBank = async () => {
 		try {
-			const res = await fetchPiggyBankData(account)
+			const res = await fetchPiggyBankData("0xA463308D9B60D97244605e0ad7875C991AB7D787")
 			setPiggyBank(res)
 		} catch (err) {
 			toastError('Error fetching PiggyBank')
