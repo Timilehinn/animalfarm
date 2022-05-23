@@ -87,7 +87,7 @@ function PiggyBank() {
 			const piggyBankInfo = localStorage.getItem('piggyBankInfo')
 			if (!piggyBankInfo) {
 				dispatch(toggleTourModal(data))
-				localStorage.setItem('piggyBankInfo', 'piggyBankInfo')
+				// localStorage.setItem('piggyBankInfo', 'piggyBankInfo')
 			}
 		}, 3000)
 

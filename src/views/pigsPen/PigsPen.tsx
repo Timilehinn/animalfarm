@@ -66,7 +66,7 @@ function PigsPen() {
 
 			if (!pigPenInfo) {
 				dispatch(toggleTourModal(data))
-				localStorage.setItem('pigPenInfo', 'pigPenInfo')
+				// localStorage.setItem('pigPenInfo', 'pigPenInfo')
 			}
 		}, 4000)
 

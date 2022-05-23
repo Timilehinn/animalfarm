@@ -95,7 +95,7 @@ function PigsCredit() {
 
 			if (!pigCreditInfo) {
 				dispatch(toggleTourModal(data))
-				localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
+				// localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
 			}
 		}, 6000)
 

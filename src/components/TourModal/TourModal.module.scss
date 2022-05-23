@@ -54,6 +54,7 @@
         text-decoration: underline;
         color: #f3ba2f;
         margin-bottom: 10px;
+        cursor: pointer;
     }
 
     button{
@@ -62,6 +63,10 @@
         border-radius: 5px;
         cursor: pointer;
         
+    }
+
+    .dontShow{
+        font-size: 0.8rem;
     }
 }
 
