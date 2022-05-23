@@ -1,0 +1,9 @@
+@import '../../global.scss';
+
+.settings {
+	@include center_modal();
+	width: 100%;
+	max-width: 600px;
+	height: 400px;
+	background: #221e16;
+}

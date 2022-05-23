@@ -1,200 +1,239 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap');
 
 @mixin flex($dir, $align-item, $justift-content) {
-    display: flex;
-    flex-direction: $dir;
-    justify-content: $justift-content;
-    align-items: $align-item;
+	display: flex;
+	flex-direction: $dir;
+	justify-content: $justift-content;
+	align-items: $align-item;
 }
 
-$orange : #F3BA2F;
-$dark : #000000;
+$orange: #f3ba2f;
+$dark: #000000;
 
-.side{
-    height: calc(100vh - 20px);
-    width: 300px;
-    // border-radius: 20px;
-    background: $dark;
-    padding: 20px 20px 0px 0px;
-    position: sticky;
-    top: 0;
-    transition: 0.3s;
-    background: #1A1A1A;
-    overflow-y: auto;
-    z-index:10;
+.side {
+	height: calc(100vh - 20px);
+	width: 300px;
+	// border-radius: 20px;
+	background: $dark;
+	padding: 20px 20px 0px 0px;
+	position: sticky;
+	top: 0;
+	transition: 0.3s;
+	background: #1a1a1a;
+	overflow-y: auto;
+	z-index: 10;
 
-    header{
+	header {
+		@include flex(row, center, flex-start);
 
-        @include flex(row, center,flex-start);
-        
-        padding-top: 6px;
-        margin-bottom: 50px;
-        padding-left: 30px;
+		padding-top: 6px;
+		margin-bottom: 50px;
+		padding-left: 30px;
 
-        h3{
-            color: orange;
-            font-size: 1.1rem;
-        }
+		h3 {
+			color: orange;
+			font-size: 1.1rem;
+		}
 
-        img{
-            height: 20px;
-            width: 20px;
-            margin-right: 10px;
-        }
-    }
-    
-    .ul{
-        // color: white;
-        padding-top: 30px;
-        list-style: none;
-        // margin-top: 30px;
+		img {
+			height: 20px;
+			width: 20px;
+			margin-right: 10px;
+		}
+	}
 
-        .link{
-            padding: 0px 0px 0px 30px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.3s ease;
-            color: white;
-            text-decoration: none;
-            margin-bottom: 35px;
-            transition: 0.3s;
-            font-family: 'Poppins',
-            sans-serif;
-            
+	.ul {
+		// color: white;
+		padding-top: 30px;
+		list-style: none;
+		// margin-top: 30px;
 
-            p{
-                font-size: 0.8rem;
-                cursor: pointer;
-                font-weight: 400;
-                color: #D9E0E899;
-                line-height: 1.6rem;
-            }
+		.link {
+			padding: 0px 0px 0px 30px;
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			transition: 0.3s ease;
+			color: white;
+			text-decoration: none;
+			margin-bottom: 35px;
+			transition: 0.3s;
+			font-family: 'Poppins', sans-serif;
 
-            img{
-                height: 18px;
-                margin-right: 10px;
-                width: 18px;
-            }
+			p {
+				font-size: 0.8rem;
+				cursor: pointer;
+				font-weight: 400;
+				color: #d9e0e899;
+				line-height: 1.6rem;
+			}
 
-            svg{
-                color: #D9E0E899;
-                margin-right: 15px;
-                font-size: 1.4rem;
-            }
-        }
+			img {
+				height: 18px;
+				margin-right: 10px;
+				width: 18px;
+			}
 
-        .link__active{
-            border-left: 3px solid #F3BA2F;
-        }
+			svg {
+				color: #d9e0e899;
+				margin-right: 15px;
+				font-size: 1.4rem;
+			}
 
-        .link__active svg{
-            color: #F3BA2F;
-        }
+			// switch
+		}
 
-        .link__active p {
-            color: #F3BA2F;
-        }
+		.link__active {
+			border-left: 3px solid #f3ba2f;
+		}
 
-        // .link:focus{
-        //     border-left: 3px solid #F3BA2F;
-        // }
+		.link__active svg {
+			color: #f3ba2f;
+		}
 
-        // .link:focus svg{
-        //     color: #F3BA2F;
-        // }
-        // .link:focus p {
-        //     color: #F3BA2F;
-        // }
+		.link__active p {
+			color: #f3ba2f;
+		}
 
-        
-    }
+		.settings__wrap {
+            padding-left: 30px;
+			.settings {
+				padding: 30px 0px 0px 0;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				transition: 0.3s ease;
+				color: white;
+				text-decoration: none;
+				margin-bottom: 35px;
+				transition: 0.3s;
+				font-family: 'Poppins', sans-serif;
+				border-top: 1px solid #d9e0e83d;
 
-    .side__coinprice{
-        width: 100%;
-        padding: 16px;
-        // position: absolute;
-        // bottom: 48px;
-        // right: 0px;
-        // height: 100px;
+				.switch {
+					width: 35px;
+					height: 18px;
+					border-radius: 10px;
+					background: #d9e0e899;
+					padding: 2px;
+                    margin-right: 10px;
 
-        .side__coinprice__in{
-            width: 100%;
-            
-            padding-left: 20px;
-            padding-top: 20px;
-            
-            padding-top: 8px;
-            background-image: url(../../assets/coinprice.svg);
-            border-radius: 10px;
-            box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+					.switch__button {
+						width: 50%;
+						height: 100%;
+						border-radius: 100%;
+						background-color: black;
+						transition: 0.3s ease;
+					}
 
-            ul{
-                padding: 10px;
-                li{
-                    display: flex;
-                    align-items: center;
-                    margin-bottom: 10px;
+					.switch__button__active {
+						transform: translateX(100%);
+						background-color: #f3ba2a;
+					}
+				}
 
-                    img{
-                        height: 20px;
-                        margin-right: 10px;
-                        
-                    }
+				p {
+					font-size: 0.8rem;
+					cursor: pointer;
+					font-weight: 400;
+					color: #d9e0e899;
+					line-height: 1.6rem;
+				}
+			}
+		}
 
-                    p{
-                        font-size: 1rem;
-                        color: rgba(217 217 212 / 90%);
-                    }
-                }
-            }
-        }
+		// .link:focus{
+		//     border-left: 3px solid #F3BA2F;
+		// }
 
-       
-    }
+		// .link:focus svg{
+		//     color: #F3BA2F;
+		// }
+		// .link:focus p {
+		//     color: #F3BA2F;
+		// }
+	}
+
+	.side__coinprice {
+		width: 100%;
+		padding: 16px;
+		// position: absolute;
+		// bottom: 48px;
+		// right: 0px;
+		// height: 100px;
+
+		.side__coinprice__in {
+			width: 100%;
+
+			padding-left: 20px;
+			padding-top: 20px;
+
+			padding-top: 8px;
+			background-image: url(../../assets/coinprice.svg);
+			border-radius: 10px;
+			box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+
+			ul {
+				padding: 10px;
+				li {
+					display: flex;
+					align-items: center;
+					margin-bottom: 10px;
+
+					img {
+						height: 20px;
+						margin-right: 10px;
+					}
+
+					p {
+						font-size: 1rem;
+						color: rgba(217 217 212 / 90%);
+					}
+				}
+			}
+		}
+	}
 }
 .side__socials {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    // position: absolute;
-    //     bottom: 10px;
-    //     right: 14px;
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	// position: absolute;
+	//     bottom: 10px;
+	//     right: 14px;
 }
 .side__socials__icon {
-    // margin-left: 14px;
-    // margin-right: 14px;
-    img{
-        height: 0.8rem;
-    }
+	// margin-left: 14px;
+	// margin-right: 14px;
+	img {
+		height: 0.8rem;
+	}
 }
 
 ::-webkit-scrollbar {
-    width: 2px;
-    border-radius: 5px;
+	width: 2px;
+	border-radius: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 5px;
-    
+	background: #f1f1f1;
+	border-radius: 5px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #121212;
-    border-radius: 5px;
-    
+	background: #121212;
+	border-radius: 5px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #121212;
+	background: #121212;
 }
 
-@media screen and (max-width : 768px ) {
-    .side{
-        display: none;
-    }
+@media screen and (max-width: 768px) {
+	.side {
+		display: none;
+	}
 }

@@ -1,11 +1,14 @@
 import React from 'react'
 import { useConnectWallet } from 'state/wallet/hooks'
 import BigNumber from 'bignumber.js'
+import Settings from 'components/Settings/Settings'
 import Landing from './views/landing/landing'
+
 import './App.css'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import ModalBackdrop from './components/ModalBackdrop/ModalBackdrop'
+
 
 BigNumber.config({
 	EXPONENTIAL_AT: 1000,

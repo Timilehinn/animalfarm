@@ -16,7 +16,9 @@ import Toast from 'components/Toast/Toast'
 import Migrate from 'views/Imigrate/Imigrate'
 import TourModal from 'components/TourModal/TourModal'
 import ErrorPage from 'views/404/ErrorPage'
+import Settings from 'components/Settings/Settings'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
+
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
 
@@ -60,7 +62,7 @@ function Landing() {
 				<ConnectWalletModal login={login} />
 				<ConfirmModal />
 				<Toast />
-
+				{/* <Settings /> */}
 				<TourModal />
 				<Suspense fallback={<div>Loading...</div>}>
 					<Routes>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { usePricing } from 'state/pricing/hooks'
@@ -11,6 +11,19 @@ import telegram from '../../assets/telegram.png'
 
 function SideNavigation() {
 	const { pigsBusdPrice } = usePricing()
+	const [isSwitchActive, SetIsSwitchActive] = useState(false)
+	const handleAppTour = () =>{
+		SetIsSwitchActive(!isSwitchActive)
+		if(isSwitchActive === false){
+			localStorage.setItem('piggyBankInfo', 'piggyBankInfo')
+			localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
+			localStorage.setItem('pigPenInfo', 'pigPenInfo')
+		}else{
+			localStorage.removeItem('piggyBankInfo')
+			localStorage.removeItem('pigCreditInfo')
+			localStorage.removeItem('pigPenInfo')
+		}
+	}
 	return (
 		<div className={styles.side}>
 			<header>
@@ -58,6 +71,14 @@ function SideNavigation() {
 					<Icon icon='bx:bar-chart-alt-2' />
 					<p>Drip Liberation</p>
 				</a>
+				<div className={styles.settings__wrap}>
+					<div className={styles.settings}>
+						<div onClick={() => handleAppTour()} className={styles.switch}>
+							<div className={isSwitchActive ? `${styles.switch__button__active} ${styles.switch__button}` : `${styles.switch__button}`}>{}</div>
+						</div>
+						<p>App Tour</p>
+					</div>
+				</div>
 			</ul>
 			<div className={styles.side__coinprice}>
 				<div className={styles.side__coinprice__in}>

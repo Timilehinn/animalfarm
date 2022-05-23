@@ -93,7 +93,7 @@ function PigsCredit() {
 		setTimeout(() => {
 			const pigCreditInfo = localStorage.getItem('pigCreditInfo')
 
-			if (!pigCreditInfo) {
+			if (pigCreditInfo) {
 				dispatch(toggleTourModal(data))
 				// localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
 			}
