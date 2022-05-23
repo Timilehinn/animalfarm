@@ -290,7 +290,7 @@ function PiggyBank() {
 		let errorCount = 0
 		for (let i = 0; i <= userPiglets.length; i++) {
 			const canDeposit = Math.floor(Date.now() / 1000) - userPiglets[i].lastCompounded > 86400
-			
+			/* eslint-disable no-continue */
 			if (!canDeposit) continue
 			try {
 				/* eslint-disable no-await-in-loop */
