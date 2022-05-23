@@ -159,3 +159,21 @@ export const claimToPigsPen = async (amount: string, signer: ethers.Signer) => {
 
 	return res
 }
+
+
+export const compoundAllStakes = async (id:string,signer:ethers.Signer) => {
+	const { piggyBankContract } = getPigsContract()
+	try{
+		const _compound = await piggyBankContract.connect(signer).feedPiglets(id)
+		const reciept = await _compound.wait()
+		// for testing
+		return{
+			status:"Transaction Successful!"
+		}
+		
+	}catch(err){
+		return{
+			status:"Transaction Failed!"
+		}
+	}
+}

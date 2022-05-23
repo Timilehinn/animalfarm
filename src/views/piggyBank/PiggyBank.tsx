@@ -10,8 +10,10 @@ import { useSpring, animated } from 'react-spring'
 import { toggleToastNotification, toggleTourModal, toggleConfirmModal, toggleModalBackDrop } from 'state/toggle'
 // import { getMyPiggyBanks } from 'api/piggyBank/getMyPiggyBanks'
 import { fetchPiggyBankData } from 'api/Ipiggybank'
+
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { amountFormatter, getDecimalAmount } from 'utils/formatBalance'
+
 import { useAppDispatch } from 'state/hooks'
 import BigNumber from 'bignumber.js'
 import { usePiggyBank } from 'state/piggybank/hooks'
@@ -19,12 +21,13 @@ import { approvePiggyBankForPigBusdLP } from 'api/allowance'
 import { useParams } from 'react-router-dom'
 
 import { longerPaysBetterBonusPercents } from 'utils/lockBonusPercentage'
-import useToast from 'hooks/useToast'
+import useToast from 'hooks/useToast' 
+import { useAppSelector } from '../../state/hooks'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 
 import { LARGE_NUMBER, ZERO_ADDRESS } from '../../config/constants'
-import { buyPigLets, giftPiglet } from '../../api/piggyBank/getMyPiggyBanks'
+import { buyPigLets, giftPiglet, compoundAllStakes } from '../../api/piggyBank/getMyPiggyBanks'
 
 function PiggyBank() {
 	useEffect(() => {
@@ -54,7 +57,8 @@ function PiggyBank() {
 	const [inputValue, setInputValue] = useState('')
 	const [inputValue2, setInputValue2] = useState('')
 
-	const { toastInfo, toastError } = useToast()
+	const { toastInfo, toastError, toastSuccess } = useToast()
+	const userPiglets = useAppSelector((state)=>state.piggyBankReducer.data.userData.userPiggyBanks)
 
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
@@ -157,8 +161,9 @@ function PiggyBank() {
 	/// API Calls
 	const getMyPiggyBank = async () => {
 		try {
-			const res = await fetchPiggyBankData(account)
+			const res = await fetchPiggyBankData(account);
 			setPiggyBank(res)
+			console.log(res)
 		} catch (err) {
 			toastError('Error fetching PiggyBank')
 			console.error(err)
@@ -281,6 +286,29 @@ function PiggyBank() {
 		confirmFunction: _gitfPiglets,
 	}
 
+	const _compoundAllStakes = async() => {
+		let errorCount = 0
+		for(let i=0; i<= userPiglets.length; i++){
+			const canDeposit = Math.floor(Date.now() / 1000) - userPiglets[i].lastCompounded > 86400
+			if(!canDeposit) continue;
+			try{
+				const res = await compoundAllStakes(userPiglets[i].ID,signer)
+			}catch(err){
+				console.log(err)
+				errorCount++
+			}
+		}
+
+		if(errorCount === 0){
+			toastSuccess("Stakes successfully compounded")
+			
+		}else{
+			toastSuccess(`${errorCount} stakes failed to compound out of ${userPiglets.length} stakes`)
+		}
+
+
+	}
+
 	return (
 		<animated.div style={props}>
 			<div className={styles.piggybank}>
@@ -379,6 +407,15 @@ function PiggyBank() {
 					<div className={styles.btn__wrap}>
 						<button type='button' className={styles.btn} onClick={copyRefLink}>
 							Copy Referral Link
+						</button>
+					</div>
+				) : (
+					''
+				)}
+				{account ? (
+					<div className={styles.btn__wrap}>
+						<button onClick={()=>_compoundAllStakes()} type='button' className={styles.btn} onClick={copyRefLink}>
+							Compound all stakes
 						</button>
 					</div>
 				) : (
