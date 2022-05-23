@@ -85,7 +85,7 @@ function PiggyBank() {
 		}
 		setTimeout(() => {
 			const piggyBankInfo = localStorage.getItem('piggyBankInfo')
-			if (!piggyBankInfo) {
+			if (piggyBankInfo) {
 				dispatch(toggleTourModal(data))
 				// localStorage.setItem('piggyBankInfo', 'piggyBankInfo')
 			}

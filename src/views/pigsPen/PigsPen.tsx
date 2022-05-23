@@ -64,7 +64,7 @@ function PigsPen() {
 		setTimeout(() => {
 			const pigPenInfo = localStorage.getItem('pigPenInfo')
 
-			if (!pigPenInfo) {
+			if (pigPenInfo) {
 				dispatch(toggleTourModal(data))
 				// localStorage.setItem('pigPenInfo', 'pigPenInfo')
 			}
