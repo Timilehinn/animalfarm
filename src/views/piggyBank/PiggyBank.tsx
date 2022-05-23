@@ -12,7 +12,7 @@ import { toggleToastNotification, toggleTourModal, toggleConfirmModal, toggleMod
 import { fetchPiggyBankData } from 'api/Ipiggybank'
 import RewardsCenter from 'components/RewardsCenter/RewardsCenter'
 import { amountFormatter, getDecimalAmount } from 'utils/formatBalance'
-import { useAppSelector, useAppDispatch } from 'state/hooks'
+import { useAppDispatch } from 'state/hooks'
 import BigNumber from 'bignumber.js'
 import { usePiggyBank } from 'state/piggybank/hooks'
 import { approvePiggyBankForPigBusdLP } from 'api/allowance'
@@ -23,12 +23,8 @@ import useToast from 'hooks/useToast'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
 
-import { PiggyBankAddress, LARGE_NUMBER, ZERO_ADDRESS } from '../../config/constants'
+import { LARGE_NUMBER, ZERO_ADDRESS } from '../../config/constants'
 import { buyPigLets, giftPiglet } from '../../api/piggyBank/getMyPiggyBanks'
-
-interface ParamsType {
-	referee: string
-}
 
 function PiggyBank() {
 	useEffect(() => {
@@ -52,7 +48,7 @@ function PiggyBank() {
 	// const navigate = useNavigate()
 	const [activeTab, setActiveTab] = useState(1)
 	const [lockDuration, setLockDuration] = useState(0)
-	const [pending, setPending] = useState(false)
+	// const [pending, setPending] = useState(false)
 	const [isApproved, setIsApproved] = useState(false)
 	const [isDisabled, setIsDisabled] = useState(false)
 	const [inputValue, setInputValue] = useState('')
@@ -169,15 +165,15 @@ function PiggyBank() {
 		}
 	}
 	const approve = async () => {
-		setPending(true)
+		// setPending(true)
 		try {
 			await approvePiggyBankForPigBusdLP(LARGE_NUMBER, signer)
 			setAllowance(LARGE_NUMBER)
-			setPending(false)
+			// setPending(false)
 			setIsApproved(true)
 			await getMyPiggyBank()
 		} catch (err) {
-			setPending(false)
+			// setPending(false)
 			setIsApproved(false)
 		}
 	}
@@ -221,7 +217,7 @@ function PiggyBank() {
 				}, 3000)
 			}
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 	const _gitfPiglets = async () => {
@@ -243,7 +239,7 @@ function PiggyBank() {
 				dispatch(toggleToastNotification({ state: true, msg: 'Transaction Failed. Try again' }))
 			}
 		} catch (err) {
-			console.log(err)
+			console.error(err)
 		}
 	}
 
