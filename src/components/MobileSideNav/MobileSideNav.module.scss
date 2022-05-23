@@ -89,6 +89,53 @@ $gold : #F3BA2F;
         .link__active p {
             color: #F3BA2F;
         }
+
+        .settings__wrap {
+            padding-left: 0px;
+			.settings {
+				padding: 30px 0px 0px 0;
+				display: flex;
+				align-items: center;
+				cursor: pointer;
+				transition: 0.3s ease;
+				color: white;
+				text-decoration: none;
+				margin-bottom: 35px;
+				transition: 0.3s;
+				font-family: 'Poppins', sans-serif;
+				border-top: 1px solid #d9e0e83d;
+
+				.switch {
+					width: 35px;
+					height: 18px;
+					border-radius: 10px;
+					background: #d9e0e899;
+					padding: 2px;
+                    margin-right: 10px;
+
+					.switch__button {
+						width: 50%;
+						height: 100%;
+						border-radius: 100%;
+						background-color: black;
+						transition: 0.3s ease;
+					}
+
+					.switch__button__active {
+						transform: translateX(100%);
+						background-color: #f3ba2a;
+					}
+				}
+
+				p {
+					font-size: 0.8rem;
+					cursor: pointer;
+					font-weight: 400;
+					color: #d9e0e899;
+					line-height: 1.6rem;
+				}
+			}
+		}
     }
     button{
         background: linear-gradient(93.41deg, #47A348 1.19%, #3D6B3D 99.16%);

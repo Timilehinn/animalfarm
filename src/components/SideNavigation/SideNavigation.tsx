@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { usePricing } from 'state/pricing/hooks'
@@ -24,6 +24,12 @@ function SideNavigation() {
 			localStorage.removeItem('pigPenInfo')
 		}
 	}
+	useEffect(()=>{
+		const isAppTourActive = localStorage.getItem("piggyBankInfo");
+		if(isAppTourActive){
+			SetIsSwitchActive(true)
+		}
+	},[])
 	return (
 		<div className={styles.side}>
 			<header>
