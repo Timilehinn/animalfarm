@@ -138,7 +138,7 @@ function PiggyBankRow(props) {
 								Compound
 							</button>
 							<hr />
-							<button disabled={!isCompoundEnabled} onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
+							<button  onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
 								Deposit
 							</button>
 						</animated.div>
