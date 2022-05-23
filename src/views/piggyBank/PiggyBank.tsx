@@ -21,7 +21,7 @@ import { approvePiggyBankForPigBusdLP } from 'api/allowance'
 import { useParams } from 'react-router-dom'
 
 import { longerPaysBetterBonusPercents } from 'utils/lockBonusPercentage'
-import useToast from 'hooks/useToast' 
+import useToast from 'hooks/useToast'
 import { useAppSelector } from '../../state/hooks'
 import styles from './PiggyBank.module.scss'
 import pig from '../../assets/svgg.png'
@@ -58,7 +58,7 @@ function PiggyBank() {
 	const [inputValue2, setInputValue2] = useState('')
 
 	const { toastInfo, toastError, toastSuccess } = useToast()
-	const userPiglets = useAppSelector((state)=>state.piggyBankReducer.data.userData.userPiggyBanks)
+	const userPiglets = useAppSelector((state) => state.piggyBankReducer.data.userData.userPiggyBanks)
 
 	const props = useSpring({ to: { opacity: 1 }, from: { opacity: 0 }, delay: 200 })
 
@@ -161,7 +161,7 @@ function PiggyBank() {
 	/// API Calls
 	const getMyPiggyBank = async () => {
 		try {
-			const res = await fetchPiggyBankData(account);
+			const res = await fetchPiggyBankData(account)
 			setPiggyBank(res)
 			console.log(res)
 		} catch (err) {
@@ -286,27 +286,26 @@ function PiggyBank() {
 		confirmFunction: _gitfPiglets,
 	}
 
-	const _compoundAllStakes = async() => {
+	const _compoundAllStakes = async () => {
 		let errorCount = 0
-		for(let i=0; i<= userPiglets.length; i++){
+		for (let i = 0; i <= userPiglets.length; i++) {
 			const canDeposit = Math.floor(Date.now() / 1000) - userPiglets[i].lastCompounded > 86400
-			if(!canDeposit) continue;
-			try{
-				const res = await compoundAllStakes(userPiglets[i].ID,signer)
-			}catch(err){
+			if (!canDeposit) continue
+			try {
+				/* eslint-disable no-await-in-loop */
+
+				const res = await compoundAllStakes(userPiglets[i].ID, signer)
+			} catch (err) {
 				console.log(err)
 				errorCount++
 			}
 		}
 
-		if(errorCount === 0){
-			toastSuccess("Stakes successfully compounded")
-			
-		}else{
+		if (errorCount === 0) {
+			toastSuccess('Stakes successfully compounded')
+		} else {
 			toastSuccess(`${errorCount} stakes failed to compound out of ${userPiglets.length} stakes`)
 		}
-
-
 	}
 
 	return (
@@ -414,7 +413,7 @@ function PiggyBank() {
 				)}
 				{account ? (
 					<div className={styles.btn__wrap}>
-						<button onClick={()=>_compoundAllStakes()} type='button' className={styles.btn} onClick={copyRefLink}>
+						<button onClick={() => _compoundAllStakes()} type='button' className={styles.btn} >
 							Compound all stakes
 						</button>
 					</div>
