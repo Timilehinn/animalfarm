@@ -290,6 +290,7 @@ function PiggyBank() {
 		let errorCount = 0
 		for (let i = 0; i <= userPiglets.length; i++) {
 			const canDeposit = Math.floor(Date.now() / 1000) - userPiglets[i].lastCompounded > 86400
+			
 			if (!canDeposit) continue
 			try {
 				/* eslint-disable no-await-in-loop */
@@ -413,7 +414,7 @@ function PiggyBank() {
 				)}
 				{account ? (
 					<div className={styles.btn__wrap}>
-						<button onClick={() => _compoundAllStakes()} type='button' className={styles.btn} >
+						<button onClick={() => _compoundAllStakes()} type='button' className={styles.btn}>
 							Compound all stakes
 						</button>
 					</div>
