@@ -3,7 +3,8 @@ import BigNumber from 'bignumber.js'
 import type { Balance } from 'state/balances'
 import { AnimalFarmTokens } from 'config/constants'
 import { getPigsBUSDPrice } from 'utils/getPrice'
-import getPigsContract from '../../utils/getContracts'
+import getPigsContract from 'utils/getContracts'
+import { Response } from 'state'
 
 export const getMyPiggyBanks = async (account: string) => {
 	const { piggyBankContract } = getPigsContract()
@@ -153,27 +154,26 @@ export const claimToPigsPen = async (amount: string, signer: ethers.Signer) => {
 		res = {
 			success: false,
 		}
-
-		console.log(err)
+		console.error(err)
 	}
 
 	return res
 }
 
-
-export const compoundAllStakes = async (id:string,signer:ethers.Signer) => {
+export const compoundAllStakes = async (id: string, signer: ethers.Signer): Promise<Response> => {
 	const { piggyBankContract } = getPigsContract()
-	try{
+	try {
 		const _compound = await piggyBankContract.connect(signer).feedPiglets(id)
-		const reciept = await _compound.wait()
-		// for testing
-		return{
-			status:"Transaction Successful!"
+		await _compound.wait()
+
+		return {
+			success: true,
+			message: 'Transaction Successful!',
 		}
-		
-	}catch(err){
-		return{
-			status:"Transaction Failed!"
+	} catch (err) {
+		return {
+			success: false,
+			message: 'Transaction Failed!',
 		}
 	}
 }

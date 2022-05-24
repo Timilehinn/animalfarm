@@ -163,7 +163,6 @@ function PiggyBank() {
 		try {
 			const res = await fetchPiggyBankData(account)
 			setPiggyBank(res)
-			console.log(res)
 		} catch (err) {
 			toastError('Error fetching PiggyBank')
 			console.error(err)
@@ -287,6 +286,10 @@ function PiggyBank() {
 	}
 
 	const _compoundAllStakes = async () => {
+		if (userPiglets.length === 0) {
+			toastInfo('Nothing to Compound')
+			return
+		}
 		let errorCount = 0
 		for (let i = 0; i <= userPiglets.length; i++) {
 			const canDeposit = Math.floor(Date.now() / 1000) - userPiglets[i].lastCompounded > 86400
@@ -294,10 +297,15 @@ function PiggyBank() {
 			if (!canDeposit) continue
 			try {
 				/* eslint-disable no-await-in-loop */
-
 				const res = await compoundAllStakes(userPiglets[i].ID, signer)
+
+				// Handle Error
+				if (res.success === false) {
+					errorCount++
+					console.error(res.message)
+				}
 			} catch (err) {
-				console.log(err)
+				console.error(err)
 				errorCount++
 			}
 		}
@@ -312,22 +320,10 @@ function PiggyBank() {
 	return (
 		<animated.div style={props}>
 			<div className={styles.piggybank}>
-				<div className={styles.piggybank__header}>
-					{/* <p>
-						THE PIGGY BANK IS THE FIRST EVER NON-INFLATIONARY VARIABLE TIME STAKING ANNUITY. LEARN MORE:
-						<a href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf#%5B%7B%22num%22%3A29%2C%22gen%22%3A0%7D%2C%7B%22name%22%3A%22FitH%22%7D%2C733.179%5D`} className={styles.header__a}>
-							{' '}
-							HERE{' '}
-						</a>
-					</p> */}
-				</div>
 				<div className={styles.cards}>
 					<div>
 						<PigsCreditCard title='Total LP Locked in PiggyBank' amount={new BigNumber(piggybank.balance).toFormat(2)} />
 					</div>
-					{/* <div> 
-						<PigsCreditCard title='Total Value LP Locked'  amount="$234,868"  />
-					</div> */}
 				</div>
 				<div className={styles.credit__wrap}>
 					<div className={styles.tabs}>
@@ -415,7 +411,7 @@ function PiggyBank() {
 				{account ? (
 					<div className={styles.btn__wrap}>
 						<button onClick={() => _compoundAllStakes()} type='button' className={styles.btn}>
-							Compound all stakes
+							Compound All Stakes
 						</button>
 					</div>
 				) : (
