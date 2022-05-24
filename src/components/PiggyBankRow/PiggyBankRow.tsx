@@ -32,7 +32,7 @@ function PiggyBankRow(props) {
 
 	useEffect(() => {
 		const timeLeftToCompoundSeconds = Math.floor(Number(lastCompounded) + 86400 - Date.now() / 1000)
-		setSecondsString(secondsToString(timeLeftToCompoundSeconds))
+		setSecondsString(secondsToString(timeLeftToCompoundSeconds, false))
 	}, [lastCompounded])
 
 	const getMyPiggyBank = async () => {
@@ -58,14 +58,14 @@ function PiggyBankRow(props) {
 		dispatch(toggleModalBackDrop(true))
 	}
 
-	function secondsToString(seconds) {
+	function secondsToString(seconds, showDays: boolean) {
 		const secondsMaxxed = Math.max(seconds, 0)
-		// const numdays = Math.floor(secondsMaxxed / 86400)
+		const numdays = Math.floor(secondsMaxxed / 86400)
 		const numhours = Math.floor((secondsMaxxed % 86400) / 3600)
 		const numminutes = Math.floor(((secondsMaxxed % 86400) % 3600) / 60)
 		const numseconds = ((secondsMaxxed % 86400) % 3600) % 60
 
-		return `${numhours}h ${numminutes}m ${numseconds}s`
+		return showDays ? `${numdays}d ${numhours}h ${numminutes}m ${numseconds}s` : `${numhours}h ${numminutes}m ${numseconds}s`
 	}
 
 	function getRemainingTime() {
@@ -75,7 +75,7 @@ function PiggyBankRow(props) {
 		// const endDate = Number(startLockTimestamp) + Number(durationTimestamp)
 
 		// return secondsToString(Math.round(endDate - timeNow))
-		return secondsToString(timeLeftSinceLock)
+		return secondsToString(timeLeftSinceLock, true)
 	}
 
 	const _sellPiglets = async () => {
@@ -108,7 +108,6 @@ function PiggyBankRow(props) {
 		}
 	}
 
-	
 	// button control
 	// check if last time compounded is greater than 24 hours
 	const isCompoundEnabled = Math.floor(Date.now() / 1000) - lastCompounded > 86400
@@ -139,7 +138,7 @@ function PiggyBankRow(props) {
 								Compound
 							</button>
 							<hr />
-							<button  onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
+							<button onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
 								Deposit
 							</button>
 						</animated.div>
