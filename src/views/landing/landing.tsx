@@ -26,6 +26,7 @@ import Home from '../home/Home'
 import style from './Landing.module.scss'
 
 const AddLiquidity = React.lazy(() => import('../addLiquidity/AddLiquidity'))
+const Farms = React.lazy(() => import('../farms/Farms'))
 
 function Landing() {
 	const { login } = useAuth()
@@ -73,6 +74,7 @@ function Landing() {
 						<Route path='/migrate' element={<Migrate />} />
 						<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
 						<Route path='/add-liquidity' element={<AddLiquidity />} />
+						<Route path='/farms' element={<Farms />} />
 						<Route path='*' element={<ErrorPage />} />
 					</Routes>
 				</Suspense>
