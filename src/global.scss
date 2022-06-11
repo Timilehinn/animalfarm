@@ -1,28 +1,59 @@
 @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&family=Poppins&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-$col : red;
-$boldFont : 'Poppins',
-sans-serif;
-$lightFont : 'Open Sans',
-sans-serif;
+$col: red;
+$boldFont: 'Poppins', sans-serif;
+$lightFont: 'Open Sans', sans-serif;
+$grey: #ffffff4d;
+$gold: #f3ba2f;
+$brown: rgba(255, 255, 255, 0.6);
 
 @mixin center {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 @mixin center_modal {
-    background: #221E16;
-    border-radius: 10px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%) scale(0.8);
-    z-index: 10000;
-    padding: 20px;
-    // visibility: hidden;
-    transition: 0.3s;
-    // opacity: 0;
+	background: #221e16;
+	border-radius: 10px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) scale(0.8);
+	z-index: 10000;
+	padding: 20px;
+	// visibility: hidden;
+	transition: 0.3s;
+	// opacity: 0;
+}
+
+@mixin button__disabled {
+	width: 100%;
+	height: 50px;
+	margin-top: 20px;
+	border-radius: 10px;
+	border: none;
+	background-color: #474e47;
+    	
+	color: $grey;
+	cursor: not-allowed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    
+	
+}
+
+.ripple {
+  background-position: center;
+  transition: background 0.8s;
+}
+.ripple:hover {
+  background: #47a348 radial-gradient(circle, transparent 1%, #3d6b3d 1%) center/15000%;
+}
+.ripple:active {
+  background-color: #47a348;
+  background-size: 100%;
+  transition: background 0s;
 }
