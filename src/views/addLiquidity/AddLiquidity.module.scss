@@ -135,3 +135,13 @@ $brown: rgba(255, 255, 255, 0.6);
 		}
 	}
 }
+
+@media screen and (max-width:1024px) {
+	.addliquidity__wrap{
+		.addliquidity{
+			section{
+				width: 100%;
+			}
+		}
+	}
+}
