@@ -1,0 +1,158 @@
+@import '../../global.scss';
+
+.farm {
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	margin: auto;
+	background: linear-gradient(#121212, #121212) padding-box, linear-gradient(#f3ba2a, #121212) border-box;
+	border-style: solid;
+	border-width: 1px;
+	border-color: transparent;
+	border-radius: 10px;
+
+	.infoArea {
+		width: 100%;
+		background: #221e16;
+		// padding: 10px;
+		margin-top: 30px;
+		border-radius: 5px;
+	}
+
+	.swapIcon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 20px;
+		img {
+			height: 20px;
+		}
+	}
+
+	.inputBox {
+		padding: 15px 20px 20px 20px;
+		border-radius: 10px;
+		border: 1px solid #ffffff4d;
+		display: flex;
+		flex-direction: column;
+        position: relative;
+		margin-top: 30px;
+
+		position: relative;
+
+		.bal {
+			text-align: end;
+			font-size: 0.9rem;
+			color: rgba(255, 255, 255, 0.6);
+			margin-bottom: 10px;
+			cursor: pointer;
+		}
+
+		.autoFillBusd {
+			font-size: 0.8rem;
+			text-align: right;
+			color: brown;
+			cursor: pointer;
+		}
+
+		.logo {
+			display: flex;
+			width: 40%;
+			align-items: center;
+
+			img {
+				margin-right: 10px;
+				height: 30px;
+			}
+
+			p {
+				color: gold;
+				font-weight: bold;
+				font-size: 1rem;
+				margin-right: 10px;
+			}
+
+			#dropdown {
+				height: 10px;
+			}
+		}
+		.box {
+			
+			width: 100px;
+			background: #1A1A1A;
+            position: absolute;
+            top:50px;
+            z-index: 100;
+            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			padding: 5px;
+			cursor: pointer;
+
+            .box__item{
+                display: flex;
+                align-items: center;
+				padding: 5px 0px 5px 0px;
+
+                p{
+                    font-size: 1rem;
+                }
+
+				img{
+					margin-right: 10px;
+				}
+
+            }
+
+		}
+
+		input {
+			background: none;
+			border: none;
+			color: rgba(217 217 212 / 90%);
+			border: none;
+			outline: none;
+			font-weight: bold;
+			text-align: right;
+			width: 60%;
+			font-size: 1.2em;
+		}
+	}
+	.buttons {
+		button {
+			@include button__disabled;
+		}
+	}
+	.bottom__info {
+		padding-top: 30px;
+		margin-top: 20px;
+		border-style: dashed;
+		border-top: 1px solid #474e47;
+		border-left: 1px solid #121212;
+		border-right: 1px solid #121212;
+		// background-image: linear-gradient(to right, #FFFFFF33 50%);
+		// background-position: top;
+		background-size: 10px 1px;
+		// background-repeat: repeat-x;
+
+		border-width: 2px;
+		border-style: dashed;
+	}
+
+	.bottom__info__liquidity {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 20px;
+		font-size: 0.8rem;
+	}
+	.bottom__info__tokens {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 20px;
+		font-size: 0.8rem;
+
+		p {
+			color: #f3ba2a;
+		}
+	}
+}
