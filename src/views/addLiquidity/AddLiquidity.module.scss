@@ -214,7 +214,10 @@ $brown: rgba(255, 255, 255, 0.6);
 
 @media screen and (max-width:1024px) {
 	.addliquidity__wrap{
+		
 		.addliquidity{
+			padding-left: 20px;
+			padding-right: 20px;
 			section{
 				width: 100%;
 			}
