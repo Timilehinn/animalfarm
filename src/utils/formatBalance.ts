@@ -10,6 +10,7 @@ export const amountFormatter = (amount: string, decimals = 18): string => {
 	let formattedNumber
 	const splittedNum = amount.split('.')
 	if (splittedNum[1]) {
+		if (decimals === 0) return `${splittedNum[0]}`
 		if (splittedNum[1].length >= decimals) {
 			formattedNumber = `${splittedNum[0]}.${splittedNum[1].substring(0, decimals)}`
 		} else {

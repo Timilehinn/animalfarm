@@ -23,7 +23,8 @@ export const checkAllowance = async (ownerAddress: string, spenderAddress: strin
 export const approveBusd = async (spenderAddress: string, amount: string, signer: ethers.Signer) => {
 	const { busdContract } = getContract()
 
-	await busdContract.connect(signer).approve(spenderAddress, amount)
+	const tx = await busdContract.connect(signer).approve(spenderAddress, amount)
+	await tx.wait()
 }
 
 export const checkPigBusdAllowance = async (ownerAddress: string, spenderAddress: string) => {

@@ -9,9 +9,10 @@ import PigsTokenAbi from 'config/abi/PigsTokenAbi.json'
 import piggyBankABI from 'config/Iabi/PiggyBank.json'
 import PigCreditsABI from 'config/abi/pigsCreditAbi.json'
 import PigPenV2ABI from 'config/abi/PigPenV2.json'
+import LiquidityHelperPigsV2ABI from 'config/abi/LiquidityHelperPigsV2.json'
 
 // Addresses
-import { PIGSAddress, PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress } from '../config/constants'
+import { PIGSAddress, PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress, LiquidityHelperPigsV2Address } from '../config/constants'
 
 const getContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
 	const signerOrProvider = signer ?? simpleRpcProvider
@@ -43,4 +44,8 @@ export const getPigCreditContract = (signer?: ethers.Signer | ethers.providers.P
 
 export const getPigPenContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
 	return getContract(PigPenV2ABI, PigPenAddress, signer)
+}
+
+export const getLiquidityHelperContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+	return getContract(LiquidityHelperPigsV2ABI, LiquidityHelperPigsV2Address, signer)
 }
