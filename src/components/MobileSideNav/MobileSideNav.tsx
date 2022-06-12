@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { useAppSelector, useAppDispatch } from 'state/hooks'
@@ -69,10 +69,14 @@ function MobileSideNav() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
-				<a className={styles.link} href='https://pancakeswap.finance/info/token/0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' target='_blank' rel='noreferrer'>
+				<NavLink onClick={() => closeNav()} to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+					<Icon icon='ri:refund-2-line' />
+					<p>Add Liquidity</p>
+				</NavLink>
+				{/* <a className={styles.link} href='https://pancakeswap.finance/info/token/0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' target='_blank' rel='noreferrer'>
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
-				</a>
+				</a> */}
 				<a className={styles.link} href='https://themanor.farm/garden'>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>

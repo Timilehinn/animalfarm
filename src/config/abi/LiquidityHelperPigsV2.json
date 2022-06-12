@@ -1,0 +1,330 @@
+[
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "pigsCreditAddress",
+				"type": "address"
+			}
+		],
+		"name": "SetPigsCreditAddress",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "pigsV2TokenAddress",
+				"type": "address"
+			}
+		],
+		"name": "SetPigsV2Address",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "reason",
+				"type": "string"
+			}
+		],
+		"name": "StringError",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "router",
+				"type": "address"
+			}
+		],
+		"name": "UpdateRouterAddress",
+		"type": "event"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "fallback"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "nativeAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "addPigsETHLiquidity",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "baseTokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "baseAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nativeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "changeAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "baseAmountMin",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nativeAmountMin",
+				"type": "uint256"
+			}
+		],
+		"name": "addPigsLiquidity",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "baseTokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "baseAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nativeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "baseAmountMin",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nativeAmountMin",
+				"type": "uint256"
+			}
+		],
+		"name": "addPigsLiquidity",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "baseTokenAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "baseAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nativeAmount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "changeAddress",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "baseAmountMin",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "nativeAmountMin",
+				"type": "uint256"
+			}
+		],
+		"name": "addPigsLiquidityFromPigsCredit",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pigsCreditAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pigsTokenAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "router",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pigsCreditAddress",
+				"type": "address"
+			}
+		],
+		"name": "setPigsCreditAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_pigsTokenAddress",
+				"type": "address"
+			}
+		],
+		"name": "setPigsV2Address",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_router",
+				"type": "address"
+			}
+		],
+		"name": "updateRouterAddress",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"stateMutability": "payable",
+		"type": "receive"
+	}
+]

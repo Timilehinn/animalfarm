@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import { Icon } from '@iconify/react'
 import { usePricing } from 'state/pricing/hooks'
@@ -12,24 +12,24 @@ import telegram from '../../assets/telegram.png'
 function SideNavigation() {
 	const { pigsBusdPrice } = usePricing()
 	const [isSwitchActive, SetIsSwitchActive] = useState(false)
-	const handleAppTour = () =>{
+	const handleAppTour = () => {
 		SetIsSwitchActive(!isSwitchActive)
-		if(isSwitchActive === false){
+		if (isSwitchActive === false) {
 			localStorage.setItem('piggyBankInfo', 'piggyBankInfo')
 			localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
 			localStorage.setItem('pigPenInfo', 'pigPenInfo')
-		}else{
+		} else {
 			localStorage.removeItem('piggyBankInfo')
 			localStorage.removeItem('pigCreditInfo')
 			localStorage.removeItem('pigPenInfo')
 		}
 	}
-	useEffect(()=>{
-		const isAppTourActive = localStorage.getItem("piggyBankInfo");
-		if(isAppTourActive){
+	useEffect(() => {
+		const isAppTourActive = localStorage.getItem('piggyBankInfo')
+		if (isAppTourActive) {
 			SetIsSwitchActive(true)
 		}
-	},[])
+	}, [])
 	return (
 		<div className={styles.side}>
 			<header>
@@ -53,14 +53,14 @@ function SideNavigation() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
-				{/* <NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				<NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ri:refund-2-line' />
 					<p>Add Liquidity</p>
-				</NavLink> */}
-				<a className={styles.link} href='https://pancakeswap.finance/info/token/0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' target='_blank' rel='noreferrer'>
+				</NavLink>
+				{/* <a className={styles.link} href='https://pancakeswap.finance/info/token/0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' target='_blank' rel='noreferrer'>
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
-				</a>
+				</a> */}
 				<a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
