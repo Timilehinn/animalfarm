@@ -35,7 +35,7 @@
 		border: 1px solid #ffffff4d;
 		display: flex;
 		flex-direction: column;
-        position: relative;
+		position: relative;
 		margin-top: 30px;
 
 		position: relative;
@@ -77,31 +77,43 @@
 			}
 		}
 		.box {
-			
-			width: 100px;
-			background: #1A1A1A;
-            position: absolute;
-            top:50px;
-            z-index: 100;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+			width: 150px;
+			background: #1a1a1a;
+
+			position: absolute;
+			top: 50px;
+			z-index: 100;
+			// box-shadow: rgba(99, 99, 99, 0.377) 0px 2px 8px 0px;
 			padding: 5px;
 			cursor: pointer;
+			padding: 10px 10px 10px 10px;
+			border-radius: 5px;
 
-            .box__item{
-                display: flex;
-                align-items: center;
-				padding: 5px 0px 5px 0px;
+			.box__item {
+				display: flex;
+				align-items: center;
+				padding: 5px 5px 5px 5px;
+			
+				margin-bottom: 10px;
+				border-radius: 5px;
 
-                p{
-                    font-size: 1rem;
-                }
+				p {
+					font-size: 1rem;
+				}
+				
 
-				img{
+				img {
 					margin-right: 10px;
 				}
 
-            }
+				img:nth-last-child(2){
+					height: 24px;
+				}
 
+				&:hover {
+					background-color: rgba(255, 255, 255, 0.08);
+				}
+			}
 		}
 
 		input {
@@ -114,6 +126,79 @@
 			text-align: right;
 			width: 60%;
 			font-size: 1.2em;
+		}
+	}
+	.slippage {
+		padding-top: 20px;
+		padding-left: 5px;
+
+		p {
+			font-size: 0.8rem;
+			margin-bottom: 20px;
+			color: rgba(217 217 212 / 90%);
+		}
+
+		.slippage__buttons {
+			display: flex;
+			justify-content: space-between;
+
+			button {
+				width: 100%;
+				margin: 0px 5px 0px 5px;
+				height: 40px;
+				border-radius: 8px;
+				cursor: pointer;
+				border: none;
+				outline: none;
+				background: rgba(243, 186, 47, 0.14);
+				color: #f3ba2f;
+				font-family: $boldFont;
+			}
+
+			button:nth-child(1) {
+				margin-left: 0px;
+			}
+
+			button:focus,
+			button.active {
+				background: #f3ba2f;
+				color: #ffffff;
+			}
+
+			input {
+				width: 100%;
+				margin: 0px 5px 0px 5px;
+				height: 40px;
+				border-radius: 8px;
+				border: none;
+				outline: none;
+				text-align: center;
+				background: rgba(255, 255, 255, 0.14);
+				color: rgba(255, 255, 255, 0.6);
+				font-family: $boldFont;
+			}
+
+			// input:nth-child(1) {
+			// 	margin-left: 0px;
+			// }
+
+			input:focus,
+			input.active {
+				border: 1px solid #f3ba2f;
+				color: #f3ba2f;
+			}
+		}
+
+		.tolerance {
+			margin-top: 20px;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.price {
+				color: #f3ba2f;
+				font-weight: 500;
+			}
 		}
 	}
 	.buttons {
