@@ -17,7 +17,7 @@ import { fetchDataForAddLiquidity, approveSpendPIGS, addPIGSAndBUSDToLiquidity }
 import { approveBusd } from 'api/allowance'
 
 // Utils and helpers
-import { getDecimalAmount, amountFormatter } from 'utils/formatBalance'
+import { getDecimalAmount, amountFormatter, getBalanceAmountString } from 'utils/formatBalance'
 
 // Config
 import { LARGE_NUMBER, LiquidityHelperPigsV2Address } from 'config/constants'
@@ -187,15 +187,15 @@ function AddLiquidity() {
 
 			const res = await addPIGSAndBUSDToLiquidity(getDecimalAmount(formattedPigs), getDecimalAmount(formattedBusd), tolerance, signer)
 
+			dispatch(toggleConfirmModal(false))
+			dispatch(toggleModalBackDrop(false))
+
 			if (res.success === true) {
 				resetInputs()
 				setPending(false)
 				toastSuccess(res.message)
 				getDataForAddLiquidity()
 			}
-
-			dispatch(toggleConfirmModal(false))
-			dispatch(toggleModalBackDrop(false))
 
 			if (res.success === false) {
 				setPending(false)
@@ -245,15 +245,15 @@ function AddLiquidity() {
 					<header>Get PIGS/BUSD LP Tokens</header>
 					<p className={styles.info}>Enter the amount of BUSD to be paired with PIG</p>
 					<div className={styles.info__area}>
-						<Info title='Your PIGS/BUSD LP balance' info={`${pigsBusdLPBalance}  PIGS/BUSD`} />
-						<Info title='Your PIGS balance' info={`${pigsBalance} PIGS`} />
-						<Info title='Your BUSD balance' info={`${busdBalance} BUSD`} />
+						<Info title='Your PIGS/BUSD LP balance' info={`${amountFormatter(getBalanceAmountString(pigsBusdLPBalance), 9)}  PIGS/BUSD`} />
+						<Info title='Your PIGS balance' info={`${amountFormatter(getBalanceAmountString(pigsBalance), 9)} PIGS`} />
+						<Info title='Your BUSD balance' info={`${amountFormatter(getBalanceAmountString(busdBalance), 9)} BUSD`} />
 					</div>
 					{/* input 1 */}
 					<div className={styles.inputBox}>
 						<p
 							onClick={() => {
-								_setInput(pigsBalance)
+								_setInput(amountFormatter(getBalanceAmountString(pigsBalance), 9))
 							}}
 							role='presentation'
 							className={styles.autoFillBusd}
@@ -273,7 +273,7 @@ function AddLiquidity() {
 					<div className={styles.inputBox}>
 						<p
 							onClick={() => {
-								_setInput2(busdBalance)
+								_setInput2(amountFormatter(getBalanceAmountString(busdBalance), 9))
 							}}
 							role='presentation'
 							className={styles.autoFillBusd}

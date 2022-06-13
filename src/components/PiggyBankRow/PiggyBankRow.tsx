@@ -16,7 +16,7 @@ import down from '../../assets/down.svg'
 import useActiveWeb3React from '../../hooks/useActiveWeb3React'
 
 function PiggyBankRow(props) {
-	const { id, piglets, trufflesavailable, truffleLocker, trufflesvalue, timeLeftSinceLock, maxpayout, lastCompounded, paddedPrecisionValue } = props
+	const { id, piglets, trufflesavailable, truffleLocker, trufflesvalue, timeLeftSinceLock, maxpayout, lastCompounded, paddedPrecisionValue, isMaxPayOut } = props
 	const dispatch = useAppDispatch()
 	const { account, library } = useActiveWeb3React()
 	const signer = library.getSigner()
@@ -96,7 +96,6 @@ function PiggyBankRow(props) {
 		showModal(false)
 		try {
 			const res = await compound(id, signer)
-			console.log(res, 'compounded')
 			if (res.success) {
 				getMyPiggyBank()
 				toastSuccess('Compound Successful!')
@@ -138,7 +137,7 @@ function PiggyBankRow(props) {
 								Compound
 							</button>
 							<hr />
-							<button onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
+							<button disabled={isMaxPayOut} onClick={() => openDepositModal()} type='button' className={!isCompoundEnabled ? `${style.modal__button} ${style.button__disabled}` : style.modal__button}>
 								Deposit
 							</button>
 						</animated.div>
