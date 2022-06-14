@@ -49,7 +49,7 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 						''
 					)}
 					<div className={styles.core__circle}>
-						<p>6x</p>
+						<p>{multiplier}x</p>
 					</div>
 				</div>
 			</header>
