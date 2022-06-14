@@ -76,7 +76,9 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div className={styles.logo}>
 						<img src={dog} alt='' />
-						<p>{title} LP</p>
+						<p>
+							{title} {pair2 ? 'LP' : ''}
+						</p>
 					</div>
 					<input min='0' required type='number' placeholder='0.0' />
 				</div>
