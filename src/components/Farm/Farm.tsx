@@ -66,7 +66,7 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 				<button type='button'>Claim</button>
 			</div>
 			<div className={styles.infoArea}>
-				<Info title='Apr' info='N-A' />
+				<Info title='Apr' info='N/A' />
 				<Info title='Earn' info={rewardToken} />
 				{/* <Info title='Total Liquidity' info={0} /> */}
 			</div>
@@ -93,7 +93,7 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 				<div className={styles.bottom__info}>
 					<div className={styles.bottom__info__liquidity}>
 						<p>Total Liquidity</p>
-						<p>N-A</p>
+						<p>N/A</p>
 					</div>
 					<div className={styles.bottom__info__tokens}>
 						<p>Get DOGS/BUSD</p>
