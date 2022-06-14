@@ -1,12 +1,16 @@
 .farms__wrap {
-	// display: flex;
-	// justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 50px;
 	.farms {
 		width: 100%;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		gap: 70px;
 		padding: 50px 60px 50px 80px;
+        max-width: 1500px;
 
 		div {
 			// height: 400px;
