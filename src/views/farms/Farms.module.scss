@@ -1,6 +1,11 @@
 .farms__wrap {
 	// display: flex;
 	// justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding-top: 50px;
 	.farms {
 		width: 100%;
 		display: grid;
@@ -18,11 +23,11 @@
 	.farms__wrap {
 		.farms {
 			width: 100%;
-            background-color: red;
+			
 			grid-template-columns: 1fr;
 			padding: 50px 20px 50px 20px;
-            column-gap: 0px;
-            row-gap: 70px;
+			column-gap: 0px;
+			row-gap: 70px;
 		}
 	}
 }
