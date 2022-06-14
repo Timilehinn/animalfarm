@@ -17,14 +17,14 @@ interface farmProps {
 	apr?: number
 	rewardToken?: string
 	totalLiquidity?: number
-	earned?:string
+	earned?: string
 	id: number
 	current: number
 	setCurrent: any
 	title?: string
 }
 
-function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr, totalLiquidity, rewardToken, core, id, current, setCurrent,earned }: farmProps) {
+function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr, totalLiquidity, rewardToken, core, id, current, setCurrent, earned }: farmProps) {
 	const props = useSpring({ to: { opacity: 1, y: 0 }, from: { opacity: 0, y: 50 }, delay: 100 })
 
 	return (
@@ -55,7 +55,7 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 			</header>
 			<div className={styles.staked}>
 				<p>
-					<span>{title}  staked:</span> {0}
+					<span>{title} staked:</span> {0}
 				</p>
 				<button type='button'>Unstake</button>
 			</div>
@@ -66,9 +66,9 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 				<button type='button'>Claim</button>
 			</div>
 			<div className={styles.infoArea}>
-				<Info title='Apr' info={`${apr}%`} />
+				<Info title='Apr' info='N-A' />
 				<Info title='Earn' info={rewardToken} />
-				<Info title='Total Liquidity' info={0} />
+				{/* <Info title='Total Liquidity' info={0} /> */}
 			</div>
 			{/* input */}
 			<div onClick={id === current ? () => setCurrent(null) : () => setCurrent(id)} className={styles.collapsible}>
@@ -90,17 +90,17 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 					<div className={styles.buttons}>
 						<button type='button'>Enter Amount</button>
 					</div>
-					{/* <div className={styles.bottom__info}>
+					<div className={styles.bottom__info}>
 						<div className={styles.bottom__info__liquidity}>
-					<p>Total liquidity</p>
-					<p>$12,222222</p>
-					</div>
+							<p>Total Liquidity</p>
+							<p>N-A</p>
+						</div>
 						<div className={styles.bottom__info__tokens}>
 							<p>Get DOGS/BUSD</p>
 							<p>View contract</p>
 							<p>See pair info</p>
 						</div>
-					</div> */}
+					</div>
 				</div>
 			)}
 		</div>
