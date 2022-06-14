@@ -15,15 +15,17 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		padding-bottom: 10px;
 		.tokens {
 			display: flex;
+			align-items: center;
 			.tokens__icons {
 				margin-right: 20px;
 				img {
-					height: 30px;
+					height: 23px;
 				}
 				.img__two {
-					margin-left: -15px;
+					margin-left: -10px;
 				}
 			}
 			.token__names {
@@ -69,7 +71,7 @@
 		background: #221e16;
 		padding: 10px;
 		border-radius: 5px;
-		margin-top: 20px;
+		margin-top: 10px;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -77,7 +79,7 @@
 		p {
 			color: white;
 			font-size: 0.8rem;
-            font-weight: 500;
+			font-weight: 500;
 
 			span {
 				color: #f3ba2a;
@@ -109,7 +111,7 @@
 		display: flex;
 		flex-direction: column;
 
-        margin-top: 30px;
+		margin-top: 30px;
 
 		position: relative;
 
@@ -135,7 +137,7 @@
 
 			img {
 				margin-right: 10px;
-                height: 30px;
+				height: 30px;
 			}
 
 			p {
@@ -157,13 +159,29 @@
 			font-size: 1.2em;
 		}
 	}
-    .buttons{
-        button{
-            @include button__disabled;
-        }
-    }
-    .bottom__info{
-        padding-top: 30px;
+
+	.collapsible {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 0px 10px 0px;
+		cursor: pointer;
+
+		p {
+			font-size: 0.8rem;
+		}
+	}
+
+	.collapseCover {
+	}
+
+	.buttons {
+		button {
+			@include button__disabled;
+		}
+	}
+	.bottom__info {
+		padding-top: 30px;
 		margin-top: 20px;
 		border-style: dashed;
 		border-top: 1px solid #474e47;
@@ -176,25 +194,39 @@
 
 		border-width: 2px;
 		border-style: dashed;
-    }
+	}
 
-    .bottom__info__liquidity{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 20px;
-        font-size: 0.8rem;
-    }
-    .bottom__info__tokens{
-         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 20px;
-        font-size: 0.8rem;
-       
-        p{
-             color: #f3ba2a;
-        }
+	.bottom__info__liquidity {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 20px;
+		font-size: 0.8rem;
+	}
+	.bottom__info__tokens {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 20px;
+		font-size: 0.8rem;
 
-    }
+		p {
+			color: #f3ba2a;
+		}
+	}
+}
+
+@media screen and (max-width: 1024px) {
+	.farm {
+		header {
+			.tokens {
+				.token__names {
+					p {
+						font-size: 0.8rem;
+						
+					}
+				}
+			}
+		}
+	}
 }
