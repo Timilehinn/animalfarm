@@ -4,17 +4,9 @@ import styles from './Pools.module.scss'
 import dog from '../../assets/dogg.png'
 import busd from '../../assets/bbusd.png'
 import wbnb from '../../assets/wbnb.png'
-import drip from '../../assets/drip.png'
-import usdt from '../../assets/usdt.png'
-import usdc from '../../assets/usdc.png'
-import tusd from '../../assets/tusd.png'
-import dai from '../../assets/dai.png'
 import btcb from '../../assets/btcb.png'
 import eth from '../../assets/eth.png'
 import cake from '../../assets/cake.png'
-import belt from '../../assets/belt.png'
-import dot from '../../assets/dot.png'
-import link from '../../assets/link.png'
 
 function Farms() {
 	useEffect(() => {
@@ -36,7 +28,6 @@ function Farms() {
 		{
 			title: 'DOG',
 			pair1: dog,
-			// pair2: busd,
 			multiplier: 0,
 			isCore: true,
 			amountStaked: 4567,
@@ -48,9 +39,8 @@ function Farms() {
 		{
 			title: 'WBNB',
 			pair1: wbnb,
-			// pair2: wbnb,
 			multiplier: 4,
-			isCore: true,
+			isCore: false,
 			amountStaked: 4567,
 			amountEarned: 98,
 			apr: 35,
@@ -60,9 +50,8 @@ function Farms() {
 		{
 			title: 'BUSD',
 			pair1: busd,
-			// pair2: busd,
 			multiplier: 4,
-			isCore: true,
+			isCore: false,
 			amountStaked: 4567,
 			amountEarned: 98,
 			apr: 35,
@@ -72,7 +61,6 @@ function Farms() {
 		{
 			title: 'ETH',
 			pair1: eth,
-			// pair2: busd,
 			multiplier: 4,
 			isCore: false,
 			amountStaked: 4567,
@@ -84,7 +72,6 @@ function Farms() {
 		{
 			title: 'CAKE',
 			pair1: cake,
-			// pair2: busd,
 			multiplier: 4,
 			isCore: false,
 			amountStaked: 4567,
@@ -96,7 +83,6 @@ function Farms() {
 		{
 			title: 'BTCB',
 			pair1: btcb,
-			// pair2: busd,
 			multiplier: 4,
 			isCore: false,
 			amountStaked: 4567,
@@ -127,14 +113,6 @@ function Farms() {
 						totalLiquidity={item.totalLiquidity}
 					/>
 				))}
-				{/* <Farm pair='DOGS/BUSD' core='core' isCollapsed={true} id={0} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={1} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/BUSD' core='core' isCollapsed={true} id={2} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={3} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={4} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={5} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={6} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={7} current={current} setCurrent={setCurrent} /> */}
 			</div>
 		</div>
 	)
