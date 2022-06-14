@@ -71,35 +71,34 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 				{/* <Info title='Total Liquidity' info={0} /> */}
 			</div>
 			{/* input */}
+
+			<div className={styles.inputBox}>
+				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+					<div className={styles.logo}>
+						<img src={dog} alt='' />
+						<p>{title} LP</p>
+					</div>
+					<input min='0' required type='number' placeholder='0.0' />
+				</div>
+			</div>
+			{/* buttons */}
+			<div className={styles.buttons}>
+				<button type='button'>Enter Amount</button>
+			</div>
 			<div onClick={id === current ? () => setCurrent(null) : () => setCurrent(id)} className={styles.collapsible}>
-				<p>Enter amount</p>
+				<p>Details</p>
 				<img src={arrow} alt='' />
 			</div>
 			{id === current && (
-				<div style={{ width: '100%' }} className={styles.collapseCover}>
-					<div className={styles.inputBox}>
-						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-							<div className={styles.logo}>
-								<img src={dog} alt='' />
-								<p>{title} LP</p>
-							</div>
-							<input min='0' required type='number' placeholder='0.0' />
-						</div>
+				<div className={styles.bottom__info}>
+					<div className={styles.bottom__info__liquidity}>
+						<p>Total Liquidity</p>
+						<p>N-A</p>
 					</div>
-					{/* buttons */}
-					<div className={styles.buttons}>
-						<button type='button'>Enter Amount</button>
-					</div>
-					<div className={styles.bottom__info}>
-						<div className={styles.bottom__info__liquidity}>
-							<p>Total Liquidity</p>
-							<p>N-A</p>
-						</div>
-						<div className={styles.bottom__info__tokens}>
-							<p>Get DOGS/BUSD</p>
-							<p>View contract</p>
-							<p>See pair info</p>
-						</div>
+					<div className={styles.bottom__info__tokens}>
+						<p>Get DOGS/BUSD</p>
+						<p>View contract</p>
+						<p>See pair info</p>
 					</div>
 				</div>
 			)}

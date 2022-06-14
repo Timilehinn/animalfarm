@@ -163,13 +163,15 @@
 
 	.collapsible {
 		display: flex;
-		justify-content: space-between;
+		justify-content: center;
 		align-items: center;
 		padding: 15px 0px 10px 0px;
 		cursor: pointer;
 
 		p {
 			font-size: 0.8rem;
+			margin-right: 5px;
+			font-weight: 600;
 		}
 	}
 
