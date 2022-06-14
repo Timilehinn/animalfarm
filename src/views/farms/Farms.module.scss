@@ -1,10 +1,14 @@
 .farms__wrap{
+ 
+    display: flex;
+    justify-content: center;
     .farms{
+        width: 60%;
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr ;
         gap: 70px;
         padding: 50px 60px 50px 80px;
-
+        
         div{
             // height: 400px;
            
@@ -15,6 +19,7 @@
 @media screen and (max-width:480px) {
     .farms__wrap{
         .farms{
+            width: 100%;
             grid-template-columns: 1fr;
              padding: 50px 20px 50px 20px;
         }
@@ -24,6 +29,7 @@
 @media screen and (min-width:480px) and (max-width:768px) {
     .farms__wrap{
         .farms{
+            width: 100%;
             grid-template-columns: 1fr 1fr;
              padding: 50px 20px 50px 20px;
         }
