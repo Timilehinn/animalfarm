@@ -7,28 +7,24 @@ import pig from '../../assets/busd.png'
 import coree from '../../assets/core.png'
 import arrow from '../../assets/arrow-down.png'
 
-
-interface farmProps { 
+interface farmProps {
 	pair1?: any
-	pair2:any
+	pair2: any
 	core?: boolean
-	multiplier?:number
-	amountStaked?:number
-	amountEarned?:number
-	apr?:number
-	rewardToken?:string
-	totalLiquidity?:number
+	multiplier?: number
+	amountStaked?: number
+	amountEarned?: number
+	apr?: number
+	rewardToken?: string
+	totalLiquidity?: number
 
-	
-	id:number
-	current:number
-	setCurrent:any
-	title?:string
-	
+	id: number
+	current: number
+	setCurrent: any
+	title?: string
 }
 
-function Farm({ pair1,pair2,title,multiplier,amountStaked,amountEarned,apr,totalLiquidity, rewardToken, core,id,current,setCurrent }: farmProps) {
-	
+function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr, totalLiquidity, rewardToken, core, id, current, setCurrent }: farmProps) {
 	const props = useSpring({ to: { opacity: 1, y: 0 }, from: { opacity: 0, y: 50 }, delay: 100 })
 
 	return (
@@ -46,7 +42,7 @@ function Farm({ pair1,pair2,title,multiplier,amountStaked,amountEarned,apr,total
 				<div className={styles.core}>
 					<div className={styles.core__button}>
 						<img src={coree} alt='' />
-						<p>{core ? "Core" : "Non-core"}</p>
+						<p>{core ? 'Core' : 'Non-core'}</p>
 					</div>
 					<div className={styles.core__circle}>
 						<p>6x</p>
@@ -55,28 +51,28 @@ function Farm({ pair1,pair2,title,multiplier,amountStaked,amountEarned,apr,total
 			</header>
 			<div className={styles.staked}>
 				<p>
-					<span>DOGS/BUSD LP staked:</span> 5,534
+					<span>DOGS/BUSD LP staked:</span> {0}
 				</p>
 				<button type='button'>Unstake</button>
 			</div>
 			<div className={styles.staked}>
 				<p>
-					<span>PIGS earned:</span> 5,534
+					<span>PIGS earned:</span> {0}
 				</p>
 				<button type='button'>Claim</button>
 			</div>
 			<div className={styles.infoArea}>
-				<Info title='Apr' info='12,4444' />
-				<Info title='Earned' info='12,4444' />
-				<Info title='Total Liquidity' info='$1200000' />
+				<Info title='Apr' info={`${apr}%`} />
+				<Info title='Earn' info={rewardToken} />
+				<Info title='Total Liquidity' info={totalLiquidity} />
 			</div>
 			{/* input */}
-			<div onClick={ id === current ? ()=>setCurrent(null) : ()=>setCurrent(id)} className={styles.collapsible} >
+			<div onClick={id === current ? () => setCurrent(null) : () => setCurrent(id)} className={styles.collapsible}>
 				<p>Enter amount</p>
-				<img src={arrow} alt="" />
+				<img src={arrow} alt='' />
 			</div>
 			{id === current && (
-				<animated.div style={props} className={styles.collapseCover} >
+				<animated.div style={props} className={styles.collapseCover}>
 					<div className={styles.inputBox}>
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 							<div className={styles.logo}>
@@ -90,17 +86,17 @@ function Farm({ pair1,pair2,title,multiplier,amountStaked,amountEarned,apr,total
 					<div className={styles.buttons}>
 						<button type='button'>Enter Amount</button>
 					</div>
-					<div className={styles.bottom__info}>
-						{/* <div className={styles.bottom__info__liquidity}>
+					{/* <div className={styles.bottom__info}>
+						<div className={styles.bottom__info__liquidity}>
 					<p>Total liquidity</p>
 					<p>$12,222222</p>
-					</div> */}
+					</div>
 						<div className={styles.bottom__info__tokens}>
 							<p>Get DOGS/BUSD</p>
 							<p>View contract</p>
 							<p>See pair info</p>
 						</div>
-					</div>
+					</div> */}
 				</animated.div>
 			)}
 		</div>
