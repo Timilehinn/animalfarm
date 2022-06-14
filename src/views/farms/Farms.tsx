@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Farm from 'components/Farm/Farm'
 import styles from './Farms.module.scss'
 import dog from '../../assets/dogg.png'
@@ -17,7 +17,19 @@ import dot from '../../assets/dot.png'
 import link from '../../assets/link.png'
 
 function Farms() {
-	const [current, setCurrent] = React.useState(null)
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(${window.location.origin}/bg/piggybank.png);
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
+	const [current, setCurrent] = useState(null)
 
 	const data = [
 		{

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Farm from 'components/Farm/Farm'
 import styles from './Pools.module.scss'
 import dog from '../../assets/dogg.png'
@@ -14,10 +14,23 @@ import eth from '../../assets/eth.png'
 import cake from '../../assets/cake.png'
 import belt from '../../assets/belt.png'
 import dot from '../../assets/dot.png'
-import link from '../../assets/link.png' 
+import link from '../../assets/link.png'
 
 function Farms() {
-	const [current, setCurrent] = React.useState(null)
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(${window.location.origin}/bg/piggybank.png);
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
+
+	const [current, setCurrent] = useState(null)
 
 	const data = [
 		{
@@ -102,7 +115,7 @@ function Farms() {
 						title={item.title}
 						core={item.isCore}
 						pair1={item.pair1}
-						// pair2={item.pair2} 
+						// pair2={item.pair2}
 						multiplier={item.multiplier}
 						amountStaked={item.amountStaked}
 						amountEarned={item.amountEarned}

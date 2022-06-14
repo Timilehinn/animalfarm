@@ -27,6 +27,19 @@ import pigs from '../../assets/svgg.png'
 import busd from '../../assets/busd.png'
 
 function AddLiquidity() {
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(${window.location.origin}/bg/piggybank.png);
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
+
 	const { account, library } = useActiveWeb3React()
 	const signer = library.getSigner()
 
