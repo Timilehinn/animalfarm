@@ -28,6 +28,7 @@ import style from './Landing.module.scss'
 const AddLiquidity = React.lazy(() => import('../addLiquidity/AddLiquidity'))
 const Farms = React.lazy(() => import('../farms/Farms'))
 const Swap = React.lazy(()=>import('../swap/Swap'))
+const Pools = React.lazy(() => import('../pools/Pools'))
 
 function Landing() {
 	const { login } = useAuth()
@@ -76,6 +77,7 @@ function Landing() {
 						<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
 						<Route path='/add-liquidity' element={<AddLiquidity />} />
 						<Route path='/farms' element={<Farms />} />
+						<Route path='/pools' element={<Pools />} />
 						<Route path='/swap' element={<Swap />} />
 						<Route path='*' element={<ErrorPage />} />
 					</Routes>
