@@ -26,7 +26,7 @@ function Farms() {
 
 	const data = [
 		{
-			title: 'DOG',
+			title: 'DOGS',
 			pair1: dog,
 			multiplier: 0,
 			isCore: true,
