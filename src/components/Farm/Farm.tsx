@@ -9,7 +9,7 @@ import arrow from '../../assets/arrow-down.png'
 
 interface farmProps {
 	pair1?: any
-	pair2: any
+	pair2?: any
 	core?: boolean
 	multiplier?: number
 	amountStaked?: number
@@ -17,14 +17,14 @@ interface farmProps {
 	apr?: number
 	rewardToken?: string
 	totalLiquidity?: number
-
+	earned?:string
 	id: number
 	current: number
 	setCurrent: any
 	title?: string
 }
 
-function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr, totalLiquidity, rewardToken, core, id, current, setCurrent }: farmProps) {
+function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr, totalLiquidity, rewardToken, core, id, current, setCurrent,earned }: farmProps) {
 	const props = useSpring({ to: { opacity: 1, y: 0 }, from: { opacity: 0, y: 50 }, delay: 100 })
 
 	return (
@@ -40,10 +40,14 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 					</div>
 				</div>
 				<div className={styles.core}>
-					<div className={styles.core__button}>
-						<img src={coree} alt='' />
-						<p>{core ? 'Core' : 'Non-core'}</p>
-					</div>
+					{core ? (
+						<div className={styles.core__button}>
+							<img src={coree} alt='' />
+							<p>Core</p>
+						</div>
+					) : (
+						''
+					)}
 					<div className={styles.core__circle}>
 						<p>6x</p>
 					</div>
@@ -51,20 +55,20 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 			</header>
 			<div className={styles.staked}>
 				<p>
-					<span>DOGS/BUSD LP staked:</span> {0}
+					<span>{title}  staked:</span> {0}
 				</p>
 				<button type='button'>Unstake</button>
 			</div>
 			<div className={styles.staked}>
 				<p>
-					<span>PIGS earned:</span> {0}
+					<span>{rewardToken} earned:</span> {0}
 				</p>
 				<button type='button'>Claim</button>
 			</div>
 			<div className={styles.infoArea}>
 				<Info title='Apr' info={`${apr}%`} />
 				<Info title='Earn' info={rewardToken} />
-				<Info title='Total Liquidity' info={totalLiquidity} />
+				<Info title='Total Liquidity' info={0} />
 			</div>
 			{/* input */}
 			<div onClick={id === current ? () => setCurrent(null) : () => setCurrent(id)} className={styles.collapsible}>
@@ -72,7 +76,7 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 				<img src={arrow} alt='' />
 			</div>
 			{id === current && (
-				<animated.div style={props} className={styles.collapseCover}>
+				<div style={{ width: '100%' }} className={styles.collapseCover}>
 					<div className={styles.inputBox}>
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 							<div className={styles.logo}>
@@ -97,7 +101,7 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 							<p>See pair info</p>
 						</div>
 					</div> */}
-				</animated.div>
+				</div>
 			)}
 		</div>
 	)
