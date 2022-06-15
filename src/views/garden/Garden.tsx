@@ -5,7 +5,8 @@ import Info from 'components/Info/Info'
 
 import styles from './Garden.module.scss'
 import pigs from '../../assets/svgg.png'
-import busd from '../../assets/busd.png'
+import busd from '../../assets/bbusd.png'
+import drip from '../../assets/drip.png'
 
 function Garden() {
 
@@ -42,7 +43,8 @@ function Garden() {
 					<div className={styles.inputBox}>
 						<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 							<div onClick={()=>setIsMenuOpen(!isMenuOpen)} className={styles.logo}>
-								<img src={pigs} alt='' />
+								<img src={busd} alt='' />
+                                <img id={styles.drip} src={drip} alt="" />
 								<p>DRIP/BUSD LP</p>
 							</div>
 							<input min='0' required type='number' placeholder='0.0' />
