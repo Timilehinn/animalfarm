@@ -47,16 +47,7 @@ function Garden() {
 							</div>
 							<input min='0' required type='number' placeholder='0.0' />
 						</div>
-						{isMenuOpen && (
-							<div className={styles.box}>
-								{tokens.map((item, index) => (
-									<div onClick={() => setIsMenuOpen(!isMenuOpen)} className={styles.box__item}>
-										<img src={item.icon} alt='' />
-										<p style={{ color: 'white' }}> {item.name}</p>
-									</div>
-								))}
-							</div>
-						)}
+						
 					</div>
 					{/* input 2 */}
 					<button type='button' className={styles.button__disabled}>Deposit</button>
