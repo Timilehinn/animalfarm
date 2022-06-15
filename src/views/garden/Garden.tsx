@@ -59,7 +59,7 @@ function Garden() {
 						)}
 					</div>
 					{/* input 2 */}
-					<button className={styles.button__disabled}>Deposit</button>
+					<button type='button' className={styles.button__disabled}>Deposit</button>
 					<div className={styles.reward__center}>
 						<p className={styles.reward__header} >Reward center</p>
 						<div className={styles.info__area}>
@@ -67,10 +67,10 @@ function Garden() {
 							<Info title='Seeds available' info='0' />
 						</div>
 						<div className={styles.reward__center__buttons}>
-							<button id={styles.button__one} className={styles.button__disabled}>
+							<button type='button' id={styles.button__one} className={styles.button__disabled}>
 								Compound seed
 							</button>
-							<button id={styles.button__two} className={styles.button__disabled}>
+							<button type='button' id={styles.button__two} className={styles.button__disabled}>
 								Sell seed
 							</button>
 						</div>
