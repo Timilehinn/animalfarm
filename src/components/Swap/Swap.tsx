@@ -23,16 +23,50 @@ function Swap() {
 			name: 'DOG',
 			icon: dog,
 		},
+		{
+			name:'BUSD',
+			icon:busd
+		}
+	]
+
+	const tokens2 = [
+		{
+			name: 'PIGS',
+			icon: pig,
+		},
+		{
+			name: 'DOG',
+			icon: dog,
+		},
+		{
+			name: 'BUSD',
+			icon: busd,
+		},
 	]
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
-	const [activeToken, setActiveToken] = useState(0)
+	const [isMenuOpen2, setIsMenuOpen2] = useState(false)
+	const [activeToken, setActiveToken] = useState(1)
+	const [activeToken2, setActiveToken2] = useState(0)
 	const [inputOne, setInputOne] = useState('')
 	const [inputTwo, setInputTwo] = useState('')
 
 	const handleMenuClick = (index: number) => {
+		if(tokens[index].name===tokens2[activeToken2].name){
+			return
+		}
 		setActiveToken(index)
 		setIsMenuOpen(false)
+		console.log(tokens[index])
+		console.log(tokens2[activeToken2])
+	}
+
+	const handleMenuClick2 = (index: number) => {
+		if (tokens2[index].name === tokens[activeToken].name) {
+			return
+		}
+		setActiveToken2(index)
+		setIsMenuOpen2(false)
 	}
 
 	return (
@@ -49,11 +83,11 @@ function Swap() {
 				<div className={styles.balance}>
 					<p>Available {tokens[activeToken].name} </p>
 					<p>0$</p>
-				</div>
+				</div> 
 				{isMenuOpen && (
 					<div className={styles.box}>
 						{tokens.map((item, index) => (
-							<div onClick={() => handleMenuClick(index)} className={styles.box__item}>
+							<div  onClick={() => handleMenuClick(index)} className={styles.box__item}>
 								<img src={item.icon} alt='' />
 								<p style={{ color: 'white' }}> {item.name}</p>
 							</div>
@@ -67,9 +101,9 @@ function Swap() {
 
 			<div className={styles.inputBox}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-					<div className={styles.logo}>
-						<img src={busd} alt='' />
-						<p>BUSD</p>
+					<div onClick={() => setIsMenuOpen2(!isMenuOpen2)} className={styles.logo}>
+						<img src={tokens2[activeToken2].icon} alt='' /> 
+						<p>{tokens2[activeToken2].name}</p>
 					</div>
 					<input min='0' required type='number' value={inputTwo} onChange={(e) => setInputTwo(e.target.value)} placeholder='0.0' />
 				</div>
@@ -77,6 +111,16 @@ function Swap() {
 					<p>Available BUSD </p>
 					<p>0$</p>
 				</div>
+				{isMenuOpen2 && (
+					<div className={styles.box}>
+						{tokens2.map((item, index) => (
+							<div onClick={() => handleMenuClick2(index)} className={styles.box__item}>
+								<img src={item.icon} alt='' />
+								<p style={{ color: 'white' }}> {item.name}</p>
+							</div>
+						))}
+					</div>
+				)}
 			</div>
 			<div className={styles.slippage}>
 				<p>Slippage settings</p>
