@@ -40,6 +40,19 @@
 
 		position: relative;
 
+		.balance{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 20px;
+
+			p{
+				font-size: 0.8rem;
+				color:#FFFFFF99;
+;
+			}
+		}
+
 		.bal {
 			text-align: end;
 			font-size: 0.9rem;
@@ -59,6 +72,7 @@
 			display: flex;
 			width: 40%;
 			align-items: center;
+			cursor: pointer;
 
 			img {
 				margin-right: 10px;
@@ -153,6 +167,7 @@
 				background: rgba(243, 186, 47, 0.14);
 				color: #f3ba2f;
 				font-family: $boldFont;
+				cursor: not-allowed;
 			}
 
 			button:nth-child(1) {
@@ -163,6 +178,7 @@
 			button.active {
 				background: #f3ba2f;
 				color: #ffffff;
+				cursor: not-allowed;
 			}
 
 			input {
@@ -186,6 +202,7 @@
 			input.active {
 				border: 1px solid #f3ba2f;
 				color: #f3ba2f;
+				cursor: not-allowed;
 			}
 		}
 

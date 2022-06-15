@@ -16,7 +16,7 @@ interface farmProps {
 function Swap() {
 	const tokens = [
 		{
-			name: 'PIG',
+			name: 'PIGS',
 			icon: pig,
 		},
 		{
@@ -30,9 +30,9 @@ function Swap() {
 	const [inputOne, setInputOne] = useState('')
 	const [inputTwo, setInputTwo] = useState('')
 
-	const handleMenuClick = (index:number) => {
-	  setActiveToken(index)
-	   setIsMenuOpen(false)
+	const handleMenuClick = (index: number) => {
+		setActiveToken(index)
+		setIsMenuOpen(false)
 	}
 
 	return (
@@ -45,6 +45,10 @@ function Swap() {
 						<img id={styles.dropdown} src={arrow} alt='' />
 					</div>
 					<input min='0' required type='number' value={inputOne} onChange={(e) => setInputOne(e.target.value)} placeholder='0.0' />
+				</div>
+				<div className={styles.balance}>
+					<p>Available {tokens[activeToken].name} </p>
+					<p>0$</p>
 				</div>
 				{isMenuOpen && (
 					<div className={styles.box}>
@@ -69,6 +73,10 @@ function Swap() {
 					</div>
 					<input min='0' required type='number' value={inputTwo} onChange={(e) => setInputTwo(e.target.value)} placeholder='0.0' />
 				</div>
+				<div className={styles.balance}>
+					<p>Available BUSD </p>
+					<p>0$</p>
+				</div>
 			</div>
 			<div className={styles.slippage}>
 				<p>Slippage settings</p>
@@ -86,7 +94,7 @@ function Swap() {
 				</div>
 				<div className={styles.tolerance}>
 					<p>Slippage tolerance</p>
-					<p className={styles.price}>90%</p>
+					<p className={styles.price}>0%</p>
 				</div>
 			</div>
 			{/* buttons */}
