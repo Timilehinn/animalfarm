@@ -10,7 +10,6 @@
 	border-width: 1px;
 	border-color: transparent;
 	border-radius: 10px;
-	
 
 	header {
 		display: flex;
@@ -203,6 +202,16 @@
 
 		p {
 			color: #f3ba2a;
+			margin-right: 5px;
+		}
+
+		span {
+			display: flex;
+			align-items: center;
+			cursor: pointer;
+			svg {
+				color: #f3ba2a;
+			}
 		}
 	}
 }
