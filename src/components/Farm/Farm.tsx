@@ -1,14 +1,18 @@
 import React, { useState } from 'react'
 import Info from 'components/Info/Info'
 import { useSpring, animated } from 'react-spring'
+import { Icon } from '@iconify/react'
 import styles from './Farm.module.scss'
 import dog from '../../assets/dogg.png'
 import pig from '../../assets/busd.png'
 import coree from '../../assets/core.png'
 import arrow from '../../assets/arrow-down.png'
+import arrowup from '../../assets/arrow-up.png'
+import linkImage from '../../assets/linkimage.png'
+
 
 interface farmProps {
-	pair1?: any
+	pair1?: any 
 	pair2?: any
 	core?: boolean
 	multiplier?: number
@@ -26,6 +30,17 @@ interface farmProps {
 
 function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr, totalLiquidity, rewardToken, core, id, current, setCurrent, earned }: farmProps) {
 	const props = useSpring({ to: { opacity: 1, y: 0 }, from: { opacity: 0, y: 50 }, delay: 100 })
+	const [isCollapsed,setIsCollapsed] = useState(false)
+
+	const handleCollapse = () => {
+		if (id === current) {
+			setCurrent(null)
+			setIsCollapsed(false)
+		} else {
+			setCurrent(id)
+			setIsCollapsed(!isCollapsed)
+		}
+	}
 
 	return (
 		<div className={styles.farm}>
@@ -87,9 +102,9 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 			<div className={styles.buttons}>
 				<button type='button'>Enter Amount</button>
 			</div>
-			<div onClick={id === current ? () => setCurrent(null) : () => setCurrent(id)} className={styles.collapsible}>
+			<div onClick={() => handleCollapse()} className={styles.collapsible}>
 				<p>Details</p>
-				<img src={arrow} alt='' />
+				<img src={isCollapsed && current === id ? arrowup : arrow} alt='' />
 			</div>
 			{id === current && (
 				<div className={styles.bottom__info}>
@@ -98,9 +113,21 @@ function Farm({ pair1, pair2, title, multiplier, amountStaked, amountEarned, apr
 						<p>N/A</p>
 					</div>
 					<div className={styles.bottom__info__tokens}>
-						<p>Get DOGS/BUSD</p>
+						{/* <p>Get DOGS/BUSD</p>
 						<p>View contract</p>
-						<p>See pair info</p>
+						<p>See pair info</p> */}
+						<span>
+							<p>Get DOGS/BUSD</p>
+							<Icon icon='eva:external-link-outline' />
+						</span>
+						<span>
+							<p>View contract</p>
+							<Icon icon='eva:external-link-outline' />
+						</span>
+						<span>
+							<p>See pair info</p>
+							<Icon icon='eva:external-link-outline' />
+						</span>
 					</div>
 				</div>
 			)}
