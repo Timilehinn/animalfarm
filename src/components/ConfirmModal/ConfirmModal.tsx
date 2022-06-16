@@ -18,6 +18,7 @@ function ConfirmModal() {
 
 	const confirm = () => {
 		modalProps.confirmFunction()
+		closeModal()
 	}
 
 	return (

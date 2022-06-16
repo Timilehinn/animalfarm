@@ -1,4 +1,5 @@
 export * from './animalFarmToken'
+// Deprecated: Use PancakeSwapRouterv2Address
 export const pancakeswapRouterAddress = '0x10ED43C718714eb63d5aA57B78B54704E256024E'
 export const WBNBAddress = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
 export const BEP_ETH = '0x2170Ed0880ac9A755fd29B2688956BD959F933F8'
@@ -20,6 +21,9 @@ export const PigPenAddress = '0x1f8a98bE5C102D145aC672ded99C5bE0330d7e4F'
 export const PiggyBankAddress = '0x1514c766127378Ea9653F9F4428fe25f3fD256c3'
 export const RewardsVaultAddress = '0x68Bdc7b480d5b4df3bB086Cc3f33b0AEf52F7d55'
 export const LiquidityHelperPigsV2Address = '0x925c3092765F5b4b9A1b966Bf76c79B8b639D90A'
+
+// PancakeSwap related addresses
+export const PancakeSwapRouterv2Address = '0x10ED43C718714eb63d5aA57B78B54704E256024E'
 
 export const LARGE_NUMBER = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
 
