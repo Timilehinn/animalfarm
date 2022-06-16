@@ -12,3 +12,12 @@
     }
   
 }
+
+@media screen and (max-width:1024px) {
+	.swap{
+        padding: 50px 20px 0px 20px;
+        .swapcomp{
+            width: 100%;
+        }
+    }
+}
