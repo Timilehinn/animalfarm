@@ -53,6 +53,10 @@ function SideNavigation() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
+				<NavLink to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+					<Icon icon='ri:refund-2-line' />
+					<p>Swap</p>
+				</NavLink>
 				<NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ri:refund-2-line' />
 					<p>Add Liquidity</p>
@@ -77,10 +81,10 @@ function SideNavigation() {
 					<Icon icon='ep:document-checked' />
 					<p>Documentation</p>
 				</a>
-				<NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				{/* <NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='dashicons:migrate' />
 					<p>Migrate</p>
-				</NavLink>
+				</NavLink> */}
 				<a className={styles.link} href='https://theanimal.farm/dripliberation' target='_blank' rel='noreferrer'>
 					<Icon icon='bx:bar-chart-alt-2' />
 					<p>Drip Liberation</p>
