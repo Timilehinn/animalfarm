@@ -13,6 +13,24 @@ $brown: rgba(255, 255, 255, 0.6);
 		padding-top: 50px;
 		max-width: 1500px;
 		width: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.cards {
+			width: 40%;
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 20px;
+			margin-bottom: 50px;
+
+			div {
+				background: #221e16;
+				// height: 80px;
+				border-radius: 10px;
+			}
+		}
 
 		section {
 			width: 40%;
@@ -46,7 +64,7 @@ $brown: rgba(255, 255, 255, 0.6);
 					.bonus__in {
 						color: rgba(217 217 212 / 90%);
 						border-bottom: 1px solid rgba(217 217 212 / 90%);
-                        padding-bottom: 10px;
+						padding-bottom: 10px;
 					}
 					// width: 100%;
 				}
@@ -84,12 +102,16 @@ $brown: rgba(255, 255, 255, 0.6);
 
 					img {
 						margin-right: 10px;
+						height: 2rem;
+					}
+					#drip {
+						margin-left: -20px;
 					}
 
 					p {
 						color: $gold;
 						font-weight: bold;
-						font-size: 1.2rem;
+						font-size: 1rem;
 					}
 				}
 
@@ -202,6 +224,45 @@ $brown: rgba(255, 255, 255, 0.6);
 					}
 				}
 			}
+		}
+
+        .about{
+            width: 50%;
+            h3{
+                color:#f3ba2a;
+                text-align: center;
+                margin-bottom: 20px;
+                margin-top: 30px;
+            }
+
+            img{
+                border:1px solid #f3ba2a;
+                margin-top: 30px;
+            }
+        }
+	}
+}
+
+
+@media screen and (max-width:1024px) {
+	.addliquidity__wrap{
+		
+		.addliquidity{
+			padding-left: 20px;
+			padding-right: 20px;
+            .cards{
+                width: 100%;
+            }
+			section{
+				width: 100%;
+			}
+
+            .about{
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
 		}
 	}
 }
