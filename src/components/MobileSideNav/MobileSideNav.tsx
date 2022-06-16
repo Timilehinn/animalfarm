@@ -69,7 +69,7 @@ function MobileSideNav() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
-				<NavLink to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				<NavLink onClick={() => closeNav()} to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ph:swap-light' />
 					<p>Swap</p>
 				</NavLink>

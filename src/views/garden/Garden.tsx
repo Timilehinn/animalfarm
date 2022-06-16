@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js'
 
 import Info from 'components/Info/Info'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
-
+import Preloader from 'components/prealoder/preloader'
 import styles from './Garden.module.scss'
 import pigs from '../../assets/svgg.png'
 import busd from '../../assets/bbusd.png'
@@ -11,8 +11,7 @@ import drip from '../../assets/drip.png'
 import garden from '../../assets/gardengraph.png'
 
 function Garden() {
-
-    const tokens = [
+	const tokens = [
 		{
 			name: 'PIGS',
 			icon: pigs,
@@ -26,7 +25,21 @@ function Garden() {
 			icon: busd,
 		},
 	]
-    const [isMenuOpen,setIsMenuOpen] = useState(false)
+	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [showApprove, setShowApprove] = useState(false)
+	const [pendingApproval, setPendingApprovel] = useState(false)
+	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+	const [pending, setPending] = useState(false)
+	const dripBusdBal = '10'
+
+	const handleApprove = () => {
+		return ''
+	}
+
+    const deposit = () => {
+      return ''
+    }
+
 	return (
 		<div className={styles.addliquidity__wrap}>
 			<div className={styles.addliquidity}>
@@ -58,10 +71,32 @@ function Garden() {
 							<input min='0' required type='number' placeholder='0.0' />
 						</div>
 					</div>
-					{/* input 2 */}
-					<button type='button' className={styles.button__disabled}>
-						Deposit
-					</button>
+					{/* buttons */}
+					{showApprove &&
+						(pendingApproval ? (
+							<button type='button' className={styles.button__enabled}>
+								<Preloader />
+							</button>
+						) : (
+							<button onClick={handleApprove} type='button' className={styles.button__enabled}>
+								Approve
+							</button>
+						))}
+					{/* Swap Button */}
+					{isButtonDisabled ? (
+						<button type='button' className={styles.button__disabled}>
+							{Number(dripBusdBal) === 0 ? `Insufficient DRIP/BUSD LP Balance` : 'Enter amount'}
+						</button>
+					) : pending ? (
+						<button type='button' className={styles.button__enabled}>
+							<Preloader />
+						</button>
+					) : (
+						
+						<button onClick={deposit}  type='button' className={styles.button__enabled}>
+							Deposit
+						</button>
+					)}
 					<div className={styles.reward__center}>
 						<p className={styles.reward__header}>Reward center</p>
 						<div className={styles.info__area}>
@@ -90,7 +125,7 @@ function Garden() {
 						plants get in the ground the larger you can grow your garden and out perform the competition. The time multiplier is designed to attract new waves capital after we have reached saturation and the contract growth has slowed due
 						to the buying power of new capital creeping up by 0.1% non compounding every day. This means there will always be a time in the future where it makes sense for fresh capital to come in and kick start a new wave gardeners!
 					</p>
-                    <img src={garden} alt="" />
+					<img src={garden} alt='' />
 				</div>
 			</div>
 		</div>

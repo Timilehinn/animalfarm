@@ -19,7 +19,7 @@ function SideNavigation() {
 			localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
 			localStorage.setItem('pigPenInfo', 'pigPenInfo')
 		} else {
-			localStorage.removeItem('piggyBankInfo')
+			localStorage.removeItem('piggyBankInfo')     
 			localStorage.removeItem('pigCreditInfo')
 			localStorage.removeItem('pigPenInfo')
 		}
@@ -56,7 +56,7 @@ function SideNavigation() {
 				<NavLink to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ph:swap-light' />
 					<p>Swap</p>
-				</NavLink>
+				</NavLink>    
 				<NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ri:refund-2-line' />
 					<p>Add Liquidity</p>
