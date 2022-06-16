@@ -8,6 +8,7 @@ import styles from './Garden.module.scss'
 import pigs from '../../assets/svgg.png'
 import busd from '../../assets/bbusd.png'
 import drip from '../../assets/drip.png'
+import garden from '../../assets/gardengraph.png'
 
 function Garden() {
 
@@ -31,9 +32,8 @@ function Garden() {
 			<div className={styles.addliquidity}>
 				<div className={styles.cards}>
 					<PigsCreditCard title='Total LP locked' amount='0 DRIP/BUSD' />
-		
-						<PigsCreditCard title='Total value of LP locked' amount='$0' />
-				
+
+					<PigsCreditCard title='Total value of LP locked' amount='$0' />
 				</div>
 
 				<section>
@@ -78,6 +78,20 @@ function Garden() {
 						</div>
 					</div>
 				</section>
+				<div className={styles.about}>
+					<h3>About Drip Garden</h3>
+					<p>
+						The piggy bank is the first ever non-inflationary variable time staking annuity. Stake pigs/busd lp tokens to earn up to 3% daily roi!! to unlock referral bonuses you must have dogs staked in the single asset staking pool (see
+						bottom of page). Time lock your harvest to earn a massive bonus on yield, airdrop stakes to friends and family using the gift stake function, most importantly take control of your financial future on the animal farm!!
+					</p>
+					<h3>Drip Garden Mechanism</h3>
+					<p>
+						As you can see, the DRIP Garden increases buying power over time and as the balance of the contract grows ensuring that you will always get a fair rate. There is still a benefit to getting in early because the earlier your
+						plants get in the ground the larger you can grow your garden and out perform the competition. The time multiplier is designed to attract new waves capital after we have reached saturation and the contract growth has slowed due
+						to the buying power of new capital creeping up by 0.1% non compounding every day. This means there will always be a time in the future where it makes sense for fresh capital to come in and kick start a new wave gardeners!
+					</p>
+                    <img src={garden} alt="" />
+				</div>
 			</div>
 		</div>
 	)

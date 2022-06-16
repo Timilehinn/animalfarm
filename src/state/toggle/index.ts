@@ -27,6 +27,19 @@ interface initialStateProps {
 	toastNotificationMsg
 	isDepositModalOpen: boolean
 	isTourModalOpen: tourMod
+
+	swapModalProps: {
+		isSwapModalOpen: boolean
+		swapingFrom: {
+			tokenName: string
+			amount: string
+		}
+		swapingTo: {
+			tokenName: string
+			amount: string
+		}
+		confirmFunction: ()=>void
+	}
 }
 
 const initialState: initialStateProps = {
@@ -48,6 +61,19 @@ const initialState: initialStateProps = {
 	isTourModalOpen: {
 		state: false,
 		msg: '',
+	},
+	// swap modal props
+	swapModalProps: {
+		isSwapModalOpen: false,
+		swapingFrom: {
+			tokenName: '',
+			amount: '',
+		},
+		swapingTo: {
+			tokenName: '',
+			amount: '',
+		},
+		confirmFunction: null,
 	},
 }
 
@@ -78,8 +104,11 @@ const toggleSlice = createSlice({
 			state.isTourModalOpen.msg = action.payload.msg
 			state.isTourModalOpen.state = action.payload.state
 		},
+		toggleSwapModal: (state, action: PayloadAction<any>) => {
+			state.swapModalProps = action.payload
+		},
 	},
 })
 
 export default toggleSlice.reducer
-export const { toggleMobileNav, toggleModalBackDrop, toggleConfirmModal, setModalProps, toggleToastNotification, toggleDepositModal, toggleTourModal } = toggleSlice.actions
+export const { toggleMobileNav, toggleModalBackDrop, toggleConfirmModal, setModalProps, toggleToastNotification, toggleDepositModal, toggleTourModal,toggleSwapModal } = toggleSlice.actions

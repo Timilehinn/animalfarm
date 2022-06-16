@@ -11,7 +11,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useAppDispatch } from 'state/hooks'
 import { usePricing } from 'state/pricing/hooks'
 import useToast from 'hooks/useToast'
-import { setModalProps, toggleModalBackDrop, toggleConfirmModal } from 'state/toggle'
+import { setModalProps, toggleModalBackDrop, toggleSwapModal } from 'state/toggle'
 
 // APIs
 import { fetchDataForSwap, approveSpendPIGS, swapCallback } from 'api/swap'
@@ -176,6 +176,7 @@ function Swap() {
 
 	const handleMenuClick = (index: number) => {
 		if (index === activeToken2) {
+			toastInfo(`you can't swap ${tokens[activeToken2].name} for ${tokens[index].name}`)
 			return
 		}
 		setActiveToken(index)
@@ -183,6 +184,7 @@ function Swap() {
 	}
 	const handleMenuClick2 = (index: number) => {
 		if (index === activeToken) {
+			toastInfo(`you can't swap ${tokens[activeToken].name} for ${tokens[index].name}`)
 			return
 		}
 		setActiveToken2(index)
@@ -287,27 +289,27 @@ function Swap() {
 
 	// confirm modal props
 	const modalProps = {
-		modalTitleText: 'Confirm Swap',
-		confirmButtonText: 'Swap',
-		value: '',
-		text: 'PIGS / BUSD',
-		warning: '*Estimated values.',
-		infoValues: [
-			{ title: `${tokens[activeToken].name} swapped`, value: `${inputOne}` },
-			{ title: `${tokens[activeToken2].name} received`, value: `${inputTwo}` },
-		],
+		isSwapModalOpen: true,
+		swapingFrom: {
+			tokenName: `${tokens[activeToken].name} `,
+			amount: `${inputOne}`,
+		},
+		swapingTo: {
+			tokenName: `${tokens[activeToken2].name}`,
+			amount: `${inputTwo}`,
+		},
 		confirmFunction: _swap,
 	}
 
 	// open confirm modal
 	const openModal = () => {
 		dispatch(toggleModalBackDrop(true))
-		dispatch(toggleConfirmModal(true))
-		dispatch(setModalProps(modalProps))
+		dispatch(toggleSwapModal(modalProps))
 	}
 
 	return (
 		<div className={styles.farm}>
+			
 			<div className={styles.inputBox}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div onClick={() => openMenu(1)} className={styles.logo}>

@@ -225,6 +225,21 @@ $brown: rgba(255, 255, 255, 0.6);
 				}
 			}
 		}
+
+        .about{
+            width: 50%;
+            h3{
+                color:#f3ba2a;
+                text-align: center;
+                margin-bottom: 20px;
+                margin-top: 30px;
+            }
+
+            img{
+                border:1px solid #f3ba2a;
+                margin-top: 30px;
+            }
+        }
 	}
 }
 
@@ -241,6 +256,13 @@ $brown: rgba(255, 255, 255, 0.6);
 			section{
 				width: 100%;
 			}
+
+            .about{
+                width: 100%;
+                img{
+                    width: 100%;
+                }
+            }
 		}
 	}
 }
