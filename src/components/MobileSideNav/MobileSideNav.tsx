@@ -69,6 +69,10 @@ function MobileSideNav() {
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Piggy Bank</p>
 				</NavLink>
+				<NavLink onClick={() => closeNav()} to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+					<Icon icon='ph:swap-light' />
+					<p>Swap</p>
+				</NavLink>
 				<NavLink onClick={() => closeNav()} to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ri:refund-2-line' />
 					<p>Add Liquidity</p>
