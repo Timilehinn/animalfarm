@@ -1,0 +1,13 @@
+.bar{
+    height: 10px;
+    width: 100%;
+    background-color: #474E47;
+    border-radius: 5px;
+    margin-top: 10px;
+    .bar__in{
+        height: 100%;
+            border-radius: 5px;
+        // width: 80%;
+        background-color: #F3BA2F;
+    }
+}
