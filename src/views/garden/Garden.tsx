@@ -70,7 +70,6 @@ function Garden() {
 	const userSeedsText = Number(userSeeds) > 0 ? userSeeds.toString() : '0'
 
 	const SeedProgress = garden ? ((Number(userSeeds) / seedsToPlant) * 100).toString() : '0'
-	console.log('SeedProgress: ', SeedProgress)
 	const userSeedsAvailable = garden ? new BigNumber(garden.userData.availableSeeds) : new BigNumber('0')
 	const userAvailableText = Number(userSeedsAvailable) > 0 ? userSeedsAvailable.toString() : '0'
 	const userPlantsAvailable = garden ? Math.trunc(Number(garden.userData.seeds) / seedsToPlant) : 'N/A'
