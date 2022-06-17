@@ -82,9 +82,9 @@ function Landing() {
 						<Route path='/farms' element={<Farms />} />
 						<Route path='/pools' element={<Pools />} />
 						<Route path='/swap' element={<Swap />} />
-						<Route path='/drip-liberation' element={<DripLiberation />} />
-						<Route path='/garden' element={<Garden />} />
-						<Route path='/garden/:referee' element={<Garden />} />
+						{/* <Route path='/drip-liberation' element={<DripLiberation />} /> */}
+						{/* <Route path='/garden' element={<Garden />} />
+						<Route path='/garden/:referee' element={<Garden />} /> */}
 						<Route path='*' element={<ErrorPage />} />
 					</Routes>
 				</Suspense>

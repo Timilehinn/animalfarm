@@ -73,14 +73,14 @@ function SideNavigation() {
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
 				</a> */}
-				<NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				{/* <NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
-				</NavLink>
-				{/* <a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
+				</NavLink> */}
+				<a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
-				</a> */}
+				</a>
 				{/* <NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='dashicons:migrate' />
 					<p>Migrate</p>

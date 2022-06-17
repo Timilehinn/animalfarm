@@ -89,10 +89,14 @@ function MobileSideNav() {
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
 				</a> */}
-				<NavLink onClick={() => closeNav()} to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				{/* <NavLink onClick={() => closeNav()} to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
-				</NavLink>
+				</NavLink> */}
+				<a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
+					<Icon icon='maki:garden' />
+					<p>Drip Garden</p>
+				</a>
 				{/* <NavLink onClick={() => closeNav()} to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Migrate</p>
