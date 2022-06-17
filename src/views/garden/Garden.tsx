@@ -330,10 +330,27 @@ function Garden() {
 								<img id={styles.drip} src={drip} alt='' />
 								<p>DRIP/BUSD LP</p>
 							</div>
-							<input min='0' required type='number' value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder='0.0' />
+							<input min='0' required type='number' value={amountFormatter(inputValue, 9)} onChange={(e) => setInputValue(e.target.value)} placeholder='0.0' />
 						</div>
 						<div className={styles.balance}>
-							<p>Balance: {amountFormatter(getBalanceAmountString(garden.userData.lpBalance), 9)}</p>
+							<p
+								onClick={() => {
+									setInputValue(amountFormatter(getBalanceAmountString(garden.userData.lpBalance)))
+								}}
+								role='presentation'
+								className={styles.autoFillBusd}
+							>
+								Balance: {amountFormatter(getBalanceAmountString(garden.userData.lpBalance), 9)}
+							</p>
+							<p
+								onClick={() => {
+									setInputValue(amountFormatter(getBalanceAmountString(garden.userData.lpBalance)))
+								}}
+								role='presentation'
+								className={styles.autoFillBusd}
+							>
+								Max
+							</p>
 						</div>
 					</div>
 
