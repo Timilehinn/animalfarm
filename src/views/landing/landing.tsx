@@ -33,6 +33,7 @@ const Farms = React.lazy(() => import('../farms/Farms'))
 const Swap = React.lazy(()=>import('../swap/Swap'))
 const Pools = React.lazy(() => import('../pools/Pools'))
 const Garden = React.lazy(() => import('../garden/Garden'))
+const DripLiberation = React.lazy(() => import('../dripLiberation/DripLiberation'))
 
 function Landing() {
 	const { login } = useAuth()
@@ -84,6 +85,7 @@ function Landing() {
 						<Route path='/farms' element={<Farms />} />
 						<Route path='/pools' element={<Pools />} />
 						<Route path='/swap' element={<Swap />} />
+						<Route path='/drip-liberation' element={<DripLiberation />} />
 						<Route path='/garden' element={<Garden />} />
 						<Route path='*' element={<ErrorPage />} />
 					</Routes>
