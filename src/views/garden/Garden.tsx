@@ -4,6 +4,7 @@ import BigNumber from 'bignumber.js'
 import Info from 'components/Info/Info'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import Preloader from 'components/prealoder/preloader'
+import ProgressBarr from 'components/ProgressBar/ProgressBar'
 
 // State and hooks
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
@@ -20,6 +21,7 @@ import styles from './Garden.module.scss'
 import busd from '../../assets/bbusd.png'
 import drip from '../../assets/drip.png'
 import gardenGraphImage from '../../assets/gardengraph.png'
+
 
 function Garden() {
 	const { garden } = useGarden()
@@ -39,6 +41,7 @@ function Garden() {
 	const [pendingApproval, setPendingApproval] = useState(false)
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+    const [progress, setProgress] = React.useState('50%')
 
 	const seedsToPlant = 2592000
 	const usdValue = garden ? new BigNumber(garden.userData.usdValue) : new BigNumber('0')
@@ -169,6 +172,9 @@ function Garden() {
 							</div>
 							<input min='0' required type='number' value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder='0.0' />
 						</div>
+						<div className={styles.balance}>
+							<p>Balance : 0 DRIP/BUSD</p>
+						</div>
 					</div>
 					{/* buttons */}
 					{showApprove &&
@@ -202,6 +208,10 @@ function Garden() {
 							<Info title='Seeds Available' info={`${userSeedsText}`} />
 							<Info title='Seeds Available Value' info={`$${usdValueText.toString()} (${userAvailableText} LP)`} />
 							<Info title='Seeds Per Day' info={`${productionRateDay.toString()}`} />
+						</div>
+						<div className={styles.progress}>
+							<p>N/A until ready to sow</p>
+							<ProgressBarr progress={progress} />
 						</div>
 						<div className={styles.reward__center__buttons}>
 							<button type='button' id={styles.button__one} className={styles.button__disabled}>
