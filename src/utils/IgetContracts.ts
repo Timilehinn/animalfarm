@@ -11,9 +11,10 @@ import PigCreditsABI from 'config/abi/pigsCreditAbi.json'
 import PigPenV2ABI from 'config/abi/PigPenV2.json'
 import LiquidityHelperPigsV2ABI from 'config/abi/LiquidityHelperPigsV2.json'
 import PancakeRouterv2ABI from 'config/abi/PancakeRouterv2.json'
+import DripGardenABI from 'config/Iabi/DripGarden.json'
 
 // Addresses
-import { PIGSAddress, PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress, LiquidityHelperPigsV2Address, PancakeSwapRouterv2Address } from '../config/constants'
+import { PIGSAddress, PigsCreditAddress, PigPenAddress, PiggyBankAddress, MultiCallAddress, LiquidityHelperPigsV2Address, PancakeSwapRouterv2Address, DripGardenAddress } from '../config/constants'
 
 const getContract = (abi: any, address: string, signer?: ethers.Signer | ethers.providers.Provider) => {
 	const signerOrProvider = signer ?? simpleRpcProvider
@@ -53,4 +54,8 @@ export const getLiquidityHelperContract = (signer?: ethers.Signer | ethers.provi
 
 export const getPancakeRouterv2Contract = (signer?: ethers.Signer | ethers.providers.Provider) => {
 	return getContract(PancakeRouterv2ABI, PancakeSwapRouterv2Address, signer)
+}
+
+export const getDripGardenContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
+	return getContract(DripGardenABI, DripGardenAddress, signer)
 }

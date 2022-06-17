@@ -19,7 +19,7 @@ function SideNavigation() {
 			localStorage.setItem('pigCreditInfo', 'pigCreditInfo')
 			localStorage.setItem('pigPenInfo', 'pigPenInfo')
 		} else {
-			localStorage.removeItem('piggyBankInfo')     
+			localStorage.removeItem('piggyBankInfo')
 			localStorage.removeItem('pigCreditInfo')
 			localStorage.removeItem('pigPenInfo')
 		}
@@ -54,9 +54,9 @@ function SideNavigation() {
 					<p>Piggy Bank</p>
 				</NavLink>
 				<NavLink to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='ph:swap-light' />
+					<Icon icon='ic:outline-swap-horizontal-circle' />
 					<p>Swap</p>
-				</NavLink>    
+				</NavLink>
 				<NavLink to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='ri:refund-2-line' />
 					<p>Add Liquidity</p>
@@ -73,10 +73,14 @@ function SideNavigation() {
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
 				</a> */}
-				<a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
+				<NavLink to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
-				</a>
+				</NavLink>
+				{/* <a className={styles.link} href='https://theanimal.farm/garden' target='_blank' rel='noreferrer'>
+					<Icon icon='maki:garden' />
+					<p>Drip Garden</p>
+				</a> */}
 				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
 					<Icon icon='ep:document-checked' />
 					<p>Documentation</p>

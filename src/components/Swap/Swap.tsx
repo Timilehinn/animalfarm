@@ -11,7 +11,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useAppDispatch } from 'state/hooks'
 import { usePricing } from 'state/pricing/hooks'
 import useToast from 'hooks/useToast'
-import { setModalProps, toggleModalBackDrop, toggleSwapModal } from 'state/toggle'
+import { toggleModalBackDrop, toggleSwapModal } from 'state/toggle'
 
 // APIs
 import { fetchDataForSwap, approveSpendPIGS, swapCallback } from 'api/swap'
@@ -122,6 +122,12 @@ function Swap() {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inputOne, userData])
+
+	// hook for price changes
+	useEffect(() => {
+		_setInput1(inputOne)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [pigsBusdPrice])
 
 	const setInput1 = (e: any) => {
 		_setInput1(e.target.value)
@@ -292,11 +298,11 @@ function Swap() {
 		isSwapModalOpen: true,
 		swapingFrom: {
 			tokenName: `${tokens[activeToken].name} `,
-			amount: `${inputOne}`,
+			amount: `${amountFormatter(inputOne, 7)}`,
 		},
 		swapingTo: {
 			tokenName: `${tokens[activeToken2].name}`,
-			amount: `${inputTwo}`,
+			amount: `${amountFormatter(inputTwo, 7)}`,
 		},
 		confirmFunction: _swap,
 	}
@@ -309,7 +315,6 @@ function Swap() {
 
 	return (
 		<div className={styles.farm}>
-			
 			<div className={styles.inputBox}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div onClick={() => openMenu(1)} className={styles.logo}>
@@ -390,8 +395,7 @@ function Swap() {
 					<Preloader />
 				</button>
 			) : (
-				// TODO: disabled={showApprove}
-				<button onClick={openModal} type='button' className={styles.button__enabled}>
+				<button disabled={showApprove} onClick={openModal} type='button' className={showApprove ? styles.button__disabled : styles.button__enabled}>
 					Swap
 				</button>
 			)}

@@ -8,7 +8,7 @@ import { useAppDispatch } from 'state/hooks'
 import { usePricing } from 'state/pricing/hooks'
 import SideNavigation from 'components/SideNavigation/SideNavigation'
 import TopNav from 'components/TopNav/TopNav'
-import PigsCredit from 'views/pigsCredit/PigsCredit'    
+import PigsCredit from 'views/pigsCredit/PigsCredit'
 import PiggyBank from 'views/piggyBank/PiggyBank'
 import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
@@ -18,8 +18,7 @@ import TourModal from 'components/TourModal/TourModal'
 import ErrorPage from 'views/404/ErrorPage'
 import Settings from 'components/Settings/Settings'
 import GardenConfirmModal from 'components/SwapConfirmModal/SwapConfirmModal'
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal' 
-
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav'
@@ -27,10 +26,9 @@ import MobileNav from '../../components/MobileNav/MobileNav'
 import Home from '../home/Home'
 import style from './Landing.module.scss'
 
-
 const AddLiquidity = React.lazy(() => import('../addLiquidity/AddLiquidity'))
 const Farms = React.lazy(() => import('../farms/Farms'))
-const Swap = React.lazy(()=>import('../swap/Swap'))
+const Swap = React.lazy(() => import('../swap/Swap'))
 const Pools = React.lazy(() => import('../pools/Pools'))
 const Garden = React.lazy(() => import('../garden/Garden'))
 
@@ -52,7 +50,7 @@ function Landing() {
 		const priceInterval = setInterval(() => {
 			// console.log('I am running every ten secs')
 			getBusdPrice()
-		}, 10000)
+		}, 5000)
 		return () => {
 			clearInterval(priceInterval)
 		}
