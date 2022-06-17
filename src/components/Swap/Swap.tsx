@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
 
 // Components
+import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import Preloader from 'components/prealoder/preloader'
 
 // State and hooks
@@ -376,6 +377,7 @@ function Swap() {
 			</div>
 			{/* Approval Button */}
 			{showApprove &&
+				account &&
 				(pendingApproval ? (
 					<button type='button' className={styles.button__enabled}>
 						<Preloader />
@@ -386,19 +388,22 @@ function Swap() {
 					</button>
 				))}
 			{/* Swap Button */}
-			{isButtonDisabled ? (
-				<button type='button' className={styles.button__disabled}>
-					{new BigNumber(userData.balance[tokens[activeToken].name]).isLessThan(getDecimalAmount(inputOne)) ? `Insufficient ${tokens[activeToken].name} Balance` : 'Enter amount'}
-				</button>
-			) : pending ? (
-				<button type='button' className={styles.button__enabled}>
-					<Preloader />
-				</button>
-			) : (
-				<button disabled={showApprove} onClick={openModal} type='button' className={showApprove ? styles.button__disabled : styles.button__enabled}>
-					Swap
-				</button>
-			)}
+			{account &&
+				(isButtonDisabled ? (
+					<button type='button' className={styles.button__disabled}>
+						{new BigNumber(userData.balance[tokens[activeToken].name]).isLessThan(getDecimalAmount(inputOne)) ? `Insufficient ${tokens[activeToken].name} Balance` : 'Enter amount'}
+					</button>
+				) : pending ? (
+					<button type='button' className={styles.button__enabled}>
+						<Preloader />
+					</button>
+				) : (
+					<button disabled={showApprove} onClick={openModal} type='button' className={showApprove ? styles.button__disabled : styles.button__enabled}>
+						Swap
+					</button>
+				))}
+			{/* Connect Wallet Button */}
+			{!account && <ConnectWalletButton />}
 			{/* Slippage */}
 			<div className={styles.slippage}>
 				<p>Slippage settings</p>
