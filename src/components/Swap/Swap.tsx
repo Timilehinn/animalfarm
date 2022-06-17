@@ -65,7 +65,7 @@ function Swap() {
 	// Approve States
 	const [isApproved, setIsApproved] = useState(false)
 	// Slippage
-	const [tolerance, setTolerance] = React.useState('10')
+	const [tolerance, setTolerance] = React.useState('1')
 	// Pending State
 	const [pending, setPending] = useState(false)
 	const [pendingApproval, setPendingApproval] = useState(false)
