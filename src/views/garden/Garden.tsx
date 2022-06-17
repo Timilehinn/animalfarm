@@ -1,34 +1,42 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import BigNumber from 'bignumber.js'
 
 import Info from 'components/Info/Info'
 import PigsCreditCard from 'components/PigsCreditCard/PigsCreditCard'
 import Preloader from 'components/prealoder/preloader'
 import ProgressBarr from 'components/ProgressBar/ProgressBar'
+import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 
 // State and hooks
 import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { useAppDispatch } from 'state/hooks'
 import { useGarden, usePollGardenData } from 'state/garden/hooks'
 import useToast from 'hooks/useToast'
+import { setModalProps, toggleConfirmModal, toggleModalBackDrop } from 'state/toggle'
 
 // APIs
-import { approveDripGardenForDripBusdLP } from 'api/garden'
+import { approveDripGardenForDripBusdLP, buySeeds, plantSeeds, sellSeeds } from 'api/garden'
 
 // Utils and helpers
-import { amountFormatter, getDecimalAmount } from 'utils/formatBalance'
+import { amountFormatter, getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
+
+// Config
+import { ZERO_ADDRESS } from 'config/constants'
 
 import styles from './Garden.module.scss'
 import busd from '../../assets/bbusd.png'
 import drip from '../../assets/drip.png'
 import gardenGraphImage from '../../assets/gardengraph.png'
 
-
 function Garden() {
+	const params = useParams()
 	const { garden } = useGarden()
 	const { fetchDripGardenData } = usePollGardenData()
 	const { account, library } = useActiveWeb3React()
 	const signer = library.getSigner()
 	const { toastInfo, toastSuccess, toastError } = useToast()
+	const dispatch = useAppDispatch()
 
 	const [inputValue, setInputValue] = useState('')
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -38,10 +46,11 @@ function Garden() {
 	const [showApprove, setShowApprove] = useState(true)
 	// Pending State
 	const [pending, setPending] = useState(false)
+	const [pendingCompound, setPendingCompound] = useState(false)
+	const [pendingSell, setPendingSell] = useState(false)
 	const [pendingApproval, setPendingApproval] = useState(false)
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-    const [progress, setProgress] = React.useState('50%')
 
 	const seedsToPlant = 2592000
 	const usdValue = garden ? new BigNumber(garden.userData.usdValue) : new BigNumber('0')
@@ -60,12 +69,14 @@ function Garden() {
 	const userSeeds = garden ? new BigNumber(garden.userData.seeds) : 0
 	const userSeedsText = Number(userSeeds) > 0 ? userSeeds.toString() : '0'
 
-	const SeedProgress = garden ? (Number(userSeeds) / seedsToPlant) * 100 : 0
+	const SeedProgress = garden ? ((Number(userSeeds) / seedsToPlant) * 100).toString() : '0'
+	console.log('SeedProgress: ', SeedProgress)
 	const userSeedsAvailable = garden ? new BigNumber(garden.userData.availableSeeds) : new BigNumber('0')
 	const userAvailableText = Number(userSeedsAvailable) > 0 ? userSeedsAvailable.toString() : '0'
 	const userPlantsAvailable = garden ? Math.trunc(Number(garden.userData.seeds) / seedsToPlant) : 'N/A'
 
 	const compoundDisabled = Number(userPlantsAvailable) === 0
+	const sellDisabled = Number(userAvailableText) === 0
 	// console.log("Number(userMiners): ", Number(userMiners).toString())
 	// console.log("compoundDisabled: ", compoundDisabled)
 
@@ -98,6 +109,13 @@ function Garden() {
 		return `${numdays}d ${numhours}h ${numminutes}m`
 	}
 
+	useEffect(() => {
+		if (params.referee) {
+			localStorage.setItem('ref', params.referee)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	// UseEffect for showing approve button
 	useEffect(() => {
 		// Allowance check
@@ -105,11 +123,10 @@ function Garden() {
 			setShowApprove(false)
 			return
 		}
-		// TODO: Uncomment this code
-		// if (new BigNumber(garden.userData.lpBalance).isLessThan(getDecimalAmount(inputValue))) {
-		// 	setShowApprove(false)
-		// 	return
-		// }
+		if (new BigNumber(garden.userData.lpBalance).isLessThan(getDecimalAmount(inputValue))) {
+			setShowApprove(false)
+			return
+		}
 		if (new BigNumber(garden.userData.lpAllowance).isLessThan(getDecimalAmount(inputValue))) {
 			setShowApprove(true)
 			return
@@ -117,6 +134,19 @@ function Garden() {
 		setShowApprove(false)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [inputValue, garden, isApproved])
+	// UseEffect for show main button
+	useEffect(() => {
+		if (new BigNumber(garden.userData.lpBalance).isLessThan(getDecimalAmount(inputValue))) {
+			setIsButtonDisabled(true)
+			return
+		}
+		if (inputValue > '0') {
+			setIsButtonDisabled(false)
+		} else {
+			setIsButtonDisabled(true)
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [inputValue, garden])
 
 	const handleApprovePIGS = async () => {
 		if (!account) {
@@ -140,8 +170,139 @@ function Garden() {
 		}
 	}
 
-	const deposit = () => {
-		return ''
+	const deposit = async () => {
+		if (!account) {
+			toastInfo('Connect wallet to buy plants')
+			return
+		}
+		let ref
+
+		const savedRef = localStorage.getItem('ref')
+		if (savedRef) {
+			if (savedRef === account) {
+				ref = ZERO_ADDRESS
+			} else {
+				ref = savedRef
+			}
+		} else {
+			ref = ZERO_ADDRESS
+		}
+
+		try {
+			setPending(true)
+
+			const res = await buySeeds(ref, getDecimalAmount(amountFormatter(inputValue)), signer)
+
+			if (res.success === true) {
+				setInputValue('')
+				setPending(false)
+				toastSuccess(res.message)
+				fetchDripGardenData()
+			}
+
+			if (res.success === false) {
+				setPending(false)
+				toastError(res.message)
+			}
+		} catch (err) {
+			console.error(err)
+			setPending(false)
+		}
+	}
+	const compound = async () => {
+		if (!account) {
+			toastInfo('Connect wallet to plant seeds')
+			return
+		}
+		let ref
+
+		const savedRef = localStorage.getItem('ref')
+		if (savedRef) {
+			if (savedRef === account) {
+				ref = ZERO_ADDRESS
+			} else {
+				ref = savedRef
+			}
+		} else {
+			ref = ZERO_ADDRESS
+		}
+
+		try {
+			setPendingCompound(true)
+
+			const res = await plantSeeds(ref, signer)
+
+			if (res.success === true) {
+				setPendingCompound(false)
+				toastSuccess(res.message)
+				fetchDripGardenData()
+			}
+
+			if (res.success === false) {
+				setPendingCompound(false)
+				toastError(res.message)
+			}
+		} catch (err) {
+			console.error(err)
+			setPendingCompound(false)
+		}
+	}
+	const sell = async () => {
+		if (!account) {
+			toastInfo('Connect wallet to Sell Seeds')
+			return
+		}
+
+		try {
+			setPendingSell(true)
+
+			const res = await sellSeeds(signer)
+
+			if (res.success === true) {
+				setPendingSell(false)
+				toastSuccess(res.message)
+				fetchDripGardenData()
+			}
+
+			if (res.success === false) {
+				setPendingSell(false)
+				toastError(res.message)
+			}
+		} catch (err) {
+			console.error(err)
+			setPendingSell(false)
+		}
+	}
+
+	const depositModalDetails = {
+		modalTitleText: 'Confirm Buy Plants',
+		confirmButtonText: 'Acknowledge',
+		value: inputValue,
+		text: 'DRIP/BUSD LP',
+		warning: 'Deposit into Drip Garden',
+		infoValues: [],
+		confirmFunction: deposit,
+	}
+	const compoundModalDetails = {
+		modalTitleText: 'Confirm Plant Seeds',
+		confirmButtonText: 'Acknowledge',
+		value: userSeedsText,
+		text: 'Seeds',
+		warning: 'Compound into Drip Garden',
+		infoValues: [],
+		confirmFunction: compound,
+	}
+
+	// open confirm modal
+	const openDepositModal = () => {
+		dispatch(toggleModalBackDrop(true))
+		dispatch(toggleConfirmModal(true))
+		dispatch(setModalProps(depositModalDetails))
+	}
+	const openCompoundModal = () => {
+		dispatch(toggleModalBackDrop(true))
+		dispatch(toggleConfirmModal(true))
+		dispatch(setModalProps(compoundModalDetails))
 	}
 
 	return (
@@ -173,11 +334,13 @@ function Garden() {
 							<input min='0' required type='number' value={inputValue} onChange={(e) => setInputValue(e.target.value)} placeholder='0.0' />
 						</div>
 						<div className={styles.balance}>
-							<p>Balance : 0 DRIP/BUSD</p>
+							<p>Balance: {amountFormatter(getBalanceAmountString(garden.userData.lpBalance), 9)}</p>
 						</div>
 					</div>
-					{/* buttons */}
+
+					{/* Approve Button */}
 					{showApprove &&
+						account &&
 						(pendingApproval ? (
 							<button type='button' className={styles.button__enabled}>
 								<Preloader />
@@ -187,20 +350,24 @@ function Garden() {
 								Approve
 							</button>
 						))}
-					{/* Swap Button */}
-					{isButtonDisabled ? (
-						<button type='button' className={styles.button__disabled}>
-							{Number(garden.userData.lpBalance) === 0 ? `Insufficient DRIP/BUSD LP Balance` : 'Enter amount'}
-						</button>
-					) : pending ? (
-						<button type='button' className={styles.button__enabled}>
-							<Preloader />
-						</button>
-					) : (
-						<button onClick={deposit} type='button' className={styles.button__enabled}>
-							Deposit
-						</button>
-					)}
+					{/* Deposit Button */}
+					{account &&
+						(isButtonDisabled ? (
+							<button type='button' className={styles.button__disabled}>
+								{new BigNumber(garden.userData.lpBalance).isLessThan(getDecimalAmount(inputValue)) ? `Insufficient Balance` : 'Enter amount'}
+							</button>
+						) : pending ? (
+							<button type='button' className={styles.button__enabled}>
+								<Preloader />
+							</button>
+						) : (
+							<button onClick={openDepositModal} type='button' className={styles.button__enabled}>
+								Deposit
+							</button>
+						))}
+					{/* Connect Wallet Button */}
+					{!account && <ConnectWalletButton />}
+
 					<div className={styles.reward__center}>
 						<p className={styles.reward__header}>My Garden</p>
 						<div className={styles.info__area}>
@@ -210,17 +377,33 @@ function Garden() {
 							<Info title='Seeds Per Day' info={`${productionRateDay.toString()}`} />
 						</div>
 						<div className={styles.progress}>
-							<p>N/A until ready to sow</p>
-							<ProgressBarr progress={progress} />
+							<p>
+								{userTimeRemainingText} until ready to sow ({userPlantsAvailable} plants)
+							</p>
+							<ProgressBarr progress={SeedProgress} />
 						</div>
-						<div className={styles.reward__center__buttons}>
-							<button type='button' id={styles.button__one} className={styles.button__disabled}>
-								Compound seed
-							</button>
-							<button type='button' id={styles.button__two} className={styles.button__disabled}>
-								Sell seed
-							</button>
-						</div>
+						{account && (
+							<div className={styles.reward__center__buttons}>
+								{pendingCompound ? (
+									<button type='button' id={styles.button__one} className={styles.button__enabled}>
+										<Preloader />
+									</button>
+								) : (
+									<button type='button' onClick={openCompoundModal} id={styles.button__one} disabled={compoundDisabled} className={compoundDisabled ? styles.button__disabled : styles.button__enabled}>
+										Plant Seeds
+									</button>
+								)}
+								{pendingSell ? (
+									<button type='button' id={styles.button__two} className={styles.button__enabled}>
+										<Preloader />
+									</button>
+								) : (
+									<button type='button' onClick={sell} id={styles.button__two} disabled={sellDisabled} className={sellDisabled ? styles.button__disabled : styles.button__enabled}>
+										Sell seed
+									</button>
+								)}
+							</div>
+						)}
 					</div>
 				</section>
 				<div className={styles.about}>

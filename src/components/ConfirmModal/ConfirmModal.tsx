@@ -29,11 +29,13 @@ function ConfirmModal() {
 			</header>
 			<h3 className={styles.lp}>{modalProps.value}</h3>
 			<p className={styles.pigs}>{modalProps.text}</p>
-			<div className={styles.infoBox}>
-				{modalProps.infoValues.map((item, index) => (
-					<Info key={`${index}${item.value}`} title={item.title} info={item.value} />
-				))}
-			</div>
+			{modalProps.infoValues.length >= 1 && (
+				<div className={styles.infoBox}>
+					{modalProps.infoValues.map((item, index) => (
+						<Info key={`${index}${item.value}`} title={item.title} info={item.value} />
+					))}
+				</div>
+			)}
 			<p className={styles.msg}>{modalProps.warning}</p>
 			<button onClick={() => confirm()} type='button'>
 				{modalProps.confirmButtonText}

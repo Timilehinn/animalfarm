@@ -1,8 +1,7 @@
 import React, { useEffect, Suspense } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { getPigsBUSDPrice } from 'utils/getPrice'
-// import useActiveWeb3React from 'hooks/useActiveWeb3React'
-// import { getAllBalance } from 'api/getBalance'
+
 import useAuth from 'hooks/useAuth'
 import { useAppDispatch } from 'state/hooks'
 import { usePricing } from 'state/pricing/hooks'
@@ -16,7 +15,7 @@ import Toast from 'components/Toast/Toast'
 import Migrate from 'views/Imigrate/Imigrate'
 import TourModal from 'components/TourModal/TourModal'
 import ErrorPage from 'views/404/ErrorPage'
-import Settings from 'components/Settings/Settings'
+
 import GardenConfirmModal from 'components/SwapConfirmModal/SwapConfirmModal'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
@@ -69,7 +68,7 @@ function Landing() {
 				<ConfirmModal />
 				<GardenConfirmModal />
 				<Toast />
-				{/* <Settings /> */}
+
 				<TourModal />
 				<Suspense fallback={<div>Loading...</div>}>
 					<Routes>
@@ -85,6 +84,7 @@ function Landing() {
 						<Route path='/swap' element={<Swap />} />
 						<Route path='/drip-liberation' element={<DripLiberation />} />
 						<Route path='/garden' element={<Garden />} />
+						<Route path='/garden/:referee' element={<Garden />} />
 						<Route path='*' element={<ErrorPage />} />
 					</Routes>
 				</Suspense>
