@@ -14,6 +14,7 @@ import { useAppDispatch } from 'state/hooks'
 import { useGarden, usePollGardenData } from 'state/garden/hooks'
 import useToast from 'hooks/useToast'
 import { setModalProps, toggleConfirmModal, toggleModalBackDrop } from 'state/toggle'
+import { fetchGardenDataAsync } from 'state/garden'
 
 // APIs
 import { approveDripGardenForDripBusdLP, buySeeds, plantSeeds, sellSeeds } from 'api/garden'
@@ -196,7 +197,8 @@ function Garden() {
 				setInputValue('')
 				setPending(false)
 				toastSuccess(res.message)
-				fetchDripGardenData()
+				// fetchDripGardenData()
+				dispatch(fetchGardenDataAsync({ account }))
 			}
 
 			if (res.success === false) {
@@ -234,7 +236,8 @@ function Garden() {
 			if (res.success === true) {
 				setPendingCompound(false)
 				toastSuccess(res.message)
-				fetchDripGardenData()
+				// fetchDripGardenData()
+				dispatch(fetchGardenDataAsync({ account }))
 			}
 
 			if (res.success === false) {
@@ -260,7 +263,8 @@ function Garden() {
 			if (res.success === true) {
 				setPendingSell(false)
 				toastSuccess(res.message)
-				fetchDripGardenData()
+				// fetchDripGardenData()
+				dispatch(fetchGardenDataAsync({ account }))
 			}
 
 			if (res.success === false) {
