@@ -94,7 +94,7 @@ function Garden() {
 
 	// const balanceMultiplier = garden ? (Number(garden.balanceMultiplier) / 1e4).toFixed(2) : "N/A"
 	const balanceMultiplier = garden ? (Number(garden.balanceMultiplier) / 1e4).toFixed(2) : 'N/A'
-	const balanceMultiplierText = '294.29%'
+	const balanceMultiplierText = '294.29'
 	const totalMultiplierText = garden ? `${(Number(timeMultiplier) + Number(balanceMultiplierText)).toFixed(2)}%` : 'N/A'
 
 	function secondsToString(seconds) {
@@ -319,7 +319,7 @@ function Garden() {
 							<div className={styles.bonus__in}>Ferterlizers Bonus</div>
 						</div>
 						<Info title='Time' info={timeMultiplierText} />
-						<Info title='Balance' info={balanceMultiplierText} />
+						<Info title='Balance' info={`${balanceMultiplierText}%`} />
 						<Info title='Total' info={totalMultiplierText} />
 					</div>
 					{/* input 1 */}
