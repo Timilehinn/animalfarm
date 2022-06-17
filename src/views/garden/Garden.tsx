@@ -94,7 +94,7 @@ function Garden() {
 
 	// const balanceMultiplier = garden ? (Number(garden.balanceMultiplier) / 1e4).toFixed(2) : "N/A"
 	const balanceMultiplier = garden ? (Number(garden.balanceMultiplier) / 1e4).toFixed(2) : 'N/A'
-	const balanceMultiplierText = '294.29'
+	const balanceMultiplierText = '294.29%'
 	const totalMultiplierText = garden ? `${(Number(timeMultiplier) + Number(balanceMultiplierText)).toFixed(2)}%` : 'N/A'
 
 	function secondsToString(seconds) {
@@ -425,16 +425,21 @@ function Garden() {
 				<div className={styles.about}>
 					<h3>About Drip Garden</h3>
 					<p>
-						The piggy bank is the first ever non-inflationary variable time staking annuity. Stake pigs/busd lp tokens to earn up to 3% daily roi!! to unlock referral bonuses you must have dogs staked in the single asset staking pool (see
-						bottom of page). Time lock your harvest to earn a massive bonus on yield, airdrop stakes to friends and family using the gift stake function, most importantly take control of your financial future on the animal farm!!
+						The DRIP Garden is a true game where all players start out relatively equal and what determines your payout is how often you plant your seeds(compound) vs. how often you sell them (withdraw). Below is a graph showing the
+						buying power over time and balance compared to other games such as Shrimp Farmer and &quot;Miners&quot;. Existing games give insiders over 100,000% more buying power than players who get in after launch, allowing them to drain
+						the contract and disincentives new capital from coming in.
 					</p>
 					<h3>Drip Garden Mechanism</h3>
+					<img src={gardenGraphImage} alt='' />
 					<p>
 						As you can see, the DRIP Garden increases buying power over time and as the balance of the contract grows ensuring that you will always get a fair rate. There is still a benefit to getting in early because the earlier your
-						plants get in the ground the larger you can grow your garden and out perform the competition. The time multiplier is designed to attract new waves capital after we have reached saturation and the contract growth has slowed due
-						to the buying power of new capital creeping up by 0.1% non compounding every day. This means there will always be a time in the future where it makes sense for fresh capital to come in and kick start a new wave gardeners!
+						plants get in the ground the larger you can grow your garden and out perform the competition.{' '}
 					</p>
-					<img src={gardenGraphImage} alt='' />
+
+					<p>
+						The time multiplier is designed to attract new waves capital after we have reached saturation and the contract growth has slowed due to the buying power of new capital creeping up by 0.1% non compounding every day. This means
+						there will always be a time in the future where it makes sense for fresh capital to come in and kick start a new wave gardeners!
+					</p>
 				</div>
 			</div>
 		</div>

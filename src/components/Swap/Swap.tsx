@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react'
@@ -316,6 +317,8 @@ function Swap() {
 
 	return (
 		<div className={styles.farm}>
+			<header>Swap Tokens</header>
+			<p className={styles.info}>Swap BUSD for PIGS utilizing our Pancakeswap liquidity pool.</p>
 			<div className={styles.inputBox}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div onClick={() => openMenu(1)} className={styles.logo}>

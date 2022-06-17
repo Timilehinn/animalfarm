@@ -93,17 +93,17 @@ function MobileSideNav() {
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
 				</NavLink>
-				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
-					<Icon icon='ep:document-checked' />
-					<p>Documentation</p>
-				</a>
-				<NavLink onClick={() => closeNav()} to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
+				{/* <NavLink onClick={() => closeNav()} to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='iconoir:piggy-bank' />
 					<p>Migrate</p>
-				</NavLink>
+				</NavLink> */}
 				<a className={styles.link} href='https://theanimal.farm/dripliberation'>
 					<Icon icon='bx:bar-chart-alt-2' />
 					<p>Drip Liberation</p>
+				</a>
+				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
+					<Icon icon='ep:document-checked' />
+					<p>Documentation</p>
 				</a>
 				<div className={styles.settings__wrap}>
 					<div className={styles.settings}>

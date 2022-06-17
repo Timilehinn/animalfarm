@@ -217,11 +217,11 @@ $brown: rgba(255, 255, 255, 0.6);
 					font-size: 0.8rem;
 					margin: 30px 0px 15px 0px;
 				}
-                .progress{
-                    font-size: 0.7rem;
-                    margin-top: 20px;
-                    color:"#FFFFFF";
-                }
+				.progress {
+					font-size: 0.7rem;
+					margin-top: 20px;
+					color: '#FFFFFF';
+				}
 				.reward__center__buttons {
 					display: flex;
 					button {
@@ -246,9 +246,16 @@ $brown: rgba(255, 255, 255, 0.6);
 				margin-top: 30px;
 			}
 
+			p {
+				line-height: 1.6em;
+				font-size: 1.12em;
+				margin-bottom: 10px;
+			}
+
 			img {
 				border: 1px solid #f3ba2a;
-				margin-top: 30px;
+				margin: 10px 0px 30px 0px;
+				width: 100%;
 			}
 		}
 	}

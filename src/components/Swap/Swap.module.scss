@@ -11,6 +11,16 @@
 	border-color: transparent;
 	border-radius: 10px;
 
+	header {
+		color: white;
+		margin-bottom: 10px;
+	}
+
+	.info {
+		font-size: 0.8rem;
+		color: rgba(217 217 212 / 90%);
+	}
+
 	.infoArea {
 		width: 100%;
 		background: #221e16;
@@ -166,7 +176,6 @@
 				background: rgba(243, 186, 47, 0.14);
 				color: #f3ba2f;
 				font-family: $boldFont;
-				
 			}
 
 			button:nth-child(1) {

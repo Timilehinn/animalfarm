@@ -81,10 +81,6 @@ function SideNavigation() {
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
 				</a> */}
-				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
-					<Icon icon='ep:document-checked' />
-					<p>Documentation</p>
-				</a>
 				{/* <NavLink to='/migrate' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='dashicons:migrate' />
 					<p>Migrate</p>
@@ -92,6 +88,10 @@ function SideNavigation() {
 				<a className={styles.link} href='https://theanimal.farm/dripliberation' target='_blank' rel='noreferrer'>
 					<Icon icon='bx:bar-chart-alt-2' />
 					<p>Drip Liberation</p>
+				</a>
+				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
+					<Icon icon='ep:document-checked' />
+					<p>Documentation</p>
 				</a>
 				<div className={styles.settings__wrap}>
 					<div className={styles.settings}>

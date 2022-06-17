@@ -59,3 +59,7 @@ export const getPancakeRouterv2Contract = (signer?: ethers.Signer | ethers.provi
 export const getDripGardenContract = (signer?: ethers.Signer | ethers.providers.Provider) => {
 	return getContract(DripGardenABI, DripGardenAddress, signer)
 }
+
+// export const getDripGardenLiberation = (signer?: ethers.Signer | ethers.providers.Provider) => {
+// 	return getContract(DripGardenABI, DripGardenAddress, signer)
+// }
