@@ -70,7 +70,7 @@ function MobileSideNav() {
 					<p>Piggy Bank</p>
 				</NavLink>
 				<NavLink onClick={() => closeNav()} to='/swap' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
-					<Icon icon='ph:swap-light' />
+					<Icon icon='ic:outline-swap-horizontal-circle' />
 					<p>Swap</p>
 				</NavLink>
 				<NavLink onClick={() => closeNav()} to='/add-liquidity' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
@@ -89,10 +89,10 @@ function MobileSideNav() {
 					<Icon icon='fa6-solid:money-check-dollar' />
 					<p>Buy / Add Liquidity</p>
 				</a> */}
-				<a className={styles.link} href='https://themanor.farm/garden'>
+				<NavLink onClick={() => closeNav()} to='/garden' className={(navData) => (navData.isActive ? `${styles.link__active} ${styles.link}` : styles.link)}>
 					<Icon icon='maki:garden' />
 					<p>Drip Garden</p>
-				</a>
+				</NavLink>
 				<a className={styles.link} href={`${window.location.origin}/docs/Animal_Farm_Rebirth_-_Migration__White_Paper_002.pdf`}>
 					<Icon icon='ep:document-checked' />
 					<p>Documentation</p>

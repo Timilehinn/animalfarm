@@ -5,6 +5,7 @@ import balanceReducer from './balances'
 import pricingReducer from './pricing'
 import piggyBankReducer from './piggybank'
 import pigPenReducer from './pigpen'
+import dripGardenReducer from './garden'
 
 const store = configureStore({
 	reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
 		pricingReducer,
 		piggyBankReducer,
 		pigPenReducer,
+		dripGardenReducer,
 	},
 	middleware: getDefaultMiddleware({
 		// TODO: This is just a temporary fix
