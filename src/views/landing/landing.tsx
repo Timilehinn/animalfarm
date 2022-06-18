@@ -16,6 +16,9 @@ import Migrate from 'views/Imigrate/Imigrate'
 import TourModal from 'components/TourModal/TourModal'
 import ErrorPage from 'views/404/ErrorPage'
 
+import GardeningModal from 'components/GardeningModal/GardeningModal'
+import FaqModal from 'components/FaqModal/FaqModal'
+
 import GardenConfirmModal from 'components/SwapConfirmModal/SwapConfirmModal'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
@@ -68,6 +71,8 @@ function Landing() {
 				<ConfirmModal />
 				<GardenConfirmModal />
 				<Toast />
+				<GardeningModal />
+				<FaqModal />
 
 				<TourModal />
 				<Suspense fallback={<div>Loading...</div>}>
@@ -82,9 +87,9 @@ function Landing() {
 						<Route path='/farms' element={<Farms />} />
 						<Route path='/pools' element={<Pools />} />
 						<Route path='/swap' element={<Swap />} />
-						{/* <Route path='/drip-liberation' element={<DripLiberation />} /> */}
-						{/* <Route path='/garden' element={<Garden />} />
-						<Route path='/garden/:referee' element={<Garden />} /> */}
+						<Route path='/drip-liberation' element={<DripLiberation />} /> 
+						<Route path='/garden' element={<Garden />} />
+						<Route path='/garden/:referee' element={<Garden />} />
 						<Route path='*' element={<ErrorPage />} />
 					</Routes>
 				</Suspense>

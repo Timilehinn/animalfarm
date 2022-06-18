@@ -40,6 +40,9 @@ interface initialStateProps {
 		}
 		confirmFunction: ()=>void
 	}
+
+	isGardenOpen: boolean
+	isFaqOpen: boolean
 }
 
 const initialState: initialStateProps = {
@@ -75,6 +78,9 @@ const initialState: initialStateProps = {
 		},
 		confirmFunction: null,
 	},
+	// garden info props
+	isGardenOpen: false,
+	isFaqOpen: false
 }
 
 const toggleSlice = createSlice({
@@ -107,8 +113,14 @@ const toggleSlice = createSlice({
 		toggleSwapModal: (state, action: PayloadAction<any>) => {
 			state.swapModalProps = action.payload
 		},
+		toggleGardenModal: (state, action: PayloadAction<any>) => {
+			state.isGardenOpen = action.payload
+		},
+		toggleFaqModal: (state, action: PayloadAction<any>) => {
+			state.isFaqOpen = action.payload
+		}
 	},
 })
 
 export default toggleSlice.reducer
-export const { toggleMobileNav, toggleModalBackDrop, toggleConfirmModal, setModalProps, toggleToastNotification, toggleDepositModal, toggleTourModal,toggleSwapModal } = toggleSlice.actions
+export const { toggleMobileNav, toggleModalBackDrop, toggleConfirmModal, setModalProps, toggleToastNotification, toggleDepositModal, toggleTourModal,toggleSwapModal, toggleGardenModal, toggleFaqModal } = toggleSlice.actions
