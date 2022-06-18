@@ -13,7 +13,7 @@ import useActiveWeb3React from 'hooks/useActiveWeb3React'
 import { useAppDispatch } from 'state/hooks'
 import { useGarden, usePollGardenData } from 'state/garden/hooks'
 import useToast from 'hooks/useToast'
-import { setModalProps, toggleConfirmModal, toggleModalBackDrop } from 'state/toggle'
+import { setModalProps, toggleConfirmModal, toggleModalBackDrop, toggleGardenModal, toggleFaqModal } from 'state/toggle'
 
 // APIs
 import { approveDripGardenForDripBusdLP, buySeeds, plantSeeds, sellSeeds } from 'api/garden'
@@ -51,6 +51,23 @@ function Garden() {
 	const [pendingApproval, setPendingApproval] = useState(false)
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+
+	// gardening and faq state
+	const [gardeningState, showGardening] = useState(false)
+	const [faqState, showFaq] = useState(false)
+
+	// open gardening faq state
+	const showGardenInfo = () => {
+		dispatch(toggleModalBackDrop(true))
+		dispatch(toggleGardenModal(true))
+	}
+
+	const showFaqInfo = () => {
+		dispatch(toggleModalBackDrop(true))
+		dispatch(toggleFaqModal(true))
+		
+	}
+
 
 	const seedsToPlant = 2592000
 	const usdValue = garden ? new BigNumber(garden.userData.usdValue) : new BigNumber('0')
@@ -304,6 +321,10 @@ function Garden() {
 		dispatch(setModalProps(compoundModalDetails))
 	}
 
+
+
+	// TODO: function to open and close individual modal with modalbackdrop
+
 	return (
 		<div className={styles.addliquidity__wrap}>
 			<div className={styles.addliquidity}>
@@ -422,6 +443,12 @@ function Garden() {
 						)}
 					</div>
 				</section>
+				
+				<div>
+					<button className={styles.button__info} type='button' onClick={showGardenInfo}>How to start gardening?</button>
+					<button className={styles.button__info} type='button' onClick={showFaqInfo}>Frequently asked questions</button>
+				</div>
+
 				<div className={styles.about}>
 					<h3>About Drip Garden</h3>
 					<p>
