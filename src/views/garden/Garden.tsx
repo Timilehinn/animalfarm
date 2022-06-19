@@ -41,7 +41,7 @@ function Garden() {
 	const [pendingApproval, setPendingApproval] = useState(false)
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-    const [progress, setProgress] = React.useState('50%')
+    const [progress, setProgress] = React.useState('80%')
 
 	const seedsToPlant = 2592000
 	const usdValue = garden ? new BigNumber(garden.userData.usdValue) : new BigNumber('0')
