@@ -138,7 +138,7 @@ export const getGarden = async (account: string): Promise<Garden> => {
 		busdTokenBalanceLP = _busdTokenBalanceLP
 		lpTotalSupply = _lpTotalSupply
 		userLPAllowance = new BigNumber(_userLPAllowance).toJSON()
-		userBalance = new BigNumber(_userLPBalance).dividedBy(1e18).toJSON()
+		userBalance = new BigNumber(_userLPBalance).toJSON()
 	} else {
 		const [_tokenBalanceLP, _busdTokenBalanceLP, _lpTotalSupply] = await multicall(erc20, callsErc20)
 		tokenBalanceLP = _tokenBalanceLP

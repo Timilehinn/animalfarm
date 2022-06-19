@@ -13,7 +13,7 @@ const initialState: GardenState = {
 		balanceMultiplier: '0',
 		userData: {
 			lpBalance: '',
-			lpAllowance: '',
+			lpAllowance: '0',
 			plants: '0',
 			seeds: '0',
 			availableSeeds: '0',

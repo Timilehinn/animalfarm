@@ -1,9 +1,11 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable react/no-array-index-key */
 import React, { useState, useEffect } from 'react'
 import BigNumber from 'bignumber.js'
 
 // Components
+import ConnectWalletButton from 'components/ConnectWalletButton/ConnectWalletButton'
 import Preloader from 'components/prealoder/preloader'
 
 // State and hooks
@@ -63,7 +65,7 @@ function Swap() {
 	// Approve States
 	const [isApproved, setIsApproved] = useState(false)
 	// Slippage
-	const [tolerance, setTolerance] = React.useState('10')
+	const [tolerance, setTolerance] = React.useState('1')
 	// Pending State
 	const [pending, setPending] = useState(false)
 	const [pendingApproval, setPendingApproval] = useState(false)
@@ -315,6 +317,8 @@ function Swap() {
 
 	return (
 		<div className={styles.farm}>
+			<header>Swap Tokens</header>
+			<p className={styles.info}>Swap BUSD for PIGS utilizing our Pancakeswap liquidity pool.</p>
 			<div className={styles.inputBox}>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 					<div onClick={() => openMenu(1)} className={styles.logo}>
@@ -376,6 +380,7 @@ function Swap() {
 			</div>
 			{/* Approval Button */}
 			{showApprove &&
+				account &&
 				(pendingApproval ? (
 					<button type='button' className={styles.button__enabled}>
 						<Preloader />
@@ -386,19 +391,22 @@ function Swap() {
 					</button>
 				))}
 			{/* Swap Button */}
-			{isButtonDisabled ? (
-				<button type='button' className={styles.button__disabled}>
-					{new BigNumber(userData.balance[tokens[activeToken].name]).isLessThan(getDecimalAmount(inputOne)) ? `Insufficient ${tokens[activeToken].name} Balance` : 'Enter amount'}
-				</button>
-			) : pending ? (
-				<button type='button' className={styles.button__enabled}>
-					<Preloader />
-				</button>
-			) : (
-				<button disabled={showApprove} onClick={openModal} type='button' className={showApprove ? styles.button__disabled : styles.button__enabled}>
-					Swap
-				</button>
-			)}
+			{account &&
+				(isButtonDisabled ? (
+					<button type='button' className={styles.button__disabled}>
+						{new BigNumber(userData.balance[tokens[activeToken].name]).isLessThan(getDecimalAmount(inputOne)) ? `Insufficient ${tokens[activeToken].name} Balance` : 'Enter amount'}
+					</button>
+				) : pending ? (
+					<button type='button' className={styles.button__enabled}>
+						<Preloader />
+					</button>
+				) : (
+					<button disabled={showApprove} onClick={openModal} type='button' className={showApprove ? styles.button__disabled : styles.button__enabled}>
+						Swap
+					</button>
+				))}
+			{/* Connect Wallet Button */}
+			{!account && <ConnectWalletButton />}
 			{/* Slippage */}
 			<div className={styles.slippage}>
 				<p>Slippage settings</p>
