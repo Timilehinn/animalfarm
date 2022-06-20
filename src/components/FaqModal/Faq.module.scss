@@ -8,9 +8,10 @@
 	overflow-x: hidden !important;
 	border-radius: 16px;
 	max-width: 1000px;
-	height: 800px !important;
+	height: 700px !important;
 	left: 0 !important;
 	right: 0 !important;
+	padding-bottom: 120px !important;
 
 	h1 {
 		color: #f3ba2f;
@@ -22,8 +23,8 @@
 		margin-bottom: 52px !important;
 	}
 	.faq__body {
-		padding-left: 36px;
-		padding-right: 36px;
+		padding-left: 28px;
+		padding-right: 28px;
 	}
 
 	h2 {
@@ -39,7 +40,7 @@
 		position: absolute;
 		right: 0;
 		top: 0;
-		margin-top: 46px;
+		margin-top: 42px;
 		margin-right: 16px !important;
 		cursor: pointer;
 	}
@@ -47,4 +48,12 @@
 
 .infobody__disable {
 	display: none;
+}
+
+@media(max-width: 1000px) {
+	.infobody {
+		margin-left:20px !important;
+		margin-right: 20px !important;
+	}
+	
 }
