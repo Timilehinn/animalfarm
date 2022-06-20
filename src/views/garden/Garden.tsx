@@ -30,6 +30,18 @@ import drip from '../../assets/drip.png'
 import gardenGraphImage from '../../assets/gardengraph.png'
 
 function Garden() {
+	useEffect(() => {
+		document.body.setAttribute(
+			'style',
+			`
+		background-image: url(${window.location.origin}/bg/drip-garden.png);
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-color: rgb(24, 24, 24);`
+		)
+	}, [])
 	const params = useParams()
 	const { garden } = useGarden()
 	const { fetchDripGardenData } = usePollGardenData()
