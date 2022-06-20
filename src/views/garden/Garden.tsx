@@ -61,9 +61,7 @@ function Garden() {
 	const showFaqInfo = () => {
 		dispatch(toggleModalBackDrop(true))
 		dispatch(toggleFaqModal(true))
-		
 	}
-
 
 	const seedsToPlant = 2592000
 	const usdValue = garden ? new BigNumber(garden.userData.usdValue) : new BigNumber('0')
@@ -317,8 +315,6 @@ function Garden() {
 		dispatch(setModalProps(compoundModalDetails))
 	}
 
-
-
 	// TODO: function to open and close individual modal with modalbackdrop
 
 	return (
@@ -330,6 +326,13 @@ function Garden() {
 
 				<section>
 					<header>Buy plants with LP tokens</header>
+					<p className={styles.info}>
+						Pair BUSD with DRIP tax free here:{' '}
+						<a href='https://theanimal.farm/dripliberation' target='_blank' rel='noreferrer'>
+							DRIP Liberation
+						</a>
+						.
+					</p>
 
 					<div className={styles.info__area}>
 						<div className={styles.bonus}>
@@ -439,10 +442,14 @@ function Garden() {
 						)}
 					</div>
 				</section>
-				
+
 				<div>
-					<button className={styles.button__info} type='button' onClick={showGardenInfo}>How to start gardening?</button>
-					<button className={styles.button__info} type='button' onClick={showFaqInfo}>Frequently asked questions</button>
+					<button className={styles.button__info} type='button' onClick={showGardenInfo}>
+						How to start gardening?
+					</button>
+					<button className={styles.button__info} type='button' onClick={showFaqInfo}>
+						Frequently asked questions
+					</button>
 				</div>
 
 				<div className={styles.about}>

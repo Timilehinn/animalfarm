@@ -47,12 +47,15 @@ $brown: rgba(255, 255, 255, 0.6);
 			header {
 				color: white;
 				margin-bottom: 10px;
-				margin-bottom: 30px;
 			}
 
 			.info {
 				font-size: 0.8rem;
 				color: rgba(217 217 212 / 90%);
+
+				a {
+					color: #f3ba2f;
+				}
 			}
 
 			.info__area {
@@ -282,7 +285,6 @@ $brown: rgba(255, 255, 255, 0.6);
 		}
 	}
 }
-
 
 .button__info {
 	width: 100%;
