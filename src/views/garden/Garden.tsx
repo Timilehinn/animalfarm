@@ -52,10 +52,6 @@ function Garden() {
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
 
-	// gardening and faq state
-	const [gardeningState, showGardening] = useState(false)
-	const [faqState, showFaq] = useState(false)
-
 	// open gardening faq state
 	const showGardenInfo = () => {
 		dispatch(toggleModalBackDrop(true))
