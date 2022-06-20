@@ -4,7 +4,7 @@ import { Response } from 'state'
 import erc20ABI from 'config/Iabi/erc20.json'
 
 import multicall from 'utils/multicall'
-import { LiquidityHelperPigsV2Address, BUSDAddress, AnimalFarmTokens, LARGE_NUMBER } from 'config/constants'
+import { DripLiberationAddress, DripBusdLpTokenAddress, BUSDAddress, LARGE_NUMBER } from 'config/constants'
 import { getPigsTokenV2Contract, getLiquidityHelperContract } from 'utils/IgetContracts'
 import { amountFormatter } from 'utils/formatBalance'
 
@@ -20,22 +20,10 @@ const getErrorMessage = (e): string => {
 export const fetchDataForDripLiberation = async (account: string): Promise<any> => {
 	const erc20Calls = [
 		{
-			// PIGS Allowance
-			address: AnimalFarmTokens.pigsToken.address,
-			name: 'allowance',
-			params: [account, LiquidityHelperPigsV2Address],
-		},
-		{
 			// BUSD Allowance
 			address: BUSDAddress,
 			name: 'allowance',
-			params: [account, LiquidityHelperPigsV2Address],
-		},
-		{
-			// User PIGS balance
-			address: AnimalFarmTokens.pigsToken.address,
-			name: 'balanceOf',
-			params: [account],
+			params: [account, DripLiberationAddress],
 		},
 		{
 			// User BUSD balance
@@ -45,44 +33,25 @@ export const fetchDataForDripLiberation = async (account: string): Promise<any> 
 		},
 		// User PIGS/BUSD LP Balance
 		{
-			address: AnimalFarmTokens.pigsToken.BUSD_LP,
+			address: DripBusdLpTokenAddress,
 			name: 'balanceOf',
 			params: [account],
 		},
 	]
 
-	const [pigsAllowance, busdAllowance, pigsBalance, busdBalance, pigsBusdLPBalance] = await multicall(erc20ABI, erc20Calls)
+	const [busdAllowance, busdBalance, dripBusdLPBalance] = await multicall(erc20ABI, erc20Calls)
 
 	return {
-		pigsAllowance: new BigNumber(pigsAllowance).toJSON(),
 		busdAllowance: new BigNumber(busdAllowance).toJSON(),
-		pigsBalance: new BigNumber(pigsBalance).toJSON(),
 		busdBalance: new BigNumber(busdBalance).toJSON(),
-		pigsBusdLPBalance: new BigNumber(pigsBusdLPBalance).toJSON(),
+		dripBusdLPBalance: new BigNumber(dripBusdLPBalance).toJSON(),
 	}
 }
 
-export const approveSpendPIGS = async (signer: ethers.Signer) => {
-	const pigsTokenV2Contract = getPigsTokenV2Contract(signer)
-	const tx = await pigsTokenV2Contract.approve(LiquidityHelperPigsV2Address, LARGE_NUMBER)
-	await tx.wait()
-}
-
-export const addPIGSAndBUSDToLiquidity = async (pigsAmount: string, busdAmount: string, tolerance: string, signer: ethers.Signer): Promise<Response> => {
-	let _tolerance
-	if (!tolerance) {
-		// Set default tolerance to 10%
-		_tolerance = '10'
-	} else {
-		_tolerance = tolerance
-	}
-
-	const pigsAmountMin = new BigNumber(pigsAmount).multipliedBy(new BigNumber(100).minus(_tolerance).dividedBy(100))
-	const busdAmountMin = new BigNumber(busdAmount).multipliedBy(new BigNumber(100).minus(_tolerance).dividedBy(100))
-
+export const addBUSDToLiberation = async (busdAmount: string, signer: ethers.Signer): Promise<Response> => {
 	try {
 		const liquidityHelperContract = getLiquidityHelperContract(signer)
-		const tx = await liquidityHelperContract['addPigsLiquidity(address,uint256,uint256,uint256,uint256)'](BUSDAddress, busdAmount, pigsAmount, amountFormatter(busdAmountMin.toString(), 0), amountFormatter(pigsAmountMin.toString(), 0))
+		const tx = await liquidityHelperContract['addPigsLiquidity(address,uint256,uint256,uint256,uint256)'](busdAmount)
 		await tx.wait()
 
 		return {
