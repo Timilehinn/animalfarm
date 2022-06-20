@@ -47,7 +47,7 @@ function ReferralTable() {
 						<p>This makes the bonus rewards for time locking staked exponentially more powerful as the stake compounds the increased roi generated from the bonus multiplied principle.</p>
 						<p>The bonus is not fully applied to the principle on day 1 of the time locked stake and is instead applied to the principle using the above displayed distribution curve with:</p>
 						<ul className={style.multiplierlist}>
-							<li>30% of the multiplier bonous being added to the principle in the first 75% of the stake&apos;s length</li>
+							<li>30% of the multiplier bonus being added to the principle in the first 75% of the stake&apos;s length</li>
 							<li>And the rest being added exponentially to the principle in the last 25% of the time lock up</li>
 						</ul>
 					</div>
