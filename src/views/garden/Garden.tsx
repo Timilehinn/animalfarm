@@ -343,7 +343,6 @@ function Garden() {
 						<a href='https://theanimal.farm/dripliberation' target='_blank' rel='noreferrer'>
 							DRIP Liberation
 						</a>
-						.
 					</p>
 
 					<div className={styles.info__area}>
