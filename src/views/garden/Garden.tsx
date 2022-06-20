@@ -16,7 +16,7 @@ import useToast from 'hooks/useToast'
 import { setModalProps, toggleConfirmModal, toggleModalBackDrop, toggleGardenModal, toggleFaqModal } from 'state/toggle'
 
 // APIs
-import { approveDripGardenForDripBusdLP, buySeeds, plantSeeds, sellSeeds } from 'api/garden'
+import { approveDripGardenForDripBusdLP, buySeeds, plantSeeds, sellSeeds, getEstimatedPlants } from 'api/garden'
 
 // Utils and helpers
 import { amountFormatter, getBalanceAmountString, getDecimalAmount } from 'utils/formatBalance'
@@ -63,6 +63,8 @@ function Garden() {
 	const [pendingApproval, setPendingApproval] = useState(false)
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
+	// Estimated Plants
+	const [estimatedPlants, setEstimatedPlants] = useState('0')
 
 	// open gardening faq state
 	const showGardenInfo = () => {
@@ -296,6 +298,18 @@ function Garden() {
 		}
 	}
 
+	const estimatePlants = async (value: string) => {
+		const amountOfPlants = await getEstimatedPlants(getDecimalAmount(amountFormatter(value)), signer)
+		setEstimatedPlants(String(Math.trunc(Number(amountOfPlants))))
+	}
+
+	const handleInput = (value) => {
+		setInputValue(value)
+		if (value) {
+			estimatePlants(value)
+		}
+	}
+
 	const depositModalDetails = {
 		modalTitleText: 'Confirm Buy Plants',
 		confirmButtonText: 'Acknowledge',
@@ -317,6 +331,9 @@ function Garden() {
 
 	// open confirm modal
 	const openDepositModal = () => {
+		if (Number(estimatedPlants) < 1) {
+			return
+		}
 		dispatch(toggleModalBackDrop(true))
 		dispatch(toggleConfirmModal(true))
 		dispatch(setModalProps(depositModalDetails))
@@ -361,7 +378,7 @@ function Garden() {
 								<img id={styles.drip} src={drip} alt='' />
 								<p>DRIP/BUSD LP</p>
 							</div>
-							<input min='0' required type='number' value={amountFormatter(inputValue, 9)} onChange={(e) => setInputValue(e.target.value)} placeholder='0.0' />
+							<input min='0' required type='number' value={amountFormatter(inputValue, 9)} onChange={(e) => handleInput(e.target.value)} placeholder='0.0' />
 						</div>
 						<div className={styles.balance}>
 							<p
@@ -409,7 +426,7 @@ function Garden() {
 							</button>
 						) : (
 							<button onClick={openDepositModal} type='button' className={styles.button__enabled}>
-								Deposit
+								Buy {estimatedPlants} Plants
 							</button>
 						))}
 					{/* Connect Wallet Button */}

@@ -95,3 +95,21 @@ export const sellSeeds = async (signer: ethers.Signer): Promise<Response> => {
 		}
 	}
 }
+
+export const getEstimatedPlants = async (amount: string, signer: ethers.Signer): Promise<string> => {
+	let amountPlantsTaxed = '0'
+	try {
+		const dripGardenContract = getDripGardenContract(signer)
+
+		const result: ethers.BigNumber = await dripGardenContract.calculateSeedsBuySimpleTotal(amount, options)
+		const seeds = ethers.BigNumber.from(result).toString()
+
+		if (seeds) {
+			amountPlantsTaxed = String((Number(seeds) * 0.95) / 2592e3)
+		}
+	} catch (e) {
+		console.error('getEstimatedPlants error: ', e)
+	}
+
+	return amountPlantsTaxed
+}
