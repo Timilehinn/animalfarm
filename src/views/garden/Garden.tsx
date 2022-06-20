@@ -160,10 +160,10 @@ function Garden() {
 	}, [inputValue, garden, isApproved])
 	// UseEffect for show main button
 	useEffect(() => {
-		if (new BigNumber(garden.userData.lpBalance).isLessThan(getDecimalAmount(inputValue))) {
-			setIsButtonDisabled(true)
-			return
-		}
+		// if (new BigNumber(garden.userData.lpBalance).isLessThan(getDecimalAmount(inputValue))) {
+		// 	setIsButtonDisabled(true)
+		// 	return
+		// }
 		if (inputValue > '0') {
 			setIsButtonDisabled(false)
 		} else {
@@ -305,8 +305,10 @@ function Garden() {
 
 	const handleInput = (value) => {
 		setInputValue(value)
-		if (value) {
+		if (Number(value) > 0) {
 			estimatePlants(value)
+		} else {
+			setEstimatedPlants('0')
 		}
 	}
 
