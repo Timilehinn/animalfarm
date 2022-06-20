@@ -366,7 +366,7 @@ function Garden() {
 
 					<div className={styles.info__area}>
 						<div className={styles.bonus}>
-							<div className={styles.bonus__in}>Fertilizers Bonus</div>
+							<div className={styles.bonus__in}>Fertilizer(s) Bonus</div>
 						</div>
 						<Info title='Time' info={timeMultiplierText} />
 						<Info title='Balance' info={`${balanceMultiplierText}%`} />

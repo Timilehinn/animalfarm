@@ -6,9 +6,16 @@ interface progressBarProps {
 }
 
 function ProgressBarr({ progress }: progressBarProps) {
+	let percent
+	if (Number(progress) > 100) {
+		percent = '100'
+	} else {
+		percent = progress
+	}
+
 	return (
 		<div className='bar'>
-			<div style={{ width: `${progress}%` }} className='bar__in'>
+			<div style={{ width: `${percent}%` }} className='bar__in'>
 				{}
 			</div>
 		</div>
