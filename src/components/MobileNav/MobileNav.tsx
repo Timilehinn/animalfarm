@@ -1,7 +1,7 @@
 import React from 'react'
 import { Icon } from '@iconify/react'
 import { useAppDispatch, useAppSelector } from 'state/hooks'
-import { toggleMobileNav,toggleModalBackDrop } from 'state/toggle'
+import { toggleMobileNav,toggleModalBackDrop } from 'state/toggle' 
 
 import styles from './MobileNav.module.scss'
 import logo from '../../assets/svgg.png'

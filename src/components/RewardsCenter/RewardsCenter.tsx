@@ -121,7 +121,7 @@ function RewardsCenter({
 	const dispatch = useAppDispatch()
 	const { account } = useActiveWeb3React()
 	const { userData } = usePigPen()
-	const pigBalance = useAppSelector((state) => state.pricingReducer.data.pigsBalance)
+	const pigBalance = useAppSelector((state) => state.balanceReducer.pigsBalance.amountString)
 	const pigsAvailableToClaim = useAppSelector((state) => state.pricingReducer.data.pigsAvailableToClaim)
 	const _pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
 	const pigsBusdLPBalance = useAppSelector((state) => state.piggyBankReducer.data.userData.lpBalance)

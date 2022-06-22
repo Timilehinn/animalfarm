@@ -45,6 +45,8 @@ interface initialStateProps {
 	isFaqOpen: boolean
 }
 
+
+
 const initialState: initialStateProps = {
 	isMobileNavActive: false,
 	isConfirmModalActive: false,

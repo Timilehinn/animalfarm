@@ -67,7 +67,7 @@ function Garden() {
 	const [estimatedPlants, setEstimatedPlants] = useState('0')
 
 	// open gardening faq state
-	const showGardenInfo = () => {
+	const showGardenInfo = () => {    
 		dispatch(toggleModalBackDrop(true))
 		dispatch(toggleGardenModal(true))
 	}
