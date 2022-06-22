@@ -59,6 +59,7 @@ interface rewardProps {
 	claimButton?: boolean
 	compoundButton?: boolean
 	pigBal?: boolean
+	pigBalance?: string
 	slippage?: boolean
 	tolerance?: string
 	setTolerance?: any
@@ -111,6 +112,7 @@ function RewardsCenter({
 	claimButton,
 	compoundButton,
 	pigBal,
+	pigBalance,
 	slippage,
 	tolerance,
 	setTolerance,
@@ -121,7 +123,6 @@ function RewardsCenter({
 	const dispatch = useAppDispatch()
 	const { account } = useActiveWeb3React()
 	const { userData } = usePigPen()
-	const pigBalance = useAppSelector((state) => state.balanceReducer.pigsBalance.amountString)
 	const pigsAvailableToClaim = useAppSelector((state) => state.pricingReducer.data.pigsAvailableToClaim)
 	const _pigsBusdPrice = useAppSelector((state) => state.pricingReducer.pigsBusdPrice)
 	const pigsBusdLPBalance = useAppSelector((state) => state.piggyBankReducer.data.userData.lpBalance)
@@ -203,7 +204,7 @@ function RewardsCenter({
 					<div className={styles.inputBox}>
 						{pigBal && (
 							<p role='presentation' onClick={() => setInputValue(amountFormatter(getBalanceAmountString(pigBalance)))} className={styles.bal}>
-								Wallet balance: {amountFormatter(getBalanceAmountString(pigBalance))}
+								Balance: {amountFormatter(getBalanceAmountString(pigBalance))}
 							</p>
 						)}
 						{autoFillBusd && (
