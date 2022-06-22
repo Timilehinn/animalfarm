@@ -51,16 +51,13 @@ function Garden() {
 	const [pendingApproval, setPendingApproval] = useState(false)
 	// Main Button State
 	const [isButtonDisabled, setIsButtonDisabled] = useState(true)
-<<<<<<< HEAD
-    const [progress, setProgress] = React.useState('80%')
-=======
 
 	// gardening and faq state
 	const [gardeningState, showGardening] = useState(false)
 	const [faqState, showFaq] = useState(false)
 
 	// open gardening faq state
-	const showGardenInfo = () => {
+	const showGardenInfo = () => {    
 		dispatch(toggleModalBackDrop(true))
 		dispatch(toggleGardenModal(true))
 	}
@@ -71,7 +68,6 @@ function Garden() {
 		
 	}
 
->>>>>>> 3fa76c05ab68d201c02b766a2543892f0aef8352
 
 	const seedsToPlant = 2592000
 	const usdValue = garden ? new BigNumber(garden.userData.usdValue) : new BigNumber('0')
