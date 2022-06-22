@@ -27,3 +27,6 @@ yarn-error.log*
 
 # CSS generated files
 *.module.css*
+
+# Folder
+/.vscode
