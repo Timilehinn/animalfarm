@@ -66,10 +66,7 @@ function PiggyBank() {
 		if (navigator.clipboard && navigator.permissions) {
 			navigator.clipboard.writeText(`${window.location.origin}/piggy-bank/${account}`).then(() => {
 				// ..
-				dispatch(toggleToastNotification({ state: true, msg: 'Copied Success!' }))
-				setTimeout(() => {
-					dispatch(toggleToastNotification(false))
-				}, 3000)
+				toastSuccess("Copied Successfully") 
 			})
 		} else if (document.queryCommandSupported('copy')) {
 			const ele = document.createElement('textarea')
