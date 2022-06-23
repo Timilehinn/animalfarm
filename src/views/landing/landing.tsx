@@ -23,7 +23,7 @@ import GardenConfirmModal from 'components/SwapConfirmModal/SwapConfirmModal'
 import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
-import MobileNav from '../../components/MobileNav/MobileNav'
+import MobileNav from '../../components/MobileNav/MobileNav' 
 
 import Home from '../home/Home'
 import style from './Landing.module.scss'
