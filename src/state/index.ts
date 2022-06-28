@@ -6,6 +6,8 @@ import pricingReducer from './pricing'
 import piggyBankReducer from './piggybank'
 import pigPenReducer from './pigpen'
 import dripGardenReducer from './garden'
+import dogFarmsReducer from './dogfarms'
+import pigFarmsReducer from './pigfarms'
 
 const store = configureStore({
 	reducer: {
@@ -16,6 +18,8 @@ const store = configureStore({
 		piggyBankReducer,
 		pigPenReducer,
 		dripGardenReducer,
+		dogFarmsReducer,
+		pigFarmsReducer,
 	},
 	middleware: getDefaultMiddleware({
 		// TODO: This is just a temporary fix

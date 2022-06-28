@@ -1,20 +1,34 @@
-import React, { useState, useEffect } from 'react'
-import Farm from 'components/Farm/Farm'
+/* eslint-disable react/no-array-index-key */
+import React, { useEffect, useCallback, useState, useMemo } from 'react'
+import BigNumber from 'bignumber.js'
+import { ChainId } from '@pancakeswap/sdk'
+import { orderBy } from 'lodash'
+
+// Components
+import FarmCard from 'components/Farm/Farm'
+
+// State and hooks
+import { Farm, FarmWithStakedValue } from 'state/types'
+import useActiveWeb3React from 'hooks/useActiveWeb3React'
+import { usePollDogCoreFarmData, usePollDogFarmsData, useDogFarmEmissions, useDogFarms } from 'state/dogfarms/hooks'
+import { usePollPigCoreFarmData, usePollPigFarmsData, usePigFarmEmissions, usePigFarms } from 'state/pigfarms/hooks'
+import { usePricePigBusd, usePriceDogBusd } from 'hooks/pricing'
+
+// Utils
+import isArchivedPid from 'utils/farmHelpers'
+import { getFarmApr, getFarmGenericApr, getPoolApr } from 'utils/apr'
+
 import styles from './Farms.module.scss'
-import dog from '../../assets/dogg.png'
-import busd from '../../assets/bbusd.png'
-import wbnb from '../../assets/wbnb.png'
-import drip from '../../assets/drip.png'
-import usdt from '../../assets/usdt.png'
-import usdc from '../../assets/usdc.png'
-import tusd from '../../assets/tusd.png'
-import dai from '../../assets/dai.png'
-import btcb from '../../assets/btcb.png'
-import eth from '../../assets/eth.png'
-import cake from '../../assets/cake.png'
-import belt from '../../assets/belt.png'
-import dot from '../../assets/dot.png'
-import link from '../../assets/link.png'
+
+const getDisplayApr = (pigRewardsApr?: number, lpRewardsApr?: number) => {
+	if (pigRewardsApr && lpRewardsApr) {
+		return (pigRewardsApr + lpRewardsApr).toLocaleString('en-US', { maximumFractionDigits: 2 })
+	}
+	if (pigRewardsApr) {
+		return pigRewardsApr.toLocaleString('en-US', { maximumFractionDigits: 2 })
+	}
+	return 'N/A'
+}
 
 function Farms() {
 	useEffect(() => {
@@ -29,279 +43,105 @@ function Farms() {
 		background-color: rgb(24, 24, 24);`
 		)
 	}, [])
-	const [current, setCurrent] = useState(null)
 
-	const data = [
-		{
-			title: 'DOGS/BUSD',
-			pair1: dog,
-			pair2: busd,
-			multiplier: 0,
-			isCore: true,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
+	usePollDogFarmsData(true)
+	usePollPigFarmsData(true)
+
+	const { account } = useActiveWeb3React()
+	const { data: farmsDogs, userDataLoaded } = useDogFarms()
+	const { data: farmsPigsLP } = usePigFarms()
+	// console.log('DOGS farms: ', farmsDogs)
+	// console.log('PIGS farms: ', farmsPigsLP)
+
+	const pigPriceUsd = usePricePigBusd()
+	const dogPriceUsd = usePriceDogBusd()
+
+	const { tokenPerBlock: tokenPerBlockDogs, maxEmissionRate: maxEmissionRateDogs, ActiveEmissionIndex: ActiveEmissionIndexDog } = useDogFarmEmissions()
+	const { tokenPerBlock: tokenPerBlockPigs, maxEmissionRate: maxEmissionRatePigs, ActiveEmissionIndex: ActiveEmissionIndexPigs } = usePigFarmEmissions()
+
+	const [current, setCurrent] = useState(null)
+	const [sortOption, setSortOption] = useState('hot')
+	const isActive = false // TODO: temporarily set to false so as to show all farms
+	const [stakedOnly, setStakedOnly] = useState(false)
+
+	// Users with no wallet connected should see 0 as Earned amount
+	// Connected users should see loading indicator until first userData has loaded
+	const userDataReady = !account || (!!account && userDataLoaded)
+
+	const _farms = farmsPigsLP.concat(farmsDogs)
+	const filteredFarmsLP = _farms.filter((farm) => farm.isPool === false)
+
+	const activeFarms = filteredFarmsLP.filter((farm) => !isArchivedPid(farm.pid))
+	const inactiveFarms = filteredFarmsLP.filter((farm) => !isArchivedPid(farm.pid))
+	const archivedFarms = filteredFarmsLP.filter((farm) => isArchivedPid(farm.pid))
+
+	const stakedOnlyFarms = activeFarms.filter((farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0))
+
+	const stakedInactiveFarms = inactiveFarms.filter((farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0))
+
+	const stakedArchivedFarms = archivedFarms.filter((farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0))
+
+	const farmsList = useCallback(
+		(farmsToDisplay: Farm[]): FarmWithStakedValue[] => {
+			const farmsToDisplayWithAPR: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
+				if (!farm.lpTotalInQuoteToken || !farm.quoteToken.busdPrice) {
+					return farm
+				}
+
+				const price = farm.isPigFarm ? pigPriceUsd : dogPriceUsd
+				const tokensPerBlock = farm.isPigFarm ? new BigNumber(tokenPerBlockPigs) : new BigNumber(tokenPerBlockDogs)
+
+				const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(farm.quoteToken.busdPrice)
+
+				const { cakeRewardsApr, lpRewardsApr } = isActive ? getFarmApr(new BigNumber(farm.poolWeight), price, totalLiquidity, farm.lpAddresses[ChainId.MAINNET], tokensPerBlock) : { cakeRewardsApr: 0, lpRewardsApr: 0 }
+
+				return { ...farm, apr: cakeRewardsApr, lpRewardsAprME: lpRewardsApr, liquidity: totalLiquidity }
+			})
+
+			return farmsToDisplayWithAPR
 		},
-		{
-			title: 'DOGS/WBNB',
-			pair1: dog,
-			pair2: wbnb,
-			multiplier: 0,
-			isCore: true,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'DRIP/BUSD',
-			pair1: drip,
-			pair2: busd,
-			multiplier: 0,
-			isCore: true,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'WBNB/BUSD',
-			pair1: wbnb,
-			pair2: busd,
-			multiplier: 4,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'USDT/BUSD',
-			pair1: usdt,
-			pair2: busd,
-			multiplier: 6,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'USDC/BUSD',
-			pair1: dog,
-			pair2: busd,
-			multiplier: 6,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'TUSD/BUSD',
-			pair1: tusd,
-			pair2: busd,
-			multiplier: 5,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'DAI/BUSD',
-			pair1: dai,
-			pair2: busd,
-			multiplier: 3,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'BTCB/ETH',
-			pair1: btcb,
-			pair2: eth,
-			multiplier: 6,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'ETH/WBNB',
-			pair1: eth,
-			pair2: wbnb,
-			multiplier: 5,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'BTCB/WBNB',
-			pair1: btcb,
-			pair2: wbnb,
-			multiplier: 5,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: '	ETH/USDC',
-			pair1: eth,
-			pair2: usdc,
-			multiplier: 4,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'BTCB/BUSD',
-			pair1: btcb,
-			pair2: busd,
-			multiplier: 4,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'USDT/WBNB',
-			pair1: usdt,
-			pair2: wbnb,
-			multiplier: 4,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'CAKE/BUSD',
-			pair1: cake,
-			pair2: busd,
-			multiplier: 4,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'CAKE/USDT',
-			pair1: cake,
-			pair2: usdt,
-			multiplier: 4,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'CAKE/WBNB',
-			pair1: cake,
-			pair2: busd,
-			multiplier: 6,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'BELT/WBNB',
-			pair1: belt,
-			pair2: wbnb,
-			multiplier: 3,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'DOT/WBNB',
-			pair1: dot,
-			pair2: wbnb,
-			multiplier: 3,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-		{
-			title: 'LINK/WBNB',
-			pair1: link,
-			pair2: wbnb,
-			multiplier: 3,
-			isCore: false,
-			amountStaked: 4567,
-			amountEarned: 98,
-			apr: 35,
-			rewardToken: 'PIGS',
-			totalLiquidity: 73362,
-		},
-	]
+		[pigPriceUsd, dogPriceUsd, isActive, tokenPerBlockDogs, tokenPerBlockPigs]
+	)
+
+	const chosenFarmsMemoized = useMemo(() => {
+		let chosenFarms = []
+
+		const sortFarms = (farms: FarmWithStakedValue[]): FarmWithStakedValue[] => {
+			switch (sortOption) {
+				case 'apr':
+					return orderBy(farms, (farm: FarmWithStakedValue) => farm.apr + farm.lpRewardsApr, 'desc')
+				case 'multiplier':
+					return orderBy(farms, (farm: FarmWithStakedValue) => (farm.multiplier ? Number(farm.multiplier.slice(0, -1)) : 0), 'desc')
+				case 'earned':
+					return orderBy(farms, (farm: FarmWithStakedValue) => (farm.userData ? Number(farm.userData.earningsPigs) : 0), 'desc')
+				case 'liquidity':
+					return orderBy(farms, (farm: FarmWithStakedValue) => Number(farm.liquidity), 'desc')
+				default:
+					return farms
+			}
+		}
+
+		if (stakedOnly) {
+			chosenFarms = farmsList(stakedOnlyFarms)
+		} else {
+			chosenFarms = farmsList(activeFarms)
+		}
+		// if (isInactive) {
+		// 	chosenFarms = stakedOnly ? farmsList(stakedInactiveFarms) : farmsList(inactiveFarms)
+		// }
+		// if (isArchived) {
+		// 	chosenFarms = stakedOnly ? farmsList(stakedArchivedFarms) : farmsList(archivedFarms)
+		// }
+
+		return sortFarms(chosenFarms)
+	}, [sortOption, activeFarms, farmsList, stakedOnly, stakedOnlyFarms])
 
 	return (
 		<div className={styles.farms__wrap}>
 			<div className={styles.farms}>
-				{data.map((item, index) => (
-					<Farm
-						title={item.title}
-						core={item.isCore}
-						pair1={item.pair1}
-						pair2={item.pair2}
-						multiplier={item.multiplier}
-						amountStaked={item.amountStaked}
-						amountEarned={item.amountEarned}
-						apr={item.apr}
-						id={index}
-						current={current}
-						rewardToken={item.rewardToken}
-						setCurrent={setCurrent}
-						totalLiquidity={item.totalLiquidity}
-					/>
+				{chosenFarmsMemoized.map((farm, index) => (
+					<FarmCard key={index} farm={farm} displayApr={getDisplayApr(farm.apr, farm.lpRewardsApr)} cakePrice={pigPriceUsd} account={account} removed={false} current={current} setCurrent={setCurrent} />
 				))}
-				{/* <Farm pair='DOGS/BUSD' core='core' isCollapsed={true} id={0} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={1} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/BUSD' core='core' isCollapsed={true} id={2} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={3} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={4} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={5} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={6} current={current} setCurrent={setCurrent} />
-				<Farm pair='DOGS/WBNB' core='core' isCollapsed={true} id={7} current={current} setCurrent={setCurrent} /> */}
 			</div>
 		</div>
 	)

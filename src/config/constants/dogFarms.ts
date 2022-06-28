@@ -1,0 +1,308 @@
+import { FarmConfig } from 'state/types'
+import tokens from './tokens'
+import { AnimalFarmTokens } from './animalFarmToken'
+
+const dogFarms: FarmConfig[] = [
+	// {
+	// 	pid: 0,
+	// 	lpSymbol: 'PIGS',
+	// 	lpAddresses: {
+	// 		97: '',
+	// 		56: AnimalFarmTokens.pigsToken.address,
+	// 	},
+	// 	token: tokens.pigs,
+	// 	quoteToken: tokens.busd,
+	// 	isPool: true,
+	// 	isPigFarm: false,
+	// 	lpBusdAddress: {
+	// 		97: '',
+	// 		56: AnimalFarmTokens.pigsToken.BUSD_LP,
+	// 	},
+	// },
+	{
+		pid: 0,
+		lpSymbol: 'WBNB/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+		},
+		token: tokens.busd,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 1,
+		lpSymbol: 'USDT/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0x7efaef62fddcca950418312c6c91aef321375a00',
+		},
+		token: tokens.usdt,
+		quoteToken: tokens.busd,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 2,
+		lpSymbol: 'USDC/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0x2354ef4df11afacb85a5c7f98b624072eccddbb1',
+		},
+		token: tokens.usdc,
+		quoteToken: tokens.busd,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 3,
+		lpSymbol: 'TUSD/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0x2e28b9b74d6d99d4697e913b82b41ef1cac51c6c',
+		},
+		token: tokens.tusd,
+		quoteToken: tokens.busd,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 4,
+		lpSymbol: 'DAI/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0x66fdb2eccfb58cf098eaa419e5efde841368e489',
+		},
+		token: tokens.dai,
+		quoteToken: tokens.busd,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 5,
+		lpSymbol: 'BTCB/ETH',
+		lpAddresses: {
+			97: '',
+			56: '0xD171B26E4484402de70e3Ea256bE5A2630d7e88D',
+		},
+		token: tokens.btcb,
+		quoteToken: tokens.eth,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 6,
+		lpSymbol: 'ETH/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0x74E4716E431f45807DCF19f284c7aA99F18a4fbc',
+		},
+		token: tokens.eth,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 7,
+		lpSymbol: 'BTCB/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0x61EB789d75A95CAa3fF50ed7E47b96c132fEc082',
+		},
+		token: tokens.btcb,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 8,
+		lpSymbol: 'ETH/USDC',
+		lpAddresses: {
+			97: '',
+			56: '0xEa26B78255Df2bBC31C1eBf60010D78670185bD0',
+		},
+		token: tokens.eth,
+		quoteToken: tokens.usdc,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 9,
+		lpSymbol: 'BTCB/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0xf45cd219aef8618a92baa7ad848364a158a24f33',
+		},
+		token: tokens.btcb,
+		quoteToken: tokens.busd,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 10,
+		lpSymbol: 'USDT/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE',
+		},
+		token: tokens.usdt,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 11,
+		lpSymbol: 'CAKE/BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0x804678fa97d91B974ec2af3c843270886528a9E6',
+		},
+		token: tokens.cake,
+		quoteToken: tokens.busd,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 12,
+		lpSymbol: 'CAKE/USDT',
+		lpAddresses: {
+			97: '',
+			56: '0xA39Af17CE4a8eb807E076805Da1e2B8EA7D0755b',
+		},
+		token: tokens.cake,
+		quoteToken: tokens.usdt,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 13,
+		lpSymbol: 'CAKE/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0x0eD7e52944161450477ee417DE9Cd3a859b14fD0',
+		},
+		token: tokens.cake,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 14,
+		lpSymbol: 'BELT/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0xf3bc6fc080ffcc30d93df48bfa2aa14b869554bb',
+		},
+		token: tokens.belt,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 15,
+		lpSymbol: 'DOT/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0xDd5bAd8f8b360d76d12FdA230F8BAF42fe0022CF',
+		},
+		token: tokens.dot,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 16,
+		lpSymbol: 'LINK/WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0x824eb9faDFb377394430d2744fa7C42916DE3eCe',
+		},
+		token: tokens.link,
+		quoteToken: tokens.wbnb,
+		isPool: false,
+		isPigFarm: false,
+	},
+	{
+		pid: 17,
+		lpSymbol: 'WBNB',
+		lpAddresses: {
+			97: '',
+			56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
+		},
+		token: tokens.wbnb,
+		quoteToken: tokens.busd,
+		isPool: true,
+		isPigFarm: false,
+		lpBusdAddress: {
+			97: '',
+			56: '0x58f876857a02d6762e0101bb5c46a8c1ed44dc16',
+		},
+	},
+	{
+		pid: 18,
+		lpSymbol: 'BUSD',
+		lpAddresses: {
+			97: '',
+			56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
+		},
+		token: tokens.busd,
+		quoteToken: tokens.usdt,
+		isPool: true,
+		isPigFarm: false,
+		lpBusdAddress: {
+			97: '',
+			56: '0x7efaef62fddcca950418312c6c91aef321375a00',
+		},
+	},
+	{
+		pid: 19,
+		lpSymbol: 'ETH',
+		lpAddresses: {
+			97: '',
+			56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+		},
+		token: tokens.eth,
+		quoteToken: tokens.usdc,
+		isPool: true,
+		isPigFarm: false,
+		lpBusdAddress: {
+			97: '',
+			56: '0xea26b78255df2bbc31c1ebf60010d78670185bd0',
+		},
+	},
+	{
+		pid: 20,
+		lpSymbol: 'CAKE',
+		lpAddresses: {
+			97: '',
+			56: '0x0e09fabb73bd3ade0a17ecc321fd13a19e81ce82',
+		},
+		token: tokens.cake,
+		quoteToken: tokens.busd,
+		isPool: true,
+		isPigFarm: false,
+		lpBusdAddress: {
+			97: '',
+			56: '0x804678fa97d91b974ec2af3c843270886528a9e6',
+		},
+	},
+	{
+		pid: 21,
+		lpSymbol: 'BTCB',
+		lpAddresses: {
+			97: '',
+			56: '0x7130d2a12b9bcbfae4f2634d864a1ee1ce3ead9c',
+		},
+		token: tokens.btcb,
+		quoteToken: tokens.busd,
+		isPool: true,
+		isPigFarm: false,
+		lpBusdAddress: {
+			97: '',
+			56: '0xf45cd219aef8618a92baa7ad848364a158a24f33',
+		},
+	},
+]
+
+export default dogFarms

@@ -1,4 +1,7 @@
 export * from './animalFarmToken'
+
+export { default as farmsConfig } from './dogFarms'
+
 // Deprecated: Use PancakeSwapRouterv2Address
 export const pancakeswapRouterAddress = '0x10ED43C718714eb63d5aA57B78B54704E256024E'
 export const WBNBAddress = '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c'
@@ -15,7 +18,7 @@ export const PigsV2BusdLP = '0x2ce4aE0E7D05bc6ec0c22cDf87fF899872c2cF7f' // FIX:
  */
 export const PIGSAddress = '0x9a3321E1aCD3B9F6debEE5e042dD2411A1742002' // FIX: Moved to animal farm token. - Will be taken out in future
 
-/// /// /// Animal Farm related addresses /// /// ///
+/// /// /// Animal Farm related addresses /// /// /// Deprecated: Moved to './contracts.ts'
 export const PigsCreditAddress = '0x14d7Bf543d4c3a29fC0a3Df1D815f698A914368b'
 export const PigPenAddress = '0x1f8a98bE5C102D145aC672ded99C5bE0330d7e4F'
 export const PiggyBankAddress = '0x1514c766127378Ea9653F9F4428fe25f3fD256c3'
@@ -25,6 +28,8 @@ export const LiquidityHelperPigsV2Address = '0x925c3092765F5b4b9A1b966Bf76c79B8b
 // Drip related addresses
 export const DripTokenAddress = '0x20f663cea80face82acdfa3aae6862d246ce0333'
 export const DripBusdLpTokenAddress = '0xa0feb3c81a36e885b6608df7f0ff69db97491b58'
+
+// Deprecated: Moved to './contracts.ts'
 export const DripGardenAddress = '0x685BFDd3C2937744c13d7De0821c83191E3027FF'
 export const DripLiberationAddress = '0x3acb478b3F1788564679e67dBC45b6317Ee5DeB4'
 
@@ -42,5 +47,5 @@ export const WBNB_TOKEN = {
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
-// Utility Contracts
+// Utility Contracts Deprecated: Moved to './contracts.ts'
 export const MultiCallAddress = '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B'

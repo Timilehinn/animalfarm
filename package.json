@@ -4,6 +4,7 @@
 	"private": true,
 	"dependencies": {
 		"@binance-chain/bsc-connector": "^1.0.0",
+		"@pancakeswap/sdk": "^2.4.5",
 		"@ramonak/react-progress-bar": "^5.0.0",
 		"@reduxjs/toolkit": "^1.7.1",
 		"@testing-library/jest-dom": "^5.16.1",

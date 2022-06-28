@@ -10,7 +10,7 @@
 		grid-template-columns: 1fr 1fr;
 		gap: 70px;
 		padding: 50px 60px 50px 80px;
-        max-width: 1500px;
+		max-width: 1500px;
 
 		div {
 			// height: 400px;
@@ -21,9 +21,13 @@
 @media screen and (max-width: 480px) {
 	.farms__wrap {
 		.farms {
-			width: 100%;
+			// width: 100%;
+			// grid-template-columns: 1fr;
+			// padding: 50px 20px 50px 20px;
 			grid-template-columns: 1fr;
 			padding: 50px 20px 50px 20px;
+			column-gap: 0px;
+			row-gap: 70px;
 		}
 	}
 }
