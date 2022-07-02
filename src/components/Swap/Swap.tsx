@@ -212,6 +212,7 @@ function Swap() {
 		setInputOne(value2)
 		setInputTwo(value1)
 		closeMenus()
+	
 	}
 
 	// API Calls
