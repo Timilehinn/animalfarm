@@ -127,7 +127,7 @@ function PigsCredit() {
 
 	const showApproveButton = (): boolean => {
 		if (!inputValue || (inputValue === '0' && isApproved)) {
-			return false
+			return false 
 		}
 		if (new BigNumber(busdAllowance).isLessThan(getDecimalAmount(inputValue))) {
 			return true

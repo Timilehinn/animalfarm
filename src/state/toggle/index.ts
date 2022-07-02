@@ -1,128 +1,169 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface InfoValue {
-	title: string
-	value: number
+	title: string;
+	value: number;
 }
 
 interface tourMod {
-	state: boolean
-	msg: string
+	state: boolean;
+	msg: string;
+}
+
+interface unstakeProps {
+	isUnstakeModalOpen: boolean;
+	lpInfo?: {
+		lpStaked: string;
+		lpAmount: string;
+		isPigsFarm : boolean
+		pid : string
+	};
 }
 
 interface initialStateProps {
-	isMobileNavActive: boolean
-	isConfirmModalActive: boolean
-	isModalBackDropOpen: boolean
+	isMobileNavActive: boolean;
+	isConfirmModalActive: boolean;
+	isModalBackDropOpen: boolean;
 	confirmModalProps: {
-		modalTitleText?: string
-		confirmButtonText?: string
-		value?: string
-		text?: string
-		warning?: string
-		infoValues?: InfoValue[]
-		confirmFunction: () => void
-	}
-	isToastNotificationOpen: boolean
-	toastNotificationMsg
-	isDepositModalOpen: boolean
-	isTourModalOpen: tourMod
+		modalTitleText?: string;
+		confirmButtonText?: string;
+		value?: string;
+		text?: string;
+		warning?: string;
+		infoValues?: InfoValue[];
+		confirmFunction: () => void;
+	};
+	isToastNotificationOpen: boolean;
+	toastNotificationMsg;
+	isDepositModalOpen: boolean;
+	isTourModalOpen: tourMod;
 
 	swapModalProps: {
-		isSwapModalOpen: boolean
+		isSwapModalOpen: boolean;
 		swapingFrom: {
-			tokenName: string
-			amount: string
-		}
+			tokenName: string;
+			amount: string;
+		};
 		swapingTo: {
-			tokenName: string
-			amount: string
-		}
-		confirmFunction: ()=>void
-	}
+			tokenName: string;
+			amount: string;
+		};
+		confirmFunction: () => void;
+	};
 
-	isGardenOpen: boolean
-	isFaqOpen: boolean
+	isGardenOpen: boolean;
+	isFaqOpen: boolean;
+
+	unstakeProps:unstakeProps
 }
-
-
 
 const initialState: initialStateProps = {
 	isMobileNavActive: false,
 	isConfirmModalActive: false,
 	isModalBackDropOpen: false,
 	confirmModalProps: {
-		modalTitleText: 'Confirm Claim',
-		confirmButtonText: 'Depo',
-		value: '',
-		text: '',
-		warning: 'Are you sure',
+		modalTitleText: "Confirm Claim",
+		confirmButtonText: "Depo",
+		value: "",
+		text: "",
+		warning: "Are you sure",
 		infoValues: [],
 		confirmFunction: null,
 	},
 	isToastNotificationOpen: false,
-	toastNotificationMsg: '',
+	toastNotificationMsg: "",
 	isDepositModalOpen: false,
 	isTourModalOpen: {
 		state: false,
-		msg: '',
+		msg: "",
 	},
 	// swap modal props
 	swapModalProps: {
 		isSwapModalOpen: false,
 		swapingFrom: {
-			tokenName: '',
-			amount: '',
+			tokenName: "",
+			amount: "",
 		},
 		swapingTo: {
-			tokenName: '',
-			amount: '',
+			tokenName: "",
+			amount: "",
 		},
 		confirmFunction: null,
 	},
 	// garden info props
 	isGardenOpen: false,
-	isFaqOpen: false
-}
+	isFaqOpen: false,
+
+	// unstake modal
+	unstakeProps: {
+		isUnstakeModalOpen: false,
+		lpInfo: {
+			lpStaked: "",
+			lpAmount: "",
+			isPigsFarm : null,
+			pid : null
+		},
+	},
+};
 
 const toggleSlice = createSlice({
-	name: 'toggleSlice',
+	name: "toggleSlice",
 	initialState,
 	reducers: {
 		toggleMobileNav: (state, action: PayloadAction<boolean>) => {
-			state.isMobileNavActive = action.payload
+			state.isMobileNavActive = action.payload;
 		},
 		toggleConfirmModal: (state, action: PayloadAction<boolean>) => {
-			state.isConfirmModalActive = action.payload
+			state.isConfirmModalActive = action.payload;
 		},
 		toggleModalBackDrop: (state, action: PayloadAction<boolean>) => {
-			state.isModalBackDropOpen = action.payload
+			state.isModalBackDropOpen = action.payload;
+			if(action.payload===false){
+				state.isConfirmModalActive = false
+				state.unstakeProps.isUnstakeModalOpen = false
+			}
 		},
 		setModalProps: (state, action: PayloadAction<any>) => {
-			state.confirmModalProps = action.payload
+			state.confirmModalProps = action.payload;
 		},
 		toggleToastNotification: (state, action: PayloadAction<any>) => {
-			state.isToastNotificationOpen = action.payload.state
-			state.toastNotificationMsg = action.payload.msg
+			state.isToastNotificationOpen = action.payload.state;
+			state.toastNotificationMsg = action.payload.msg;
 		},
 		toggleDepositModal: (state, action: PayloadAction<any>) => {
-			state.isDepositModalOpen = action.payload
+			state.isDepositModalOpen = action.payload;
 		},
 		toggleTourModal: (state, action: PayloadAction<any>) => {
-			state.isTourModalOpen.msg = action.payload.msg
-			state.isTourModalOpen.state = action.payload.state
+			state.isTourModalOpen.msg = action.payload.msg;
+			state.isTourModalOpen.state = action.payload.state;
 		},
 		toggleSwapModal: (state, action: PayloadAction<any>) => {
-			state.swapModalProps = action.payload
+			state.swapModalProps = action.payload;
 		},
 		toggleGardenModal: (state, action: PayloadAction<any>) => {
-			state.isGardenOpen = action.payload
+			state.isGardenOpen = action.payload;
 		},
 		toggleFaqModal: (state, action: PayloadAction<any>) => {
-			state.isFaqOpen = action.payload
-		}
+			state.isFaqOpen = action.payload;
+		},
+		// unstake modal props
+		toggleUnstakeModal: (state, action: PayloadAction<unstakeProps>) => {
+			state.unstakeProps = action.payload
+		},
 	},
-})
+});
 
-export default toggleSlice.reducer
-export const { toggleMobileNav, toggleModalBackDrop, toggleConfirmModal, setModalProps, toggleToastNotification, toggleDepositModal, toggleTourModal,toggleSwapModal, toggleGardenModal, toggleFaqModal } = toggleSlice.actions
+export default toggleSlice.reducer;
+export const {
+	toggleMobileNav,
+	toggleModalBackDrop,
+	toggleConfirmModal,
+	setModalProps,
+	toggleToastNotification,
+	toggleDepositModal,
+	toggleTourModal,
+	toggleSwapModal,
+	toggleGardenModal,
+	toggleFaqModal,
+	toggleUnstakeModal
+} = toggleSlice.actions;

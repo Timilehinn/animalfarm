@@ -24,6 +24,7 @@ import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 import ConnectWalletModal from '../../components/ConnectWalletModal/ConnectWalletModal'
 import MobileNav from '../../components/MobileNav/MobileNav' 
+import UnstakeModal from '../../components/UnstakeModal/UnstakeModal'
 
 import Home from '../home/Home'
 import style from './Landing.module.scss'
@@ -69,6 +70,7 @@ function Landing() {
 				<MobileSideNav />
 				<ConnectWalletModal login={login} />
 				<ConfirmModal />
+				<UnstakeModal />
 				<GardenConfirmModal />
 				<Toast />
 				<GardeningModal />
@@ -85,6 +87,7 @@ function Landing() {
 						<Route path='/piggy-bank/:referee' element={<PiggyBank />} />
 						<Route path='/add-liquidity' element={<AddLiquidity />} />
 						<Route path='/farms' element={<Farms />} />
+						<Route path='/farms/:referee' element={<Farms />} />
 						<Route path='/pools' element={<Pools />} />
 						<Route path='/swap' element={<Swap />} />
 						<Route path='/drip-liberation' element={<DripLiberation />} /> 

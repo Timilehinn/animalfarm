@@ -1,11 +1,12 @@
-@import '../../global.scss';
+@import "../../global.scss";
 
 .farm {
 	width: 100%;
 	// height: 100%;
 	padding: 20px;
 	margin: 0 auto auto;
-	background: linear-gradient(#121212, #121212) padding-box, linear-gradient(#f3ba2a, #121212) border-box;
+	background: linear-gradient(#121212, #121212) padding-box,
+		linear-gradient(#f3ba2a, #121212) border-box;
 	border-style: solid;
 	border-width: 1px;
 	border-color: transparent;
@@ -65,6 +66,34 @@
 			}
 		}
 	}
+	.button__disabled {
+		width: 100%;
+		height: 50px;
+		margin-top: 20px;
+		border-radius: 10px;
+		border: none;
+		background-color: #474e47;
+		color: $grey;
+		cursor: not-allowed;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.button__enabled {
+		width: 100%;
+		height: 50px;
+		margin-top: 20px;
+		border-radius: 10px;
+		border: none;
+		font-weight: 600;
+		cursor: pointer;
+		color: white;
+		background: linear-gradient(93.41deg, #47a348 1.19%, #3d6b3d 99.16%);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 
 	.staked {
 		width: 100%;
@@ -94,6 +123,14 @@
 			border: none;
 			outline: none;
 			color: white;
+		}
+
+		.stakeDisabled {
+			cursor: not-allowed;
+		}
+
+		.stakeEnabled {
+			cursor: pointer;
 		}
 	}
 
@@ -203,14 +240,23 @@
 		p {
 			color: #f3ba2a;
 			margin-right: 5px;
+			text-decoration: none;
 		}
 
 		span {
 			display: flex;
 			align-items: center;
 			cursor: pointer;
-			svg {
-				color: #f3ba2a;
+
+			a {
+
+				display: flex;
+				align-items: center;
+				text-decoration: none;
+				font-size: 0.8rem;
+				svg {
+					color: #f3ba2a;
+				}
 			}
 		}
 	}
