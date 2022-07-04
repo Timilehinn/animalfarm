@@ -62,8 +62,8 @@ function Farms() {
 	usePollDogFarmsData(true);
 	usePollPigFarmsData(true);
 
-	const params = useParams()
-	const navigate = useNavigate()
+	const params = useParams();
+	const navigate = useNavigate();
 	const { account } = useActiveWeb3React();
 	const { data: farmsDogs, userDataLoaded } = useDogFarms();
 	const { data: farmsPigsLP } = usePigFarms();
@@ -88,7 +88,7 @@ function Farms() {
 	const [sortOption, setSortOption] = useState("hot");
 	const isActive = false; // TODO: temporarily set to false so as to show all farms
 	const [stakedOnly, setStakedOnly] = useState(false);
-	const [ref,setRef] = useState(localStorage.getItem("farmsRef"))
+	const [ref, setRef] = useState(localStorage.getItem("farmsRef"));
 
 	// Users with no wallet connected should see 0 as Earned amount
 	// Connected users should see loading indicator until first userData has loaded
@@ -217,55 +217,42 @@ function Farms() {
 		return sortFarms(chosenFarms);
 	}, [sortOption, activeFarms, farmsList, stakedOnly, stakedOnlyFarms]);
 
-	const toast = useToast()
+	const toast = useToast();
 
 	const copyRefLink = () => {
 		if (navigator.clipboard && navigator.permissions) {
-			navigator.clipboard.writeText(`${window.location.origin}/farms/${account}`).then(() => {
-				// ..
-				toast.toastSuccess("Copied Successfully") 
-			})
-		} else if (document.queryCommandSupported('copy')) {
-			const ele = document.createElement('textarea')
-			ele.value = account
-			document.body.appendChild(ele) 
-			ele.select()
-			document.execCommand('copy')
-			document.body.removeChild(ele)
+			navigator.clipboard
+				.writeText(`${window.location.origin}/farms/${account}`)
+				.then(() => {
+					// ..
+					toast.toastSuccess("Copied Successfully");
+				});
+		} else if (document.queryCommandSupported("copy")) {
+			const ele = document.createElement("textarea");
+			ele.value = account;
+			document.body.appendChild(ele);
+			ele.select();
+			document.execCommand("copy");
+			document.body.removeChild(ele);
 		}
-	}
+	};
 
-	const getRefAndRedirect = () =>{ 
-		const _ref = params.referee
-		
-		if(_ref){
-			localStorage.setItem("farmsRef",_ref)
-			navigate('/farms')
-			setRef(_ref)
+	const getRefAndRedirect = () => {
+		const _ref = params.referee;
 
-			
+		if (_ref) {
+			localStorage.setItem("farmsRef", _ref);
+			navigate("/farms");
+			setRef(_ref);
 		}
-	}
+	};
 
-	useEffect(()=>{
-		getRefAndRedirect()
-	})
+	useEffect(() => {
+		getRefAndRedirect();
+	});
 
 	return (
 		<div className={styles.farms__wrap}>
-			<div className={styles.cards}>
-				<PigsCreditCard title="Your Referrer" amount={ ref !==null ? `${ref.substring(0, 6)} ${'...'} ${ref.substring(ref.length - 4)}` : 'N/A'} />
-				<PigsCreditCard title="Commision Earned" amount="N/A" />
-				<PigsCreditCard title="Referral Count" amount="N/A" />
-			</div>
-			{account ? (
-					<div className={styles.btn__wrap}>
-						<button type='button' className={styles.btn} onClick={copyRefLink}>
-							Copy Referral Link
-						</button>
-					</div>
-				) : (
-					'')}
 			<div className={styles.farms}>
 				{chosenFarmsMemoized.map((farm, index) => (
 					<FarmCard
@@ -280,6 +267,29 @@ function Farms() {
 					/>
 				))}
 			</div>
+			<div className={styles.cards}>
+				<PigsCreditCard
+					title="Your Referrer"
+					amount={
+						ref !== null
+							? `${ref.substring(0, 6)} ${"..."} ${ref.substring(
+									ref.length - 4
+							  )}`
+							: "N/A"
+					}
+				/>
+				<PigsCreditCard title="Commision Earned" amount="N/A" />
+				<PigsCreditCard title="Referral Count" amount="N/A" />
+			</div>
+			{account ? (
+				<div className={styles.btn__wrap}>
+					<button type="button" className={styles.btn} onClick={copyRefLink}>
+						Copy Referral Link
+					</button>
+				</div>
+			) : (
+				""
+			)}
 		</div>
 	);
 }
