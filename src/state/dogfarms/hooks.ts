@@ -41,7 +41,6 @@ export const usePollDogCoreFarmData = () => {
 	// dispatch(fetchDogFarmEmissionsAsync())
 
 	useEffect(() => {
-		console.log('Use Effect DOGS is running....')
 		dispatch(fetchDogFarmEmissionsAsync())
 		dispatch(fetchDogFarmsPublicDataAsync([0, 1]))
 	}, [])
