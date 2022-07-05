@@ -10,7 +10,8 @@ import { useDogFarmFromPid } from "state/dogfarms/hooks";
 import {
 	getBalanceAmount,
 	getDecimalAmount,
-	getFullDisplayBalance, amountFormatter
+	getFullDisplayBalance,
+	amountFormatter,
 } from "utils/formatBalance";
 import { getAddress } from "utils/addressHelpers";
 import getLiquidityUrlPathParts from "utils/getLiquidityUrlPathParts";
@@ -40,7 +41,7 @@ import linkImage from "../../assets/linkimage.png";
 import { useAppSelector, useAppDispatch } from "../../state/hooks";
 import {
 	toggleConfirmModal,
-	setModalProps, 
+	setModalProps,
 	toggleModalBackDrop,
 	toggleUnstakeModal,
 } from "../../state/toggle";
@@ -141,6 +142,8 @@ function Farm({
 	});
 	const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`;
 	const lpAddress = getAddress(farm.lpAddresses);
+	const tokenAddress = farm.lpAddresses["56"]; // TODO : Remove
+	
 	const isPromotedFarm =
 		farm.isPigFarm ||
 		farm.lpAddresses["56"] === AnimalFarmTokens.pigsToken.address;
@@ -195,7 +198,6 @@ function Farm({
 		return false;
 	};
 
-	
 	// input value
 	const handleInputValue = (e) => {
 		setInputValue(e.target.value);
@@ -211,8 +213,8 @@ function Farm({
 	}, [inputValue]);
 
 	const deposit = async () => {
-		const ref = localStorage.getItem("farmsRef")
-		
+		const ref = localStorage.getItem("farmsRef");
+
 		setPending(true);
 		try {
 			if (farm.isPigFarm === true) {
@@ -243,40 +245,63 @@ function Farm({
 				setPending(false);
 			}
 		} catch (err) {
-			toast.error("An error occured")
+			toast.error("An error occured");
 		}
 	};
-
-	
 
 	// approve masterchef contract
 	const approveMasterChef = async () => {
 		setPending(true);
-		if (farm.isPigFarm === true) {
-			try {
-				await approveLPPigs(lpAddress, signer);
-				toast.success("Approval Successful");
-				setPending(false);
-			} catch (err) {
-				toast.error("An error occured");
-
-				setPending(false);
+		if (farm.isPool) {
+			if (farm.isPigFarm === true) {
+				try {
+					await approveLPPigs(tokenAddress, signer);
+					toast.success("Approval Successful");
+					setPending(false);
+				} catch (err) {
+					toast.error("An error occured");
+	
+					setPending(false);
+				}
+			} else {
+				try {
+					await approveLPDogs(tokenAddress, signer);
+					toast.success("Approval Successful");
+					setPending(false);
+				} catch (err) {
+					toast.error("An error occured");
+	
+					setPending(false);
+				}
 			}
 		} else {
-			try {
-				await approveLPDogs(lpAddress, signer);
-				toast.success("Approval Successful");
-				setPending(false);
-			} catch (err) {
-				toast.error("An error occured");
+			// eslint-disable-next-line no-lonely-if
+			if (farm.isPigFarm === true) {
+				try {
+					await approveLPPigs(lpAddress, signer);
+					toast.success("Approval Successful");
+					setPending(false);
+				} catch (err) {
+					toast.error("An error occured");
 
-				setPending(false);
+					setPending(false);
+				} 
+			} else {
+				try {
+					await approveLPDogs(lpAddress, signer);
+					toast.success("Approval Successful");
+					setPending(false);
+				} catch (err) {
+					toast.error("An error occured");
+
+					setPending(false);
+				}
 			}
 		}
 	};
 	// claim
 	const claim = async () => {
-		const ref = localStorage.getItem("farmsRef")
+		const ref = localStorage.getItem("farmsRef");
 		if (farm.isPigFarm === true) {
 			try {
 				const res = await claimWithMasterChefPigs(
@@ -291,7 +316,7 @@ function Farm({
 				}
 			} catch (err) {
 				toast.error("An error occured");
-				console.log(err)
+				console.log(err);
 			}
 		} else {
 			try {
@@ -308,7 +333,7 @@ function Farm({
 				}
 			} catch (err) {
 				toast.error("An error occured");
-				console.log(err)
+				console.log(err);
 			}
 		}
 	};
@@ -373,11 +398,13 @@ function Farm({
 				<div className={styles.tokens}>
 					<div className={styles.tokens__icons}>
 						<img src={getImageUrlFromToken(farm.token)} alt="" />
-						<img
-							className={styles.img__two}
-							src={getImageUrlFromToken(farm.quoteToken)}
-							alt=""
-						/>
+						{!farm.isPool && (
+							<img
+								className={styles.img__two}
+								src={getImageUrlFromToken(farm.quoteToken)}
+								alt=""
+							/>
+						)}
 					</div>
 					<div className={styles.token__names}>
 						<p>{lpLabel}</p>
@@ -457,7 +484,9 @@ function Farm({
 			{account &&
 				(isButtonDisabled ? (
 					<button type="button" className={styles.button__disabled}>
-						{Number(tokenBalance) === 0 ? `Insufficient Balance` : "Enter amount"}
+						{Number(tokenBalance) === 0
+							? `Insufficient Balance`
+							: "Enter amount"}
 					</button>
 				) : pending ? (
 					<button type="button" className={styles.button__enabled}>
