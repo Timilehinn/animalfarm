@@ -104,7 +104,7 @@ function UnstakeModal() {
 			/>
 
 			<p className={styles.msg}>
-				{modalProps.lpInfo.lpStaked} LP staked:{modalProps.lpInfo.lpAmount}
+				{modalProps.lpInfo.lpStaked}  staked:{modalProps.lpInfo.lpAmount}
 			</p>
 			{!pending && (
 				<button

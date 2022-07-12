@@ -7,9 +7,6 @@ import { useAppDispatch } from 'state/hooks'
 import { usePricing } from 'state/pricing/hooks'
 import SideNavigation from 'components/SideNavigation/SideNavigation'
 import TopNav from 'components/TopNav/TopNav'
-import PigsCredit from 'views/pigsCredit/PigsCredit'
-import PiggyBank from 'views/piggyBank/PiggyBank'
-import PigsPen from 'views/pigsPen/PigsPen'
 import MobileSideNav from 'components/MobileSideNav/MobileSideNav'
 import Toast from 'components/Toast/Toast'
 import Migrate from 'views/Imigrate/Imigrate'
@@ -29,12 +26,18 @@ import UnstakeModal from '../../components/UnstakeModal/UnstakeModal'
 import Home from '../home/Home'
 import style from './Landing.module.scss'
 
+// Pages import
+const PigsCredit = React.lazy(()=>import('../pigsCredit/PigsCredit'))
+const PigsPen = React.lazy(()=>import('../pigsPen/PigsPen'))
+const PiggyBank = React.lazy(()=>import('../piggyBank/PiggyBank'))
 const AddLiquidity = React.lazy(() => import('../addLiquidity/AddLiquidity'))
 const Farms = React.lazy(() => import('../farms/Farms'))
 const Swap = React.lazy(() => import('../swap/Swap'))
 const Pools = React.lazy(() => import('../pools/Pools'))
 const Garden = React.lazy(() => import('../garden/Garden'))
 const DripLiberation = React.lazy(() => import('../dripLiberation/DripLiberation'))
+
+
 
 function Landing() {
 	const { login } = useAuth()
